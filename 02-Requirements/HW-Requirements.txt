@@ -1,0 +1,115 @@
+﻿Requirements
+1. Introduction 
+1.1 Purpose 
+The purpose of this document is to detail the software project requirements for a project management system. To reflect the real needs, expectations and services; we have chosen to classify the requirements into functional, non-functional, developer requirements and those proposed by our clients and users. This document is addressed to the development team and the clients, with the purpose of negotiating, understanding and analyzing the features and functionalities that must be implemented to meet the expectations that exist on the project.
+
+
+1.2 System Scope 
+The system to be developed will be called “Mole” a project manager that will allow you to record in which stage of development a project is located, it also grants organizational support to the management of new and old contracts, grants users the possibility of extracting reports from the status of a project according to the period of time they want Review. Being on the web, its portability is assured, however, it will not have the launch powers of a large-scale project. It is not linked to other VCS’s, the interface is only for users with the capacity of administrators who control their projects, obtaining reports will be automated.
+
+
+
+
+1.3 Definitions, Acronyms and Abbreviations
+VCS: Version Control System 
+VAT: Value Added Tax
+
+
+Document Overview 
+
+
+2. General Description 
+The project is based on a telecommunications services sales environment under the concept of contract projects. These have quotation, acceptance, modification, billing and monitoring processes, which must be organized under categories according to their process or project status and interconnected in a database, which will be modified under an administrator; These interconnections must be immediate within the web, these implementations must be under free software and assigned chronologically by dates.
+
+
+2.1 Product Perspective 
+        The product aims to improve the graphical interface, the storage system and the quality of the code due to the dependence on external storage software and web services. This involves ensuring that integrations with other storage and web services are smoother and easier to configure, without adding complexity to the user. On the user side, web search and saving tools can be incorporated.
+2.2 Product Functions 
+        :
+* Create and Save projects in a database
+* Consult old or ongoing projects for editing or changing characteristics
+* Assign categories to projects depending on their approval status
+* Give notifications about project dates
+* Generate reports on projects and contracts to track them
+* Edit or delete projects in case of errors
+
+
+2.3 User Characteristics
+For project managers
+
+
+1
+	Basic knowledge of the telecommunications products and services offered by the company.
+	2
+	Basic knowledge of the telecommunications company's products and services
+	3
+	Ability to track payments and manage accounts receivable in an orderly and accurate manner.
+	4
+	Familiarity with the web page interface
+	5
+	Ability to review and understand quotes and service invoices.
+	6
+	Experience in managing user permissions and settings
+	For company clients
+
+
+1
+	Familiarity with the client interface on web platforms
+	2
+	Basic understanding of the contracted services and their main company characteristics.
+	
+
+2.4 Constraints 
+
+
+Company Policies
+	·        The program must be made with free software
+·        The software must be made to be accessed through a web page
+	Hardware Limitations
+	·        The software must work for desktop computers
+	Programming language(s)
+	·        Java, Javascript, Python
+	Audit functions
+	·        Adapting to VAT changes
+	
+
+2.5 Assumptions and Dependencies 
+Telecommunications Contract Regulations: Projects aimed at public sectors present certain regulations or standards to which the software must adapt.
+
+
+Growth in the Number of Users: If an increase in the number of users is expected, the system must be scalable.
+
+
+Integration with Other Free Software Systems: If the company uses other free software tools, the system must be compatible and integrated with these,
+
+
+2.6 Future Requirements
+
+
+* AI Assistant for Project Management: Implement an AI-powered assistant that can help users manage their projects
+* Include reports that predict project performance
+* Set up automated rules that handle frequent tasks like payment reminders, contract expiration alerts, and project status updates
+* Improve system access security through multi-factor authentication and biometric options
+* Connect the system with collaboration tools that allow editing by multiple people
+
+
+
+
+3. Specific Requirements 
+   * 3.1 External Interfaces
+User Interface:
+The interface should allow users to manage projects, view reports, and receive notifications.
+The interface should be intuitive and accessible for users of various profiles, with quick access to main functions: creating, consulting, editing, and deleting projects, as well as report generation and support contract management.
+Interface with Other Systems:
+If necessary in the future, the application should be able to integrate data from quotations and payments from other external systems or databases.
+Communication Interface:
+The application should be available in a web environment, accessible from standard browsers such as Chrome, Firefox, and Edge. Additionally, it should include email notifications or internal notifications for support contract expiration alerts.
+   * 3.2 Functions
+To organize the functional requirements, a functional hierarchy organization is selected, where each function addresses a key objective of the application: project management, status tracking, support contracts, and reporting.
+      * 3.2.1 Project Management
+RF1: The system should allow users to create a new project, entering essential data such as name, description, initial category, start date, and client.
+RF2: The system should allow users to consult previous projects using filters by category, status, or creation date.
+RF3: The system should allow users to assign categories to each project:
+Project with quotation sent.
+Quotation accepted.
+Quotation rejected

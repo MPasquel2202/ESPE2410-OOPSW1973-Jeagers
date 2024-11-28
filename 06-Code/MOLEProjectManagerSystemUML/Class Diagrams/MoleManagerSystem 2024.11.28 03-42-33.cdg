@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="MoleManagerSystem">
+  <ClassDiagramComponents>
+    <Class name="Customer" package="ec.edu.espe.projects.model" visibility="public" xPosition="1471.0" yPosition="789.0">
+      <Fields>
+        <Field name="customerName" type="String" visibility="private"/>
+        <Field name="customerEmail" type="String" visibility="private"/>
+        <Field name="customerIdCard" type="String" visibility="private"/>
+        <Field name="customerCompanyName" type="String" visibility="private"/>
+        <Field name="projectList" type="String[]" visibility="private"/>
+        <Field name="ruc" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="changeCustomerData" returnType="String" visibility="public"/>
+        <Method name="changeCustomerCompanyName" returnType="String" visibility="public"/>
+        <Method name="getProjectList" returnType="String[]" visibility="public"/>
+        <Method name="changeRuc" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DataBase" package="ec.edu.espe.projects.model" visibility="public" xPosition="429.0" yPosition="760.0">
+      <Fields>
+        <Field name="userName" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="dataBaseName" type="String" visibility="private"/>
+        <Field name="isConected" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="conectDataBase" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Date" package="ec.edu.espe.projects.model" visibility="public" xPosition="1149.0" yPosition="65.0">
+      <Fields>
+        <Field name="day" type="int" visibility="private"/>
+        <Field name="month" type="int" visibility="private"/>
+        <Field name="year" type="int" visibility="private"/>
+        <Field name="formattedDate" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getFormattedDate" returnType="String" visibility="public"/>
+        <Method name="setDate" returnType="void" visibility="public">
+          <Argument type="int" name="day"/>
+          <Argument type="int" name="month"/>
+          <Argument type="int" name="year"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Developer" package="ec.edu.espe.projects.model" visibility="public" xPosition="669.0" yPosition="694.0">
+      <Fields>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="systemAccount" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="employeePosition" type="String" visibility="private"/>
+        <Field name="project" type="Project" visibility="private"/>
+        <Field name="report" type="Report" visibility="private"/>
+        <Field name="dataBase" type="DataBase" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="authenticate" returnType="boolean" visibility="public">
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="changePassword" returnType="void" visibility="public">
+          <Argument type="String" name="newPassword"/>
+        </Method>
+        <Method name="modifyReports" returnType="void" visibility="public">
+          <Argument type="Report" name="report"/>
+        </Method>
+        <Method name="createProject" returnType="void" visibility="public">
+          <Argument type="Project" name="project"/>
+        </Method>
+        <Method name="doReportList" returnType="void" visibility="public"/>
+        <Method name="modifyProjects" returnType="void" visibility="public">
+          <Argument type="Project" name="project"/>
+        </Method>
+        <Method name="connectToDataBase" returnType="void" visibility="public">
+          <Argument type="DataBase" name="dataBase"/>
+        </Method>
+        <Method name="removeUser" returnType="void" visibility="public">
+          <Argument type="String" name="userId"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Notification" package="ec.edu.espe.projects.model" visibility="public" xPosition="1799.0" yPosition="84.0">
+      <Fields>
+        <Field name="notificationId" type="int" visibility="private"/>
+        <Field name="noticeTittle" type="String" visibility="private"/>
+        <Field name="sendDate" type="Date" visibility="private"/>
+        <Field name="projectStatus" type="Status" visibility="private"/>
+        <Field name="noticeMessage" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setNoticeTittle" returnType="void" visibility="public">
+          <Argument type="String" name="noticeTittle"/>
+        </Method>
+        <Method name="getSendDate" returnType="Date" visibility="public"/>
+        <Method name="getProjectStatus" returnType="Status" visibility="public"/>
+        <Method name="setNoticeMessage" returnType="void" visibility="public">
+          <Argument type="String" name="noticeMessage"/>
+        </Method>
+        <Method name="sendNotification" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Project" package="ec.edu.espe.projects.model" visibility="public" xPosition="1161.0" yPosition="539.0">
+      <Fields>
+        <Field name="projectName" type="String" visibility="private"/>
+        <Field name="shortDescription" type="String" visibility="private"/>
+        <Field name="projectStartDate" type="Date" visibility="private"/>
+        <Field name="projectFinalDate" type="Date" visibility="private"/>
+        <Field name="quote" type="float" visibility="private"/>
+        <Field name="purchaseOrderDocument" type="String" visibility="private"/>
+        <Field name="customer" type="Customer" visibility="private"/>
+        <Field name="projectStatus" type="Status" visibility="private"/>
+        <Field name="statusNotification" type="Notification" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="doShortDescription" returnType="String" visibility="public"/>
+        <Method name="getProjectStartDate" returnType="Date" visibility="public"/>
+        <Method name="getProjectFinalDate" returnType="Date" visibility="public"/>
+        <Method name="getPurchaseOrderDocument" returnType="String" visibility="public"/>
+        <Method name="getProjectStatus" returnType="Status" visibility="public"/>
+        <Method name="getStatusNotification" returnType="Notification" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Report" package="ec.edu.espe.projects.model" visibility="public" xPosition="687.0" yPosition="65.0">
+      <Fields>
+        <Field name="reportId" type="String" visibility="private"/>
+        <Field name="projectNames" type="String[]" visibility="private"/>
+        <Field name="projectDescriptions" type="String[]" visibility="private"/>
+        <Field name="rucs" type="String[]" visibility="private"/>
+        <Field name="finalProjectStatus" type="Status[]" visibility="private"/>
+        <Field name="paidStatus" type="boolean[]" visibility="private"/>
+        <Field name="quoteList" type="float[]" visibility="private"/>
+        <Field name="isDailyReport" type="boolean" visibility="private"/>
+        <Field name="isWeeklyReport" type="boolean" visibility="private"/>
+        <Field name="isMothlyReport" type="boolean" visibility="private"/>
+        <Field name="isQuarterReport" type="boolean" visibility="private"/>
+        <Field name="totalQuote" type="float" visibility="private"/>
+        <Field name="endProjectDates" type="Date[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setReportId" returnType="void" visibility="public">
+          <Argument type="String" name="reportId"/>
+        </Method>
+        <Method name="setProjectNames" returnType="void" visibility="public">
+          <Argument type="String[]" name="projectNames"/>
+        </Method>
+        <Method name="setProjectDescriptions" returnType="void" visibility="public">
+          <Argument type="String[]" name="projectDescriptions"/>
+        </Method>
+        <Method name="setRucs" returnType="void" visibility="public">
+          <Argument type="String[]" name="rucs"/>
+        </Method>
+        <Method name="doFinalProjectStatus" returnType="void" visibility="public">
+          <Argument type="Status[]" name="finalProjectStatus"/>
+        </Method>
+        <Method name="doQuoteList" returnType="float[]" visibility="public"/>
+        <Method name="setTypeOfReport" returnType="boolean" visibility="public"/>
+        <Method name="calculateTotalQuote" returnType="float" visibility="public"/>
+        <Method name="getEndProjectDates" returnType="Date[]" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Status" package="ec.edu.espe.projects.model" visibility="public" xPosition="1588.0" yPosition="516.0">
+      <Fields>
+        <Field name="isCancelled" type="boolean" visibility="private"/>
+        <Field name="isInProgress" type="boolean" visibility="private"/>
+        <Field name="isApproved" type="boolean" visibility="private"/>
+        <Field name="isFinished" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setStauts" returnType="void" visibility="public">
+          <Argument type="boolean" name="isCancelled"/>
+          <Argument type="boolean" name="isInProgress"/>
+          <Argument type="boolean" name="isApproved"/>
+          <Argument type="boolean" name="isFinished"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="sendDate" source="ec.edu.espe.projects.model.Notification" target="ec.edu.espe.projects.model.Date" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Report" target="ec.edu.espe.projects.model.Date" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectStartDate" source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Date" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="statusNotification" source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Notification" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.DataBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Report" target="ec.edu.espe.projects.model.Status" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dataBase" source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.DataBase" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Notification" target="ec.edu.espe.projects.model.Status" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectStatus" source="ec.edu.espe.projects.model.Notification" target="ec.edu.espe.projects.model.Status" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Notification" target="ec.edu.espe.projects.model.Date" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Date" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Notification" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectStatus" source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Status" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Status" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="report" source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.Report" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="project" source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.Project" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.Report" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="customer" source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Customer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="projectFinalDate" source="ec.edu.espe.projects.model.Project" target="ec.edu.espe.projects.model.Date" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.espe.projects.model.Developer" target="ec.edu.espe.projects.model.Project" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

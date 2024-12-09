@@ -1,49 +1,41 @@
 package ec.edu.espe.projects.model;
 
+import java.util.Date;
+
 /**
  *
- * @author David Pilatasig
+ * @author Dennis Paucar
  */
+
 public class Support {
-    private String suportID;
-    private String projectID;
+    private String supportId;
+    private String relatedProjectId;
     private Date startDate;
     private Date endDate;
     private String status;
 
-    public Support() {
-    }
-
-    public Support(String suportID, String projectID, Date startDate, Date endDate, String status) {
-        this.suportID = suportID;
-        this.projectID = projectID;
+    public Support(String supportId, String relatedProjectId, Date startDate, Date endDate, String status) {
+        this.supportId = supportId;
+        this.relatedProjectId = relatedProjectId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSupportId() {
+        return supportId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSupportId(String supportId) {
+        this.supportId = supportId;
     }
 
-    public String getSuportID() {
-        return suportID;
+    public String getRelatedProjectId() {
+        return relatedProjectId;
     }
 
-    public void setSuportID(String suportID) {
-        this.suportID = suportID;
-    }
-
-    public String getProjectID() {
-        return projectID;
-    }
-
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public void setRelatedProjectId(String relatedProjectId) {
+        this.relatedProjectId = relatedProjectId;
     }
 
     public Date getStartDate() {
@@ -62,11 +54,32 @@ public class Support {
         this.endDate = endDate;
     }
 
-    public void updateStatus(String status){
-        
+    public String getStatus() {
+        return status;
     }
-    
-    public boolean isSupportNearEnd(){
-        return false;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void updateStatus(String newStatus) {
+        this.status = newStatus;
+    }
+
+    public boolean isSupportNearEnd(int daysBefore) {
+        if (endDate == null) return false;
+        long currentTime = new Date().getTime();
+        long endTime = endDate.getTime();
+        long daysDifference = (endTime - currentTime) / (1000 * 60 * 60 * 24);
+        return daysDifference <= daysBefore;
+    }
+
+    @Override
+    public String toString() {
+        return "Support ID: " + supportId + "\n" +
+               "Related Project ID: " + relatedProjectId + "\n" +
+               "Start Date: " + startDate + "\n" +
+               "End Date: " + endDate + "\n" +
+               "Status: " + status;
     }
 }

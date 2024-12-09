@@ -93,32 +93,36 @@ public class ProjectMenu {
     public static void updateProjectStatusMenu(ProjectController controller, Scanner scanner) {
         System.out.println("\n--- Actualizar estado del proyecto ---");
         
+        List<Project> projectlist= new ArrayList<>();
         String filename="projects.json";
         JSONFileHandler JSONlist= new JSONFileHandler();
-        Type projectListType=new TypeToken<List<Project>>() {}.getType();
-        JSONlist.readFromFile(filename, projectListType);
+        String projectId;
+        boolean isfounded;
+        isfounded=false;
         
+        Type projectListType=new TypeToken<List<Project>>() {}.getType();
+        projectlist=JSONlist.readFromFile(filename, projectListType);
         
         System.out.print("Ingrese el ID del proyecto: ");
-        String projectId = scanner.nextLine().trim();
+        projectId = scanner.nextLine().trim();
         if (projectId.isEmpty()) {
             System.out.println("Error: El ID del proyecto no puede estar vacio.");
             return;
         }
-
-        System.out.println("Ingrese un nuevo estado:");
-        for (int i = 0; i < Status.values().length; i++) {
-            System.out.println((i + 1) + ". " + Status.values()[i]);
+        
+        for(Project project: projectlist){
+            if (projectId.contentEquals(project.getProjectId())){
+                int statusOption = scanner.nextInt();
+                scanner.nextLine(); 
+                if (statusOption < 1 || statusOption > Status.values().length) {
+                    System.out.println("Error: Opcion invalida.");
+                return;
         }
-        int statusOption = scanner.nextInt();
-        scanner.nextLine(); 
-        if (statusOption < 1 || statusOption > Status.values().length) {
-            System.out.println("Error: Opcion invalida.");
-            return;
-        }
-
         Status newStatus = Status.values()[statusOption - 1];
         controller.updateProjectStatus(projectId, newStatus);
+            }
+            
+       }
     }
 
     private static Date parseDate(String dateStr) {

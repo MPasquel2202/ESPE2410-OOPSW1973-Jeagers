@@ -1,14 +1,19 @@
 package ec.edu.espe.mole.view;
 
+import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.mole.controller.ProjectController;
 import ec.edu.espe.mole.model.Customer;
+import ec.edu.espe.mole.model.JSONFileHandler;
+import ec.edu.espe.mole.model.Project;
 import ec.edu.espe.mole.model.Status;
+import java.lang.reflect.Type;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.util.List;
 /**
  *
  * @author Marlon Pasquel
@@ -19,6 +24,14 @@ public class ProjectMenu {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void createProjectMenu(ProjectController controller, Scanner scanner) {
+        
+        JSONFileHandler<Project> handler=new JSONFileHandler<>();
+        List<Project> projectlist= new ArrayList<>();
+        String filepath="projects.json";
+        
+        Type projectListType=new TypeToken<List<Project>>() {}.getType();
+        projectlist=handler.readFromFile(filepath, projectListType);
+        
         System.out.println("\n--- Crear proyecto ---");
 
         System.out.print("Ingrese el ID del proyecto: ");
@@ -73,11 +86,19 @@ public class ProjectMenu {
         Status status = Status.values()[statusOption - 1];
 
         controller.createProject(projectId, description, customer, startDate, status);
+        
+        handler.writeToFile(projectlist, filepath);
     }
 
     public static void updateProjectStatusMenu(ProjectController controller, Scanner scanner) {
         System.out.println("\n--- Actualizar estado del proyecto ---");
-
+        
+        String filename="projects.json";
+        JSONFileHandler JSONlist= new JSONFileHandler();
+        Type projectListType=new TypeToken<List<Project>>() {}.getType();
+        JSONlist.readFromFile(filename, projectListType);
+        
+        
         System.out.print("Ingrese el ID del proyecto: ");
         String projectId = scanner.nextLine().trim();
         if (projectId.isEmpty()) {

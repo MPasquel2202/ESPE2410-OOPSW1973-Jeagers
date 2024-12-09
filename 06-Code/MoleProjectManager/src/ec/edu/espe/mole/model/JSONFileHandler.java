@@ -44,7 +44,6 @@ public class JSONFileHandler<T> {
         JSONFileHandler<Project> handler = new JSONFileHandler<>();
         List<Project> projects = new ArrayList<>();
         
-
         Project project1 = new Project("P001", "Proyecto 1", null, new java.util.Date(), Status.IN_PROGRESS);
         projects.add(project1);
 

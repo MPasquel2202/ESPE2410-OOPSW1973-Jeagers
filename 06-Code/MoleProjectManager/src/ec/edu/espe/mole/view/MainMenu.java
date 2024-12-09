@@ -27,13 +27,11 @@ public class MainMenu {
                 System.out.println("1. Crear nuevo proyecto");
                 System.out.println("2. Actualizar estado del proyecto");
                 System.out.println("3. Listar todos los proyectos");
-                System.out.println("4. Guardar proyectos a un archivo");
-                System.out.println("5. Cargar proyectos desde un archivo");
-                System.out.println("6. Gestionar soportes");
-                System.out.println("7. Listar soportes");
-                System.out.println("8. Generar y exportar reportes");
-                System.out.println("9. Gestionar notificaciones");
-                System.out.println("10. Salir");
+                System.out.println("4. Gestionar soportes");
+                System.out.println("5. Listar soportes");
+                System.out.println("6. Generar y exportar reportes");
+                System.out.println("7. Gestionar notificaciones");
+                System.out.println("8. Salir");
                 System.out.print("Elija una opcion: ");
                 
                 option = scanner.nextInt();
@@ -49,36 +47,27 @@ public class MainMenu {
                     case 3:
                         projectController.listProjects();
                         break;
+               
                     case 4:
-                        System.out.print("Ingrese el nombre del archivo para guardar proyectos: ");
-                        String saveFilename = scanner.nextLine();
-                        projectController.saveProjectsToFile(saveFilename);
-                        break;
-                    case 5:
-                        System.out.print("Ingrese el nombre del archivo para cargar proyectos: ");
-                        String loadFilename = scanner.nextLine();
-                        projectController.loadProjectsFromFile(loadFilename);
-                        break;
-                    case 6:
                         SupportMenu.manageSupportMenu(scanner);
                         break;
-                    case 7:
+                    case 5:
                         SupportMenu.listSupports(supports);
                         break;
-                    case 8:
+                    case 6:
                         ReportsMenu.generateAndExportReports(projectController, scanner);
                         break;
-                    case 9:
+                    case 7:
                         NotificationMenu.manageNotificationsMenu(scanner);
                         break;
-                    case 10:
+                    case 8:
                         System.out.println("Saliendo del programa. Hasta la proxima!");
                         break;
                     default:
                         System.out.println("Opcion invalida. Intente nuevamente.");
                 }
                 
-            } while (option != 10);
+            } while (option != 8);
         }
     }
 }

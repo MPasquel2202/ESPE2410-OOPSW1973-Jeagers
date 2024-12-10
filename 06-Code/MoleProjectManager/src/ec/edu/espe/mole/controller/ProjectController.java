@@ -36,11 +36,6 @@ public class ProjectController {
             System.out.println(project);
         }
     }
-    public void saveProjectsToFile(String filename) {
-    }
-
-    public void loadProjectsFromFile(String filename) {
-    }
 
     public List<Project> filterProjectsByDate(Date startDate, Date endDate) {
         List<Project> filteredProjects = new ArrayList<>();

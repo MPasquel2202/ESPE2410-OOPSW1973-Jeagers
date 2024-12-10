@@ -124,13 +124,13 @@ public class ProjectMenu {
                 try {
                     System.out.print("Seleccione el nuevo estado (1-" + Status.values().length + "): ");
                     statusOption = scanner.nextInt();
-                    scanner.nextLine(); // Limpia el buffer después de nextInt.
+                    scanner.nextLine(); 
                     if (statusOption < 1 || statusOption > Status.values().length) {
                         System.out.println("Error: Opción inválida. Intente nuevamente.");
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Error: Debe ingresar un número entero.");
-                    scanner.nextLine(); // Limpia el buffer si hay una entrada inválida.
+                    scanner.nextLine(); 
                 }
             } while (statusOption < 1 || statusOption > Status.values().length);
 
@@ -139,7 +139,7 @@ public class ProjectMenu {
             wasfounded = true;
 
             System.out.println("El estado del proyecto se ha cambiado a: " + status.getDescription());
-            break; // Sal del bucle una vez que se encuentre el proyecto.
+            break; 
         }
     }
 

@@ -40,8 +40,7 @@ public class MainMenu {
                 System.out.println("4. Gestionar soportes");
                 System.out.println("5. Listar soportes");
                 System.out.println("6. Generar y exportar reportes");
-                System.out.println("7. Gestionar notificaciones");
-                System.out.println("8. Salir");
+                System.out.println("7. Salir");
                 System.out.print("Elija una opcion: ");
                 
                 option = scanner.nextInt();
@@ -66,17 +65,15 @@ public class MainMenu {
                     case 6:
                         ReportsMenu.generateAndExportReports(projectController, scanner);
                         break;
+
                     case 7:
-                        NotificationMenu.manageNotificationsMenu(scanner);
-                        break;
-                    case 8:
                         System.out.println("Saliendo del programa. Hasta la próxima!");
                         break;
                     default:
                         System.out.println("Opción inválida. Intente nuevamente.");
                 }
                 
-            } while (option != 8);
+            } while (option != 7);
         }
     }
 

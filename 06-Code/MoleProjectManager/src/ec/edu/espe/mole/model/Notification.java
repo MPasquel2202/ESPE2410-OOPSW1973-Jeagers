@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Brandon Pazmino
  */
 public class Notification {
-        private String notificationId;
+    private String notificationId;
     private String noticeTitle;
     private String noticeMessage;
     private Date sendDate;

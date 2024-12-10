@@ -3,9 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/User/OneDrive/Documentos/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/view/ReportsMenu.java</file>
             <file>file:/C:/Users/User/OneDrive/Documentos/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/model/ProjectsReport.java</file>
             <file>file:/C:/Users/User/OneDrive/Documentos/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/view/MainMenu.java</file>
+=======
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/model/ProjectsReport.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/view/ProjectMenu.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/model/Project.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/model/JSONFileHandler.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/view/MainMenu.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/controller/ProjectController.java</file>
+            <file>file:/C:/Users/Usuario/ESPE2410-OOPSW1973-Jeagers/06-Code/MoleProjectManager/src/ec/edu/espe/mole/model/Status.java</file>
+>>>>>>> aad53ae7863ac261aa6138d3e6d1c1f9275e22b8
         </group>
     </open-files>
 </project-private>

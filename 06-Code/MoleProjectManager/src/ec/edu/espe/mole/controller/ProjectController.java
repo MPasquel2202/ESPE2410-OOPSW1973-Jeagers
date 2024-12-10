@@ -1,8 +1,16 @@
 package ec.edu.espe.mole.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.mole.model.Project;
 import ec.edu.espe.mole.model.Status;
 import ec.edu.espe.mole.model.Customer;
+import ec.edu.espe.mole.model.JSONFileHandler;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Type;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,19 +28,41 @@ public class ProjectController {
         this.projects = new ArrayList<>();
     }
 
-    public void createProject(String projectId, String description, Customer customer, Date startDate, Status status) {
-        Project project = new Project(projectId, description, customer, startDate, status);
-        projects.add(project);
-        System.out.println("Project created successfully: \n" + project);
+    public void createProject(Project project) {
+        JSONFileHandler<Project> JSONHandler=new JSONFileHandler();
+        List<Project> projectList= new ArrayList<>();
+        String filepath="project.json";
+        Type projectListType=new TypeToken<List<Project>>() {}.getType();
+        projectList=JSONHandler.readFromFile(filepath, projectListType);
+        
+        projectList.add(project);
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        
+        String json = gson.toJson(projectList);
+        System.out.println(json);
+        JSONHandler.writeToFile(projectList,"project.json" );
+        
+        try (Writer writer = new FileWriter("project.json")) {
+            gson.toJson(projectList, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void listProjects() {
         System.out.println("\n--- List of Projects ---");
-        if (projects.isEmpty()) {
+         JSONFileHandler<Project> handler=new JSONFileHandler<>();
+        List<Project> projectlist= new ArrayList<>();
+        String filepath="project.json";
+        Type projectListType=new TypeToken<List<Project>>() {}.getType();
+        projectlist=handler.readFromFile(filepath, projectListType);
+        
+        if (projectlist.isEmpty()) {
             System.out.println("No projects found.");
             return;
         }
-        for (Project project : projects) {
+        for (Project project : projectlist) {
             System.out.println(project);
         }
     }

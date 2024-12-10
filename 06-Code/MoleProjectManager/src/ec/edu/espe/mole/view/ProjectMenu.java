@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.List;
 /**
@@ -25,15 +26,8 @@ public class ProjectMenu {
 
     public static void createProjectMenu(ProjectController controller, Scanner scanner) {
         
-        JSONFileHandler<Project> handler=new JSONFileHandler<>();
-        List<Project> projectlist= new ArrayList<>();
-        String filepath="projects.json";
-        
         String projectId;
         String description;
-        
-        Type projectListType=new TypeToken<List<Project>>() {}.getType();
-        projectlist=handler.readFromFile(filepath, projectListType);
         
         System.out.println("\n--- Crear proyecto ---");
 
@@ -89,47 +83,73 @@ public class ProjectMenu {
             scanner.nextLine();
         }
         Status status = Status.values()[statusOption - 1];
+        
+        Project project= new Project(projectId, description, customer, startDate, status);
+        
+        controller.createProject(project);
 
-        controller.createProject(projectId, description, customer, startDate, status);
-        
-        
-        handler.writeToFile(projectlist, filepath);
     }
 
     public static void updateProjectStatusMenu(ProjectController controller, Scanner scanner) {
         System.out.println("\n--- Actualizar estado del proyecto ---");
-        
-        List<Project> projectlist= new ArrayList<>();
-        String filename="projects.json";
-        JSONFileHandler JSONlist= new JSONFileHandler();
-        String projectId;
-        boolean isfounded;
-        isfounded=false;
-        
-        Type projectListType=new TypeToken<List<Project>>() {}.getType();
-        projectlist=JSONlist.readFromFile(filename, projectListType);
-        
-        System.out.print("Ingrese el ID del proyecto: ");
-        projectId = scanner.nextLine().trim();
-        if (projectId.isEmpty()) {
-            System.out.println("Error: El ID del proyecto no puede estar vacio.");
-            return;
-        }
-        
-        for(Project project: projectlist){
-            if (projectId.contentEquals(project.getProjectId())){
-                int statusOption = scanner.nextInt();
-                scanner.nextLine(); 
-                if (statusOption < 1 || statusOption > Status.values().length) {
-                    System.out.println("Error: Opcion invalida.");
-                return;
-        }
-        Status newStatus = Status.values()[statusOption - 1];
-        controller.updateProjectStatus(projectId, newStatus);
-            }
-            
-       }
+
+    JSONFileHandler<Project> handler = new JSONFileHandler<>();
+    List<Project> projectList = new ArrayList<>();
+    String filepath = "project.json";
+    Type projectListType = new TypeToken<List<Project>>() {}.getType();
+    projectList = handler.readFromFile(filepath, projectListType);
+
+    boolean wasfounded = false;
+
+    System.out.print("Ingrese el ID del proyecto: ");
+    String projectId = scanner.nextLine().trim();
+    if (projectId.isEmpty()) {
+        System.out.println("Error: El ID del proyecto no puede estar vacío.");
+        return;
     }
+
+    for (Project project : projectList) {
+        if (project.getProjectId().equals(projectId)) {
+            System.out.print("Cambie la descripción del proyecto: ");
+            String description = scanner.nextLine();
+            project.setDescription(description);
+
+            System.out.println("Cambie el estado del proyecto:");
+            for (int i = 0; i < Status.values().length; i++) {
+                System.out.println((i + 1) + ". " + Status.values()[i].getDescription());
+            }
+
+            int statusOption = -1;
+            do {
+                try {
+                    System.out.print("Seleccione el nuevo estado (1-" + Status.values().length + "): ");
+                    statusOption = scanner.nextInt();
+                    scanner.nextLine(); // Limpia el buffer después de nextInt.
+                    if (statusOption < 1 || statusOption > Status.values().length) {
+                        System.out.println("Error: Opción inválida. Intente nuevamente.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Error: Debe ingresar un número entero.");
+                    scanner.nextLine(); // Limpia el buffer si hay una entrada inválida.
+                }
+            } while (statusOption < 1 || statusOption > Status.values().length);
+
+            Status status = Status.values()[statusOption - 1];
+            project.setStatus(status);
+            wasfounded = true;
+
+            System.out.println("El estado del proyecto se ha cambiado a: " + status.getDescription());
+            break; // Sal del bucle una vez que se encuentre el proyecto.
+        }
+    }
+
+    if (!wasfounded) {
+        System.out.println("Su proyecto no existe.");
+    } else {
+        handler.writeToFile(projectList, "project.json");
+        System.out.println("Los cambios se han guardado correctamente.");
+    }
+        }
 
     private static Date parseDate(String dateStr) {
         try {

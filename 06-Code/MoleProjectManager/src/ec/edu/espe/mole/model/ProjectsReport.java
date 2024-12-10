@@ -3,14 +3,12 @@ package ec.edu.espe.mole.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 /**
  *
  * @author Brandon Pazmino
  */
 public class ProjectsReport {
-
-    private List<Project> projects;
+        private List<Project> projects;
     private Date startDate;
     private Date endDate;
 
@@ -54,19 +52,26 @@ public class ProjectsReport {
         return filteredProjects;
     }
 
+    public void exportReportToCSV() {
+        System.out.println("Exporting report to CSV...");
+        for (Project project : generateReport()) {
+            System.out.println(project.toString().replaceAll("\\n", ", "));
+        }
+    }
+
     public void exportReportToJSON() {
         System.out.println("Exporting report to JSON...");
         System.out.println("[\n");
         for (Project project : generateReport()) {
-            System.out.println("  { "
-                    + "\"projectId\": \"" + project.getProjectId() + "\", "
-                    + "\"description\": \"" + project.getDescription() + "\", "
-                    + "\"status\": \"" + project.getStatus() + "\", "
-                    + "\"startDate\": \"" + project.getStartDate() + "\", "
-                    + (project.getEndDate() != null ? "\"endDate\": \"" + project.getEndDate() + "\", " : "")
-                    + "}");
+            System.out.println("  { " +
+                "\"projectId\": \"" + project.getProjectId() + "\", " +
+                "\"description\": \"" + project.getDescription() + "\", " +
+                "\"status\": \"" + project.getStatus() + "\", " +
+                "\"startDate\": \"" + project.getStartDate() + "\", " +
+                (project.getEndDate() != null ? "\"endDate\": \"" + project.getEndDate() + "\", " : "") +
+                "}");
         }
         System.out.println("\n]");
     }
-
+    
 }

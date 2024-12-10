@@ -1,9 +1,13 @@
 package ec.edu.espe.mole.view;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import ec.edu.espe.mole.controller.ProjectController;
 import ec.edu.espe.mole.model.Support;
 
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +20,13 @@ import java.util.Scanner;
 public class MainMenu {
     public static void main(String[] args) {
         ProjectController projectController = new ProjectController();
-        List<Support> supports = new ArrayList<>(); 
+        List<Support> supports = new ArrayList<>();
+        
+        if (!authenticate()) {
+            System.out.println("Authentication failed. Program terminated.");
+            return;
+        }
+        
         try (Scanner scanner = new Scanner(System.in)) {
             int option;
             
@@ -35,7 +45,7 @@ public class MainMenu {
                 System.out.print("Elija una opcion: ");
                 
                 option = scanner.nextInt();
-                scanner.nextLine(); 
+                scanner.nextLine();
                 
                 switch (option) {
                     case 1:
@@ -47,7 +57,6 @@ public class MainMenu {
                     case 3:
                         projectController.listProjects();
                         break;
-               
                     case 4:
                         SupportMenu.manageSupportMenu(scanner);
                         break;
@@ -61,13 +70,61 @@ public class MainMenu {
                         NotificationMenu.manageNotificationsMenu(scanner);
                         break;
                     case 8:
-                        System.out.println("Saliendo del programa. Hasta la proxima!");
+                        System.out.println("Saliendo del programa. Hasta la próxima!");
                         break;
                     default:
-                        System.out.println("Opcion invalida. Intente nuevamente.");
+                        System.out.println("Opción inválida. Intente nuevamente.");
                 }
                 
             } while (option != 8);
         }
     }
+
+     private static boolean authenticate() {
+        Scanner scanner = new Scanner(System.in);
+        String correctUsername;
+        String correctPasswordEncrypted;
+
+       
+        try (FileReader reader = new FileReader("C:\\Users\\denni\\OneDrive\\Escritorio\\MoleProjectManager\\credentials.json")) {
+            Gson gson = new Gson();
+            JsonObject credentials = JsonParser.parseReader(reader).getAsJsonObject();
+            correctUsername = credentials.get("username").getAsString();
+            correctPasswordEncrypted = credentials.get("password").getAsString();  // Store the encrypted password
+        } catch (IOException e) {
+            System.out.println("Error reading credentials file: " + e.getMessage());
+            return false;
+        }
+
+        System.out.println("==== Authentication Required ====");
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+
+     
+        String encryptedEnteredPassword = encryptPasswordToASCII(password);
+
+       
+        if (username.equals(correctUsername) && encryptedEnteredPassword.equals(correctPasswordEncrypted)) {
+            System.out.println("Authentication successful. Welcome!");
+            return true;
+        } else {
+            System.out.println("Invalid username or password.");
+            return false;
+        }
+    }
+
+   
+    private static String encryptPasswordToASCII(String password) {
+        StringBuilder encryptedPassword = new StringBuilder();
+        for (int i = 0; i < password.length(); i++) {
+            encryptedPassword.append((int) password.charAt(i));  
+            if (i < password.length() - 1) {
+                encryptedPassword.append(" ");  
+            }
+        }
+        return encryptedPassword.toString();  
+    }
+    
 }

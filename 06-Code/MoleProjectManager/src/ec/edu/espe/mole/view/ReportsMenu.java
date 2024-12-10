@@ -37,27 +37,10 @@ public class ReportsMenu {
         }
 
         ProjectsReport report = new ProjectsReport(projectController.filterProjectsByDate(startDate, endDate), startDate, endDate);
-        System.out.println("Reporte generado. Elija el formato:");
-        System.out.println("1. JSON");
-        System.out.println("2. CSV");
-        int exportOption = scanner.nextInt();
-        scanner.nextLine(); 
-
+        System.out.println("Reporte generado en formato JSON");
         System.out.print("Ingrese el nombre del archivo: ");
         String filename = scanner.nextLine().trim();
 
-        switch (exportOption) {
-            case 1:
-                report.exportReportToJSON();
-                System.out.println("Reporte exportado a JSON.");
-                break;
-            case 2:
-                report.exportReportToCSV();
-                System.out.println("Reporte exportado a CSV.");
-                break;
-            default:
-                System.out.println("Error: Opcion invalida.");
-        }
     }
 
     private static Date parseDate(String dateStr) {

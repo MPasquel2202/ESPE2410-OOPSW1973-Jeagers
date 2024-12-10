@@ -52,12 +52,6 @@ public class ProjectsReport {
         return filteredProjects;
     }
 
-    public void exportReportToCSV() {
-        System.out.println("Exporting report to CSV...");
-        for (Project project : generateReport()) {
-            System.out.println(project.toString().replaceAll("\\n", ", "));
-        }
-    }
 
     public void exportReportToJSON() {
         System.out.println("Exporting report to JSON...");

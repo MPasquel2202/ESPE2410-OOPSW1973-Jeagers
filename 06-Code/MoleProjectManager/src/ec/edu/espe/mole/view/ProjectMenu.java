@@ -29,23 +29,26 @@ public class ProjectMenu {
         List<Project> projectlist= new ArrayList<>();
         String filepath="projects.json";
         
+        String projectId;
+        String description;
+        
         Type projectListType=new TypeToken<List<Project>>() {}.getType();
         projectlist=handler.readFromFile(filepath, projectListType);
         
         System.out.println("\n--- Crear proyecto ---");
 
         System.out.print("Ingrese el ID del proyecto: ");
-        String projectId = scanner.nextLine().trim();
-        if (projectId.isEmpty()) {
+        projectId = scanner.nextLine().trim();
+        while(projectId.isEmpty()) {
             System.out.println("Error: El ID del proyecto no puede estar vacio.");
-            return;
+            projectId= scanner.nextLine().trim();
         }
 
         System.out.print("Ingrese la descripcion del proyecto: ");
-        String description = scanner.nextLine().trim();
-        if (description.isEmpty()) {
+        description = scanner.nextLine().trim();
+        while(description.isEmpty()) {
             System.out.println("Error: La descripcion del proyecto no puede estar vacia.");
-            return;
+            description=scanner.nextLine().trim();
         }
 
         System.out.print("Ingrese el ID del cliente: ");
@@ -68,9 +71,10 @@ public class ProjectMenu {
         System.out.print("Ingrese la fecha del inicio del proyecto (YYYY-MM-DD): ");
         String startDateStr = scanner.nextLine().trim();
         Date startDate = parseDate(startDateStr);
-        if (startDate == null) {
+        while(startDate == null) {
             System.out.println("Error: Formato de fecha invalido.");
-            return;
+            startDateStr = scanner.nextLine().trim();
+            startDate = parseDate(startDateStr);
         }
 
         System.out.println("Elija el estado del proyecto:");
@@ -79,13 +83,15 @@ public class ProjectMenu {
         }
         int statusOption = scanner.nextInt();
         scanner.nextLine(); 
-        if (statusOption < 1 || statusOption > Status.values().length) {
+        while(statusOption < 1 || statusOption > Status.values().length) {
             System.out.println("Error: Opcion invalida.");
-            return;
+            statusOption=scanner.nextInt();
+            scanner.nextLine();
         }
         Status status = Status.values()[statusOption - 1];
 
         controller.createProject(projectId, description, customer, startDate, status);
+        
         
         handler.writeToFile(projectlist, filepath);
     }

@@ -40,21 +40,5 @@ public class JSONFileHandler<T> {
         return new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        JSONFileHandler<Project> handler = new JSONFileHandler<>();
-        List<Project> projects = new ArrayList<>();
-        
-        Project project1 = new Project("P001", "Proyecto 1", null, new java.util.Date(), Status.IN_PROGRESS);
-        projects.add(project1);
-
-        handler.writeToFile(projects, "projects.json");
-
-        Type projectListType = new TypeToken<List<Project>>() {}.getType();
-        List<Project> readProjects = handler.readFromFile("projects.json", projectListType);
-        
-        for (Project project : readProjects) {
-            System.out.println(project);
-        }
-    }
 }
 

@@ -79,4 +79,8 @@ public class Notification {
                "Send Date: " + sendDate + "\n" +
                "Related Project ID: " + relatedProjectId;
     }
+
+    public void setProject(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

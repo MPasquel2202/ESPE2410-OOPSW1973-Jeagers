@@ -83,7 +83,7 @@ public class MainMenu {
         String correctPasswordEncrypted;
 
        
-        try (FileReader reader = new FileReader("C:\\Users\\User\\ESPE2410-OOPSW1973-Jeagers\\06-Code\\MoleProjectManager\\credentials.json")) {
+        try (FileReader reader = new FileReader("C:\\Users\\marlo\\ESPE2410-OOPSW1973-Jeagers\\06-Code\\MoleProjectManager\\credentials.json")) {
             Gson gson = new Gson();
             JsonObject credentials = JsonParser.parseReader(reader).getAsJsonObject();
             correctUsername = credentials.get("username").getAsString();

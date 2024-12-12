@@ -54,7 +54,7 @@ public class SupportMenu {
         System.out.println("Soporte generado exitosamente: \n" + support);
     }
 
-    public static void listSupports() {
+    public static void listSupports(List<Support> supports1) {
         System.out.println("\n--- Lista de soportes ---");
         if (supports.isEmpty()) {
             System.out.println("No se encontraron soportes.");

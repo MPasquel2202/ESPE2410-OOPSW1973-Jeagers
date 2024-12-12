@@ -23,7 +23,7 @@ public class MainMenu {
         List<Support> supports = new ArrayList<>();
         
         if (!authenticate()) {
-            System.out.println("Authentication failed. Program terminated.");
+            System.out.println("Autenticacion fallida, vuelva a intentarlo.");
             return;
         }
         
@@ -89,14 +89,14 @@ public class MainMenu {
             correctUsername = credentials.get("username").getAsString();
             correctPasswordEncrypted = credentials.get("password").getAsString();  
         } catch (IOException e) {
-            System.out.println("Error reading credentials file: " + e.getMessage());
+            System.out.println("Error leyendo el archivo de credenciales: " + e.getMessage());
             return false;
         }
 
-        System.out.println("==== Authentication Required ====");
-        System.out.print("Enter your username: ");
+        System.out.println("==== Auntenticacion Requerida ====");
+        System.out.print("Ingrese su nombre de usuario: ");
         String username = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        System.out.print("Ingrese su contraseña: ");
         String password = scanner.nextLine();
 
      
@@ -104,10 +104,10 @@ public class MainMenu {
 
        
         if (username.equals(correctUsername) && encryptedEnteredPassword.equals(correctPasswordEncrypted)) {
-            System.out.println("Authentication successful. Welcome!");
+            System.out.println("Autenticacion completada. Bienvenido!");
             return true;
         } else {
-            System.out.println("Invalid username or password.");
+            System.out.println("Usuario o contraseña invalidos.");
             return false;
         }
     }

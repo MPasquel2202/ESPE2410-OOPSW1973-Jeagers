@@ -1,0 +1,100 @@
+[
+  {
+    "projectId": "12",
+    "description": "hola",
+    "status": "QUOTATION_ACCEPTED",
+    "customer": {
+      "customerId": "1727852871",
+      "name": "David Pilatasig",
+      "email": "david_pilatasig@hotmail.com",
+      "ruc": "1727852871",
+      "phoneNumber": "0958787008"
+    },
+    "quation": 0.0,
+    "startDate": "Dec 10, 2024, 12:00:00 AM"
+  },
+  {
+    "projectId": "15",
+    "description": "Paid project",
+    "status": "PAID",
+    "customer": {
+      "customerId": "0502319270",
+      "name": "Marco Pilatasig",
+      "email": "marco@hotmail.com",
+      "ruc": "0502319270",
+      "phoneNumber": "98941230056"
+    },
+    "quation": 0.0,
+    "startDate": "Jan 10, 2024, 12:00:00 AM"
+  },
+  {
+    "projectId": "01",
+    "description": "12355",
+    "status": "QUOTATION_REJECTED",
+    "customer": {
+      "customerId": "01",
+      "name": "0987654321",
+      "email": "ex@ex.ex",
+      "ruc": "001",
+      "phoneNumber": "0132612"
+    },
+    "quation": 0.0,
+    "startDate": "Aug 17, 2027, 12:00:00 AM"
+  },
+  {
+    "projectId": "01",
+    "description": "hola",
+    "status": "COMPLETED",
+    "customer": {
+      "customerId": "01",
+      "name": "marlon",
+      "email": "ex@ex.ex",
+      "ruc": "001",
+      "phoneNumber": "0987654321"
+    },
+    "quation": 0.0,
+    "startDate": "Nov 15, 1976, 12:00:00 AM"
+  },
+  {
+    "projectId": "02",
+    "description": "salir",
+    "status": "QUOTATION_ACCEPTED",
+    "customer": {
+      "customerId": "22",
+      "name": "245",
+      "email": "54",
+      "ruc": "2552",
+      "phoneNumber": "2255"
+    },
+    "quation": 0.0,
+    "startDate": "Mar 5, 668751, 12:00:00 AM"
+  },
+  {
+    "projectId": "1545",
+    "description": "21534",
+    "status": "QUOTATION_REJECTED",
+    "customer": {
+      "customerId": "...",
+      "name": "ij2521",
+      "email": "212pk",
+      "ruc": "ññ",
+      "phoneNumber": "ñññ"
+    },
+    "quation": 0.0,
+    "startDate": "Jan 19, 226888958, 7:08:16 PM"
+  },
+  {
+    "projectId": "465654",
+    "description": "New Project",
+    "status": "QUOTATION_SENT",
+    "customer": {
+      "customerId": "48564",
+      "name": "Marlon",
+      "email": "marlon@hotmail.com",
+      "ruc": "094841516",
+      "phoneNumber": "78946518"
+    },
+    "quation": 98745.0,
+    "startDate": "Dec 11, 2024, 12:00:00 AM"
+  }
+]

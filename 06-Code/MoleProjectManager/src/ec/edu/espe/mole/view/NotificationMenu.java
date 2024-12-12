@@ -12,7 +12,6 @@ import java.util.Scanner;
  * @author Dennis Paucar
  */
 
-
 public class NotificationMenu {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");

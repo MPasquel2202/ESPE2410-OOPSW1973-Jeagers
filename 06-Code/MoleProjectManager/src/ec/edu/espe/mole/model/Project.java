@@ -84,13 +84,13 @@ public class Project {
         this.status = newStatus;
     }
 
-    public boolean isSupportEndingSoon(int daysBefore) {
-        if (supportEndDate == null) return false;
-        long currentTime = new Date().getTime();
-        long supportTime = supportEndDate.getTime();
-        long daysDifference = (supportTime - currentTime) / (1000 * 60 * 60 * 24);
-        return daysDifference <= daysBefore;
-    }
+//    public boolean isSupportEndingSoon(int daysBefore) {
+//      if (supportEndDate == null) return false;
+//        long currentTime = new Date().getTime();
+//        long supportTime = supportEndDate.getTime();
+//        long daysDifference = (supportTime - currentTime) / (1000 * 60 * 60 * 24);
+//        return daysDifference <= daysBefore;
+//    }
 
     @Override
     public String toString() {

@@ -87,7 +87,7 @@ public class MainMenu {
             Gson gson = new Gson();
             JsonObject credentials = JsonParser.parseReader(reader).getAsJsonObject();
             correctUsername = credentials.get("username").getAsString();
-            correctPasswordEncrypted = credentials.get("password").getAsString();  // Store the encrypted password
+            correctPasswordEncrypted = credentials.get("password").getAsString();  
         } catch (IOException e) {
             System.out.println("Error reading credentials file: " + e.getMessage());
             return false;

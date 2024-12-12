@@ -70,7 +70,14 @@ public class ProjectMenu {
             startDateStr = scanner.nextLine().trim();
             startDate = parseDate(startDateStr);
         }
-
+        
+        System.out.print("Ingrese la cuota del proyecto: ");
+        float quation = scanner.nextFloat();
+        while(quation<=0){
+            System.out.println("Precio inválido para empezar un proyecto, ingrese otro valor: ");
+            quation=scanner.nextFloat();
+        }
+        
         System.out.println("Elija el estado del proyecto:");
         for (int i = 0; i < Status.values().length; i++) {
             System.out.println((i + 1) + ". " + Status.values()[i]);
@@ -84,7 +91,7 @@ public class ProjectMenu {
         }
         Status status = Status.values()[statusOption - 1];
         
-        Project project= new Project(projectId, description, customer, startDate, status);
+        Project project= new Project(projectId, description, status, customer, quation, startDate);
         
         controller.createProject(project);
 

@@ -2,13 +2,12 @@ package ec.edu.espe.mole.model;
 
 import java.util.Date;
 
-
-
 /**
  *
  * @author Brandon Pazmino
  */
 public class Notification {
+
     private String notificationId;
     private String noticeTitle;
     private String noticeMessage;
@@ -64,19 +63,35 @@ public class Notification {
     }
 
     public void sendNotification() {
-        System.out.println("Notification sent: \n" +
-                           "Title: " + noticeTitle + "\n" +
-                           "Message: " + noticeMessage + "\n" +
-                           "Related Project ID: " + relatedProjectId + "\n" +
-                           "Send Date: " + sendDate);
+        System.out.println("Notification sent: \n"
+                + "Title: " + noticeTitle + "\n"
+                + "Message: " + noticeMessage + "\n"
+                + "Related Project ID: " + relatedProjectId + "\n"
+                + "Send Date: " + sendDate);
+    }
+
+    public static Notification generateSupportNotification(Support support, int daysBefore) {
+        if (support.isSupportNearEnd(daysBefore)) {
+            String notificationId = "NOT_" + support.getSupportId();
+            String title = "Soporte cercano a finalizar";
+            String message = "El soporte con ID " + support.getSupportId() + " del proyecto "
+                    + support.getRelatedProjectId() + " finalizará pronto.";
+            Date sendDate = new Date();
+            return new Notification(notificationId, title, message, sendDate, support.getRelatedProjectId());
+        }
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Notification ID: " + notificationId + "\n" +
-               "Title: " + noticeTitle + "\n" +
-               "Message: " + noticeMessage + "\n" +
-               "Send Date: " + sendDate + "\n" +
-               "Related Project ID: " + relatedProjectId;
+        return "Notification ID: " + notificationId + "\n"
+                + "Title: " + noticeTitle + "\n"
+                + "Message: " + noticeMessage + "\n"
+                + "Send Date: " + sendDate + "\n"
+                + "Related Project ID: " + relatedProjectId;
+    }
+
+    public void setProject(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

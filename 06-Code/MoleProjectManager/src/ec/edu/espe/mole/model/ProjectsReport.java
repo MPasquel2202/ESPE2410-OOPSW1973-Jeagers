@@ -1,71 +1,54 @@
 package ec.edu.espe.mole.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-/**
- *
- * @author Brandon Pazmino
- */
+import com.google.gson.*;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class ProjectsReport {
-        private List<Project> projects;
-    private Date startDate;
-    private Date endDate;
 
-    public ProjectsReport(List<Project> projects, Date startDate, Date endDate) {
-        this.projects = projects != null ? projects : new ArrayList<>();
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+    public void generateReportFromJSON(String jsonFilePath) {
+        try (FileReader reader = new FileReader(jsonFilePath)) {
+            JsonElement rootElement = JsonParser.parseReader(reader);
+            JsonArray projectsArray = rootElement.getAsJsonArray();
+            Scanner scanner = new Scanner(System.in);
 
-    public List<Project> getProjects() {
-        return projects;
-    }
+            System.out.print("Ingrese el codigo del proyecto: ");
+            String inputCode = scanner.nextLine();
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+            boolean found = false;
 
-    public Date getStartDate() {
-        return startDate;
-    }
+            for (JsonElement projectElement : projectsArray) {
+                JsonObject project = projectElement.getAsJsonObject();
+                String projectId = project.get("projectId").getAsString();
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+                if (projectId.equals(inputCode)) {
+                    found = true;
+                    System.out.println("Detalles del Proyecto:");
+                    System.out.println("ID del Proyecto: " + projectId);
+                    System.out.println("Estado: " + project.get("status").getAsString());
+                    System.out.println("Fecha de inicio: " + project.get("startDate").getAsString());
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public List<Project> generateReport() {
-        List<Project> filteredProjects = new ArrayList<>();
-        for (Project project : projects) {
-            if (project.getStartDate().after(startDate) && project.getStartDate().before(endDate)) {
-                filteredProjects.add(project);
+                    JsonObject customer = project.getAsJsonObject("customer");
+                    if (customer != null) {
+                        System.out.println("Detalles del Cliente:");
+                        System.out.println("  ID Cliente: " + customer.get("customerId").getAsString());
+                        System.out.println("  Nombre: " + customer.get("name").getAsString());
+                        System.out.println("  Email: " + customer.get("email").getAsString());
+                        System.out.println("  RUC: " + customer.get("ruc").getAsString());
+                        System.out.println("  Teléfono: " + customer.get("phoneNumber").getAsString());
+                    }
+                    break;
+                }
             }
-        }
-        return filteredProjects;
-    }
 
+            if (!found) {
+                System.out.println("No se encontró el proyecto con el código proporcionado.");
+            }
 
-    public void exportReportToJSON() {
-        System.out.println("Exporting report to JSON...");
-        System.out.println("[\n");
-        for (Project project : generateReport()) {
-            System.out.println("  { " +
-                "\"projectId\": \"" + project.getProjectId() + "\", " +
-                "\"description\": \"" + project.getDescription() + "\", " +
-                "\"status\": \"" + project.getStatus() + "\", " +
-                "\"startDate\": \"" + project.getStartDate() + "\", " +
-                (project.getEndDate() != null ? "\"endDate\": \"" + project.getEndDate() + "\", " : "") +
-                "}");
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo JSON: " + e.getMessage());
         }
-        System.out.println("\n]");
     }
-    
 }

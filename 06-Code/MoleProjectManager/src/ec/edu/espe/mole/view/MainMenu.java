@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import ec.edu.espe.mole.controller.ProjectController;
+import ec.edu.espe.mole.model.ProjectsReport;
 import ec.edu.espe.mole.model.Support;
 
 import java.io.FileReader;
@@ -63,7 +64,7 @@ public class MainMenu {
                         SupportMenu.listSupports(supports);
                         break;
                     case 6:
-                        ReportsMenu.generateAndExportReports(projectController, scanner);
+                        ReportsMenu.generateReportFromJSON(scanner);
                         break;
 
                     case 7:
@@ -83,7 +84,7 @@ public class MainMenu {
         String correctPasswordEncrypted;
 
        
-        try (FileReader reader = new FileReader("C:\\Users\\Usuario\\ESPE2410-OOPSW1973-Jeagers\\06-Code\\MoleProjectManager\\credentials.json")) {
+        try (FileReader reader = new FileReader("C:\\Users\\denni\\ESPE2410-OOPSW1973-Jeagers\\06-Code\\MoleProjectManager\\credentials.json")) {
             Gson gson = new Gson();
             JsonObject credentials = JsonParser.parseReader(reader).getAsJsonObject();
             correctUsername = credentials.get("username").getAsString();

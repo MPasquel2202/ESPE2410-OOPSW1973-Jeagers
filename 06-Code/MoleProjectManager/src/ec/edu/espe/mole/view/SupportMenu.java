@@ -2,9 +2,7 @@ package ec.edu.espe.mole.view;
 
 import ec.edu.espe.mole.model.Support;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,56 +10,51 @@ import java.util.Scanner;
  *
  * @author Marlon Pasquel
  */
-
 public class SupportMenu {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final List<Support> supports = new ArrayList<>();
 
     public static void manageSupportMenu(Scanner scanner) {
         System.out.println("\n--- Gestionar soportes ---");
 
-        System.out.print("Ingrese ID del soporte: ");
-        String supportId = scanner.nextLine().trim();
-        if (supportId.isEmpty()) {
-            System.out.println("Error: El ID del soporte no puede estar vacio.");
-            return;
+        String relatedProjectId;
+        while (true) {
+            System.out.print("Ingrese el ID del proyecto asociado al soporte: ");
+            relatedProjectId = scanner.nextLine().trim();
+            if (!relatedProjectId.isEmpty()) {
+                break;
+            }
+            System.out.println("Error: Este campo no puede estar vacío. Inténtelo nuevamente.");
         }
 
-        System.out.print("Ingrese el ID del proyecto asociado al soporte: ");
-        String relatedProjectId = scanner.nextLine().trim();
-        if (relatedProjectId.isEmpty()) {
-            System.out.println("Error: Este campo no puede estar vacio.");
-            return;
+        int supportType;
+        while (true) {
+            System.out.print("Ingrese la duración del soporte (1, 3 o 5 años): ");
+            String supportTypeStr = scanner.nextLine().trim();
+            if (supportTypeStr.matches("[135]")) {
+                supportType = Integer.parseInt(supportTypeStr);
+                break;
+            }
+            System.out.println("Error: Ingrese una duración válida (1, 3 o 5).");
         }
 
-        System.out.print("Ingrese fecha de inicio del soporte (YYYY-MM-DD): ");
-        String startDateStr = scanner.nextLine().trim();
-        Date startDate = parseDate(startDateStr);
-        if (startDate == null) {
-            System.out.println("Error: Formato invalido.");
-            return;
+        String format;
+        while (true) {
+            System.out.print("Ingrese el formato del soporte (8*5 o 24*7): ");
+            format = scanner.nextLine().trim();
+            if (format.equals("8*5") || format.equals("24*7")) {
+                break;
+            }
+            System.out.println("Error: Formato inválido. Debe ser '8*5' o '24*7'.");
         }
 
-        System.out.print("Ingrese la fecha de fin de soporte (YYYY-MM-DD): ");
-        String endDateStr = scanner.nextLine().trim();
-        Date endDate = parseDate(endDateStr);
-        if (endDate == null) {
-            System.out.println("Error: Formato de fecha invalido.");
-            return;
-        }
+        Support support = new Support(relatedProjectId, supportType, format);
+        supports.add(support);
 
-        System.out.print("Ingrese estado del soporte: ");
-        String status = scanner.nextLine().trim();
-        if (status.isEmpty()) {
-            System.out.println("Error: Este campo no puede estar vacio.");
-            return;
-        }
-
-        Support support = new Support(supportId, relatedProjectId, startDate, endDate, status);
-        System.out.println("Soporte generado: \n" + support);
+        System.out.println("Soporte generado exitosamente: \n" + support);
     }
 
-    public static void listSupports(List<Support> supports) {
+    public static void listSupports() {
         System.out.println("\n--- Lista de soportes ---");
         if (supports.isEmpty()) {
             System.out.println("No se encontraron soportes.");
@@ -70,14 +63,6 @@ public class SupportMenu {
 
         for (Support support : supports) {
             System.out.println(support);
-        }
-    }
-
-    private static Date parseDate(String dateStr) {
-        try {
-            return DATE_FORMAT.parse(dateStr);
-        } catch (ParseException e) {
-            return null;
         }
     }
 }

@@ -96,5 +96,19 @@
     },
     "quation": 98745.0,
     "startDate": "Dec 11, 2024, 12:00:00 AM"
+  },
+  {
+    "projectId": "86010259",
+    "description": "H",
+    "status": "IN_PROGRESS",
+    "customer": {
+      "customerId": "47739967",
+      "name": "J",
+      "email": "k",
+      "ruc": "l",
+      "phoneNumber": "9637"
+    },
+    "quation": 50.0,
+    "startDate": "May 12, 2024, 12:00:00 AM"
   }
 ]

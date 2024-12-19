@@ -1,13 +1,15 @@
 package ec.edu.espe.mole.model;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
  * @author Marlon Pasquel
  */
-
 public class Project {
+    private static final Random random = new Random();
+
     private String projectId;
     private String description;
     private Status status;
@@ -17,8 +19,8 @@ public class Project {
     private Date endDate;
     private Date supportEndDate;
 
-    public Project(String projectId, String description, Status status, Customer customer, float quation, Date startDate) {
-        this.projectId = projectId;
+    public Project(String description, Status status, Customer customer, float quation, Date startDate) {
+        this.projectId = generateId(); 
         this.description = description;
         this.status = status;
         this.customer = customer;
@@ -26,11 +28,9 @@ public class Project {
         this.startDate = startDate;
     }
 
-
     public String getProjectId() {
         return projectId;
     }
-
 
     public String getDescription() {
         return description;
@@ -52,7 +52,6 @@ public class Project {
         return customer;
     }
 
-
     public float getQuation() {
         return quation;
     }
@@ -64,7 +63,6 @@ public class Project {
     public Date getStartDate() {
         return startDate;
     }
-
 
     public Date getEndDate() {
         return endDate;
@@ -82,16 +80,6 @@ public class Project {
         this.supportEndDate = supportEndDate;
     }
 
-    
-
-//    public boolean isSupportEndingSoon(int daysBefore) {
-//      if (supportEndDate == null) return false;
-//        long currentTime = new Date().getTime();
-//        long supportTime = supportEndDate.getTime();
-//        long daysDifference = (supportTime - currentTime) / (1000 * 60 * 60 * 24);
-//        return daysDifference <= daysBefore;
-//    }
-
     @Override
     public String toString() {
         return "Project ID: " + projectId + "\n" +
@@ -103,6 +91,9 @@ public class Project {
                (endDate != null ? "End Date: " + endDate + "\n" : "") +
                (supportEndDate != null ? "Support End Date: " + supportEndDate + "\n" : "");
     }
+
+ 
+    private static String generateId() {
+        return String.format("%08d", random.nextInt(100000000)); 
+    }
 }
-
-

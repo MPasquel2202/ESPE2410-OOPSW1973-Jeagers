@@ -86,7 +86,7 @@ public class MainMenu {
             FileReader reader = new FileReader("src/config/Credentials.json");
             Gson gson = new Gson();
 
-            JsonObject credentials = new JsonParser().parse(reader).getAsJsonObject();
+            JsonObject credentials = JsonParser.parseReader(reader).getAsJsonObject();
             correctUsername = credentials.get("username").getAsString();
             correctPasswordEncrypted = credentials.get("password").getAsString();
         } catch (IOException e) {

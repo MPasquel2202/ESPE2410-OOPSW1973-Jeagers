@@ -1,19 +1,23 @@
 
 package ec.edu.espe.mole.model;
 
+import java.util.Random;
+
 /**
  *
  * @author David Pilatasig
  */
 public class Customer {
-     private String customerId;
+    private static final Random random = new Random();
+
+    private String customerId;
     private String name;
     private String email;
     private String ruc;
     private String phoneNumber;
 
-    public Customer(String customerId, String name, String email, String ruc, String phoneNumber) {
-        this.customerId = customerId;
+    public Customer(String name, String email, String ruc, String phoneNumber) {
+        this.customerId = generateId();
         this.name = name;
         this.email = email;
         this.ruc = ruc;
@@ -76,5 +80,10 @@ public class Customer {
     @Override
     public String toString() {
         return getCustomerInfo();
+    }
+
+    
+    private static String generateId() {
+        return String.format("%08d", random.nextInt(100000000)); 
     }
 }

@@ -1,17 +1,24 @@
 package ec.edu.espe.view;
 
+import ec.edu.espe.model.DataManager;
+import ec.edu.espe.model.Project;
+import ec.edu.espe.model.ProjectStatus;
 import java.util.Scanner;
 
 /**
  *
  * @author Dennis Paucar
+ * }
+ * 
  */
+
+    
 
 public class Main {
     
     public static void mostrarMenu() {
         System.out.println("\nGestor de Proyectos");
-        System.out.println("1. Crear Proyecto");
+        System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Registrar Cambio de Presupuesto");
         System.out.println("3. Ver Fechas Restantes de Soporte de los Proyectos");
         System.out.println("4. Generar Reporte Mensual de Proyectos");
@@ -19,7 +26,7 @@ public class Main {
         System.out.println("6. Generar Reporte Individual de Proyecto");
         System.out.println("7. Visualizar Lista de Clientes/Consumidores");
         System.out.println("8. Administrar Estatus de Proyecto");
-        System.out.println("9. Registrar Actividades del Proyecto");
+        System.out.println("9. Registrar Actividades del Proyecto(historial)");
         System.out.println("10. Generar Recordatorio de Fechas Importantes");
         System.out.println("11. Generacion de Soporte Posventa");
         System.out.println("12. Salir");
@@ -45,10 +52,22 @@ public class Main {
         System.out.println("4. Volver al Menu Principal");
         System.out.print("Seleccione una opcion: ");
     }
+    
+    public static void showProjectSubmenu() {
+        System.out.println("\nSubmenu: Funciones de proyecto");
+        System.out.println("1. Crear un nuevo proyecto");
+        System.out.println("2. Visualizar lista de proyectos");
+        System.out.println("3. Volver al Menu Principal");
+        System.out.println("Selecione una opcion: ");
+    }
 
    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
+        DataManager dataManager = new DataManager();
+        dataManager.loadProjectsFromFile();
+        
         int opcion;
         boolean salir = false;
 
@@ -58,8 +77,34 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Opcion 1: Crear Proyecto");
-              
+                    showProjectSubmenu();
+                    int projectOptions = scanner.nextInt();
+                    switch(projectOptions){
+                        case 1:
+                            System.out.println("Opcion 1: Crear Proyecto");
+                            Project newProject = dataManager.askForProjectData();
+                            dataManager.addProject(newProject);
+                            dataManager.saveProjectsToFile();
+                            System.out.println("Proyectos guardados.");
+                            break;
+                        case 2:
+                            System.out.println("Opcion 2: Visualizar Proyectos");
+                              
+                            System.out.println("\n--- Detalles de los Proyectos ---");
+                            
+                            for (Project project : dataManager.getProjects()) {
+                                project.displayProjectData();  
+                            }
+                            break;
+                        case 3: 
+                            System.out.println("Volviendo al Menu Principal...");
+                            break;
+                        default:
+                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                            break;
+                    }
+                    
+                    
                     break;
                 case 2:
                     System.out.println("Opcion 2: Registrar Cambio de Presupuesto");
@@ -86,7 +131,7 @@ public class Main {
                            
                             break;
                         case 4:
-                            System.out.println("Volviendo al Menú Principal...");
+                            System.out.println("Volviendo al Menu Principal...");
                             break;
                         default:
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");

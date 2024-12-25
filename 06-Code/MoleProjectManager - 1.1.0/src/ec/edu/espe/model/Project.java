@@ -11,6 +11,7 @@ public class Project {
     private String projectId;
     private String projectTitle;
     private String projectDescription;
+    private Customer customer;
     private Date startDate;
     private Date closingDate;
     private double startquote;
@@ -20,12 +21,13 @@ public class Project {
     private boolean invoiced;
     private boolean isPublic;
 
-    public Project(String projectTitle, String projectId, String projectDescription, Date startDate, Date closingDate,
+    public Project(String projectTitle, String projectId, String projectDescription, Customer customer, Date startDate, Date closingDate,
                    double startquote, ProjectStatus operationalStatus, ProjectStatus quoteStatus, boolean paid,
                    boolean invoiced, boolean isPublic) {
         this.projectTitle = projectTitle;
         this.projectId = projectId;
         this.projectDescription = projectDescription;
+        this.customer = customer;
         this.startDate = startDate;
         this.closingDate = closingDate;
         this.startquote = startquote;
@@ -36,43 +38,41 @@ public class Project {
         this.isPublic = isPublic;
     }
     
-    
     public void displayProjectData() {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-  
-    String separator = "+------------------------------------------------------------+";
-    String titleHeader = "| %-60s |";
-    String dataHeader = "| %-15s %-45s |";
+     
+        System.out.println("+--------------------------------------------------------------+");
+        System.out.printf("| %-60s |\n", "Detalles del Proyecto");
+        System.out.println("+--------------------------------------------------------------+");
 
-   
-    System.out.println(separator);
-    System.out.printf(titleHeader, "Proyecto Detalles");
-    System.out.println("\n" + separator);
+       
+        System.out.printf("| %-18s | %-45s |\n", "ID Proyecto:", projectId);
+        System.out.printf("| %-18s | %-45s |\n", "Titulo:", projectTitle);
+        System.out.printf("| %-18s | %-45s |\n", "Descripcion:", projectDescription);
+        System.out.println("+--------------------------------------------------------------+");
 
+       
+        System.out.printf("| %-18s | %-45s |\n", "Cliente:", customer != null ? customer.toString() : "Sin definir");
+        System.out.println("+--------------------------------------------------------------+");
 
-    System.out.println("+--------------------+--------------------------------------------------+");
-    System.out.printf("| %-18s | %-48s |\n", "ID Proyecto:", projectId);
-    System.out.println("+--------------------+--------------------------------------------------+");
-    System.out.printf("| %-18s | %-48s |\n", "Titulo:", projectTitle);
-    System.out.printf("| %-18s | %-48s |\n", "Descripcion:", projectDescription);
-    
+        
+        System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", startDate != null ? dateFormat.format(startDate) : "No definida");
+        System.out.printf("| %-18s | %-45s |\n", "Fecha de Cierre:", closingDate != null ? dateFormat.format(closingDate) : "No definida");
+        System.out.println("+--------------------------------------------------------------+");
 
-    System.out.printf("| %-18s | %-48s |\n", "Fecha de Inicio:", startDate != null ? dateFormat.format(startDate) : "No definida");
-    System.out.printf("| %-18s | %-48s |\n", "Fecha de Cierre:", closingDate != null ? dateFormat.format(closingDate) : "No definida");
+        
+        System.out.printf("| %-18s | %-45.2f |\n", "Presupuesto:", startquote);
+        System.out.printf("| %-18s | %-45s |\n", "Estado Operativo:", operationalStatus);
+        System.out.printf("| %-18s | %-45s |\n", "Estado Cotizacion:", quoteStatus);
+        System.out.println("+--------------------------------------------------------------+");
 
-  
-    System.out.printf("| %-18s | %-48.2f |\n", "Presupuesto Inicial:", startquote);
-    System.out.printf("| %-18s | %-48s |\n", "Estado Operativo:", operationalStatus);
-    System.out.printf("| %-18s | %-48s |\n", "Estado Cotizacion:", quoteStatus);
-    System.out.printf("| %-18s | %-48b |\n", "Facturado:", invoiced);
-    System.out.printf("| %-18s | %-48b |\n", "Pagado:", paid);
-    System.out.printf("| %-18s | %-48b |\n", "Es Publico:", isPublic);
-    System.out.println("+--------------------+--------------------------------------------------+");
-
-
-    System.out.println(separator);
-}
+        
+        System.out.printf("| %-18s | %-45s |\n", "Facturado:", invoiced ? "Si" : "No");
+        System.out.printf("| %-18s | %-45s |\n", "Pagado:", paid ? "Si" : "No");
+        System.out.printf("| %-18s | %-45s |\n", "Es Publico:", isPublic ? "Si" : "No");
+        System.out.println("+--------------------------------------------------------------+");
+    }
 
     /**
      * @return the projectTitle

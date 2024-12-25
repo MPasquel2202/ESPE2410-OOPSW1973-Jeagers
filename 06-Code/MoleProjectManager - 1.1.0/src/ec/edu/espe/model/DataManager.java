@@ -88,14 +88,30 @@ public class DataManager {
     public Project askForProjectData() {
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        
         System.out.print("Ingrese el titulo del proyecto: ");
         String title = scanner.nextLine();
 
         System.out.print("Ingrese la descripcion: ");
         String description = scanner.nextLine();
 
-        
+        System.out.println("----------Ingrese la informacion del cliente----------");
+        System.out.print("Ingrese RUC: ");
+        String ruc = scanner.nextLine();
+
+        System.out.print("Ingrese nombre/empresa del cliente: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Ingrese numero de contacto: ");
+        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Ingrese e-mail: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Ingrese direccion: ");
+        String address = scanner.nextLine();
+
+        Customer customer = new Customer(ruc, name, phoneNumber, email, address);
 
         Date startDate = new Date();  
 
@@ -188,8 +204,10 @@ public class DataManager {
         String projectId = "Prj-" + String.format("%04d", projectCounter++);
         
         
-        return new Project(title, projectId, description, startDate, closingDate, quote, operationalStatus, quoteStatus, paid, isInvoiced, isPublic);
+        return new Project(title, projectId, description, customer, startDate, closingDate, quote, operationalStatus, quoteStatus, paid, isInvoiced, isPublic);
     }
     
     
 }
+
+

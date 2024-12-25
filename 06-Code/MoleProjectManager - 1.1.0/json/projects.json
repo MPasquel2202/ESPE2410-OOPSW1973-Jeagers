@@ -1,36 +1,26 @@
 [
   {
     "projectId": "Prj-0001",
-    "projectTitle": "Celerity",
-    "projectDescription": "Install and recover 5gAntenas",
-    "startDate": "Dec 25, 2024, 3:51:13 PM",
-    "closingDate": "Dec 27, 2025, 12:00:00 AM",
-    "startquote": 23343.5,
+    "projectTitle": "Build 5gAntenas",
+    "projectDescription": "build and install internet 5G in Quito",
+    "customer": {
+      "ruc": "2343435",
+      "name": "Netlife",
+      "phoneNumber": "0990600274",
+      "email": "netlife@gmail.com",
+      "address": "Quito-Ruminiahui-Ecuador"
+    },
+    "startDate": "Dec 25, 2024, 4:47:15 PM",
+    "closingDate": "Dec 26, 2024, 12:00:00 AM",
+    "startquote": 45999.5,
     "operationalStatus": {
       "status": "Created"
     },
     "quoteStatus": {
       "status": "Quote Sended"
     },
-    "paid": false,
+    "paid": true,
     "invoiced": true,
-    "isPublic": true
-  },
-  {
-    "projectId": "Prj-0001",
-    "projectTitle": "Netlife",
-    "projectDescription": "install new wifi antena",
-    "startDate": "Dec 25, 2024, 3:53:08 PM",
-    "closingDate": "Dec 28, 2024, 12:00:00 AM",
-    "startquote": 343545.67,
-    "operationalStatus": {
-      "status": "Created"
-    },
-    "quoteStatus": {
-      "status": "Quote Sended"
-    },
-    "paid": false,
-    "invoiced": true,
-    "isPublic": true
+    "isPublic": false
   }
 ]

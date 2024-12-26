@@ -87,6 +87,10 @@ public class Project {
     public void setProjectTitle(String projectTitle) {
         this.projectTitle = projectTitle;
     }
+    
+    public String getProjectId(){
+        return projectId;
+    }
 
     /**
      * @return the projectDescription
@@ -213,10 +217,5 @@ public class Project {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-    
-    
-    
-    
-    
     
 }

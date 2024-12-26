@@ -3,6 +3,7 @@ package ec.edu.espe.view;
 import ec.edu.espe.model.DataManager;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
+import ec.edu.espe.model.Report;
 import java.util.Scanner;
 
 /**
@@ -12,10 +13,8 @@ import java.util.Scanner;
  * 
  */
 
-    
-
 public class Main {
-    
+    public String fileName = "json/projects.json";
     public static void mostrarMenu() {
         System.out.println("\nGestor de Proyectos");
         System.out.println("1. Funciones para Proyectos");
@@ -112,7 +111,10 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Opcion 3: Ver Fechas Restantes de Soporte de los Proyectos");
-                  
+                
+                    break;
+                case 4:
+                    
                     break;
                 case 5:
                     mostrarSubmenuBusqueda();
@@ -138,6 +140,13 @@ public class Main {
                             break;
                     }
                     break;
+                case 6:
+                    Report report= new Report("json/projects.json");
+                    report.createIndividualReport(scanner);
+                    break;
+                case 7:
+                    
+                    break;
                 case 8:
                     mostrarSubmenuEstatus();
                     int opcionEstatus = scanner.nextInt();
@@ -161,6 +170,12 @@ public class Main {
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
                     break;
                 case 12:
                     System.out.println("Saliendo del sistema...");

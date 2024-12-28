@@ -127,16 +127,9 @@ public class DataManager {
         }
         return new ArrayList<>();
     }
-
-    public Project askForProjectData() {
+    
+    public Customer askForCustomerData() {
         Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
-        System.out.print("Ingrese el titulo del proyecto: ");
-        String title = scanner.nextLine();
-
-        System.out.print("Ingrese la descripcion: ");
-        String description = scanner.nextLine();
 
         System.out.println("----------Ingrese la informacion del cliente----------");
         System.out.print("Ingrese RUC: ");
@@ -154,11 +147,59 @@ public class DataManager {
         System.out.print("Ingrese direccion: ");
         String address = scanner.nextLine();
 
-        
         String customerId = String.format("%05d", ThreadLocalRandom.current().nextInt(10000, 99999));
         Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
-        customers.add(customer); 
+
+        customers.add(customer);
         saveCustomersToFile();
+
+        return customer;
+    }
+
+    public Project askForProjectData() {
+        Scanner scanner = new Scanner(System.in);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        System.out.print("Ingrese el titulo del proyecto: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Ingrese la descripcion: ");
+        String description = scanner.nextLine();
+        
+        Customer customer;
+        System.out.println("Desea usar un cliente existente o crear uno nuevo?");
+        System.out.println("1. Usar cliente existente");
+        System.out.println("2. Crear cliente nuevo");
+        System.out.print("Seleccione una opcion: ");
+        int customerOption = scanner.nextInt();
+        scanner.nextLine();
+
+        if (customerOption == 1) {
+        
+            List<Customer> customers = getCustomers();
+            if (customers.isEmpty()) {
+                    System.out.println("No hay clientes guardados. Debe crear uno nuevo.");
+                    customer = askForCustomerData();
+                } else {
+                    System.out.println("Lista de clientes disponibles:");
+                    for (int i = 0; i < customers.size(); i++) {
+                        Customer c = customers.get(i);
+                        System.out.println((i + 1) + ". " + c.getName() + " (" + c.getRuc() + ")");
+                    }
+                    System.out.print("Seleccione el numero del cliente: ");
+                    int customerIndex = scanner.nextInt() - 1;
+                    scanner.nextLine();
+
+                    if (customerIndex >= 0 && customerIndex < customers.size()) {
+                        customer = customers.get(customerIndex);
+                    } else {
+                        System.out.println("Seleccion invalida. Creando un cliente nuevo.");
+                        customer = askForCustomerData();
+                    }
+                }
+            } else {
+                customer = askForCustomerData();
+        }
         
         Date startDate = new Date();  
 
@@ -254,6 +295,41 @@ public class DataManager {
         return new Project(title, projectId, description, customer, startDate, closingDate, quote, operationalStatus, quoteStatus, paid, isInvoiced, isPublic);
     }
     
+    public void modifyCustomerByCode(String customerId) {
+        Scanner scanner = new Scanner(System.in);
+        Customer customer = null;
+
+        for (Customer c : customers) {
+            if (c.getCustomerId().equals(customerId)) {
+                customer = c;
+                break;
+            }
+        }
+
+        if (customer != null) {
+            System.out.println("Modificando datos del cliente: " + customer.getName());
+            System.out.print("Nuevo nombre/empresa: ");
+            customer.setName(scanner.nextLine());
+            
+            System.out.print("Nuevo RUC: ");
+            customer.setRuc(scanner.nextLine());
+            
+            System.out.print("Nuevo numero de contacto: ");
+            customer.setPhoneNumber(scanner.nextLine());
+
+            System.out.print("Nuevo e-mail: ");
+            customer.setEmail(scanner.nextLine());
+
+            System.out.print("Nueva direccion: ");
+            customer.setAddress(scanner.nextLine());
+
+            saveCustomersToFile();
+            System.out.println("Datos del cliente modificados exitosamente.");
+        } else {
+            System.out.println("Cliente no encontrado con el ID: " + customerId);
+        }
+    }
+
     
 }
 

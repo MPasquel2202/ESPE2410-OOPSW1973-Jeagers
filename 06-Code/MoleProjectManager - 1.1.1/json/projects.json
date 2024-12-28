@@ -73,5 +73,30 @@
     "paid": false,
     "invoiced": false,
     "isPublic": true
+  },
+  {
+    "projectId": "Prj-0004",
+    "projectTitle": "Build 5g Antenas",
+    "projectDescription": "Build a rele and control system for internet in Quito-Sur",
+    "customer": {
+      "ruc": "0349343",
+      "name": "neetlife.EC",
+      "phoneNumber": " netlife@gmail.com",
+      "email": "netlife@gmail.com4",
+      "address": "ecuador-Quito",
+      "customerId": "47584"
+    },
+    "startDate": "Dec 28, 2024, 2:10:36 AM",
+    "closingDate": "Dec 31, 2024, 12:00:00 AM",
+    "startquote": 80000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": true,
+    "isPublic": true
   }
 ]

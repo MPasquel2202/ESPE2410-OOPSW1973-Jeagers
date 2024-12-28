@@ -5,6 +5,7 @@ import ec.edu.espe.model.DataManager;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
 import ec.edu.espe.model.Report;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Scanner;
 
 /**
@@ -158,10 +159,11 @@ public class Main {
                 case 7:
                     showClientSubmenu();
                     int clientOption = scanner.nextInt();
+                     scanner.nextLine(); 
                     switch (clientOption) {
                         case 1:
                             System.out.println("Opcion 1: Anadir nuevo cliente");
-                            
+                                dataManager.askForCustomerData();
                             break;
                         case 2:
                             System.out.println("Opcion 2: Mostrar lista de clientes");
@@ -171,7 +173,10 @@ public class Main {
                             break;
                         case 3:
                             System.out.println("Opcion 3: Modificar datos de un cliente");
-                           
+                            System.out.print("Ingrese el ID del cliente a modificar: ");
+                            String customerId = scanner.nextLine();  
+                            dataManager.modifyCustomerByCode(customerId); ;
+                            
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");

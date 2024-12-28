@@ -33,7 +33,7 @@ public class Customer {
         System.out.printf("| %-20s | %-20s |%n", "Direccion", address);
         System.out.println("+---------------------+---------------------+");
     }
-    
+
     public String getRuc() {
         return ruc;
     }
@@ -73,6 +73,16 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+    
+    
 
     
     @Override

@@ -119,7 +119,9 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Opcion 2: Registrar Cambio de Presupuesto");
-                 
+                    System.out.print("Ingrese numero de Id de Proyecto: ");
+                    dataManager.modifyProjectBudget();
+                    
                     break;
                 case 3:
                     System.out.println("Opcion 3: Ver Fechas Restantes de Soporte de los Proyectos");

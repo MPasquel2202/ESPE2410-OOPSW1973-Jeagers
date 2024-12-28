@@ -68,20 +68,7 @@ public class DataManager {
     public List<Customer> getCustomers(){
         return customers;
     }
-// no mover se utilizara despues para buscar proyectos 
-//    public void listProjects() {
-//        
-//        if (projects.isEmpty()) {
-//            System.out.println("No hay proyectos para mostrar.");
-//        } else {
-//            System.out.println("Lista de proyectos:");
-//            
-//            for (Project project : projects) {
-//                System.out.println(project.getProjectId() + " - " + project.getProjectTitle());
-//            }
-//        }
-//    }
-       
+    
     public void saveProjectsToFile() {
         saveToFile(PROJECTS_FILE_NAME, projects);
         System.out.println("Proyectos guardados exitosamente en " + PROJECTS_FILE_NAME);
@@ -327,6 +314,68 @@ public class DataManager {
             System.out.println("Datos del cliente modificados exitosamente.");
         } else {
             System.out.println("Cliente no encontrado con el ID: " + customerId);
+        }
+    }
+    
+    
+    public void modifyProjectBudget() {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> budgetUpdates = new ArrayList<>(); // Lista para almacenar los cambios realizados
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        System.out.print("Ingrese el codigo del proyecto a modificar: ");
+        String projectId = scanner.nextLine();
+
+
+        Project project = null;
+        for (Project p : projects) {
+            if (p.getProjectId().equals(projectId)) {
+                project = p;
+                break;
+            }
+        }
+
+        if (project != null) {
+            System.out.println("Proyecto encontrado: " + project.getProjectTitle());
+            System.out.println("Presupuesto actual: $" + project.getStartquote());
+
+            
+            System.out.print("Ingrese el nuevo presupuesto: $");
+            double newQuote = scanner.nextDouble();
+            scanner.nextLine();
+
+            
+            project.setStartquote(newQuote);
+            saveProjectsToFile(); 
+            System.out.println("Presupuesto actualizado exitosamente.");
+
+            
+            String updateRecord = String.format(
+                "Proyecto: %s, Codigo: %s, Cliente: %s, Nuevo Presupuesto: $%.2f",
+                project.getProjectTitle(), project.getProjectId(), project.getCustomer().getName(), newQuote
+            );
+            budgetUpdates.add(updateRecord);
+
+            
+            saveBudgetUpdatesToFile(budgetUpdates);
+            System.out.println("Historial de actualizaciones guardado en 'json/budget_updates.json'.");
+
+        } else {
+            System.out.println("No se encontro un proyecto con el codigo: " + projectId);
+        }
+    }
+
+    private void saveBudgetUpdatesToFile(ArrayList<String> updates) {
+        File directory = new File("json");
+        if (!directory.exists()) {
+            directory.mkdir(); 
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("json/budget_updates.json")) {
+            gson.toJson(updates, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

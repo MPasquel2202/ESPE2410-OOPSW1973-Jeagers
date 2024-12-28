@@ -74,148 +74,102 @@ public class Project {
         System.out.println("+--------------------------------------------------------------+");
     }
 
-    /**
-     * @return the projectTitle
-     */
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
     public String getProjectTitle() {
         return projectTitle;
     }
 
-    /**
-     * @param projectTitle the projectTitle to set
-     */
     public void setProjectTitle(String projectTitle) {
         this.projectTitle = projectTitle;
     }
-    
-    public String getProjectId(){
-        return projectId;
-    }
 
-    /**
-     * @return the projectDescription
-     */
     public String getProjectDescription() {
         return projectDescription;
     }
 
-    /**
-     * @param projectDescription the projectDescription to set
-     */
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
     }
 
-    /**
-     * @return the startDate
-     */
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
 
-    /**
-     * @param startDate the startDate to set
-     */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    /**
-     * @return the closingDate
-     */
     public Date getClosingDate() {
         return closingDate;
     }
 
-    /**
-     * @param closingDate the closingDate to set
-     */
     public void setClosingDate(Date closingDate) {
         this.closingDate = closingDate;
     }
 
-    /**
-     * @return the startquote
-     */
     public double getStartquote() {
         return startquote;
     }
 
-    /**
-     * @param startquote the startquote to set
-     */
     public void setStartquote(double startquote) {
         this.startquote = startquote;
     }
 
-    /**
-     * @return the operationalStatus
-     */
     public ProjectStatus getOperationalStatus() {
         return operationalStatus;
     }
 
-    /**
-     * @param operationalStatus the operationalStatus to set
-     */
     public void setOperationalStatus(ProjectStatus operationalStatus) {
         this.operationalStatus = operationalStatus;
     }
 
-    /**
-     * @return the quoteStatus
-     */
     public ProjectStatus getQuoteStatus() {
         return quoteStatus;
     }
 
-    /**
-     * @param quoteStatus the quoteStatus to set
-     */
     public void setQuoteStatus(ProjectStatus quoteStatus) {
         this.quoteStatus = quoteStatus;
     }
 
-    /**
-     * @return the paid
-     */
     public boolean isPaid() {
         return paid;
     }
 
-    /**
-     * @param paid the paid to set
-     */
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
-    /**
-     * @return the invoiced
-     */
     public boolean isInvoiced() {
         return invoiced;
     }
 
-    /**
-     * @param invoiced the invoiced to set
-     */
     public void setInvoiced(boolean invoiced) {
         this.invoiced = invoiced;
     }
 
-    /**
-     * @return the isPublic
-     */
     public boolean isIsPublic() {
         return isPublic;
     }
 
-    /**
-     * @param isPublic the isPublic to set
-     */
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
+
+    
     
 }

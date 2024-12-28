@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Brandon Pazmino
+ * @author David Pilatasig
  */
 public class Report {
     private String fileName;
@@ -25,6 +25,7 @@ public class Report {
     public void createIndividualReport(Scanner scanner) {
     ArrayList<Project> projects = new ArrayList<>();
     File file = new File(fileName);
+    boolean isfound=false;
     if (file.exists()) {
         Gson gson = new Gson();
         try (Reader reader = new FileReader(file)) {
@@ -40,9 +41,9 @@ public class Report {
                 if (idsearched.contentEquals(project.getProjectId())) {
                     writeReport(project);
                 }
-                else{
-                    System.out.println("\nNo existe proyecto con el ID proporcionado");
-                }
+            }
+            if(!isfound){
+                System.out.println("No existe proyecto Asociado con el ID proporcionado.");
             }
         } catch (IOException e) {
             e.printStackTrace();

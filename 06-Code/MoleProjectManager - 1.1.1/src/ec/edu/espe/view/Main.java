@@ -1,5 +1,6 @@
 package ec.edu.espe.view;
 
+import ec.edu.espe.model.Customer;
 import ec.edu.espe.model.DataManager;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
@@ -23,7 +24,7 @@ public class Main {
         System.out.println("4. Generar Reporte Mensual de Proyectos");
         System.out.println("5. Busqueda de Proyectos");
         System.out.println("6. Generar Reporte Individual de Proyecto");
-        System.out.println("7. Visualizar Lista de Clientes/Consumidores");
+        System.out.println("7. Gestion de clientes");
         System.out.println("8. Administrar Estatus de Proyecto");
         System.out.println("9. Registrar Actividades del Proyecto(historial)");
         System.out.println("10. Generar Recordatorio de Fechas Importantes");
@@ -59,6 +60,15 @@ public class Main {
         System.out.println("3. Volver al Menu Principal");
         System.out.println("Selecione una opcion: ");
     }
+    
+    public static void showClientSubmenu(){
+        System.out.println("\nSubmenu: Funciones de cliente");
+        System.out.println("1. Anadir un nuevo cliente");
+        System.out.println("2. Visualizar lista de clientes");
+        System.out.println("3. Modificar datos de clientes");
+        System.out.println("3. Volver al Menu Principal");
+        System.out.println("Selecione una opcion: ");
+    }
 
    
     public static void main(String[] args) {
@@ -66,6 +76,7 @@ public class Main {
         
         DataManager dataManager = new DataManager();
         dataManager.loadProjectsFromFile();
+        dataManager.loadCustomersFromFile();
         
         int opcion;
         boolean salir = false;
@@ -145,6 +156,31 @@ public class Main {
                     report.createIndividualReport(scanner);
                     break;
                 case 7:
+                    showClientSubmenu();
+                    int clientOption = scanner.nextInt();
+                    switch (clientOption) {
+                        case 1:
+                            System.out.println("Opcion 1: Anadir nuevo cliente");
+                            
+                            break;
+                        case 2:
+                            System.out.println("Opcion 2: Mostrar lista de clientes");
+                            for (Customer customer : dataManager.getCustomers()) {
+                                customer.displayCustomerDetails();
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Opcion 3: Modificar datos de un cliente");
+                           
+                            break;
+                        case 4:
+                            System.out.println("Volviendo al Menu Principal...");
+                            break;
+                        default:
+                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                            break;
+                    }
+                    
                     
                     break;
                 case 8:

@@ -1,18 +1,44 @@
 [
   {
     "projectId": "Prj-0001",
-    "projectTitle": "Build 5gAntenas",
-    "projectDescription": "build and install internet 5G in Quito",
+    "projectTitle": "Netlife",
+    "projectDescription": "netlife 5g wifi",
     "customer": {
-      "ruc": "2343435",
-      "name": "Netlife",
-      "phoneNumber": "0990600274",
-      "email": "netlife@gmail.com",
-      "address": "Quito-Ruminiahui-Ecuador"
+      "ruc": "0034934",
+      "name": "netlife",
+      "phoneNumber": "09903434",
+      "email": "netlifeec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "30330"
     },
-    "startDate": "Dec 25, 2024, 4:47:15 PM",
-    "closingDate": "Dec 26, 2024, 12:00:00 AM",
-    "startquote": 45999.5,
+    "startDate": "Dec 26, 2024, 2:15:22 AM",
+    "closingDate": "Dec 30, 2024, 12:00:00 AM",
+    "startquote": 55000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": true
+  },
+  {
+    "projectId": "Prj-0002",
+    "projectTitle": "Puntonet ",
+    "projectDescription": "rebuild a antena ",
+    "customer": {
+      "ruc": "0092323",
+      "name": "Celerity",
+      "phoneNumber": "09902324",
+      "email": "celerity@gmail.com",
+      "address": "Guayaquil-Ecuador",
+      "customerId": "93697"
+    },
+    "startDate": "Dec 26, 2024, 2:17:23 AM",
+    "closingDate": "Dec 28, 2024, 12:00:00 AM",
+    "startquote": 6000.0,
     "operationalStatus": {
       "status": "Created"
     },
@@ -22,5 +48,30 @@
     "paid": true,
     "invoiced": true,
     "isPublic": false
+  },
+  {
+    "projectId": "Prj-0003",
+    "projectTitle": "Netlife",
+    "projectDescription": "install routers",
+    "customer": {
+      "ruc": "0349343",
+      "name": "neetlife.EC",
+      "phoneNumber": " netlife@gmail.com",
+      "email": "netlife@gmail.com4",
+      "address": "ecuador-Quito",
+      "customerId": "47584"
+    },
+    "startDate": "Dec 27, 2024, 11:23:48 PM",
+    "closingDate": "Dec 29, 2024, 12:00:00 AM",
+    "startquote": 59000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": true
   }
 ]

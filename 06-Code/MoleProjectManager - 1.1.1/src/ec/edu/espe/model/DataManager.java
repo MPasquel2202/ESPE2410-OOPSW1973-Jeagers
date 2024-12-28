@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,26 +16,57 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Dennis Paucar
  */
 public class DataManager {
     private ArrayList<Project> projects;
+    private ArrayList<Customer> customers;
     private static int projectCounter = 1;  
-    private static final String FILE_NAME = "json/projects.json"; 
+    private static final String PROJECTS_FILE_NAME = "json/projects.json";
+    private static final String CUSTOMERS_FILE_NAME = "json/customers.json";
+    
+    private void initializeProjectCounter() {
+        int maxId = 0; 
+
+        for (Project project : projects) {
+            String id = project.getProjectId(); 
+
+            try {
+                int numericPart = Integer.parseInt(id.split("-")[1]); 
+                if (numericPart > maxId) { 
+                    maxId = numericPart;
+                }
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+        }
+        projectCounter = maxId + 1; 
+    }
     
     public DataManager() {  
         projects = new ArrayList<>();
+        customers = new ArrayList<>();
+        loadProjectsFromFile();
+        loadCustomersFromFile();
+        
+        initializeProjectCounter();
     }
 
     public void addProject(Project project) {
         projects.add(project);
         System.out.println("Proyecto agregado con exito: " + project.getProjectTitle());
+        
     }
     
     public List<Project> getProjects() {
         return projects;
+    }
+    
+    public List<Customer> getCustomers(){
+        return customers;
     }
 // no mover se utilizara despues para buscar proyectos 
 //    public void listProjects() {
@@ -51,38 +83,49 @@ public class DataManager {
 //    }
        
     public void saveProjectsToFile() {
-        
+        saveToFile(PROJECTS_FILE_NAME, projects);
+        System.out.println("Proyectos guardados exitosamente en " + PROJECTS_FILE_NAME);
+    }
+
+    public void loadProjectsFromFile() {
+        projects = loadFromFile(PROJECTS_FILE_NAME, new TypeToken<List<Project>>(){}.getType());
+        System.out.println("Proyectos cargados exitosamente desde " + PROJECTS_FILE_NAME);
+    }
+
+    public void saveCustomersToFile() {
+        saveToFile(CUSTOMERS_FILE_NAME, customers);
+        System.out.println("Clientes guardados exitosamente en " + CUSTOMERS_FILE_NAME);
+    }
+
+    public void loadCustomersFromFile() {
+        customers = loadFromFile(CUSTOMERS_FILE_NAME, new TypeToken<List<Customer>>(){}.getType());
+        System.out.println("Clientes cargados exitosamente desde " + CUSTOMERS_FILE_NAME);
+    }
+
+    private <T> void saveToFile(String fileName, List<T> data) {
         File directory = new File("json");
         if (!directory.exists()) {
             directory.mkdir();  
         }
-
-      
-        
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(FILE_NAME)) {
-            gson.toJson(projects, writer);  
-            System.out.println("Proyectos guardados exitosamente en " + FILE_NAME);
+        try (FileWriter writer = new FileWriter(fileName)) {
+            gson.toJson(data, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void loadProjectsFromFile() {
-        File file = new File(FILE_NAME);
+    private <T> ArrayList<T> loadFromFile(String fileName, Type type) {
+        File file = new File(fileName);
         if (file.exists()) {
             Gson gson = new Gson();
             try (Reader reader = new FileReader(file)) {
-                Type projectListType = new TypeToken<List<Project>>(){}.getType();
-                projects = gson.fromJson(reader, projectListType);  
-                System.out.println("Proyectos cargados exitosamente desde " + FILE_NAME);
+                return gson.fromJson(reader, type);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("No se encontro el archivo de proyectos en " + FILE_NAME);
         }
+        return new ArrayList<>();
     }
 
     public Project askForProjectData() {
@@ -111,8 +154,12 @@ public class DataManager {
         System.out.print("Ingrese direccion: ");
         String address = scanner.nextLine();
 
-        Customer customer = new Customer(ruc, name, phoneNumber, email, address);
-
+        
+        String customerId = String.format("%05d", ThreadLocalRandom.current().nextInt(10000, 99999));
+        Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
+        customers.add(customer); 
+        saveCustomersToFile();
+        
         Date startDate = new Date();  
 
         

@@ -78,6 +78,7 @@ public class Main {
         DataManager dataManager = new DataManager();
         dataManager.loadProjectsFromFile();
         dataManager.loadCustomersFromFile();
+        dataManager.loadSupportsFromFile();
         
         int opcion;
         boolean salir = false;
@@ -219,6 +220,7 @@ public class Main {
                 case 10:
                     break;
                 case 11:
+                    dataManager.createSupport(scanner);
                     break;
                 case 12:
                     System.out.println("Saliendo del sistema...");

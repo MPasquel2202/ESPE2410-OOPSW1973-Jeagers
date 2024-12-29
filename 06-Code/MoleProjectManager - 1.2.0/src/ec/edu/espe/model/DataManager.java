@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.System.Logger.Level;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,9 +25,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataManager {
     private ArrayList<Project> projects;
     private ArrayList<Customer> customers;
+    private ArrayList<Support> supports;
     private static int projectCounter = 1;  
     private static final String PROJECTS_FILE_NAME = "json/projects.json";
     private static final String CUSTOMERS_FILE_NAME = "json/customers.json";
+    private static final String SUPPORTS_FILE_NAME = "json/supports.json"; 
     
     private void initializeProjectCounter() {
         int maxId = 0; 
@@ -49,12 +52,28 @@ public class DataManager {
     public DataManager() {  
         projects = new ArrayList<>();
         customers = new ArrayList<>();
+        supports = new ArrayList<>();
         loadProjectsFromFile();
         loadCustomersFromFile();
+        loadSupportsFromFile();
         
         initializeProjectCounter();
     }
 
+    public String getPROJECTS_FILE_NAME() {
+        return PROJECTS_FILE_NAME;
+    }
+
+    public String getCUSTOMERS_FILE_NAME() {
+        return CUSTOMERS_FILE_NAME;
+    }
+
+    public String getSUPPORTS_FILE_NAME() {
+        return SUPPORTS_FILE_NAME;
+    }
+
+    
+    
     public void addProject(Project project) {
         projects.add(project);
         System.out.println("Proyecto agregado con exito: " + project.getProjectTitle());
@@ -67,6 +86,10 @@ public class DataManager {
     
     public List<Customer> getCustomers(){
         return customers;
+    }
+    
+    public List<Support> getSupports(){
+        return supports;
     }
     
     public void saveProjectsToFile() {
@@ -88,8 +111,18 @@ public class DataManager {
         customers = loadFromFile(CUSTOMERS_FILE_NAME, new TypeToken<List<Customer>>(){}.getType());
         System.out.println("Clientes cargados exitosamente desde " + CUSTOMERS_FILE_NAME);
     }
+    
+    public void saveSupportsToFile(){
+        saveToFile(SUPPORTS_FILE_NAME, supports);
+        System.out.println("Soportes guardados exitosamente en " + SUPPORTS_FILE_NAME);
+    }
+    
+    public void loadSupportsFromFile() {
+        supports= loadFromFile(SUPPORTS_FILE_NAME, new TypeToken<List<Support>>() {}.getType());
+        System.out.println("SOportes guardados exitosamente en " + SUPPORTS_FILE_NAME);
+    }
 
-    private <T> void saveToFile(String fileName, List<T> data) {
+    public <T> void saveToFile(String fileName, List<T> data) {
         File directory = new File("json");
         if (!directory.exists()) {
             directory.mkdir();  
@@ -102,7 +135,7 @@ public class DataManager {
         }
     }
 
-    private <T> ArrayList<T> loadFromFile(String fileName, Type type) {
+    public <T> ArrayList<T> loadFromFile(String fileName, Type type) {
         File file = new File(fileName);
         if (file.exists()) {
             Gson gson = new Gson();
@@ -380,6 +413,70 @@ public class DataManager {
     }
 
     
+public void createSupport(Scanner scanner) {
+    if (projects == null || projects.isEmpty()) {
+        System.out.println("No hay proyectos cargados.");
+        return;
+    }
+
+    System.out.println("Ingrese el ID del proyecto que solicita soporte: ");
+    scanner.nextLine();
+    String projectId = scanner.nextLine().trim();
+
+    boolean projectExists = projects.stream()
+                                    .anyMatch(project -> project.getProjectId().equalsIgnoreCase(projectId));
+
+    if (projectExists) {
+        System.out.println("+-------Ingrese la información del soporte-------+");
+        Support support = askForSupportData(scanner, projectId);
+        supports.add(support);
+        saveSupportsToFile();
+        System.out.println("El soporte ha sido creado con éxito.");
+        support.toString();
+    } else {
+        System.out.println("No existe un proyecto con el ID proporcionado.");
+    }
 }
 
 
+public Date calculateEndDateOfSupport(Scanner scanner, Date startDate) {
+    int monthsOfSupport = 0;
+    while (monthsOfSupport <= 0) {
+        try {
+            System.out.println("Meses de contrato de soporte: ");
+            monthsOfSupport = scanner.nextInt();
+            scanner.nextLine(); // Limpia el buffer
+            if (monthsOfSupport <= 0) {
+                System.out.println("Ingrese un valor válido para los meses de contrato.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+            scanner.nextLine(); // Limpia el buffer
+        }
+    }
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(startDate);
+    calendar.add(Calendar.MONTH, monthsOfSupport);
+    return calendar.getTime();
+   }
+
+public Support askForSupportData(Scanner scanner, String projectId) {
+    System.out.println("Ingrese el ID del soporte: ");
+    String idSupport = scanner.nextLine();
+
+    for (Support existingSupport : supports) {
+        if (existingSupport.getIdSupport().equalsIgnoreCase(idSupport)) {
+            System.out.println("El ID del soporte ya existe. Por favor, ingrese uno diferente.");
+            return askForSupportData(scanner, projectId);
+        }
+    }
+
+    System.out.println("Ingrese una descripción del soporte: ");
+    String description = scanner.nextLine();
+    Date startDate = new Date();
+    Date endDate = calculateEndDateOfSupport(scanner, startDate);
+    return new Support(idSupport, projectId, description, startDate, endDate);
+   }
+
+}

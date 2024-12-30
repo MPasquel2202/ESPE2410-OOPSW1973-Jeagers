@@ -18,7 +18,19 @@ import java.util.Scanner;
 public class Main {
     public String fileName = "json/projects.json";
     public static void mostrarMenu() {
-        System.out.println("\nGestor de Proyectos");
+        System.out.println("\n  __  __  ____  _      ______                                                                \n" +
+" |  \\/  |/ __ \\| |    |  ____|                                                               \n" +
+" | \\  / | |  | | |    | |__                                                                  \n" +
+" | |\\/| | |  | | |    |  __|                                                                 \n" +
+" | |  | | |__| | |____| |____                                                                \n" +
+" |_|__|_|\\____/|______|______|             _                        _           _            \n" +
+"  / ____|         | | (_)                 | |                      (_)         | |           \n" +
+" | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n" +
+" | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n" +
+" | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n" +
+"  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n" +
+"                                                   | |            _/ |                       \n" +
+"                                                   |_|           |__/                        ");
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Registrar Cambio de Presupuesto");
         System.out.println("3. Ver Fechas Restantes de Soporte de los Proyectos");
@@ -36,12 +48,12 @@ public class Main {
 
    
     public static void mostrarSubmenuBusqueda() {
-        System.out.println("\nSubmenu: Busqueda de Proyectos");
+        System.out.println("\nSubmenu: Busqueda de proyectos");
         System.out.println("1. Busqueda por Fechas");
         System.out.println("2. Busqueda por RUC");
         System.out.println("3. Busqueda por Estado de Proyecto");
         System.out.println("4. Volver al Menu Principal");
-        System.out.print("Seleccione una opcion: ");
+        System.out.print("Seleccione una opcion: ") ;
     }
 
   
@@ -120,7 +132,6 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Opcion 2: Registrar Cambio de Presupuesto");
-                    System.out.print("Ingrese numero de Id de Proyecto: ");
                     dataManager.modifyProjectBudget();
                     
                     break;

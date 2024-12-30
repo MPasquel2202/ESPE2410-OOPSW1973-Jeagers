@@ -353,10 +353,10 @@ public class DataManager {
     
     public void modifyProjectBudget() {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> budgetUpdates = new ArrayList<>(); // Lista para almacenar los cambios realizados
+        ArrayList<String> budgetUpdates = new ArrayList<>(); 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.print("Ingrese el codigo del proyecto a modificar: ");
+        System.out.print("Ingrese el ID del proyecto a modificar: ");
         String projectId = scanner.nextLine();
 
 
@@ -445,13 +445,13 @@ public Date calculateEndDateOfSupport(Scanner scanner, Date startDate) {
         try {
             System.out.println("Meses de contrato de soporte: ");
             monthsOfSupport = scanner.nextInt();
-            scanner.nextLine(); // Limpia el buffer
+            scanner.nextLine();
             if (monthsOfSupport <= 0) {
                 System.out.println("Ingrese un valor válido para los meses de contrato.");
             }
         } catch (InputMismatchException e) {
             System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-            scanner.nextLine(); // Limpia el buffer
+            scanner.nextLine();
         }
     }
 

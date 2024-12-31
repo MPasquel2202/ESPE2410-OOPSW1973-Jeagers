@@ -24,10 +24,13 @@ public class DataManager {
     private ArrayList<Project> projects;
     private ArrayList<Customer> customers;
     private static int projectCounter = 1;  
-    private ArrayList<ProjectChangeLog> quoteChangeLogs = new ArrayList<>();
+    private ArrayList<QuoteChangeLog> quoteChangeLogs = new ArrayList<>();
+    private ArrayList<StatusChangeLog> statusChangeLogs = new ArrayList<>();
     private static final String PROJECTS_FILE_NAME = "json/projects.json";
     private static final String CUSTOMERS_FILE_NAME = "json/customers.json";
     private static final String CHANGE_LOGS_FILE_NAME = "json/quote_changeLogs.json";
+    private static final String STATUS_CHANGE_LOGS_FILE_NAME = "json/status_changeLogs.json";
+
 
     
     private void initializeProjectCounter() {
@@ -52,9 +55,11 @@ public class DataManager {
         projects = new ArrayList<>();
         customers = new ArrayList<>();
         quoteChangeLogs = new ArrayList<>();
+        statusChangeLogs = new ArrayList<>();
         loadProjectsFromFile();
         loadCustomersFromFile();
         loadChangeLogsFromFile();
+        loadStatusChangeLogsFromFile();
         
         initializeProjectCounter();
     }
@@ -99,9 +104,20 @@ public class DataManager {
     }
 
     public void loadChangeLogsFromFile() {
-        quoteChangeLogs = loadFromFile(CHANGE_LOGS_FILE_NAME, new TypeToken<List<ProjectChangeLog>>(){}.getType());
+        quoteChangeLogs = loadFromFile(CHANGE_LOGS_FILE_NAME, new TypeToken<List<QuoteChangeLog>>(){}.getType());
         System.out.println("Historial de cambios cargado exitosamente desde " + CHANGE_LOGS_FILE_NAME);
     }
+    
+    public void saveStatusChangeLogsToFile() {
+        saveToFile(STATUS_CHANGE_LOGS_FILE_NAME, statusChangeLogs);
+        System.out.println("Historial de cambios de estado guardado exitosamente en " + STATUS_CHANGE_LOGS_FILE_NAME);
+    }
+    
+    public void loadStatusChangeLogsFromFile() {
+        statusChangeLogs = loadFromFile(STATUS_CHANGE_LOGS_FILE_NAME, new TypeToken<List<StatusChangeLog>>(){}.getType());
+        System.out.println("Historial de cambios de estado cargado exitosamente desde " + STATUS_CHANGE_LOGS_FILE_NAME);
+    }
+
 
 
     public <T> void saveToFile(String fileName, List<T> data) {
@@ -131,7 +147,7 @@ public class DataManager {
     }
     
     public void logProjectQuoteChange(Project project, double oldQuote, double newQuote) {
-        ProjectChangeLog log = new ProjectChangeLog(
+        QuoteChangeLog log = new QuoteChangeLog(
             project.getProjectId(),
             project.getProjectTitle(),
             oldQuote,
@@ -368,13 +384,129 @@ public class DataManager {
     
     public void displayChangeLogs() {
         System.out.println("Historial de Cambios:");
-        for (ProjectChangeLog log : quoteChangeLogs) {
+        for (QuoteChangeLog log : quoteChangeLogs) {
             System.out.println(log);
         }
+    }
+    
+    public void logProjectStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
+        
+        StatusChangeLog log = new StatusChangeLog(
+            project.getProjectId(),               
+            project.getProjectTitle(),            
+            oldStatus.toString(),                 
+            newStatus.toString(),                 
+            new Date()                           
+        );
+
+       
+        statusChangeLogs.add(log);
+
+       
+        saveStatusChangeLogsToFile();
+
+        System.out.println("Cambio de estado registrado: " + log);
+    }
+
+    
+    public void updateProjectStatus(String projectId) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        for (Project project : projects) {
+            if (project.getProjectId().equals(projectId)) {
+               
+                System.out.println("Estado actual: " + project.getOperationalStatus());
+
+                
+                System.out.println("Seleccione el nuevo estado:");
+                System.out.println("1. Created");
+                System.out.println("2. In Progress");
+                System.out.println("3. Paused");
+                System.out.println("4. Closed");
+
+                int option;
+                ProjectStatus newStatus = null;
+                String description = ""; 
+
+                
+                do {
+                    System.out.print("Opcion: ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Entrada invalida. Intente de nuevo.");
+                        scanner.next();
+                    }
+                    option = scanner.nextInt();
+                    scanner.nextLine(); 
+
+                    
+                    switch (option) {
+                        case 1 -> newStatus = ProjectStatus.CREATED;
+                        case 2 -> newStatus = ProjectStatus.IN_PROGRESS;
+                        case 3 -> {
+                            newStatus = ProjectStatus.PAUSED;
+
+                            
+                            System.out.print("Ingrese una descripcion para el estado PAUSED: ");
+                            description = scanner.nextLine();
+                        }
+                        case 4 -> newStatus = ProjectStatus.CLOSED;
+                        default -> System.out.println("Opcion no valida. Intente de nuevo.");
+                    }
+                } while (newStatus == null);
+
+                
+                ProjectStatus oldStatus = project.getOperationalStatus();
+                if (!oldStatus.equals(newStatus)) {
+                    
+                    project.setOperationalStatus(newStatus);
+
+                    
+                    logProjectStatusChange(project, oldStatus, newStatus);
+
+                    
+                    saveProjectsToFile();
+
+                    System.out.println("Estado actualizado exitosamente.");
+                    if (newStatus == ProjectStatus.PAUSED) {
+                        System.out.println("Descripcion agregada: " + description);
+                    }
+                } else {
+                    System.out.println("El estado no ha cambiado.");
+                }
+                return;
+            }
+        }
+        System.out.println("Proyecto no encontrado con el ID: " + projectId);
     }
 
 
     
+    public void displayStatusChangeLogs() {
+        System.out.println("Historial de Cambios de Estado:");
+        for (StatusChangeLog log : statusChangeLogs) {
+            System.out.println(log);
+        }
+    }
+    
+    public void displayProjectsWithStatus() {
+        System.out.println("Listado de Proyectos:");
+        System.out.printf("%-10s %-30s %-20s%n", "Codigo", "Titulo", "Estado");
+        System.out.println("-------------------------------------------------------------");
+
+        for (Project project : projects) {
+            System.out.printf("%-10s %-30s %-20s%n",
+                project.getProjectId(),
+                project.getProjectTitle(),
+                project.getOperationalStatus().toString());
+        }
+
+        System.out.println("-------------------------------------------------------------");
+    }
+
+
+
+   
 }
 
 

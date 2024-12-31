@@ -15,7 +15,7 @@
     "closingDate": "Dec 30, 2024, 12:00:00 AM",
     "startquote": 50000.0,
     "operationalStatus": {
-      "status": "Created"
+      "status": "In Progress"
     },
     "quoteStatus": {
       "status": "Quote Sended"
@@ -40,7 +40,7 @@
     "closingDate": "Dec 28, 2024, 12:00:00 AM",
     "startquote": 6000.0,
     "operationalStatus": {
-      "status": "Created"
+      "status": "Closed"
     },
     "quoteStatus": {
       "status": "Quote Sended"
@@ -65,7 +65,7 @@
     "closingDate": "Dec 29, 2024, 12:00:00 AM",
     "startquote": 59000.0,
     "operationalStatus": {
-      "status": "Created"
+      "status": "Paused"
     },
     "quoteStatus": {
       "status": "Quote Sended"
@@ -88,7 +88,7 @@
     },
     "startDate": "Dec 28, 2024, 2:10:36 AM",
     "closingDate": "Dec 31, 2024, 12:00:00 AM",
-    "startquote": 3500.45,
+    "startquote": 9800.0,
     "operationalStatus": {
       "status": "Created"
     },
@@ -98,5 +98,30 @@
     "paid": false,
     "invoiced": true,
     "isPublic": true
+  },
+  {
+    "projectId": "Prj-0005",
+    "projectTitle": "Sistema de redes",
+    "projectDescription": "construccion de un sistema de red 5G en Quito-Sur",
+    "customer": {
+      "ruc": "454546",
+      "name": "Puntonet",
+      "phoneNumber": "0990600274",
+      "email": "puntonetec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "76704"
+    },
+    "startDate": "Dec 30, 2024, 5:27:35 PM",
+    "closingDate": "Dec 31, 2024, 12:00:00 AM",
+    "startquote": 60000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Accepted"
+    },
+    "paid": true,
+    "invoiced": true,
+    "isPublic": false
   }
 ]

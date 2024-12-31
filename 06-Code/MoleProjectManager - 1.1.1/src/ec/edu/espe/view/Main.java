@@ -21,12 +21,12 @@ public class Main {
         System.out.println("\nGestor de Proyectos");
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Registrar Cambio de Presupuesto");
-        System.out.println("3. Ver Fechas Restantes de Soporte de los Proyectos");
+        System.out.println("3. Administrar Estatus de Proyectos");
         System.out.println("4. Generar Reporte Mensual de Proyectos");
         System.out.println("5. Busqueda de Proyectos");
         System.out.println("6. Generar Reporte Individual de Proyecto");
         System.out.println("7. Gestion de clientes");
-        System.out.println("8. Administrar Estatus de Proyecto");
+        System.out.println("8. Ver Fechas Restantes de Soporte de los Proyectos");
         System.out.println("9. Registrar Actividades del Proyecto(historial)");
         System.out.println("10. Generar Recordatorio de Fechas Importantes");
         System.out.println("11. Generacion de Soporte Posventa");
@@ -129,10 +129,35 @@ public class Main {
 
 
                     dataManager.updateProjectQuote(projectId, newQuote);
+                    dataManager.displayChangeLogs();
                     break;
                 case 3:
-                    System.out.println("Opcion 3: Ver Fechas Restantes de Soporte de los Proyectos");
-                
+                    mostrarSubmenuEstatus();
+                    int opcionEstatus = scanner.nextInt();
+                    switch (opcionEstatus) {
+                        case 1:
+                            System.out.println("Visualizar Estatus de los Proyectos");
+                            dataManager.displayProjectsWithStatus();
+                            break;
+                        case 2:
+                            System.out.println("Cambiar Estatus de Proyecto");
+                            System.out.print("Ingrese el ID del proyecto a modificar status: ");
+                            scanner.nextLine();
+                            String statusProjectId = scanner.nextLine();
+                            dataManager.updateProjectStatus(statusProjectId);
+                            break;
+                        case 3:
+                            System.out.println("Ver Historial de Cambios de Estatus");
+                            dataManager.displayStatusChangeLogs();
+                            break;
+    
+                 case 4:
+                            System.out.println("Volviendo al Menu Principal...");
+                            break;
+                        default:
+                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                            break;
+                    }
                     break;
                 case 4:
                     
@@ -198,28 +223,7 @@ public class Main {
                     
                     break;
                 case 8:
-                    mostrarSubmenuEstatus();
-                    int opcionEstatus = scanner.nextInt();
-                    switch (opcionEstatus) {
-                        case 1:
-                            System.out.println("Visualizar Estatus de los Proyectos");
-                            
-                            break;
-                        case 2:
-                            System.out.println("Cambiar Estatus de Proyecto");
-                            
-                            break;
-                        case 3:
-                            System.out.println("Ver Historial de Cambios de Estatus");
-                           
-                            break;
-                        case 4:
-                            System.out.println("Volviendo al Menu Principal...");
-                            break;
-                        default:
-                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
-                            break;
-                    }
+                    System.out.println("Opcion 8: Ver Fechas Restantes de Soporte de los Proyectos");
                     break;
                 case 9:
                     break;

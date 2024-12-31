@@ -20,11 +20,11 @@ public class Main {
     public static void mostrarMenu() {
         System.out.println("\nGestor de Proyectos");
         System.out.println("1. Funciones para Proyectos");
-        System.out.println("2. Registrar Cambio de Presupuesto");
+        System.out.println("2. Administrar Presupuestos");
         System.out.println("3. Administrar Estatus de Proyectos");
-        System.out.println("4. Generar Reporte Mensual de Proyectos");
+        System.out.println("4. Generar Reporte Individual de Proyecto");
         System.out.println("5. Busqueda de Proyectos");
-        System.out.println("6. Generar Reporte Individual de Proyecto");
+        System.out.println("6. Generar Reporte Mensual de Proyectos");
         System.out.println("7. Gestion de clientes");
         System.out.println("8. Ver Fechas Restantes de Soporte de los Proyectos");
         System.out.println("9. Registrar Actividades del Proyecto(historial)");
@@ -67,7 +67,16 @@ public class Main {
         System.out.println("1. Anadir un nuevo cliente");
         System.out.println("2. Visualizar lista de clientes");
         System.out.println("3. Modificar datos de clientes");
-        System.out.println("3. Volver al Menu Principal");
+        System.out.println("4. Volver al Menu Principal");
+        System.out.println("Selecione una opcion: ");
+    }
+    
+    public static void showQuoteSubmenu() {
+        System.out.println("\nSubmenu: Funciones de presupuesto");
+        System.out.println("1. Cambio de presupuesto");
+        System.out.println("2. Visualizar lista de cambios");
+        System.out.println("3. Cambiar status de presupuesto");
+        System.out.println("4. Volver al Menu Principal");
         System.out.println("Selecione una opcion: ");
     }
 
@@ -118,18 +127,41 @@ public class Main {
                     
                     break;
                 case 2:
-                    System.out.println("Opcion 2: Registrar Cambio de Presupuesto");
-                    System.out.print("Ingrese el ID del proyecto a modificar: ");
-                    scanner.nextLine();
-                    String projectId = scanner.nextLine();  
+                    showQuoteSubmenu();
+                    int quoteoption = scanner.nextInt();
+                    switch (quoteoption) {
+                        case 1:
+                            System.out.println("Registrar Cambio de Presupuesto");
+                            System.out.print("Ingrese el ID del proyecto a modificar: ");
+                            scanner.nextLine();
+                            String projectId = scanner.nextLine();  
 
+                            System.out.print("Ingrese el nuevo presupuesto: ");
+                            double newQuote = scanner.nextDouble();
 
-                    System.out.print("Ingrese el nuevo presupuesto: ");
-                    double newQuote = scanner.nextDouble();
-
-
-                    dataManager.updateProjectQuote(projectId, newQuote);
-                    dataManager.displayChangeLogs();
+                            dataManager.updateProjectQuote(projectId, newQuote);
+                            break;
+                        case 2:
+                            System.out.println("Visualizar Lista de cambios");
+                            dataManager.displayChangeLogs();
+                            break;
+                        case 3:
+                            System.out.println("Cambiar Status de Presupuesto");
+                            System.out.print("Ingrese el ID del proyecto para cambiar el estado de cotizacion: ");
+                            scanner.nextLine();
+                            String quoteStatusProjectId = scanner.nextLine();
+                            
+                            dataManager.updateProjectQuoteStatus(quoteStatusProjectId); 
+                            break;
+    
+                        case 4:
+                            System.out.println("Volviendo al Menu Principal...");
+                            break;
+                        default:
+                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                            break;
+                    }
+                   
                     break;
                 case 3:
                     mostrarSubmenuEstatus();
@@ -151,7 +183,7 @@ public class Main {
                             dataManager.displayStatusChangeLogs();
                             break;
     
-                 case 4:
+                        case 4:
                             System.out.println("Volviendo al Menu Principal...");
                             break;
                         default:
@@ -160,6 +192,7 @@ public class Main {
                     }
                     break;
                 case 4:
+                    System.out.println("Opcion 4: Generación de Reportes Individuales");
                     
                     break;
                 case 5:
@@ -187,8 +220,8 @@ public class Main {
                     }
                     break;
                 case 6:
-                    Report report= new Report("json/projects.json");
-                    report.createIndividualReport(scanner);
+//                    Report report= new Report("json/projects.json");
+//                    report.createIndividualReport(scanner);
                     break;
                 case 7:
                     showClientSubmenu();

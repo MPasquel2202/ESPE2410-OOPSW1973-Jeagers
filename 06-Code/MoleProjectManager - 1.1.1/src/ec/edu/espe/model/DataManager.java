@@ -26,10 +26,12 @@ public class DataManager {
     private static int projectCounter = 1;  
     private ArrayList<QuoteChangeLog> quoteChangeLogs = new ArrayList<>();
     private ArrayList<StatusChangeLog> statusChangeLogs = new ArrayList<>();
+    private ArrayList<QuoteStatusChangeLog> quoteStatusChangeLogs = new ArrayList<>();
     private static final String PROJECTS_FILE_NAME = "json/projects.json";
     private static final String CUSTOMERS_FILE_NAME = "json/customers.json";
     private static final String CHANGE_LOGS_FILE_NAME = "json/quote_changeLogs.json";
-    private static final String STATUS_CHANGE_LOGS_FILE_NAME = "json/status_changeLogs.json";
+    private static final String STATUS_CHANGE_LOGS_FILE_NAME = "json/status_changeLogs.json";   
+    private static final String QUOTE_STATUS_CHANGE_LOGS_FILE_NAME = "json/quote_status_changeLogs.json";
 
 
     
@@ -56,10 +58,14 @@ public class DataManager {
         customers = new ArrayList<>();
         quoteChangeLogs = new ArrayList<>();
         statusChangeLogs = new ArrayList<>();
+        quoteStatusChangeLogs = new ArrayList<>();
+        
         loadProjectsFromFile();
         loadCustomersFromFile();
         loadChangeLogsFromFile();
         loadStatusChangeLogsFromFile();
+        loadQuoteStatusChangeLogsFromFile();
+
         
         initializeProjectCounter();
     }
@@ -116,6 +122,16 @@ public class DataManager {
     public void loadStatusChangeLogsFromFile() {
         statusChangeLogs = loadFromFile(STATUS_CHANGE_LOGS_FILE_NAME, new TypeToken<List<StatusChangeLog>>(){}.getType());
         System.out.println("Historial de cambios de estado cargado exitosamente desde " + STATUS_CHANGE_LOGS_FILE_NAME);
+    }
+    
+    public void saveQuoteStatusChangeLogsToFile() {
+        saveToFile(QUOTE_STATUS_CHANGE_LOGS_FILE_NAME, quoteStatusChangeLogs);
+        System.out.println("Historial de cambios de estado de cotizacion guardado exitosamente en " + QUOTE_STATUS_CHANGE_LOGS_FILE_NAME);
+    }
+
+    public void loadQuoteStatusChangeLogsFromFile() {
+        quoteStatusChangeLogs = loadFromFile(QUOTE_STATUS_CHANGE_LOGS_FILE_NAME, new TypeToken<List<QuoteStatusChangeLog>>(){}.getType());
+        System.out.println("Historial de cambios de estado de cotizacion cargado exitosamente desde " + QUOTE_STATUS_CHANGE_LOGS_FILE_NAME);
     }
 
 
@@ -503,10 +519,85 @@ public class DataManager {
 
         System.out.println("-------------------------------------------------------------");
     }
-
-
-
+    
    
+    public void logQuoteStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
+        QuoteStatusChangeLog log = new QuoteStatusChangeLog(
+            project.getProjectId(),
+            project.getProjectTitle(),
+            oldStatus.toString(),
+            newStatus.toString(),
+            new Date()
+        );
+
+        quoteStatusChangeLogs.add(log);
+        saveQuoteStatusChangeLogsToFile();
+        System.out.println("Cambio de estado de cotizacion registrado: " + log);
+    }
+
+
+    public void updateProjectQuoteStatus(String projectId) {
+        Scanner scanner = new Scanner(System.in);
+
+        for (Project project : projects) {
+            if (project.getProjectId().equals(projectId)) {
+
+                System.out.println("Estado actual de cotizacion: " + project.getQuoteStatus());
+
+                System.out.println("Seleccione el nuevo estado de cotizacion:");
+                System.out.println("1. Quote Sended");
+                System.out.println("2. Quote Rejected");
+                System.out.println("3. Quote Accepted");
+
+                int option;
+                ProjectStatus newQuoteStatus = null;
+
+                do {
+                    System.out.print("Opcion: ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Entrada invalida. Intente de nuevo.");
+                        scanner.next();
+                    }
+                    option = scanner.nextInt();
+                    scanner.nextLine(); 
+                    
+                    switch (option) {
+                        case 1 -> newQuoteStatus = ProjectStatus.QUOTE_SEND;
+                        case 2 -> newQuoteStatus = ProjectStatus.QUOTE_REJECTED;
+                        case 3 -> newQuoteStatus = ProjectStatus.QUOTE_ACCEPTED;
+                        default -> System.out.println("Opcion no valida. Intente de nuevo.");
+                    }
+                } while (newQuoteStatus == null);
+
+                
+                ProjectStatus oldQuoteStatus = project.getQuoteStatus();
+
+                
+                if (!oldQuoteStatus.equals(newQuoteStatus)) {
+
+                    
+                    project.setQuoteStatus(newQuoteStatus);
+
+                    
+                    logQuoteStatusChange(project, oldQuoteStatus, newQuoteStatus);
+
+
+                    saveProjectsToFile();
+
+                   
+                    System.out.println("Estado de cotizacion actualizado exitosamente.");
+                } else {
+                    System.out.println("El estado de cotizacion no ha cambiado.");
+                }
+                return; 
+            }
+        }
+        System.out.println("Proyecto no encontrado con el ID: " + projectId);
+}
+
+
+    
+
 }
 
 

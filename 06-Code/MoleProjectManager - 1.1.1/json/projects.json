@@ -88,12 +88,12 @@
     },
     "startDate": "Dec 28, 2024, 2:10:36 AM",
     "closingDate": "Dec 31, 2024, 12:00:00 AM",
-    "startquote": 9800.0,
+    "startquote": 56000.0,
     "operationalStatus": {
       "status": "Created"
     },
     "quoteStatus": {
-      "status": "Quote Sended"
+      "status": "Quote Rejected"
     },
     "paid": false,
     "invoiced": true,

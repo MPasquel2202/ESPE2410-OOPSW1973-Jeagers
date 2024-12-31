@@ -26,5 +26,12 @@
     "oldQuote": 3500.45,
     "newQuote": 9800.0,
     "changeDate": "Dec 30, 2024, 11:21:04 PM"
+  },
+  {
+    "projectId": "Prj-0004",
+    "projectTitle": "Build 5g Antenas",
+    "oldQuote": 9800.0,
+    "newQuote": 56000.0,
+    "changeDate": "Dec 31, 2024, 11:35:20 AM"
   }
 ]

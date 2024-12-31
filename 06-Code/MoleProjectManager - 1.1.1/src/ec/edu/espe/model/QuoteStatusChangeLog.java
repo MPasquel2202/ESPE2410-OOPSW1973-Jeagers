@@ -6,23 +6,20 @@ import java.util.Date;
  *
  * @author Dennis Paucar
  */
-public class StatusChangeLog {
+public class QuoteStatusChangeLog {
     private String projectId;
     private String projectTitle;
-    private String oldStatus;
-    private String newStatus;
+    private String oldQuoteStatus;
+    private String newQuoteStatus;
     private Date changeDate;
-    private String description;
 
-    public StatusChangeLog(String projectId, String projectTitle, String oldStatus, String newStatus, Date changeDate) {
+    public QuoteStatusChangeLog(String projectId, String projectTitle, String oldQuoteStatus, String newQuoteStatus, Date changeDate) {
         this.projectId = projectId;
         this.projectTitle = projectTitle;
-        this.oldStatus = oldStatus;
-        this.newStatus = newStatus;
+        this.oldQuoteStatus = oldQuoteStatus;
+        this.newQuoteStatus = newQuoteStatus;
         this.changeDate = changeDate;
-        
     }
-    
     
 
     public String getProjectId() {
@@ -41,20 +38,20 @@ public class StatusChangeLog {
         this.projectTitle = projectTitle;
     }
 
-    public String getOldStatus() {
-        return oldStatus;
+    public String getOldQuoteStatus() {
+        return oldQuoteStatus;
     }
 
-    public void setOldStatus(String oldSrarus) {
-        this.oldStatus = oldSrarus;
+    public void setOldQuoteStatus(String oldQuoteStatus) {
+        this.oldQuoteStatus = oldQuoteStatus;
     }
 
-    public String getNewStatus() {
-        return newStatus;
+    public String getNewQuoteStatus() {
+        return newQuoteStatus;
     }
 
-    public void setNewStatus(String newStatus) {
-        this.newStatus = newStatus;
+    public void setNewQuoteStatus(String newQuoteStatus) {
+        this.newQuoteStatus = newQuoteStatus;
     }
 
     public Date getChangeDate() {
@@ -64,18 +61,6 @@ public class StatusChangeLog {
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     
     
-
-   
-            
-   
 }

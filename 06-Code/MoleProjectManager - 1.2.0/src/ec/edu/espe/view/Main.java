@@ -10,27 +10,27 @@ import java.util.Scanner;
 
 /**
  *
- * @author Dennis Paucar
- * }
- * 
+ * @author Dennis Paucar }
+ *
  */
-
 public class Main {
+
     public String fileName = "json/projects.json";
+
     public static void mostrarMenu() {
-        System.out.println("\n  __  __  ____  _      ______                                                                \n" +
-" |  \\/  |/ __ \\| |    |  ____|                                                               \n" +
-" | \\  / | |  | | |    | |__                                                                  \n" +
-" | |\\/| | |  | | |    |  __|                                                                 \n" +
-" | |  | | |__| | |____| |____                                                                \n" +
-" |_|__|_|\\____/|______|______|             _                        _           _            \n" +
-"  / ____|         | | (_)                 | |                      (_)         | |           \n" +
-" | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n" +
-" | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n" +
-" | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n" +
-"  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n" +
-"                                                   | |            _/ |                       \n" +
-"                                                   |_|           |__/                        ");
+        System.out.println("\n  __  __  ____  _      ______                                                                \n"
+                + " |  \\/  |/ __ \\| |    |  ____|                                                               \n"
+                + " | \\  / | |  | | |    | |__                                                                  \n"
+                + " | |\\/| | |  | | |    |  __|                                                                 \n"
+                + " | |  | | |__| | |____| |____                                                                \n"
+                + " |_|__|_|\\____/|______|______|             _                        _           _            \n"
+                + "  / ____|         | | (_)                 | |                      (_)         | |           \n"
+                + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n"
+                + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n"
+                + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n"
+                + "  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n"
+                + "                                                   | |            _/ |                       \n"
+                + "                                                   |_|           |__/                        ");
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Registrar Cambio de Presupuesto");
         System.out.println("3. Ver Fechas Restantes de Soporte de los Proyectos");
@@ -46,17 +46,15 @@ public class Main {
         System.out.print("Seleccione una opcion: ");
     }
 
-   
     public static void mostrarSubmenuBusqueda() {
         System.out.println("\nSubmenu: Busqueda de proyectos");
         System.out.println("1. Busqueda por Fechas");
         System.out.println("2. Busqueda por RUC");
         System.out.println("3. Busqueda por Estado de Proyecto");
         System.out.println("4. Volver al Menu Principal");
-        System.out.print("Seleccione una opcion: ") ;
+        System.out.print("Seleccione una opcion: ");
     }
 
-  
     public static void mostrarSubmenuEstatus() {
         System.out.println("\nSubmenu: Administrar Estatus de Proyecto");
         System.out.println("1. Visualizar Estatus de los Proyectos");
@@ -65,7 +63,7 @@ public class Main {
         System.out.println("4. Volver al Menu Principal");
         System.out.print("Seleccione una opcion: ");
     }
-    
+
     public static void showProjectSubmenu() {
         System.out.println("\nSubmenu: Funciones de proyecto");
         System.out.println("1. Crear un nuevo proyecto");
@@ -73,8 +71,8 @@ public class Main {
         System.out.println("3. Volver al Menu Principal");
         System.out.println("Selecione una opcion: ");
     }
-    
-    public static void showClientSubmenu(){
+
+    public static void showClientSubmenu() {
         System.out.println("\nSubmenu: Funciones de cliente");
         System.out.println("1. Anadir un nuevo cliente");
         System.out.println("2. Visualizar lista de clientes");
@@ -83,15 +81,14 @@ public class Main {
         System.out.println("Selecione una opcion: ");
     }
 
-   
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
+
         DataManager dataManager = new DataManager();
         dataManager.loadProjectsFromFile();
         dataManager.loadCustomersFromFile();
         dataManager.loadSupportsFromFile();
-        
+
         int opcion;
         boolean salir = false;
 
@@ -103,7 +100,7 @@ public class Main {
                 case 1:
                     showProjectSubmenu();
                     int projectOptions = scanner.nextInt();
-                    switch(projectOptions){
+                    switch (projectOptions) {
                         case 1:
                             System.out.println("Opcion 1: Crear Proyecto");
                             Project newProject = dataManager.askForProjectData();
@@ -113,34 +110,34 @@ public class Main {
                             break;
                         case 2:
                             System.out.println("Opcion 2: Visualizar Proyectos");
-                              
+
                             System.out.println("\n--- Detalles de los Proyectos ---");
-                            
+
                             for (Project project : dataManager.getProjects()) {
-                                project.displayProjectData();  
+                                project.displayProjectData();
                             }
                             break;
-                        case 3: 
+                        case 3:
                             System.out.println("Volviendo al Menu Principal...");
                             break;
                         default:
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
-                    
-                    
+
                     break;
                 case 2:
                     System.out.println("Opcion 2: Registrar Cambio de Presupuesto");
                     dataManager.modifyProjectBudget();
-                    
+
                     break;
                 case 3:
-                    System.out.println("Opcion 3: Ver Fechas Restantes de Soporte de los Proyectos");
-                
+                    System.out.println("Opción 3: Ver Fechas Restantes de Soporte de los Proyectos");
+                    dataManager.displayRemainingSupportDates();
                     break;
+
                 case 4:
-                    
+
                     break;
                 case 5:
                     mostrarSubmenuBusqueda();
@@ -148,15 +145,15 @@ public class Main {
                     switch (opcionBusqueda) {
                         case 1:
                             System.out.println("Busqueda por Fechas");
-                            
+
                             break;
                         case 2:
                             System.out.println("Busqueda por RUC");
-                        
+
                             break;
                         case 3:
                             System.out.println("Busqueda por Estado de Proyecto");
-                           
+
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
@@ -167,17 +164,17 @@ public class Main {
                     }
                     break;
                 case 6:
-                    Report report= new Report("json/projects.json");
+                    Report report = new Report("json/projects.json");
                     report.createIndividualReport(scanner);
                     break;
                 case 7:
                     showClientSubmenu();
                     int clientOption = scanner.nextInt();
-                     scanner.nextLine(); 
+                    scanner.nextLine();
                     switch (clientOption) {
                         case 1:
                             System.out.println("Opcion 1: Anadir nuevo cliente");
-                                dataManager.askForCustomerData();
+                            dataManager.askForCustomerData();
                             break;
                         case 2:
                             System.out.println("Opcion 2: Mostrar lista de clientes");
@@ -188,9 +185,10 @@ public class Main {
                         case 3:
                             System.out.println("Opcion 3: Modificar datos de un cliente");
                             System.out.print("Ingrese el ID del cliente a modificar: ");
-                            String customerId = scanner.nextLine();  
-                            dataManager.modifyCustomerByCode(customerId); ;
-                            
+                            String customerId = scanner.nextLine();
+                            dataManager.modifyCustomerByCode(customerId);
+                            ;
+
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
@@ -199,8 +197,7 @@ public class Main {
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
-                    
-                    
+
                     break;
                 case 8:
                     mostrarSubmenuEstatus();
@@ -208,15 +205,15 @@ public class Main {
                     switch (opcionEstatus) {
                         case 1:
                             System.out.println("Visualizar Estatus de los Proyectos");
-                            
+
                             break;
                         case 2:
                             System.out.println("Cambiar Estatus de Proyecto");
-                            
+
                             break;
                         case 3:
                             System.out.println("Ver Historial de Cambios de Estatus");
-                           
+
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");

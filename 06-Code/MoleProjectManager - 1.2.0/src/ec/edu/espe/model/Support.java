@@ -10,12 +10,12 @@ import java.util.Scanner;
  * @author David Pilatasig
  */
 public class Support {
+
     private String idSupport;
     private String asociatedProjectId;
     private String Description;
     private Date startDate;
     private Date endDate;
-    
 
     public Support(String idSupport, String asociatedProject, String Description, Date startDate, Date endDate) {
         this.idSupport = idSupport;
@@ -23,6 +23,11 @@ public class Support {
         this.Description = Description;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public long getRemainingDays() {
+        Date today = new Date();
+        return (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
     }
 
     public String getIdSupport() {
@@ -50,9 +55,18 @@ public class Support {
     }
 
     public void writeSupportOfProject() {
+        long remainingDays = getRemainingDays();
+
         System.out.println("+----------Soportes del proyecto----------+");
         System.out.println("ID del soporte: " + idSupport);
         System.out.println("Descripción: " + Description);
-        System.out.println("Fin del soporte: " + endDate); 
+        System.out.println("Fin del soporte: " + endDate);
+
+        if (remainingDays > 0) {
+            System.out.println("Días restantes: " + remainingDays + " días");
+        } else {
+            System.out.println("El soporte ya ha expirado.");
+        }
     }
+
 }

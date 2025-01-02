@@ -1,30 +1,32 @@
 package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
- * @author David Pilatasig
+ * @author Dennis Paucar
  */
 public class Support {
-
     private String supportId;
-    private String asociatedProjectId;
-    private String Description;
+    private String projectId;
+    private String projectDescription;
+    private String supportDetails;
     private Date startDate;
     private Date endDate;
+    private String supportStatus;
 
-    public Support(String idSupport, String asociatedProject, String Description, Date startDate, Date endDate) {
-        this.supportId = idSupport;
-        this.asociatedProjectId = asociatedProject;
-        this.Description = Description;
+    public Support(String supportId, String projectId, String projectDescription, String supportDetails, Date startDate, Date endDate, String supportStatus) {
+        this.supportId = supportId;
+        this.projectId = projectId;
+        this.projectDescription = projectDescription;
+        this.supportDetails = supportDetails;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.supportStatus = supportStatus;
     }
+
+    
     
     public void displaySupportData() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,7 +38,7 @@ public class Support {
 
         
         System.out.printf("| %-18s | %-45s |\n", "ID Soporte:", supportId);
-        System.out.printf("| %-18s | %-45s |\n", "Proyecto:", projectTitle);
+        System.out.printf("| %-18s | %-45s |\n", "Proyecto:", projectId);
         System.out.printf("| %-18s | %-45s |\n", "Detalles:", supportDetails);
         System.out.println("+--------------------------------------------------------------+");
 
@@ -49,54 +51,58 @@ public class Support {
         System.out.printf("| %-18s | %-45s |\n", "Estado del Soporte:", supportStatus != null ? supportStatus : "Sin definir");
         System.out.println("+--------------------------------------------------------------+");
 
-        
-        System.out.printf("| %-18s | %-45s |\n", "Contacto:", contact != null ? contact : "No definido");
-        System.out.printf("| %-18s | %-45s |\n", "Comentarios:", comments != null ? comments : "Ninguno");
-        System.out.println("+--------------------------------------------------------------+");
+     
     }
-
-    public long getRemainingDays() {
-        Date today = new Date();
-        return (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
-    }
+    
+    
 
     public String getSupportId() {
         return supportId;
     }
 
-    public String getAsociatedProjectId() {
-        return asociatedProjectId;
+    public void setSupportId(String supportId) {
+        this.supportId = supportId;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectDescription() {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
+    }
+
+    public String getSupportDetails() {
+        return supportDetails;
+    }
+
+    public void setSupportDetails(String supportDetails) {
+        this.supportDetails = supportDetails;
     }
 
     public Date getStartDate() {
         return startDate;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
     public Date getEndDate() {
         return endDate;
     }
 
-    public void writeSupportOfProject() {
-        long remainingDays = getRemainingDays();
-
-        System.out.println("-------->  Soportes del proyecto  <---------");
-        System.out.println("ID del soporte: " + supportId);
-        System.out.println("Descripción: " + Description);
-        System.out.println("Fin del soporte: " + endDate);
-
-        if (remainingDays > 0) {
-            System.out.println("Días restantes: " + remainingDays + " días");
-        } else {
-            System.out.println("El soporte ya ha expirado.");
-        }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
-
+    
+    
 }

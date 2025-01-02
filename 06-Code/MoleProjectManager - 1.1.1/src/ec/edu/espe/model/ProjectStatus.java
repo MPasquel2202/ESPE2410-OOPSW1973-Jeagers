@@ -30,6 +30,20 @@ public class ProjectStatus {
     public String toString() {
         return status;
     }
+    
+    public static ProjectStatus fromString(String status) {
+    switch (status) {
+        case "Created": return CREATED;
+        case "In Progress": return IN_PROGRESS;
+        case "Paused": return PAUSED;
+        case "Closed": return CLOSED;
+        case "Quote Sended": return QUOTE_SEND;
+        case "Quote Rejected": return QUOTE_REJECTED;
+        case "Quote Accepted": return QUOTE_ACCEPTED;
+        default: throw new IllegalArgumentException("Estado desconocido: " + status);
+    }
+}
+
 }
 
 

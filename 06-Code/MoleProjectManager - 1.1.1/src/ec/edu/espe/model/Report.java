@@ -1,5 +1,7 @@
 package ec.edu.espe.model;
 
+import java.util.Date;
+
 
 
 /**
@@ -7,5 +9,13 @@ package ec.edu.espe.model;
  * @author David Pilatasig
  */
 public class Report {
+    String reportId;
+    Date generatedDate;
+    Project project;
+    Customer customer;
+    QuoteChangeLog quoteChangelog;
+    QuoteStatusChangeLog quoteStatusChangelog;
+    StatusChangeLog statusChangeLog;
+    
     
 }

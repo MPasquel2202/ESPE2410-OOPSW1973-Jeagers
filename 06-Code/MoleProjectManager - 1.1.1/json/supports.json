@@ -1,38 +1,13 @@
 [
   {
-    "supportId": "SVR_0001",
+    "supportId": "SVR_3727",
     "projectId": "Prj-0001",
     "projectDescription": "Netlife",
-    "supportDetails": "Manteminiento de las antenas",
-    "startDate": "Jan 2, 2025, 11:51:03 AM",
-    "endDate": "Dec 9, 2025, 12:00:00 AM",
-    "supportStatus": "Created"
-  },
-  {
-    "supportId": "SVR_0001",
-    "projectId": "Prj-0001",
-    "projectDescription": "Netlife",
-    "supportDetails": "Mantenimiento 2",
-    "startDate": "Jan 2, 2025, 4:54:54 PM",
-    "endDate": "Mar 29, 2025, 12:00:00 AM",
-    "supportStatus": "Created"
-  },
-  {
-    "supportId": "SVR_0001",
-    "projectId": "Prj-0002",
-    "projectDescription": "Puntonet ",
-    "supportDetails": "Manteniemto semanal",
-    "startDate": "Jan 2, 2025, 4:58:39 PM",
-    "endDate": "Dec 1, 2026, 12:00:00 AM",
-    "supportStatus": "Created"
-  },
-  {
-    "supportId": "SVR_0001",
-    "projectId": "Prj-0002",
-    "projectDescription": "Puntonet ",
-    "supportDetails": "Mantenimiento 2 de antenas",
-    "startDate": "Jan 2, 2025, 5:00:00 PM",
-    "endDate": "Dec 3, 2027, 12:00:00 AM",
-    "supportStatus": "Created"
+    "supportDetails": "Mantenimiento 1",
+    "startDate": "Jan 2, 2025, 5:51:58 PM",
+    "endDate": "Feb 23, 2025, 12:00:00 AM",
+    "supportStatus": "Created",
+    "durationYears": 2,
+    "scheduleType": "24x7"
   }
 ]

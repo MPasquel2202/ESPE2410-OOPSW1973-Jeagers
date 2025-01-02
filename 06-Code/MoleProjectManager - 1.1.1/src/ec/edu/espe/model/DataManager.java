@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -610,20 +611,22 @@ public class DataManager {
         }
         System.out.println("Proyecto no encontrado con el ID: " + projectId);
 }
+   
+
     public void generateSupport() {
         Scanner scanner = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+       
         for (Project project : projects) {
             System.out.println("Proyecto ID: " + project.getProjectId() + " Estado: " + project.getOperationalStatus());
         }
-        
+
         
         System.out.print("Ingrese el ID del proyecto para generar soporte: ");
         String projectId = scanner.nextLine();
 
         Project selectedProject = null;
-       
         for (Project project : projects) {
             if (project.getProjectId().equals(projectId)) {
                 selectedProject = project;
@@ -636,32 +639,47 @@ public class DataManager {
             return;
         }
 
-        
-        
-       
         if (!selectedProject.getOperationalStatus().getStatus().equals("Closed")) {
             System.out.println("El proyecto no esta cerrado. Solo los proyectos cerrados pueden generar soporte.");
-             System.out.println("Estado del proyecto: " + selectedProject.getOperationalStatus());
+            System.out.println("Estado del proyecto: " + selectedProject.getOperationalStatus());
             return;
         }
-
 
         
         System.out.println("Estado del pago del proyecto: " + (selectedProject.isPaid() ? "Si" : "No") + " esta pagado");
 
-        
-        int supportCounter = 1; 
-        String supportId = String.format("SVR_%04d", supportCounter++);
+      
+        Random random = new Random();
+        int supportCounter = random.nextInt(10000);  
+        String supportId = String.format("SVR_%04d", supportCounter);  
 
-        
         System.out.print("Ingrese los detalles del soporte: ");
         String supportDetails = scanner.nextLine();
 
         Date startDate = new Date();
 
+ 
         Date endDate = null;
         boolean validDate = false;
 
+        
+        int durationYears = 0;
+        boolean validDuration = false;
+
+        do {
+            System.out.print("Ingrese la duracion del soporte en anios (1, 2 o 5): ");
+            if (scanner.hasNextInt()) {
+                durationYears = scanner.nextInt();
+                if (durationYears == 1 || durationYears == 2 || durationYears == 5) {
+                    validDuration = true;
+                } else {
+                    System.out.println("Duracion invalida. Solo se permite 1, 2 o 5 anios.");
+                }
+            } else {
+                System.out.println("Entrada no valida. Debe ser un numero.");
+                scanner.next(); 
+            }
+        } while (!validDuration);
         
         do {
             System.out.print("Fecha de finalizacion (yyyy-MM-dd): ");
@@ -684,7 +702,35 @@ public class DataManager {
             }
         } while (!validDate);
 
-        
+       
+        String scheduleType = "";
+        boolean validSchedule = false;
+
+        scanner.nextLine(); 
+
+        System.out.println("Seleccione el tipo de horario:");
+        System.out.println("1. 8x5 (8 horas al dia por 5 dias a la semana)");
+        System.out.println("2. 24x7 (24 horas al dia por 7 dias a la semana)");
+
+        do {
+            System.out.print("Ingrese el numero de la opcion: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    scheduleType = "8x5";
+                    validSchedule = true;
+                    break;
+                case 2:
+                    scheduleType = "24x7";
+                    validSchedule = true;
+                    break;
+                default:
+                    System.out.println("Opcion no valida. Elija 1 para 8x5 o 2 para 24x7.");
+                    break;
+            }
+        } while (!validSchedule);
+
         Support support = new Support(
             supportId,
             selectedProject.getProjectId(),
@@ -692,18 +738,68 @@ public class DataManager {
             supportDetails,
             startDate,
             endDate,
-            "Created"  
+            "Created",       
+            durationYears,   
+            scheduleType     
         );
 
+       
         supports.add(support);
 
-        
+
         saveSupportsToFile();
 
-        
+
         System.out.println("Soporte generado con exito:");
-        System.out.println(support);
+        support.displaySupportData();
     }
+
+
+    
+    public void closeSupport() {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.println("Lista de soportes:");
+        for (Support support : supports) {
+            System.out.println("ID: " + support.getSupportId() + ", Estado: " + support.getSupportStatus());
+        }
+
+        
+        System.out.print("Ingrese el ID del soporte que desea cerrar: ");
+        String supportId = scanner.nextLine();
+
+        
+        Support selectedSupport = null;
+        for (Support support : supports) {
+            if (support.getSupportId().equals(supportId)) {
+                selectedSupport = support;
+                break;
+            }
+        }
+
+        
+        if (selectedSupport == null) {
+            System.out.println("Soporte no encontrado con el ID: " + supportId);
+            return;
+        }
+
+       
+        if (selectedSupport.getSupportStatus().equals("Closed")) {
+            System.out.println("El soporte ya esta cerrado.");
+            return;
+        }
+
+       
+        selectedSupport.setSupportStatus("Closed");
+
+      
+        saveSupportsToFile();
+
+       
+        System.out.println("El soporte con ID: " + supportId + " ha sido cerrado correctamente.");
+    }
+
 
 
     

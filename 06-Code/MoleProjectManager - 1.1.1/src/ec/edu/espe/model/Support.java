@@ -15,16 +15,24 @@ public class Support {
     private Date startDate;
     private Date endDate;
     private String supportStatus;
+    private int durationYears;        
+    private String scheduleType;       
 
-    public Support(String supportId, String projectId, String projectDescription, String supportDetails, Date startDate, Date endDate, String supportStatus) {
-        this.supportId = supportId;
-        this.projectId = projectId;
-        this.projectDescription = projectDescription;
-        this.supportDetails = supportDetails;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.supportStatus = supportStatus;
-    }
+   
+    
+    public Support(String supportId, String projectId, String projectDescription, String supportDetails, 
+               Date startDate, Date endDate, String supportStatus, int durationYears, String scheduleType) {
+    this.supportId = supportId;
+    this.projectId = projectId;
+    this.projectDescription = projectDescription;
+    this.supportDetails = supportDetails;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.supportStatus = supportStatus;
+    this.durationYears = durationYears;
+    this.scheduleType = scheduleType;
+}
+
 
     
     
@@ -50,6 +58,11 @@ public class Support {
         
         System.out.printf("| %-18s | %-45s |\n", "Estado del Soporte:", supportStatus != null ? supportStatus : "Sin definir");
         System.out.println("+--------------------------------------------------------------+");
+        
+        System.out.printf("| %-18s | %-45s |\n", "Duracion (anios):", durationYears);
+        System.out.printf("| %-18s | %-45s |\n", "Horario:", scheduleType);
+        System.out.println("+--------------------------------------------------------------+");
+
 
      
     }
@@ -103,6 +116,31 @@ public class Support {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public String getSupportStatus() {
+        return supportStatus;
+    }
+
+    public void setSupportStatus(String supportStatus) {
+        this.supportStatus = supportStatus;
+    }
+    
+    public int getDurationYears() {
+        return durationYears;
+    }
+
+    public void setDurationYears(int durationYears) {
+        this.durationYears = durationYears;
+    }
+
+    public String getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(String scheduleType) {
+        this.scheduleType = scheduleType;
+    }
+
     
     
 }

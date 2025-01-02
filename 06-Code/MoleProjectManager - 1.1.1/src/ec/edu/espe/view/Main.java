@@ -101,6 +101,7 @@ public class Main {
         dataManager.loadCustomersFromFile();
         dataManager.loadQuoteStatusChangeLogsFromFile();
         dataManager.loadSupportsFromFile();
+       
         int opcion;
         boolean salir = false;
         
@@ -233,7 +234,7 @@ public class Main {
                                 break;
                             case 3:
                                 System.out.println("Cambiar estado de soporte");
-
+                                dataManager.closeSupport();
                                 break;
 
                             case 4:

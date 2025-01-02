@@ -15,7 +15,9 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public String fileName = "json/projects.json";
+    private static final String fileName = "json/projects.json";
+    private static Report report = new Report(fileName);
+    
 
     public static void mostrarMenu() {
         System.out.println("\n  __  __  ____  _      ______                                                                \n"
@@ -23,8 +25,8 @@ public class Main {
                 + " | \\  / | |  | | |    | |__                                                                  \n"
                 + " | |\\/| | |  | | |    |  __|                                                                 \n"
                 + " | |  | | |__| | |____| |____                                                                \n"
-                + " |_|__|_|\\____/|______|______|             _                        _           _            \n"
-                + "  / ____|         | | (_)                 | |                      (_)         | |           \n"
+                + " |_|__|_|\\____/|______|______|_            _                        _           _            \n"
+                + "  / ____|         | | (_)    /_/          | |                      (_)         | |           \n"
                 + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n"
                 + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n"
                 + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n"
@@ -137,8 +139,11 @@ public class Main {
                     break;
 
                 case 4:
-
+                    System.out.println("Opción 4: Agrupación de Reportes del Mes Actual");
+                    report.showMonthlyReports();
+                    
                     break;
+
                 case 5:
                     mostrarSubmenuBusqueda();
                     int opcionBusqueda = scanner.nextInt();

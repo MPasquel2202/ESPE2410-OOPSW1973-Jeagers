@@ -53,7 +53,7 @@ public class DataManager {
     public void displayRemainingSupportDates() {
         Date today = new Date();
         System.out.println("| Fechas restantes de soporte |");
-        System.out.println("+----------------------------+");
+        System.out.println("|----------------------------|");
 
         for (Support support : supports) {
             long remainingDays = (support.getEndDate().getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
@@ -195,7 +195,7 @@ public class DataManager {
     public Customer askForCustomerData() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("----------Ingrese la informacion del cliente----------");
+        System.out.println("--------->  Ingrese la informacion del cliente  <---------");
         System.out.print("Ingrese RUC: ");
         String ruc = scanner.nextLine();
 
@@ -459,7 +459,7 @@ public class DataManager {
                 .anyMatch(project -> project.getProjectId().equalsIgnoreCase(projectId));
 
         if (projectExists) {
-            System.out.println("+-------Ingrese la información del soporte-------+");
+            System.out.println("------> Ingrese la información del soporte <-----");
             Support support = askForSupportData(scanner, projectId);
             supports.add(support);
             saveSupportsToFile();

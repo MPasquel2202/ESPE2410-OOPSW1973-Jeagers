@@ -57,7 +57,7 @@ public class Support {
     public void writeSupportOfProject() {
         long remainingDays = getRemainingDays();
 
-        System.out.println("+----------Soportes del proyecto----------+");
+        System.out.println("-------->  Soportes del proyecto  <---------");
         System.out.println("ID del soporte: " + idSupport);
         System.out.println("Descripción: " + Description);
         System.out.println("Fin del soporte: " + endDate);

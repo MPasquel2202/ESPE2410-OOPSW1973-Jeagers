@@ -12,11 +12,10 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -238,72 +237,89 @@ public class DataManager {
     }
 
     public Project askForProjectData() {
-        Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
-        System.out.print("Ingrese el titulo del proyecto: ");
-        String title = scanner.nextLine();
+    Scanner scanner = new Scanner(System.in);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.print("Ingrese la descripcion: ");
-        String description = scanner.nextLine();
-        
-        Customer customer;
-        System.out.println("Desea usar un cliente existente o crear uno nuevo?");
-        System.out.println("1. Usar cliente existente");
-        System.out.println("2. Crear cliente nuevo");
-        System.out.print("Seleccione una opcion: ");
-        int customerOption = scanner.nextInt();
-        scanner.nextLine();
+    String title = askForProjectTitle(scanner);
+    String description = askForProjectDescription(scanner);
+    Customer customer = askForCustomer(scanner);
+    Date startDate = new Date();
+    Date closingDate = askForClosingDate(scanner, dateFormat, startDate);
+    double quote = askForProjectQuote(scanner);
+    ProjectStatus quoteStatus = askForQuoteStatus(scanner);
+    boolean isInvoiced = askIfInvoiced(scanner);
+    boolean paid = isInvoiced ? askIfPaid(scanner) : false;
+    boolean isPublic = askIfPublic(scanner);
 
-        if (customerOption == 1) {
-        
-            List<Customer> customers = getCustomers();
-            if (customers.isEmpty()) {
-                    System.out.println("No hay clientes guardados. Debe crear uno nuevo.");
-                    customer = askForCustomerData();
-                } else {
-                    System.out.println("Lista de clientes disponibles:");
-                    for (int i = 0; i < customers.size(); i++) {
-                        Customer c = customers.get(i);
-                        System.out.println((i + 1) + ". " + c.getName() + " (" + c.getRuc() + ")");
-                    }
-                    System.out.print("Seleccione el numero del cliente: ");
-                    int customerIndex = scanner.nextInt() - 1;
-                    scanner.nextLine();
+    String projectId = "Prj-" + String.format("%04d", projectCounter++);
 
-                    if (customerIndex >= 0 && customerIndex < customers.size()) {
-                        customer = customers.get(customerIndex);
-                    } else {
-                        System.out.println("Seleccion invalida. Creando un cliente nuevo.");
-                        customer = askForCustomerData();
-                    }
-                }
-            } else {
-                customer = askForCustomerData();
+    return new Project(title, projectId, description, customer, startDate, closingDate, quote, 
+        ProjectStatus.CREATED, quoteStatus, paid, isInvoiced, isPublic);
+}
+
+private String askForProjectTitle(Scanner scanner) {
+    System.out.print("Ingrese el titulo del proyecto: ");
+    return scanner.nextLine();
+}
+
+private String askForProjectDescription(Scanner scanner) {
+    System.out.print("Ingrese la descripcion: ");
+    return scanner.nextLine();
+}
+
+private Customer askForCustomer(Scanner scanner) {
+    System.out.println("Desea usar un cliente existente o crear uno nuevo?");
+    System.out.println("1. Usar cliente existente");
+    System.out.println("2. Crear cliente nuevo");
+    System.out.print("Seleccione una opcion: ");
+    int customerOption = scanner.nextInt();
+    scanner.nextLine();
+
+    if (customerOption == 1) {
+        List<Customer> customers = getCustomers();
+        if (customers.isEmpty()) {
+            System.out.println("No hay clientes guardados. Debe crear uno nuevo.");
+            return askForCustomerData();
+        } else {
+            return selectExistingCustomer(scanner, customers);
         }
-        
-        Date startDate = new Date();  
+    } else {
+        return askForCustomerData();
+    }
+}
 
-        
-        Date closingDate = null;
-        boolean validDate = false;
+private Customer selectExistingCustomer(Scanner scanner, List<Customer> customers) {
+    System.out.println("Lista de clientes disponibles:");
+    for (int i = 0; i < customers.size(); i++) {
+        Customer c = customers.get(i);
+        System.out.println((i + 1) + ". " + c.getName() + " (" + c.getRuc() + ")");
+    }
+    System.out.print("Seleccione el numero del cliente: ");
+    int customerIndex = scanner.nextInt() - 1;
+    scanner.nextLine();
 
-        
-        do {
+    if (customerIndex >= 0 && customerIndex < customers.size()) {
+        return customers.get(customerIndex);
+    } else {
+        System.out.println("Seleccion invalida. Creando un cliente nuevo.");
+        return askForCustomerData();
+    }
+}
+
+private Date askForClosingDate(Scanner scanner, SimpleDateFormat dateFormat, Date startDate) {
+    Date closingDate = null;
+    boolean validDate = false;
+    do {
         System.out.print("Fecha de cierre (yyyy-MM-dd): ");
         String inputDate = scanner.nextLine();
 
-        
         if (inputDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            closingDate = null;
             try {
                 closingDate = dateFormat.parse(inputDate);
-
-                
                 if (closingDate.before(startDate)) {
                     System.out.println("La fecha de cierre no puede ser anterior a la fecha de inicio. Intenta nuevamente.");
                 } else {
-                    validDate = true;  
+                    validDate = true;
                 }
             } catch (ParseException e) {
                 System.out.println("Formato de fecha incorrecto. Intenta nuevamente.");
@@ -312,70 +328,57 @@ public class DataManager {
             System.out.println("Por favor, ingresa la fecha en el formato correcto (yyyy-MM-dd).");
         }
     } while (!validDate);
-        
-        System.out.print("Presupuesto inicial: ");
-        double quote = scanner.nextDouble();
-        
-        ProjectStatus operationalStatus = ProjectStatus.CREATED;
+    return closingDate;
+}
 
-        
-        System.out.println("Estado de cotizacion: ");
-        System.out.println("1. Quote Sended");
-        System.out.println("2. Quote Rejected");
-        System.out.println("3. Quote Accepted");
-        System.out.print("Seleccione el numero: ");
-        int quoteStatusInput = scanner.nextInt();
-        ProjectStatus quoteStatus = switch (quoteStatusInput) {
-            case 1 -> ProjectStatus.QUOTE_SEND;
-            case 2 -> ProjectStatus.QUOTE_REJECTED;
-            case 3 -> ProjectStatus.QUOTE_ACCEPTED;
-            default -> ProjectStatus.QUOTE_SEND;
-        };
+private double askForProjectQuote(Scanner scanner) {
+    System.out.print("Presupuesto inicial: ");
+    return scanner.nextDouble();
+}
 
-        scanner.nextLine();  
-        String facturado;
-        boolean isInvoiced = false;
-        do {
-            System.out.print("Esta facturado? (Si/No): ");
-            facturado = scanner.nextLine().trim().toLowerCase();
-            if (facturado.equals("si")) {
-                isInvoiced = true;
-                break;
-            } else if (facturado.equals("no")) {
-                isInvoiced = false;
-                break;
-            } else {
-                System.out.println("Por favor ingrese 'Si' o 'No'.");
-            }
-        } while (true);
+private ProjectStatus askForQuoteStatus(Scanner scanner) {
+    System.out.println("Estado de cotizacion: ");
+    System.out.println("1. Quote Sended");
+    System.out.println("2. Quote Rejected");
+    System.out.println("3. Quote Accepted");
+    System.out.print("Seleccione el numero: ");
+    int quoteStatusInput = scanner.nextInt();
 
-        
-        boolean paid = false;
-        if (isInvoiced) {
-            System.out.print("Esta pagado? (Si/No): ");
-            String paidInput = scanner.nextLine().trim().toLowerCase();
-            if (paidInput.equals("si")) {
-                paid = true;
-            } else if (paidInput.equals("no")) {
-                paid = false;
-            } else {
-                System.out.println("Por favor ingrese 'Si' o 'No'. Se asumira 'No'.");
-                paid = false;  
-            }
+    return switch (quoteStatusInput) {
+        case 1 -> ProjectStatus.QUOTE_SEND;
+        case 2 -> ProjectStatus.QUOTE_REJECTED;
+        case 3 -> ProjectStatus.QUOTE_ACCEPTED;
+        default -> ProjectStatus.QUOTE_SEND;
+    };
+}
+
+private boolean askIfInvoiced(Scanner scanner) {
+    String facturado;
+    do {
+        System.out.print("Esta facturado? (Si/No): ");
+        facturado = scanner.nextLine().trim().toLowerCase();
+        if (facturado.equals("si")) {
+            return true;
+        } else if (facturado.equals("no")) {
+            return false;
+        } else {
+            System.out.println("Por favor ingrese 'Si' o 'No'.");
         }
+    } while (true);
+}
 
-        
-        System.out.print("Es proyecto publico? (Si/No): ");
-        String publicInput = scanner.nextLine().trim().toLowerCase();
-        boolean isPublic = publicInput.equals("si");
+private boolean askIfPaid(Scanner scanner) {
+    System.out.print("Esta pagado? (Si/No): ");
+    String paidInput = scanner.nextLine().trim().toLowerCase();
+    return paidInput.equals("si");
+}
 
-       
-        String projectId = "Prj-" + String.format("%04d", projectCounter++);
-        
-        
-        return new Project(title, projectId, description, customer, startDate, closingDate, quote, operationalStatus, quoteStatus, paid, isInvoiced, isPublic);
-    }
-    
+private boolean askIfPublic(Scanner scanner) {
+    System.out.print("Es proyecto publico? (Si/No): ");
+    String publicInput = scanner.nextLine().trim().toLowerCase();
+    return publicInput.equals("si");
+}
+
     public void modifyCustomerByCode(String customerId) {
         Scanner scanner = new Scanner(System.in);
         Customer customer = null;
@@ -613,148 +616,186 @@ public class DataManager {
         }
         System.out.println("Proyecto no encontrado con el ID: " + projectId);
 }
-   
+    
+    public Date calculateEndDateOfSupport(Scanner scanner, Date startDate, int durationYears) {
+        int monthsOfSupport = 0;
+        while (monthsOfSupport <= 0) {
+            try {
+                System.out.println("Meses de contrato de soporte: ");
+                monthsOfSupport = scanner.nextInt();
+                scanner.nextLine();
+                if (monthsOfSupport <= 0) {
+                    System.out.println("Ingrese un valor válido para los meses de contrato.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                scanner.nextLine();
+            }
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.MONTH, monthsOfSupport);
+        return calendar.getTime();
+    }
 
     public void generateSupport() {
-        Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Scanner scanner = new Scanner(System.in);
 
-       
-        for (Project project : projects) {
-            System.out.println("Proyecto ID: " + project.getProjectId() + " Estado: " + project.getOperationalStatus());
-        }
-
-        
-        System.out.print("Ingrese el ID del proyecto para generar soporte: ");
-        String projectId = scanner.nextLine();
-
-        Project selectedProject = null;
-        for (Project project : projects) {
-            if (project.getProjectId().equals(projectId)) {
-                selectedProject = project;
-                break;
-            }
-        }
-
-        if (selectedProject == null) {
-            System.out.println("Proyecto no encontrado con el ID: " + projectId);
-            return;
-        }
-
-        if (!selectedProject.getOperationalStatus().getStatus().equals("Closed")) {
-            System.out.println("El proyecto no esta cerrado. Solo los proyectos cerrados pueden generar soporte.");
-            System.out.println("Estado del proyecto: " + selectedProject.getOperationalStatus());
-            return;
-        }
-
-        
-        System.out.println("Estado del pago del proyecto: " + (selectedProject.isPaid() ? "Si" : "No") + " esta pagado");
-
-      
-        Random random = new Random();
-        int supportCounter = random.nextInt(10000);  
-        String supportId = String.format("SVR_%04d", supportCounter);  
-
-        System.out.print("Ingrese los detalles del soporte: ");
-        String supportDetails = scanner.nextLine();
-
-        Date startDate = new Date();
-
- 
-        Date endDate = null;
-        boolean validDate = false;
-
-        
-        int durationYears = 0;
-        boolean validDuration = false;
-
-        do {
-            System.out.print("Ingrese la duracion del soporte en anios (1, 2 o 5): ");
-            if (scanner.hasNextInt()) {
-                durationYears = scanner.nextInt();
-                if (durationYears == 1 || durationYears == 2 || durationYears == 5) {
-                    validDuration = true;
-                } else {
-                    System.out.println("Duracion invalida. Solo se permite 1, 2 o 5 anios.");
-                }
-            } else {
-                System.out.println("Entrada no valida. Debe ser un numero.");
-                scanner.next(); 
-            }
-        } while (!validDuration);
-        
-        do {
-            System.out.print("Fecha de finalizacion (yyyy-MM-dd): ");
-            String inputDate = scanner.nextLine();
-
-            if (inputDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                try {
-                    endDate = dateFormat.parse(inputDate);
-
-                    if (endDate.before(startDate)) {
-                        System.out.println("La fecha de finalizacion no puede ser anterior a la fecha de inicio. Intenta nuevamente.");
-                    } else {
-                        validDate = true;
-                    }
-                } catch (ParseException e) {
-                    System.out.println("Formato de fecha incorrecto. Intenta nuevamente.");
-                }
-            } else {
-                System.out.println("Por favor, ingresa la fecha en el formato correcto (yyyy-MM-dd).");
-            }
-        } while (!validDate);
-
-       
-        String scheduleType = "";
-        boolean validSchedule = false;
-
-        scanner.nextLine(); 
-
-        System.out.println("Seleccione el tipo de horario:");
-        System.out.println("1. 8x5 (8 horas al dia por 5 dias a la semana)");
-        System.out.println("2. 24x7 (24 horas al dia por 7 dias a la semana)");
-
-        do {
-            System.out.print("Ingrese el numero de la opcion: ");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    scheduleType = "8x5";
-                    validSchedule = true;
-                    break;
-                case 2:
-                    scheduleType = "24x7";
-                    validSchedule = true;
-                    break;
-                default:
-                    System.out.println("Opcion no valida. Elija 1 para 8x5 o 2 para 24x7.");
-                    break;
-            }
-        } while (!validSchedule);
-
-        Support support = new Support(
-            supportId,
-            selectedProject.getProjectId(),
-            selectedProject.getProjectTitle(),
-            supportDetails,
-            startDate,
-            endDate,
-            "Created",       
-            durationYears,   
-            scheduleType     
-        );
-
-       
-        supports.add(support);
-
-
-        saveSupportsToFile();
-
-
-        System.out.println("Soporte generado con exito:");
-        support.displaySupportData();
+    Project selectedProject = selectProject(scanner);
+    if (selectedProject == null) {
+        System.out.println("Proyecto no encontrado o inválido.");
+        return;
     }
+
+    if (!validateProjectStatus(selectedProject)) {
+        return;
+    }
+
+    String supportDetails = getSupportDetails(scanner);
+
+    Date startDate = new Date();
+
+    int durationYears = getDurationYears(scanner);
+
+    
+    Date endDate = calculateEndDateOfSupport(scanner, startDate, durationYears);
+    
+    String scheduleType = getScheduleType(scanner);
+
+    String supportId=generateSupportId(durationYears, scheduleType);
+    
+    Support support = new Support(
+        supportId,
+        selectedProject.getProjectId(),
+        selectedProject.getProjectTitle(),
+        supportDetails,
+        startDate,
+        endDate,
+        "Created",       
+        durationYears,   
+        scheduleType     
+    );
+
+    supports.add(support);
+    saveSupportsToFile();
+
+    System.out.println("Soporte generado con éxito:");
+    support.displaySupportData();
+}
+
+private Project selectProject(Scanner scanner) {
+    System.out.println("Proyectos disponibles:");
+    for (Project project : projects) {
+        System.out.println("Proyecto ID: " + project.getProjectId() + " Estado: " + project.getOperationalStatus());
+    }
+
+    System.out.print("Ingrese el ID del proyecto para generar soporte: ");
+    String projectId = scanner.nextLine();
+
+    for (Project project : projects) {
+        if (project.getProjectId().equals(projectId)) {
+            return project;
+        }
+    }
+
+    return null;
+}
+
+private boolean validateProjectStatus(Project project) {
+    if (!project.getOperationalStatus().getStatus().equals("Closed")) {
+        System.out.println("El proyecto no está cerrado. Solo los proyectos cerrados pueden generar soporte.");
+        System.out.println("Estado del proyecto: " + project.getOperationalStatus());
+        return false;
+    }
+
+    if (!project.isPaid()) {
+        System.out.println("El proyecto no está pagado. Solo los proyectos pagados pueden generar soporte.");
+        return false;
+    }
+
+    return true;
+}
+
+private String generateSupportId(int durationYears, String scheduleType) {
+    String durationLabel = durationYears + "A";
+    String scheduleLabel = scheduleType.equals("8x5") ? "8*5" : "24*7"; 
+
+    if (durationYears == 1 && scheduleType.equals("8x5")) {
+        return "SRV_01 (" + durationLabel + " " + scheduleLabel + ")";
+    } else if (durationYears == 1 && scheduleType.equals("24x7")) {
+        return "SRV_02 (" + durationLabel + " " + scheduleLabel + ")";
+    } else if (durationYears == 3 && scheduleType.equals("8x5")) {
+        return "SRV_03 (" + durationLabel + " " + scheduleLabel + ")";
+    } else if (durationYears == 3 && scheduleType.equals("24x7")) {
+        return "SRV_04 (" + durationLabel + " " + scheduleLabel + ")";
+    } else if (durationYears == 5 && scheduleType.equals("8x5")) {
+        return "SRV_05 (" + durationLabel + " " + scheduleLabel + ")";
+    } else if (durationYears == 5 && scheduleType.equals("24x7")) {
+        return "SRV_06 (" + durationLabel + " " + scheduleLabel + ")";
+    } else {
+        return "SRV_UNKNOWN (" + durationLabel + " " + scheduleLabel + ")";
+    }
+}
+
+
+private String getSupportDetails(Scanner scanner) {
+    System.out.print("Ingrese los detalles del soporte: ");
+    return scanner.nextLine();
+}
+
+private int getDurationYears(Scanner scanner) {
+    int durationYears = 0;
+    boolean validDuration = false;
+
+    do {
+        System.out.print("Ingrese la duración del soporte en años (1, 2 o 5): ");
+        if (scanner.hasNextInt()) {
+            durationYears = scanner.nextInt();
+            if (durationYears == 1 || durationYears == 2 || durationYears == 5) {
+                validDuration = true;
+            } else {
+                System.out.println("Duración inválida. Solo se permite 1, 2 o 5 años.");
+            }
+        } else {
+            System.out.println("Entrada no válida. Debe ser un número.");
+            scanner.next(); 
+        }
+    } while (!validDuration);
+
+    return durationYears;
+}
+
+private String getScheduleType(Scanner scanner) {
+    String scheduleType = "";
+    boolean validSchedule = false;
+
+    System.out.println("Seleccione el tipo de horario:");
+    System.out.println("1. 8x5 (8 horas al día por 5 días a la semana)");
+    System.out.println("2. 24x7 (24 horas al día por 7 días a la semana)");
+
+    do {
+        System.out.print("Ingrese el número de la opción: ");
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                scheduleType = "8x5";
+                validSchedule = true;
+                break;
+            case 2:
+                scheduleType = "24x7";
+                validSchedule = true;
+                break;
+            default:
+                System.out.println("Opción no válida. Elija 1 para 8x5 o 2 para 24x7.");
+                break;
+        }
+    } while (!validSchedule);
+
+    return scheduleType;
+}
+
     
     public void closeSupport() {
         Scanner scanner = new Scanner(System.in);
@@ -799,10 +840,6 @@ public class DataManager {
        
         System.out.println("El soporte con ID: " + supportId + " ha sido cerrado correctamente.");
     }
- 
-    
-
-
 }
 
 

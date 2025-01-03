@@ -15,7 +15,7 @@
     "closingDate": "Dec 30, 2024, 12:00:00 AM",
     "startquote": 50000.0,
     "operationalStatus": {
-      "status": "In Progress"
+      "status": "Closed"
     },
     "quoteStatus": {
       "status": "Quote Sended"

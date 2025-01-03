@@ -5,6 +5,7 @@ import ec.edu.espe.model.DataManager;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
 import ec.edu.espe.model.Report;
+import ec.edu.espe.model.Support;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Scanner;
 
@@ -35,14 +36,14 @@ public class Main {
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Administrar Presupuestos");
         System.out.println("3. Administrar Estatus de Proyectos");
-        System.out.println("4. Generar Reporte Individual de Proyecto");
-        System.out.println("5. Busqueda de Proyectos");
-        System.out.println("6. Generar Reporte Mensual de Proyectos");
-        System.out.println("7. Gestion de clientes");
-        System.out.println("8. Ver Fechas Restantes de Soporte de los Proyectos");
-        System.out.println("9. Registrar Actividades del Proyecto(historial)");
-        System.out.println("10. Generar Recordatorio de Fechas Importantes");
-        System.out.println("11. Generacion de Soporte Posventa");
+        System.out.println("4. Generacion de Soporte Posventa");
+        System.out.println("5. Generar Reporte Individual de Proyecto");
+        System.out.println("6. Busqueda de Proyectos1");
+        System.out.println("7. Generar Reporte Mensual de Proyectos");
+        System.out.println("8. Gestion de clientes");
+        System.out.println("9. Ver Fechas Restantes de Soporte de los Proyectos");
+        System.out.println("10. Registrar Actividades del Proyecto(historial)");
+        System.out.println("11. Generar Recordatorio de Fechas Importantes");
         System.out.println("12. Salir");
         System.out.print("Seleccione una opcion: ");
     }
@@ -90,7 +91,16 @@ public class Main {
         System.out.println("2. Visualizar lista de cambios");
         System.out.println("3. Cambiar status de presupuesto");
         System.out.println("4. Volver al Menu Principal");
-        System.out.println("Selecione una opcion: ");
+        System.out.print("Selecione una opcion: ");
+    }
+    
+     public static void showSupportSubmenu() {
+        System.out.println("\nSubmenu: Funciones de soporte");
+        System.out.println("1. Generar Soporte");
+        System.out.println("2. Visualizar lista de Soporte");
+        System.out.println("3. Cambiar estado de Soporte");
+        System.out.println("4. Volver al Menu Principal");
+        System.out.print("Selecione una opcion: ");
     }
 
    
@@ -100,48 +110,59 @@ public class Main {
         DataManager dataManager = new DataManager();
         dataManager.loadProjectsFromFile();
         dataManager.loadCustomersFromFile();
-        
+        dataManager.loadChangeLogsFromFile();
+        dataManager.loadCustomersFromFile();
+        dataManager.loadQuoteStatusChangeLogsFromFile();
+        dataManager.loadSupportsFromFile();
+       
         int opcion;
         boolean salir = false;
-
+        
+        
         while (!salir) {
             mostrarMenu();
             opcion = scanner.nextInt();
-
+            
             switch (opcion) {
                 case 1:
-                    showProjectSubmenu();
-                    int projectOptions = scanner.nextInt();
-                    switch(projectOptions){
-                        case 1:
-                            System.out.println("Opcion 1: Crear Proyecto");
-                            Project newProject = dataManager.askForProjectData();
-                            dataManager.addProject(newProject);
-                            dataManager.saveProjectsToFile();
-                            System.out.println("Proyectos guardados.");
-                            break;
-                        case 2:
-                            System.out.println("Opcion 2: Visualizar Proyectos");
-                              
-                            System.out.println("\n--- Detalles de los Proyectos ---");
-                            
-                            for (Project project : dataManager.getProjects()) {
-                                project.displayProjectData();  
-                            }
-                            break;
-                        case 3: 
-                            System.out.println("Volviendo al Menu Principal...");
-                            break;
-                        default:
-                            System.out.println("Opcion invalida. Volviendo al Menu Principal...");
-                            break;
-                    }
+                    boolean backToMenu = false;
+                    while (!backToMenu){
+                        showProjectSubmenu();
+                        int projectOptions = scanner.nextInt();
+                        switch(projectOptions){
+                            case 1:
+                                System.out.println("Opcion 1: Crear Proyecto");
+                                Project newProject = dataManager.askForProjectData();
+                                dataManager.addProject(newProject);
+                                dataManager.saveProjectsToFile();
+                                System.out.println("Proyectos guardados.");
+                                break;
+                            case 2:
+                                System.out.println("Opcion 2: Visualizar Proyectos");
+
+                                System.out.println("\n--- Detalles de los Proyectos ---");
+
+                                for (Project project : dataManager.getProjects()) {
+                                    project.displayProjectData();  
+                                }
+                                break;
+                            case 3: 
+                                System.out.println("Volviendo al Menu Principal...");
+                                backToMenu = true;
+                                break;
+                            default:
+                                System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                                backToMenu = true;
+                                break;
+                        }
                     
+                    }
                     
                     break;
                 case 2:
                     showQuoteSubmenu();
                     int quoteoption = scanner.nextInt();
+                    
                     switch (quoteoption) {
                         case 1:
                             System.out.println("Registrar Cambio de Presupuesto");
@@ -205,8 +226,40 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.println("Opcion 4: Generación de Reportes Individuales");
                     
+                    boolean backToMenu2 = false;
+                    while(!backToMenu2){
+                        showSupportSubmenu();
+                        int supportOption = scanner.nextInt();
+                        switch (supportOption) {
+                            case 1:
+                                dataManager.loadProjectsFromFile();
+                                System.out.println("Generar un soporte");
+                                dataManager.generateSupport();
+                                break;
+                            case 2:
+                                System.out.println("Visualizar Soportes");
+                                System.out.println("\n--- Detalles de los Soportes ---");
+
+                                for (Support support : dataManager.getSupports()) {
+                                    support.displaySupportData();  
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Cambiar estado de soporte");
+                                dataManager.closeSupport();
+                                break;
+
+                            case 4:
+                                System.out.println("Volviendo al Menu Principal...");
+                                backToMenu2 = true;
+                                break;
+                            default:
+                                System.out.println("Opcion invalida. Volviendo al Menu Principal...");
+                                backToMenu2 = true;
+                                break;
+                        }
+                    }
                     break;
                 case 5:
                     mostrarSubmenuBusqueda();
@@ -233,8 +286,7 @@ public class Main {
                     }
                     break;
                 case 6:
-//                    Report report= new Report("json/projects.json");
-//                    report.createIndividualReport(scanner);
+
                     break;
                 case 7:
                     showClientSubmenu();

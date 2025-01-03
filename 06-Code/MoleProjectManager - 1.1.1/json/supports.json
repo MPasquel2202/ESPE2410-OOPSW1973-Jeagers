@@ -1,0 +1,13 @@
+[
+  {
+    "supportId": "SVR_3727",
+    "projectId": "Prj-0001",
+    "projectDescription": "Netlife",
+    "supportDetails": "Mantenimiento 1",
+    "startDate": "Jan 2, 2025, 5:51:58 PM",
+    "endDate": "Feb 23, 2025, 12:00:00 AM",
+    "supportStatus": "Created",
+    "durationYears": 2,
+    "scheduleType": "24x7"
+  }
+]

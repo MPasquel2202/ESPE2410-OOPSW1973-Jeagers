@@ -59,12 +59,12 @@ public class DataManager {
             long remainingDays = (support.getEndDate().getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
 
             if (remainingDays > 0) {
-                System.out.println("Soporte ID: " + support.getIdSupport());
+                System.out.println("Soporte ID: " + support.getSupportId());
                 System.out.println("Proyecto Asociado: " + support.getAsociatedProjectId());
                 System.out.println("Días restantes: " + remainingDays + " días");
                 System.out.println("----------------------------------");
             } else {
-                System.out.println("Soporte ID: " + support.getIdSupport() + " ha expirado.");
+                System.out.println("Soporte ID: " + support.getSupportId() + " ha expirado.");
                 System.out.println("----------------------------------");
             }
         }
@@ -497,7 +497,7 @@ public class DataManager {
         String idSupport = scanner.nextLine();
 
         for (Support existingSupport : supports) {
-            if (existingSupport.getIdSupport().equalsIgnoreCase(idSupport)) {
+            if (existingSupport.getSupportId().equalsIgnoreCase(idSupport)) {
                 System.out.println("El ID del soporte ya existe. Por favor, ingrese uno diferente.");
                 return askForSupportData(scanner, projectId);
             }

@@ -1,9 +1,12 @@
 package ec.edu.espe.view;
 
+import ec.edu.espe.model.ChangeLogManager;
 import ec.edu.espe.model.Customer;
 import ec.edu.espe.model.DataManager;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
+import ec.edu.espe.model.QuoteChangeLog;
+import ec.edu.espe.model.QuoteStatusChangeLog;
 import ec.edu.espe.model.Report;
 import ec.edu.espe.model.Support;
 import java.time.temporal.TemporalAdjusters;
@@ -19,30 +22,17 @@ import java.util.Scanner;
 public class Main {
     public String fileName = "json/projects.json";
     public static void mostrarMenu() {
-        System.out.println("\n  __  __  ____  _      ______                                                                \n"
-                + " |  \\/  |/ __ \\| |    |  ____|                                                               \n"
-                + " | \\  / | |  | | |    | |__                                                                  \n"
-                + " | |\\/| | |  | | |    |  __|                                                                 \n"
-                + " | |  | | |__| | |____| |____                                                                \n"
-                + " |_|__|_|\\____/|______|______|_            _                        _           _            \n"
-                + "  / ____|         | | (_)    /_/          | |                      (_)         | |           \n"
-                + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n"
-                + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n"
-                + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n"
-                + "  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n"
-                + "                                                   | |            _/ |                       \n"
-                + "                                                   |_|           |__/                        ");
-        
+        System.out.println("\nGestor de Proyectos");
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Administrar Presupuestos");
         System.out.println("3. Administrar Estatus de Proyectos");
         System.out.println("4. Generacion de Soporte Posventa");
-        System.out.println("5. Generar Reporte Individual de Proyecto");
-        System.out.println("6. Busqueda de Proyectos1");
-        System.out.println("7. Generar Reporte Mensual de Proyectos");
-        System.out.println("8. Gestion de clientes");
-        System.out.println("9. Ver Fechas Restantes de Soporte de los Proyectos");
-        System.out.println("10. Registrar Actividades del Proyecto(historial)");
+        System.out.println("5. Busqueda de Proyectos");
+        System.out.println("6. Vista de historial de cambios");
+        System.out.println("7. Generar Reporte Individual de Proyecto");
+        System.out.println("8. Generar Reporte Mensual de Proyectos");
+        System.out.println("9. Gestion de clientes");
+        System.out.println("10. Ver Fechas Restantes de Soporte de los Proyectos");
         System.out.println("11. Generar Recordatorio de Fechas Importantes");
         System.out.println("12. Salir");
         System.out.print("Seleccione una opcion: ");
@@ -108,6 +98,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         
         DataManager dataManager = new DataManager();
+        ChangeLogManager logManager = new ChangeLogManager(dataManager);
+
+        
         dataManager.loadProjectsFromFile();
         dataManager.loadCustomersFromFile();
         dataManager.loadChangeLogsFromFile();
@@ -177,7 +170,9 @@ public class Main {
                             break;
                         case 2:
                             System.out.println("Visualizar Lista de cambios");
-                            dataManager.displayChangeLogs();
+                             for (QuoteChangeLog quoteChangeLog : dataManager.getQuoteChangeLogs()) {
+                                    quoteChangeLog.displayChangeLog();  
+                                }
                             break;
                         case 3:
                             System.out.println("Cambiar Status de Presupuesto");
@@ -214,7 +209,9 @@ public class Main {
                             break;
                         case 3:
                             System.out.println("Ver Historial de Cambios de Estatus");
-                            dataManager.displayStatusChangeLogs();
+                            for (QuoteStatusChangeLog quoteStatusChangeLog : dataManager.getQuoteStatusChangeLogs()) {
+                                    quoteStatusChangeLog.displayStatusChangeLog();  
+                                }
                             break;
     
                         case 4:
@@ -286,7 +283,9 @@ public class Main {
                     }
                     break;
                 case 6:
-
+                    System.out.println("Opcion 6: Historial de cambios");
+                    logManager.displayGroupedLogs();
+                   
                     break;
                 case 7:
                     showClientSubmenu();

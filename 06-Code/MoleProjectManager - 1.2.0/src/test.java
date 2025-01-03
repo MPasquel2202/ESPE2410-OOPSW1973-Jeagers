@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,12 +28,14 @@ public class DataManager {
     private ArrayList<QuoteChangeLog> quoteChangeLogs = new ArrayList<>();
     private ArrayList<StatusChangeLog> statusChangeLogs = new ArrayList<>();
     private ArrayList<QuoteStatusChangeLog> quoteStatusChangeLogs = new ArrayList<>();
+    private ArrayList<Support> supports = new ArrayList<>();
+    
     private static final String PROJECTS_FILE_NAME = "json/projects.json";
     private static final String CUSTOMERS_FILE_NAME = "json/customers.json";
     private static final String CHANGE_LOGS_FILE_NAME = "json/quote_changeLogs.json";
     private static final String STATUS_CHANGE_LOGS_FILE_NAME = "json/status_changeLogs.json";   
     private static final String QUOTE_STATUS_CHANGE_LOGS_FILE_NAME = "json/quote_status_changeLogs.json";
-
+    private static final String SUPPORTS_FILE_NAME = "json/supports.json";
 
     
     private void initializeProjectCounter() {
@@ -84,6 +87,18 @@ public class DataManager {
         return customers;
     }
     
+    public List<Support> getSupports(){
+        return supports;
+    }
+    
+    public List<QuoteChangeLog> getQuoteChangeLogs(){
+        return quoteChangeLogs;
+    }
+    
+    public List<QuoteStatusChangeLog> getQuoteStatusChangeLogs(){
+        return quoteStatusChangeLogs;
+    }
+    
     public void saveProjectsToFile() {
         saveToFile(PROJECTS_FILE_NAME, projects);
         System.out.println("Proyectos guardados exitosamente en " + PROJECTS_FILE_NAME);
@@ -133,8 +148,8 @@ public class DataManager {
         quoteStatusChangeLogs = loadFromFile(QUOTE_STATUS_CHANGE_LOGS_FILE_NAME, new TypeToken<List<QuoteStatusChangeLog>>(){}.getType());
         System.out.println("Historial de cambios de estado de cotizacion cargado exitosamente desde " + QUOTE_STATUS_CHANGE_LOGS_FILE_NAME);
     }
-
-
+    
+ 
 
     public <T> void saveToFile(String fileName, List<T> data) {
         File directory = new File("json");
@@ -343,118 +358,208 @@ public class DataManager {
         return new Project(title, projectId, description, customer, startDate, closingDate, quote, operationalStatus, quoteStatus, paid, isInvoiced, isPublic);
     }
     
-    public void modifyCustomerByCode(String customerId) {
-        Scanner scanner = new Scanner(System.in);
-        Customer customer = null;
-
-        for (Customer c : customers) {
-            if (c.getCustomerId().equals(customerId)) {
-                customer = c;
-                break;
+    
+    public void updateProjectQuote(String projectId, double newQuote) {
+        for (Project project : projects) {
+            if (project.getProjectId().equals(projectId)) {
+                double oldQuote = project.getStartquote();
+                if (oldQuote != newQuote) { 
+                    project.setStartquote(newQuote); 
+                    logProjectQuoteChange(project, oldQuote, newQuote); 
+                    saveProjectsToFile(); 
+                    System.out.println("Presupuesto actualizado exitosamente.");
+                } else {
+                    System.out.println("El presupuesto no ha cambiado.");
+                }
+                return;
             }
         }
-
-        if (customer != null) {
-            System.out.println("Modificando datos del cliente: " + customer.getName());
-            System.out.print("Nuevo nombre/empresa: ");
-            customer.setName(scanner.nextLine());
-            
-            System.out.print("Nuevo RUC: ");
-            customer.setRuc(scanner.nextLine());
-            
-            System.out.print("Nuevo numero de contacto: ");
-            customer.setPhoneNumber(scanner.nextLine());
-
-            System.out.print("Nuevo e-mail: ");
-            customer.setEmail(scanner.nextLine());
-
-            System.out.print("Nueva direccion: ");
-            customer.setAddress(scanner.nextLine());
-
-            saveCustomersToFile();
-            System.out.println("Datos del cliente modificados exitosamente.");
-        } else {
-            System.out.println("Cliente no encontrado con el ID: " + customerId);
-        }
+        System.out.println("Proyecto no encontrado con el ID: " + projectId);
     }
     
-    public void generateSupport() {
+    
+    public void logProjectStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
+        
+        StatusChangeLog log = new StatusChangeLog(
+            project.getProjectId(),               
+            project.getProjectTitle(),            
+            oldStatus.toString(),                 
+            newStatus.toString(),                 
+            new Date()                           
+        );
+
+       
+        statusChangeLogs.add(log);
+
+       
+        saveStatusChangeLogsToFile();
+
+        System.out.println("Cambio de estado registrado: " + log);
+    }
+
+    
+    public void updateProjectStatus(String projectId) {
         Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.print("Ingrese el ID del proyecto para generar soporte: ");
-        String projectId = scanner.nextLine();
-
-        Project selectedProject = null;
 
         for (Project project : projects) {
             if (project.getProjectId().equals(projectId)) {
-                selectedProject = project;
-                break;
-            }
-        }
+               
+                System.out.println("Estado actual: " + project.getOperationalStatus());
 
-        if (selectedProject == null) {
-            System.out.println("Proyecto no encontrado con el ID: " + projectId);
-            return;
-        }
+                
+                System.out.println("Seleccione el nuevo estado:");
+                System.out.println("1. Created");
+                System.out.println("2. In Progress");
+                System.out.println("3. Paused");
+                System.out.println("4. Closed");
 
-        if (selectedProject.getOperationalStatus() != ProjectStatus.CLOSED) {
-            System.out.println("El proyecto no esta cerrado. Solo los proyectos cerrados pueden generar soporte.");
-            return;
-        }
+                int option;
+                ProjectStatus newStatus = null;
+                String description = ""; 
 
-        System.out.println("¿Está el proyecto pagado? " + (selectedProject.isPaid() ? "Sí" : "No"));
-
-        int supportCounter = 1; 
-        String supportId = String.format("SVR_%04d", supportCounter++);
-
-        System.out.print("Ingrese los detalles del soporte: ");
-        String supportDetails = scanner.nextLine();
-
-        Date startDate = new Date();
-
-        Date endDate = null;
-        boolean validDate = false;
-
-        do {
-            System.out.print("Fecha de finalizacion (yyyy-MM-dd): ");
-            String inputDate = scanner.nextLine();
-
-            if (inputDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                try {
-                    endDate = dateFormat.parse(inputDate);
-
-                    if (endDate.before(startDate)) {
-                        System.out.println("La fecha de finalizacion no puede ser anterior a la fecha de inicio. Intenta nuevamente.");
-                    } else {
-                        validDate = true;
+                
+                do {
+                    System.out.print("Opcion: ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Entrada invalida. Intente de nuevo.");
+                        scanner.next();
                     }
-                } catch (ParseException e) {
-                    System.out.println("Formato de fecha incorrecto. Intenta nuevamente.");
+                    option = scanner.nextInt();
+                    scanner.nextLine(); 
+
+                    
+                    switch (option) {
+                        case 1 -> newStatus = ProjectStatus.CREATED;
+                        case 2 -> newStatus = ProjectStatus.IN_PROGRESS;
+                        case 3 -> {
+                            newStatus = ProjectStatus.PAUSED;
+
+                            
+                            System.out.print("Ingrese una descripcion para el estado PAUSED: ");
+                            description = scanner.nextLine();
+                        }
+                        case 4 -> newStatus = ProjectStatus.CLOSED;
+                        default -> System.out.println("Opcion no valida. Intente de nuevo.");
+                    }
+                } while (newStatus == null);
+
+                
+                ProjectStatus oldStatus = project.getOperationalStatus();
+                if (!oldStatus.equals(newStatus)) {
+                    
+                    project.setOperationalStatus(newStatus);
+
+                    
+                    logProjectStatusChange(project, oldStatus, newStatus);
+
+                    
+                    saveProjectsToFile();
+
+                    System.out.println("Estado actualizado exitosamente.");
+                    if (newStatus == ProjectStatus.PAUSED) {
+                        System.out.println("Descripcion agregada: " + description);
+                    }
+                } else {
+                    System.out.println("El estado no ha cambiado.");
                 }
-            } else {
-                System.out.println("Por favor, ingresa la fecha en el formato correcto (yyyy-MM-dd).");
+                return;
             }
-        } while (!validDate);
-
-       
-        Support support = new Support(
-            supportId,
-            selectedProject.getProjectId(),
-            selectedProject.getProjectTitle(),
-            supportDetails,
-            startDate,
-            endDate
-        );
-
-        System.out.println("Soporte generado con exito:");
-        System.out.println(support);
+        }
+        System.out.println("Proyecto no encontrado con el ID: " + projectId);
     }
 
 
-    
+    public void displayProjectsWithStatus() {
+        System.out.println("Listado de Proyectos:");
+        System.out.printf("%-10s %-30s %-20s%n", "Codigo", "Titulo", "Estado");
+        System.out.println("-------------------------------------------------------------");
 
+        for (Project project : projects) {
+            System.out.printf("%-10s %-30s %-20s%n",
+                project.getProjectId(),
+                project.getProjectTitle(),
+                project.getOperationalStatus().toString());
+        }
+
+        System.out.println("-------------------------------------------------------------");
+    }
+    
+   
+    public void logQuoteStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
+        QuoteStatusChangeLog log = new QuoteStatusChangeLog(
+            project.getProjectId(),
+            project.getProjectTitle(),
+            oldStatus.toString(),
+            newStatus.toString(),
+            new Date()
+        );
+
+        quoteStatusChangeLogs.add(log);
+        saveQuoteStatusChangeLogsToFile();
+        System.out.println("Cambio de estado de cotizacion registrado: " + log);
+    }
+
+
+    public void updateProjectQuoteStatus(String projectId) {
+        Scanner scanner = new Scanner(System.in);
+
+        for (Project project : projects) {
+            if (project.getProjectId().equals(projectId)) {
+
+                System.out.println("Estado actual de cotizacion: " + project.getQuoteStatus());
+
+                System.out.println("Seleccione el nuevo estado de cotizacion:");
+                System.out.println("1. Quote Sended");
+                System.out.println("2. Quote Rejected");
+                System.out.println("3. Quote Accepted");
+
+                int option;
+                ProjectStatus newQuoteStatus = null;
+
+                do {
+                    System.out.print("Opcion: ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("Entrada invalida. Intente de nuevo.");
+                        scanner.next();
+                    }
+                    option = scanner.nextInt();
+                    scanner.nextLine(); 
+                    
+                    switch (option) {
+                        case 1 -> newQuoteStatus = ProjectStatus.QUOTE_SEND;
+                        case 2 -> newQuoteStatus = ProjectStatus.QUOTE_REJECTED;
+                        case 3 -> newQuoteStatus = ProjectStatus.QUOTE_ACCEPTED;
+                        default -> System.out.println("Opcion no valida. Intente de nuevo.");
+                    }
+                } while (newQuoteStatus == null);
+
+                
+                ProjectStatus oldQuoteStatus = project.getQuoteStatus();
+
+                
+                if (!oldQuoteStatus.equals(newQuoteStatus)) {
+
+                    
+                    project.setQuoteStatus(newQuoteStatus);
+
+                    
+                    logQuoteStatusChange(project, oldQuoteStatus, newQuoteStatus);
+
+
+                    saveProjectsToFile();
+
+                   
+                    System.out.println("Estado de cotizacion actualizado exitosamente.");
+                } else {
+                    System.out.println("El estado de cotizacion no ha cambiado.");
+                }
+                return; 
+            }
+        }
+        System.out.println("Proyecto no encontrado con el ID: " + projectId);
+}
+   
 }
 
 

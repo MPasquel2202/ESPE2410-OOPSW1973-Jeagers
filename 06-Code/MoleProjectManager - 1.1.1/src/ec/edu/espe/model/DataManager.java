@@ -13,7 +13,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -60,8 +62,9 @@ public class DataManager {
         projects = new ArrayList<>();
         customers = new ArrayList<>();
         quoteChangeLogs = new ArrayList<>();
-        statusChangeLogs = new ArrayList<>();
+        quoteChangeLogs = new ArrayList<>();
         quoteStatusChangeLogs = new ArrayList<>();
+        statusChangeLogs = new ArrayList<>();
         
         loadProjectsFromFile();
         loadCustomersFromFile();
@@ -90,6 +93,19 @@ public class DataManager {
     public List<Support> getSupports(){
         return supports;
     }
+    
+    public List<QuoteChangeLog> getQuoteChangeLogs(){
+        return quoteChangeLogs;
+    }
+    
+    public List<QuoteStatusChangeLog> getQuoteStatusChangeLogs(){
+        return quoteStatusChangeLogs;
+    }
+    
+    public List<StatusChangeLog> getStatusChangeLogs(){
+        return statusChangeLogs;
+    }
+    
     
     public void saveProjectsToFile() {
         saveToFile(PROJECTS_FILE_NAME, projects);
@@ -415,12 +431,6 @@ public class DataManager {
         System.out.println("Proyecto no encontrado con el ID: " + projectId);
     }
     
-    public void displayChangeLogs() {
-        System.out.println("Historial de Cambios:");
-        for (QuoteChangeLog log : quoteChangeLogs) {
-            System.out.println(log);
-        }
-    }
     
     public void logProjectStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
         
@@ -514,14 +524,6 @@ public class DataManager {
     }
 
 
-    
-    public void displayStatusChangeLogs() {
-        System.out.println("Historial de Cambios de Estado:");
-        for (StatusChangeLog log : statusChangeLogs) {
-            System.out.println(log);
-        }
-    }
-    
     public void displayProjectsWithStatus() {
         System.out.println("Listado de Proyectos:");
         System.out.printf("%-10s %-30s %-20s%n", "Codigo", "Titulo", "Estado");
@@ -753,8 +755,6 @@ public class DataManager {
         System.out.println("Soporte generado con exito:");
         support.displaySupportData();
     }
-
-
     
     public void closeSupport() {
         Scanner scanner = new Scanner(System.in);
@@ -799,13 +799,9 @@ public class DataManager {
        
         System.out.println("El soporte con ID: " + supportId + " ha sido cerrado correctamente.");
     }
-
-
-
+ 
     
 
-
-    
 
 }
 

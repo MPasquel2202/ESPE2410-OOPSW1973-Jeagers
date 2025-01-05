@@ -15,8 +15,13 @@ import java.util.Scanner;
 
 /**
  *
+<<<<<<< HEAD
  * @author Dennis Paucar }
  *
+=======
+ * @author Dennis Paucar
+ * 
+>>>>>>> cdfdcd3ed58830eaa2fb6a337f93f3c6888721da
  */
 public class Main {
 

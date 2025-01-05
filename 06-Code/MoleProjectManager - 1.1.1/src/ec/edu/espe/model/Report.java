@@ -8,9 +8,17 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
+=======
+>>>>>>> cdfdcd3ed58830eaa2fb6a337f93f3c6888721da
 import java.util.List;
+
+/**
+ * 
+ * @author David Pilatasig
+ */
 
 public class Report {
 
@@ -19,14 +27,24 @@ public class Report {
     private List<QuoteChangeLog> quoteChangeLogs;
     private List<StatusChangeLog> statusChangeLogs;
     private List<QuoteStatusChangeLog> quoteStatusChangeLogs;
+<<<<<<< HEAD
     private static final String fileName = "json/projects.json";
 
     public Report(String reportId, Project project, List<QuoteChangeLog> quoteChangeLogs, List<StatusChangeLog> statusChangeLogs, List<QuoteStatusChangeLog> quoteStatusChangeLogs) {
+=======
+    private List<Support> supports;
+
+   
+    public Report(String reportId, Project project, List<QuoteChangeLog> quoteChangeLogs,
+                  List<StatusChangeLog> statusChangeLogs, List<QuoteStatusChangeLog> quoteStatusChangeLogs,
+                  List<Support> supports) {
+>>>>>>> cdfdcd3ed58830eaa2fb6a337f93f3c6888721da
         this.reportId = reportId;
         this.project = project;
         this.quoteChangeLogs = quoteChangeLogs;
         this.statusChangeLogs = statusChangeLogs;
         this.quoteStatusChangeLogs = quoteStatusChangeLogs;
+        this.supports= supports;
     }
 
     public Report() {
@@ -38,8 +56,9 @@ public class Report {
     }
 
     public void displayReport() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+<<<<<<< HEAD
         System.out.println("+--------------------------------------------------------------+");
         System.out.printf("| %-60s |\n", "Reporte ID: " + reportId);
         System.out.printf("| %-60s |\n", "Proyecto ID: " + project.getProjectId());
@@ -134,6 +153,80 @@ public class Report {
         }
     }
 
+=======
+    System.out.println("+--------------------------------------------------------------+");
+    System.out.printf("| %-60s |\n", "Reporte ID: " + reportId);
+    System.out.printf("| %-60s |\n", "Proyecto ID: " + project.getProjectId());
+    System.out.println("+--------------------------------------------------------------+");
+
+    System.out.printf("| %-18s | %-45s |\n", "Nombre del Proyecto:", project.getProjectTitle());
+    System.out.printf("| %-18s | %-45s |\n", "Descripcion:", project.getProjectDescription());
+    System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", dateFormat.format(project.getStartDate()));
+    System.out.printf("| %-18s | %-45s |\n", "Fecha de Cierre:", dateFormat.format(project.getClosingDate()));
+    System.out.printf("| %-18s | %-45s |\n", "Cliente:", project.getCustomer().getName());
+    System.out.printf("| %-18s | %-45.2f |\n", "Presupuesto:", project.getStartquote());
+    System.out.printf("| %-18s | %-45s |\n", "Estado del Proyecto:", project.getOperationalStatus().getStatus());
+    System.out.printf("| %-18s | %-45s |\n", "Estado Cotizacion:", project.getQuoteStatus().getStatus());
+    System.out.printf("| %-18s | %-45s |\n", "Facturado:", project.isInvoiced() ? "Si" : "No");
+    System.out.printf("| %-18s | %-45s |\n", "Pagado:", project.isPaid() ? "Si" : "No");
+    System.out.printf("| %-18s | %-45s |\n", "Es Publico:", project.isIsPublic() ? "Si" : "No");
+    System.out.println("+--------------------------------------------------------------+");
+    System.out.println("Soportes del proyecto:");
+    System.out.println("+--------------------------------------------------------------+");
+
+    System.out.println("Soportes Asociados:");
+    if (!supports.isEmpty()) {
+        for (Support support : supports) {
+            System.out.printf("\n - %s\n", support.getProjectDescription());
+            System.out.println("Identificador numerico del proyecto: " + support.getSupportId() );
+            System.out.println("Detalle del soporte: " + support.getSupportDetails());
+            System.out.println("Status del soporte: " + support.getSupportStatus());
+        }
+    } else {
+        System.out.println(" - No hay soportes asociados.");
+    }
+
+    System.out.println("+--------------------------------------------------------------+");
+    System.out.println("Historial de Cambios:");
+    System.out.println("+--------------------------------------------------------------+");
+
+    if (!quoteChangeLogs.isEmpty()) {
+        System.out.println("[Cambios de Presupuesto]");
+        for (QuoteChangeLog log : quoteChangeLogs) {
+            System.out.printf("[QuoteChange] Proyecto: %s - Viejo: %.2f, Nuevo: %.2f, Fecha: %s\n",
+                    log.getProjectTitle(),
+                    log.getOldQuote(),
+                    log.getNewQuote(),
+                    dateFormat.format(log.getChangeDate()));
+        }
+    }
+
+    if (!statusChangeLogs.isEmpty()) {
+        System.out.println("[Cambios de Estado]");
+        for (StatusChangeLog log : statusChangeLogs) {
+            System.out.printf("[StatusChange] Proyecto: %s - De: %s a %s, Fecha: %s\n",
+                    log.getProjectTitle(),
+                    log.getOldStatus(),
+                    log.getNewStatus(),
+                    dateFormat.format(log.getChangeDate()));
+        }
+    }
+
+    if (!quoteStatusChangeLogs.isEmpty()) {
+        System.out.println("[Cambios de Estado de Cotizacion]");
+        for (QuoteStatusChangeLog log : quoteStatusChangeLogs) {
+            System.out.printf("[QuoteStatusChange] Proyecto: %s - De: %s a %s, Fecha: %s\n",
+                    log.getProjectTitle(),
+                    log.getOldQuoteStatus(),
+                    log.getNewQuoteStatus(),
+                    dateFormat.format(log.getChangeDate()));
+        }
+    }
+
+    System.out.println("+--------------------------------------------------------------+");
+}
+    
+>>>>>>> cdfdcd3ed58830eaa2fb6a337f93f3c6888721da
     public String getReportId() {
         return reportId;
     }

@@ -704,13 +704,13 @@ private Project selectProject(Scanner scanner) {
 
 private boolean validateProjectStatus(Project project) {
     if (!project.getOperationalStatus().getStatus().equals("Closed")) {
-        System.out.println("El proyecto no está cerrado. Solo los proyectos cerrados pueden generar soporte.");
+        System.out.println("El proyecto no esta cerrado. Solo los proyectos cerrados pueden generar soporte.");
         System.out.println("Estado del proyecto: " + project.getOperationalStatus());
         return false;
     }
 
     if (!project.isPaid()) {
-        System.out.println("El proyecto no está pagado. Solo los proyectos pagados pueden generar soporte.");
+        System.out.println("El proyecto no esta pagado. Solo los proyectos pagados pueden generar soporte.");
         return false;
     }
 

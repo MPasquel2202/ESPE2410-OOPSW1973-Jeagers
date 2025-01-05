@@ -9,5 +9,16 @@
     "supportStatus": "Created",
     "durationYears": 2,
     "scheduleType": "24x7"
+  },
+  {
+    "supportId": "SRV_UNKNOWN (2A 24*7)",
+    "projectId": "Prj-0002",
+    "projectDescription": "Puntonet ",
+    "supportDetails": "MANTEMIENTO ",
+    "startDate": "Jan 3, 2025, 7:07:11 PM",
+    "endDate": "May 3, 2025, 7:07:11 PM",
+    "supportStatus": "Created",
+    "durationYears": 2,
+    "scheduleType": "24x7"
   }
 ]

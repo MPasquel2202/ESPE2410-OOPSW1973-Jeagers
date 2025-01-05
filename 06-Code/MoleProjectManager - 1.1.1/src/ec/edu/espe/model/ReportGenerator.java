@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -35,7 +36,6 @@ public class ReportGenerator {
         return new Report(reportId, project, quoteChangeLogs, statusChangeLogs, quoteStatusChangeLogs);
     }
 
-    
     private <T> List<T> getLogsByProjectId(List<T> logs, String projectId, Function<T, String> getProjectId) {
         List<T> filteredLogs = new ArrayList<>();
         if (logs != null) {
@@ -48,7 +48,6 @@ public class ReportGenerator {
         return filteredLogs;
     }
 
-   
     public void displayReport(Project project) {
         if (project == null) {
             throw new IllegalArgumentException("El proyecto no puede ser nulo");
@@ -58,20 +57,45 @@ public class ReportGenerator {
         saveReportToFile(report);  
     }
 
-   
     private void saveReportToFile(Report report) {
-        String fileName = "json/report_" + report.getReportId() + ".json";
+        String fileName = "json/reports.json";
         File directory = new File("json");
         if (!directory.exists()) {
             directory.mkdir();  
         }
 
+        
+        List<Report> reports = loadReportsFromFile(fileName);
+
+       
+        reports.add(report);
+
+        
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(fileName)) {
-            gson.toJson(report, writer);  
+            gson.toJson(reports, writer);
             System.out.println("Informe guardado exitosamente en " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private List<Report> loadReportsFromFile(String fileName) {
+        File file = new File(fileName);
+        List<Report> reports = new ArrayList<>();
+
+        if (file.exists()) {
+            Gson gson = new Gson();
+            try (FileReader reader = new FileReader(fileName)) {
+                Report[] reportArray = gson.fromJson(reader, Report[].class);
+                if (reportArray != null) {
+                    reports = new ArrayList<>(Arrays.asList(reportArray));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return reports;
     }
 }

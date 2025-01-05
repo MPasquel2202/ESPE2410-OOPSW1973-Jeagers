@@ -43,7 +43,7 @@ public class Report {
         System.out.printf("| %-18s | %-45s |\n", "Facturado:", project.isInvoiced() ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Pagado:", project.isPaid() ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Es Publico:", project.isIsPublic() ? "Si" : "No");
-        System.out.println("+--------------------------------------------------------------+");
+        System.out.println("+--------------------------------------------------------------+"); 
 
       
         System.out.println("Historial de Cambios:");

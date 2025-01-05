@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  *
- * @author Dennis Paucar
+ * @author David Pilatasig
  */
 public class Support {
     private String supportId;

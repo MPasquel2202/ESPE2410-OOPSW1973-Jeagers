@@ -13,6 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * 
+ * @author David Pilatasig
+ */
 public class ReportGenerator {
     private DataManager dataManager;
     private static int reportCounter = 1;

@@ -1,7 +1,7 @@
 package ec.edu.espe.model;
 
 /**
- * @author Dennis Paucar
+ * @author David Pilatasig
  */
 public class Customer {
     private String ruc;            

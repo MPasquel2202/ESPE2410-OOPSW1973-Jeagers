@@ -3,6 +3,11 @@ package ec.edu.espe.model;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * 
+ * @author David Pilatasig
+ */
+
 public class Report {
     private String reportId;
     private Project project; 

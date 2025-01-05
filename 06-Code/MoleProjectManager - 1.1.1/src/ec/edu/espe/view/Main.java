@@ -8,49 +8,38 @@ import ec.edu.espe.model.ProjectStatus;
 import ec.edu.espe.model.QuoteChangeLog;
 import ec.edu.espe.model.QuoteStatusChangeLog;
 import ec.edu.espe.model.Report;
+import ec.edu.espe.model.ReportGenerator;
 import ec.edu.espe.model.Support;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Scanner;
 
 /**
  *
- * @author Dennis Paucar }
- *
+ * @author Dennis Paucar
+ * }
+ * 
  */
+
 public class Main {
-
     public String fileName = "json/projects.json";
-
     public static void mostrarMenu() {
-        System.out.println("\n  __  __  ____  _      ______                                                                \n"
-                + " |  \\/  |/ __ \\| |    |  ____|                                                               \n"
-                + " | \\  / | |  | | |    | |__                                                                  \n"
-                + " | |\\/| | |  | | |    |  __|                                                                 \n"
-                + " | |  | | |__| | |____| |____                                                                \n"
-                + " |_|__|_|\\____/|______|______|_            _                        _           _            \n"
-                + "  / ____|         | | (_)    /_/          | |                      (_)         | |           \n"
-                + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n"
-                + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n"
-                + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n"
-                + "  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n"
-                + "                                                   | |            _/ |                       \n"
-                + "                                                   |_|           |__/                        ");
-
+        System.out.println("\nGestor de Proyectos");
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Administrar Presupuestos");
         System.out.println("3. Administrar Estatus de Proyectos");
         System.out.println("4. Generacion de Soporte Posventa");
         System.out.println("5. Busqueda de Proyectos");
         System.out.println("6. Vista de historial de cambios");
-        System.out.println("7. Generar Reporte Individual de Proyecto");
-        System.out.println("8. Generar Reporte Mensual de Proyectos");
-        System.out.println("9. Gestion de clientes");
+        System.out.println("7. Gestion de clientes");
+        System.out.println("8. Generar Reporte Individual de Proyecto");
+        System.out.println("9. Generar Reporte Mensual de Proyectos");
         System.out.println("10. Ver Fechas Restantes de Soporte de los Proyectos");
         System.out.println("11. Generar Recordatorio de Fechas Importantes");
         System.out.println("12. Salir");
         System.out.print("Seleccione una opcion: ");
     }
 
+   
     public static void mostrarSubmenuBusqueda() {
         System.out.println("\nSubmenu: Busqueda de Proyectos");
         System.out.println("1. Busqueda por Fechas");
@@ -60,6 +49,7 @@ public class Main {
         System.out.print("Seleccione una opcion: ");
     }
 
+  
     public static void mostrarSubmenuEstatus() {
         System.out.println("\nSubmenu: Administrar Estatus de Proyecto");
         System.out.println("1. Visualizar Estatus de los Proyectos");
@@ -68,7 +58,7 @@ public class Main {
         System.out.println("4. Volver al Menu Principal");
         System.out.print("Seleccione una opcion: ");
     }
-
+    
     public static void showProjectSubmenu() {
         System.out.println("\nSubmenu: Funciones de proyecto");
         System.out.println("1. Crear un nuevo proyecto");
@@ -76,8 +66,8 @@ public class Main {
         System.out.println("3. Volver al Menu Principal");
         System.out.println("Selecione una opcion: ");
     }
-
-    public static void showClientSubmenu() {
+    
+    public static void showClientSubmenu(){
         System.out.println("\nSubmenu: Funciones de cliente");
         System.out.println("1. Anadir un nuevo cliente");
         System.out.println("2. Visualizar lista de clientes");
@@ -85,7 +75,7 @@ public class Main {
         System.out.println("4. Volver al Menu Principal");
         System.out.println("Selecione una opcion: ");
     }
-
+    
     public static void showQuoteSubmenu() {
         System.out.println("\nSubmenu: Funciones de presupuesto");
         System.out.println("1. Cambio de presupuesto");
@@ -94,8 +84,8 @@ public class Main {
         System.out.println("4. Volver al Menu Principal");
         System.out.print("Selecione una opcion: ");
     }
-
-    public static void showSupportSubmenu() {
+    
+     public static void showSupportSubmenu() {
         System.out.println("\nSubmenu: Funciones de soporte");
         System.out.println("1. Generar Soporte");
         System.out.println("2. Visualizar lista de Soporte");
@@ -104,33 +94,37 @@ public class Main {
         System.out.print("Selecione una opcion: ");
     }
 
+   
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        
         DataManager dataManager = new DataManager();
         ChangeLogManager logManager = new ChangeLogManager(dataManager);
+        ReportGenerator reportGenerator = new ReportGenerator(dataManager);
 
+        
         dataManager.loadProjectsFromFile();
         dataManager.loadCustomersFromFile();
         dataManager.loadChangeLogsFromFile();
         dataManager.loadCustomersFromFile();
         dataManager.loadQuoteStatusChangeLogsFromFile();
         dataManager.loadSupportsFromFile();
-
+       
         int opcion;
         boolean salir = false;
-
+        
+        
         while (!salir) {
             mostrarMenu();
             opcion = scanner.nextInt();
-
+            
             switch (opcion) {
                 case 1:
                     boolean backToMenu = false;
-                    while (!backToMenu) {
+                    while (!backToMenu){
                         showProjectSubmenu();
                         int projectOptions = scanner.nextInt();
-                        switch (projectOptions) {
+                        switch(projectOptions){
                             case 1:
                                 System.out.println("Opcion 1: Crear Proyecto");
                                 Project newProject = dataManager.askForProjectData();
@@ -144,10 +138,10 @@ public class Main {
                                 System.out.println("\n--- Detalles de los Proyectos ---");
 
                                 for (Project project : dataManager.getProjects()) {
-                                    project.displayProjectData();
+                                    project.displayProjectData();  
                                 }
                                 break;
-                            case 3:
+                            case 3: 
                                 System.out.println("Volviendo al Menu Principal...");
                                 backToMenu = true;
                                 break;
@@ -156,20 +150,20 @@ public class Main {
                                 backToMenu = true;
                                 break;
                         }
-
+                    
                     }
-
+                    
                     break;
                 case 2:
                     showQuoteSubmenu();
                     int quoteoption = scanner.nextInt();
-
+                    
                     switch (quoteoption) {
                         case 1:
                             System.out.println("Registrar Cambio de Presupuesto");
                             System.out.print("Ingrese el ID del proyecto a modificar: ");
                             scanner.nextLine();
-                            String projectId = scanner.nextLine();
+                            String projectId = scanner.nextLine();  
 
                             System.out.print("Ingrese el nuevo presupuesto: ");
                             double newQuote = scanner.nextDouble();
@@ -178,19 +172,19 @@ public class Main {
                             break;
                         case 2:
                             System.out.println("Visualizar Lista de cambios");
-                            for (QuoteChangeLog quoteChangeLog : dataManager.getQuoteChangeLogs()) {
-                                quoteChangeLog.displayChangeLog();
-                            }
+                             for (QuoteChangeLog quoteChangeLog : dataManager.getQuoteChangeLogs()) {
+                                    quoteChangeLog.displayChangeLog();  
+                                }
                             break;
                         case 3:
                             System.out.println("Cambiar Status de Presupuesto");
                             System.out.print("Ingrese el ID del proyecto para cambiar el estado de cotizacion: ");
                             scanner.nextLine();
                             String quoteStatusProjectId = scanner.nextLine();
-
-                            dataManager.updateProjectQuoteStatus(quoteStatusProjectId);
+                            
+                            dataManager.updateProjectQuoteStatus(quoteStatusProjectId); 
                             break;
-
+    
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
                             break;
@@ -198,7 +192,7 @@ public class Main {
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
-
+                   
                     break;
                 case 3:
                     mostrarSubmenuEstatus();
@@ -218,10 +212,10 @@ public class Main {
                         case 3:
                             System.out.println("Ver Historial de Cambios de Estatus");
                             for (QuoteStatusChangeLog quoteStatusChangeLog : dataManager.getQuoteStatusChangeLogs()) {
-                                quoteStatusChangeLog.displayStatusChangeLog();
-                            }
+                                    quoteStatusChangeLog.displayStatusChangeLog();  
+                                }
                             break;
-
+    
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
                             break;
@@ -231,9 +225,9 @@ public class Main {
                     }
                     break;
                 case 4:
-
+                    
                     boolean backToMenu2 = false;
-                    while (!backToMenu2) {
+                    while(!backToMenu2){
                         showSupportSubmenu();
                         int supportOption = scanner.nextInt();
                         switch (supportOption) {
@@ -247,7 +241,7 @@ public class Main {
                                 System.out.println("\n--- Detalles de los Soportes ---");
 
                                 for (Support support : dataManager.getSupports()) {
-                                    support.displaySupportData();
+                                    support.displaySupportData();  
                                 }
                                 break;
                             case 3:
@@ -272,15 +266,15 @@ public class Main {
                     switch (opcionBusqueda) {
                         case 1:
                             System.out.println("Busqueda por Fechas");
-
+                            
                             break;
                         case 2:
                             System.out.println("Busqueda por RUC");
-
+                        
                             break;
                         case 3:
                             System.out.println("Busqueda por Estado de Proyecto");
-
+                           
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
@@ -293,16 +287,16 @@ public class Main {
                 case 6:
                     System.out.println("Opcion 6: Historial de cambios");
                     logManager.displayGroupedLogs();
-
+                   
                     break;
                 case 7:
                     showClientSubmenu();
                     int clientOption = scanner.nextInt();
-                    scanner.nextLine();
+                     scanner.nextLine(); 
                     switch (clientOption) {
                         case 1:
                             System.out.println("Opcion 1: Anadir nuevo cliente");
-                            dataManager.askForCustomerData();
+                                dataManager.askForCustomerData();
                             break;
                         case 2:
                             System.out.println("Opcion 2: Mostrar lista de clientes");
@@ -313,10 +307,9 @@ public class Main {
                         case 3:
                             System.out.println("Opcion 3: Modificar datos de un cliente");
                             System.out.print("Ingrese el ID del cliente a modificar: ");
-                            String customerId = scanner.nextLine();
-                            dataManager.modifyCustomerByCode(customerId);
-                            ;
-
+                            String customerId = scanner.nextLine();  
+                            dataManager.modifyCustomerByCode(customerId); ;
+                            
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
@@ -325,15 +318,37 @@ public class Main {
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
-
+                    
+                    
                     break;
                 case 8:
+                    System.out.println("Opcion 8: Generacion individial de reportes");
+                     System.out.println("Generar Informe de Proyecto");
+                    System.out.print("Ingrese el ID del proyecto para generar el informe: ");
+                    scanner.nextLine();  
+                    String projectIdForReport = scanner.nextLine();
+
+                    
+                    Project projectForReport = null;
+                    for (Project project : dataManager.getProjects()) {
+                        if (project.getProjectId().equals(projectIdForReport)) {
+                            projectForReport = project;
+                            break;
+                        }
+                    }
+
+                    if (projectForReport != null) {
+                        
+                        reportGenerator.displayReport(projectForReport);  
+                        System.out.println("Informe generado y guardado en formato JSON.");
+                    } else {
+                        System.out.println("Proyecto no encontrado.");
+                    }
                     break;
+                    
                 case 9:
                     break;
                 case 10:
-                    System.out.println("Opcion 10: Ver Fechas Restantes de Soporte de los Proyectos");
-                    dataManager.displayRemainingSupportDates();
                     break;
                 case 11:
                     break;

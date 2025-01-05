@@ -8,7 +8,6 @@ import java.util.Date;
  * @author Dennis Paucar
  */
 public class Support {
-
     private String supportId;
     private String projectId;
     private String projectDescription;
@@ -16,54 +15,62 @@ public class Support {
     private Date startDate;
     private Date endDate;
     private String supportStatus;
-    private int durationYears;
-    private String scheduleType;
+    private int durationYears;        
+    private String scheduleType;       
 
-    public Support(String supportId, String projectId, String projectDescription, String supportDetails,
-            Date startDate, Date endDate, String supportStatus, int durationYears, String scheduleType) {
-        this.supportId = supportId;
-        this.projectId = projectId;
-        this.projectDescription = projectDescription;
-        this.supportDetails = supportDetails;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.supportStatus = supportStatus;
-        this.durationYears = durationYears;
-        this.scheduleType = scheduleType;
-    }
+   
+    
+    public Support(String supportId, String projectId, String projectDescription, String supportDetails, 
+               Date startDate, Date endDate, String supportStatus, int durationYears, String scheduleType) {
+    this.supportId = supportId;
+    this.projectId = projectId;
+    this.projectDescription = projectDescription;
+    this.supportDetails = supportDetails;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.supportStatus = supportStatus;
+    this.durationYears = durationYears;
+    this.scheduleType = scheduleType;
+}
 
+
+    
+    
     public void displaySupportData() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        
         System.out.println("+--------------------------------------------------------------+");
         System.out.printf("| %-60s |\n", "Detalles del Soporte");
         System.out.println("+--------------------------------------------------------------+");
 
+        
         System.out.printf("| %-18s | %-45s |\n", "ID Soporte:", supportId);
         System.out.printf("| %-18s | %-45s |\n", "Proyecto:", projectId);
         System.out.printf("| %-18s | %-45s |\n", "Detalles:", supportDetails);
         System.out.println("+--------------------------------------------------------------+");
 
+        
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", startDate != null ? dateFormat.format(startDate) : "No definida");
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Fin:", endDate != null ? dateFormat.format(endDate) : "No definida");
         System.out.println("+--------------------------------------------------------------+");
 
+        
         System.out.printf("| %-18s | %-45s |\n", "Estado del Soporte:", supportStatus != null ? supportStatus : "Sin definir");
         System.out.println("+--------------------------------------------------------------+");
-
+        
         System.out.printf("| %-18s | %-45s |\n", "Duracion (anios):", durationYears);
         System.out.printf("| %-18s | %-45s |\n", "Horario:", scheduleType);
         System.out.println("+--------------------------------------------------------------+");
 
+
+     
     }
+    
+    
 
     public String getSupportId() {
         return supportId;
-    }
-
-    public long getRemainingDays() {
-        Date today = new Date();
-        return (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
     }
 
     public void setSupportId(String supportId) {
@@ -117,7 +124,7 @@ public class Support {
     public void setSupportStatus(String supportStatus) {
         this.supportStatus = supportStatus;
     }
-
+    
     public int getDurationYears() {
         return durationYears;
     }
@@ -134,4 +141,6 @@ public class Support {
         this.scheduleType = scheduleType;
     }
 
+    
+    
 }

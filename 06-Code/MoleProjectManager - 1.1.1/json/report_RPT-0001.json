@@ -1,0 +1,67 @@
+{
+  "reportId": "RPT-0001",
+  "project": {
+    "projectId": "Prj-0001",
+    "projectTitle": "Netlife",
+    "projectDescription": "netlife 5g wifi",
+    "customer": {
+      "ruc": "0034934",
+      "name": "netlife",
+      "phoneNumber": "09903434",
+      "email": "netlifeec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "30330"
+    },
+    "startDate": "Dec 26, 2024, 2:15:22 AM",
+    "closingDate": "Dec 30, 2024, 12:00:00 AM",
+    "startquote": 50000.0,
+    "operationalStatus": {
+      "status": "Closed"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": true
+  },
+  "quoteChangeLogs": [
+    {
+      "projectId": "Prj-0001",
+      "projectTitle": "Netlife",
+      "oldQuote": 35000.0,
+      "newQuote": 50000.0,
+      "changeDate": "Dec 30, 2024, 2:35:56 PM"
+    }
+  ],
+  "statusChangeLogs": [
+    {
+      "projectId": "Prj-0001",
+      "projectTitle": "Netlife",
+      "newStatus": "In Progress",
+      "changeDate": "Dec 31, 2024, 1:11:02 AM"
+    },
+    {
+      "projectId": "Prj-0001",
+      "projectTitle": "Netlife",
+      "oldStatus": "In Progress",
+      "newStatus": "Closed",
+      "changeDate": "Jan 2, 2025, 11:50:14 AM"
+    },
+    {
+      "projectId": "Prj-0001",
+      "projectTitle": "Netlife",
+      "oldStatus": "Closed",
+      "newStatus": "Closed",
+      "changeDate": "Jan 2, 2025, 12:13:37 PM"
+    },
+    {
+      "projectId": "Prj-0001",
+      "projectTitle": "Netlife",
+      "oldStatus": "Closed",
+      "newStatus": "Closed",
+      "changeDate": "Jan 2, 2025, 12:14:49 PM"
+    }
+  ],
+  "quoteStatusChangeLogs": []
+}

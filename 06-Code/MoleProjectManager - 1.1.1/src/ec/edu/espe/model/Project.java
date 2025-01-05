@@ -1,7 +1,6 @@
 package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,9 +21,8 @@ public class Project {
     private boolean invoiced;
     private boolean isPublic;
 
-    
-    public Project(String projectTitle, String projectId, String projectDescription, Customer customer, Date startDate, Date closingDate,
-                   double startquote, ProjectStatus operationalStatus, ProjectStatus quoteStatus, boolean paid,
+    public Project(String projectTitle, String projectId, String projectDescription, Customer customer, Date startDate, Date closingDate, 
+                   double startquote, ProjectStatus operationalStatus, ProjectStatus quoteStatus, boolean paid, 
                    boolean invoiced, boolean isPublic) {
         this.projectTitle = projectTitle;
         this.projectId = projectId;
@@ -40,40 +38,45 @@ public class Project {
         this.isPublic = isPublic;
     }
 
-    
-    
-    
-    
+    public Project() {
+        this.projectTitle = "";
+        this.projectId = "";
+        this.projectDescription = "";
+        this.customer = null;
+        this.startDate = null;
+        this.closingDate = null;
+        this.startquote = 0.0;
+        this.operationalStatus = null;
+        this.quoteStatus = null;
+        this.paid = false;
+        this.invoiced = false;
+        this.isPublic = false;
+    }
+
     public void displayProjectData() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-     
         System.out.println("+--------------------------------------------------------------+");
         System.out.printf("| %-60s |\n", "Detalles del Proyecto");
         System.out.println("+--------------------------------------------------------------+");
 
-       
         System.out.printf("| %-18s | %-45s |\n", "ID Proyecto:", projectId);
         System.out.printf("| %-18s | %-45s |\n", "Titulo:", projectTitle);
         System.out.printf("| %-18s | %-45s |\n", "Descripcion:", projectDescription);
         System.out.println("+--------------------------------------------------------------+");
 
-       
         System.out.printf("| %-18s | %-45s |\n", "Cliente:", customer != null ? customer.toString() : "Sin definir");
         System.out.println("+--------------------------------------------------------------+");
 
-        
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", startDate != null ? dateFormat.format(startDate) : "No definida");
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Cierre:", closingDate != null ? dateFormat.format(closingDate) : "No definida");
         System.out.println("+--------------------------------------------------------------+");
 
-        
         System.out.printf("| %-18s | %-45.2f |\n", "Presupuesto:", startquote);
         System.out.printf("| %-18s | %-45s |\n", "Estado Operativo:", operationalStatus);
         System.out.printf("| %-18s | %-45s |\n", "Estado Cotizacion:", quoteStatus);
         System.out.println("+--------------------------------------------------------------+");
 
-        
         System.out.printf("| %-18s | %-45s |\n", "Facturado:", invoiced ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Pagado:", paid ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Es Publico:", isPublic ? "Si" : "No");
@@ -175,7 +178,4 @@ public class Project {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-
-    
-    
 }

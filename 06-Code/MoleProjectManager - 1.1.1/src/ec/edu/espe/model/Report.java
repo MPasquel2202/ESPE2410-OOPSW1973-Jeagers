@@ -1,19 +1,27 @@
 package ec.edu.espe.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Report {
+
     private String reportId;
-    private Project project; 
+    private Project project;
     private List<QuoteChangeLog> quoteChangeLogs;
     private List<StatusChangeLog> statusChangeLogs;
     private List<QuoteStatusChangeLog> quoteStatusChangeLogs;
+    private static final String fileName = "json/projects.json";
 
-   
-    public Report(String reportId, Project project, List<QuoteChangeLog> quoteChangeLogs,
-                  List<StatusChangeLog> statusChangeLogs, List<QuoteStatusChangeLog> quoteStatusChangeLogs) {
+    public Report(String reportId, Project project, List<QuoteChangeLog> quoteChangeLogs, List<StatusChangeLog> statusChangeLogs, List<QuoteStatusChangeLog> quoteStatusChangeLogs) {
         this.reportId = reportId;
         this.project = project;
         this.quoteChangeLogs = quoteChangeLogs;
@@ -21,17 +29,22 @@ public class Report {
         this.quoteStatusChangeLogs = quoteStatusChangeLogs;
     }
 
-    
+    public Report() {
+        this.reportId = "";
+        this.project = new Project();
+        this.quoteChangeLogs = new ArrayList<>();
+        this.statusChangeLogs = new ArrayList<>();
+        this.quoteStatusChangeLogs = new ArrayList<>();
+    }
+
     public void displayReport() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        
         System.out.println("+--------------------------------------------------------------+");
         System.out.printf("| %-60s |\n", "Reporte ID: " + reportId);
         System.out.printf("| %-60s |\n", "Proyecto ID: " + project.getProjectId());
         System.out.println("+--------------------------------------------------------------+");
 
-       
         System.out.printf("| %-18s | %-45s |\n", "Nombre del Proyecto:", project.getProjectTitle());
         System.out.printf("| %-18s | %-45s |\n", "Descripcion:", project.getProjectDescription());
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", dateFormat.format(project.getStartDate()));
@@ -43,13 +56,11 @@ public class Report {
         System.out.printf("| %-18s | %-45s |\n", "Facturado:", project.isInvoiced() ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Pagado:", project.isPaid() ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Es Publico:", project.isIsPublic() ? "Si" : "No");
-        System.out.println("+--------------------------------------------------------------+"); 
+        System.out.println("+--------------------------------------------------------------+");
 
-      
         System.out.println("Historial de Cambios:");
         System.out.println("+--------------------------------------------------------------+");
 
-        
         if (!quoteChangeLogs.isEmpty()) {
             System.out.println("[Cambios de Presupuesto]");
             for (QuoteChangeLog log : quoteChangeLogs) {
@@ -61,7 +72,6 @@ public class Report {
             }
         }
 
-        
         if (!statusChangeLogs.isEmpty()) {
             System.out.println("[Cambios de Estado]");
             for (StatusChangeLog log : statusChangeLogs) {
@@ -73,7 +83,6 @@ public class Report {
             }
         }
 
-        
         if (!quoteStatusChangeLogs.isEmpty()) {
             System.out.println("[Cambios de Estado de Cotizacion]");
             for (QuoteStatusChangeLog log : quoteStatusChangeLogs) {
@@ -88,7 +97,43 @@ public class Report {
         System.out.println("+--------------------------------------------------------------+");
     }
 
-    
+    public void showMonthlyReports() {
+        List<Project> projects = new ArrayList<>();
+        File file = new File(fileName); 
+        int currentMonth = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1; 
+
+        if (file.exists()) {
+            Gson gson = new Gson();
+            try (Reader reader = new FileReader(file)) {
+                Type projectListType = new TypeToken<List<Project>>() {
+                }.getType();
+                projects = gson.fromJson(reader, projectListType);
+                System.out.println("\n---------> Reportes del Mes Actual <---------");
+                boolean foundAny = false;
+                for (Project project : projects) {
+                    if (project.getStartDate() != null) {
+                        int projectMonth = project.getStartDate()
+                                .toInstant()
+                                .atZone(java.time.ZoneId.systemDefault())
+                                .toLocalDate()
+                                .getMonthValue();
+                        if (projectMonth == currentMonth) {
+                            writeReport(project); 
+                            foundAny = true;
+                        }
+                    }
+                }
+                if (!foundAny) {
+                    System.out.println("No se encontraron proyectos iniciados en el mes actual.");
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cargar proyectos desde el archivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se encontró el archivo de proyectos en " + fileName);
+        }
+    }
+
     public String getReportId() {
         return reportId;
     }
@@ -99,6 +144,10 @@ public class Report {
 
     public Project getProject() {
         return project;
+    }
+
+    private void writeReport(Project project) {
+        System.out.println("Reporte generado para el proyecto: " + project.getProjectTitle());
     }
 
     public void setProject(Project project) {

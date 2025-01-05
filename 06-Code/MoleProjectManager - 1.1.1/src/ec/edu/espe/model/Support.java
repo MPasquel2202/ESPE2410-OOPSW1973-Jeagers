@@ -141,6 +141,4 @@ public class Support {
         this.scheduleType = scheduleType;
     }
 
-    
-    
 }

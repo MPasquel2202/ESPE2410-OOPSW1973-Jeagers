@@ -842,4 +842,3 @@ private String getScheduleType(Scanner scanner) {
     }
 }
 
-

@@ -52,10 +52,7 @@ public class Report {
         for (Support support : supports) {
             System.out.printf("\n - %s\n", support.getProjectDescription());
             System.out.println("Identificador numerico del proyecto: " + support.getSupportId() );
-            System.out.println("Fecha de inicio del proyecto: " + support.getStartDate());
-            System.out.println("Fecha final del proyecto: " + support.getEndDate());
             System.out.println("Detalle del soporte: " + support.getSupportDetails());
-            System.out.println("Tipo de horario: " + support.getScheduleType());
             System.out.println("Status del soporte: " + support.getSupportStatus());
         }
     } else {

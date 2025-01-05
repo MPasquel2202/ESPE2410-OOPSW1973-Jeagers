@@ -185,5 +185,56 @@
         "changeDate": "Dec 31, 2024, 2:00:27 PM"
       }
     ]
+  },
+  {
+    "reportId": "RPT-0001",
+    "project": {
+      "projectId": "Prj-0002",
+      "projectTitle": "Puntonet ",
+      "projectDescription": "rebuild a antena ",
+      "customer": {
+        "ruc": "0092323",
+        "name": "Celerity",
+        "phoneNumber": "09902324",
+        "email": "celerity@gmail.com",
+        "address": "Guayaquil-Ecuador",
+        "customerId": "93697"
+      },
+      "startDate": "Dec 26, 2024, 2:17:23 AM",
+      "closingDate": "Dec 28, 2024, 12:00:00 AM",
+      "startquote": 6000.0,
+      "operationalStatus": {
+        "status": "Closed"
+      },
+      "quoteStatus": {
+        "status": "Quote Sended"
+      },
+      "paid": true,
+      "invoiced": true,
+      "isPublic": false
+    },
+    "quoteChangeLogs": [],
+    "statusChangeLogs": [
+      {
+        "projectId": "Prj-0002",
+        "projectTitle": "Puntonet ",
+        "newStatus": "Closed",
+        "changeDate": "Dec 31, 2024, 1:12:10 AM"
+      }
+    ],
+    "quoteStatusChangeLogs": [],
+    "supports": [
+      {
+        "supportId": "SRV_UNKNOWN (2A 24*7)",
+        "projectId": "Prj-0002",
+        "projectDescription": "Puntonet ",
+        "supportDetails": "MANTEMIENTO ",
+        "startDate": "Jan 3, 2025, 7:07:11 PM",
+        "endDate": "May 3, 2025, 7:07:11 PM",
+        "supportStatus": "Created",
+        "durationYears": 2,
+        "scheduleType": "24x7"
+      }
+    ]
   }
 ]

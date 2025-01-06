@@ -22,5 +22,13 @@
     "email": "telconectEcuador@gmail.com",
     "address": "Ecuador-Quito-Av.6 de diciembre",
     "customerId": "50414"
+  },
+  {
+    "ruc": "1835698027001",
+    "name": "Pablo Noruda",
+    "phoneNumber": "0945213678",
+    "email": "lejemplo1@gmail.com",
+    "address": "Av. Los Ríos Oe-32",
+    "customerId": "77884"
   }
 ]

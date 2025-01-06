@@ -14,28 +14,28 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Scanner;
 
 /**
- * 
+ *
  * @author Dennis Paucar
  */
-
 public class Main {
 
     public String fileName = "json/projects.json";
 
     public static void mostrarMenu() {
-        System.out.println("\n  __  __  ____  _      ______                                                                \n"
-                + " |  \\/  |/ __ \\| |    |  ____|                                                               \n"
-                + " | \\  / | |  | | |    | |__                                                                  \n"
-                + " | |\\/| | |  | | |    |  __|                                                                 \n"
-                + " | |  | | |__| | |____| |____                                                                \n"
-                + " |_|__|_|\\____/|______|______|_            _                        _           _            \n"
-                + "  / ____|         | | (_)    /_/          | |                      (_)         | |           \n"
-                + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _  ___  ___| |_ ___  ___ \n"
-                + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| |/ _ \\/ __| __/ _ \\/ __|\n"
-                + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |  __/ (__| || (_) \\__ \\\n"
-                + "  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/| |\\___|\\___|\\__\\___/|___/\n"
-                + "                                                   | |            _/ |                       \n"
-                + "                                                   |_|           |__/                        ");
+        System.out.println("  __  __  ____  _      ______                                                                    \n"
+                + " |  \\/  |/ __ \\| |    |  ____|                                                                   \n"
+                + " | \\  / | |  | | |    | |__                                                                      \n"
+                + " | |\\/| | |  | | |    |  __|                                                                     \n"
+                + " | |  | | |__| | |____| |____                                                                    \n"
+                + " |_|__|_|\\____/|______|______|             _                                        _            \n"
+                + "  / ____|         | | (_) /_/             | |                                      | |           \n"
+                + " | |  __  ___  ___| |_ _  ___  _ __     __| | ___   _ __  _ __ ___  _   _  ___  ___| |_ ___  ___ \n"
+                + " | | |_ |/ _ \\/ __| __| |/ _ \\| '_ \\   / _` |/ _ \\ | '_ \\| '__/ _ \\| | | |/ _ \\/ __| __/ _ \\/ __|\n"
+                + " | |__| |  __/\\__ \\ |_| | (_) | | | | | (_| |  __/ | |_) | | | (_) | |_| |  __/ (__| || (_) \\__ \\\n"
+                + "  \\_____|\\___||___/\\__|_|\\___/|_| |_|  \\__,_|\\___| | .__/|_|  \\___/ \\__, |\\___|\\___|\\__\\___/|___/\n"
+                + "                                                   | |               __/ |                       \n"
+                + "                                                   |_|              |___/                        ");
+
         System.out.println("1. Funciones para Proyectos");
         System.out.println("2. Administrar Presupuestos");
         System.out.println("3. Administrar Estatus de Proyectos");
@@ -316,8 +316,6 @@ public class Main {
                             System.out.print("Ingrese el ID del cliente a modificar: ");
                             String customerId = scanner.nextLine();
                             dataManager.modifyCustomerByCode(customerId);
-                            ;
-
                             break;
                         case 4:
                             System.out.println("Volviendo al Menu Principal...");
@@ -326,7 +324,6 @@ public class Main {
                             System.out.println("Opcion invalida. Volviendo al Menu Principal...");
                             break;
                     }
-
                     break;
                 case 8:
                     System.out.println("Opcion 8: Generacion individial de reportes");

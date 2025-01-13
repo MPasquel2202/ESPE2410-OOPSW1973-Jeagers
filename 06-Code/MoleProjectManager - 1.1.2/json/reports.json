@@ -64,7 +64,8 @@
         "changeDate": "Jan 2, 2025, 12:14:49 PM"
       }
     ],
-    "quoteStatusChangeLogs": []
+    "quoteStatusChangeLogs": [],
+    "supports": []
   },
   {
     "reportId": "RPT-0002",
@@ -102,7 +103,8 @@
         "changeDate": "Dec 31, 2024, 1:12:10 AM"
       }
     ],
-    "quoteStatusChangeLogs": []
+    "quoteStatusChangeLogs": [],
+    "supports": []
   },
   {
     "reportId": "RPT-0001",
@@ -184,7 +186,8 @@
         "newQuoteStatus": "Quote Rejected",
         "changeDate": "Dec 31, 2024, 2:00:27 PM"
       }
-    ]
+    ],
+    "supports": []
   },
   {
     "reportId": "RPT-0001",
@@ -236,5 +239,45 @@
         "scheduleType": "24x7"
       }
     ]
+  },
+  {
+    "reportId": "RPT-0001",
+    "project": {
+      "projectId": "Prj-0005",
+      "projectTitle": "Sistema de redes",
+      "projectDescription": "construccion de un sistema de red 5G en Quito-Sur",
+      "customer": {
+        "ruc": "454546",
+        "name": "Puntonet",
+        "phoneNumber": "0990600274",
+        "email": "puntonetec@gmail.com",
+        "address": "Ecuador-Quito",
+        "customerId": "76704"
+      },
+      "startDate": "Dec 30, 2024, 5:27:35 PM",
+      "closingDate": "Dec 31, 2024, 12:00:00 AM",
+      "startquote": 60000.0,
+      "operationalStatus": {
+        "status": "Created"
+      },
+      "quoteStatus": {
+        "status": "Quote Accepted"
+      },
+      "paid": true,
+      "invoiced": true,
+      "isPublic": false
+    },
+    "quoteChangeLogs": [
+      {
+        "projectId": "Prj-0005",
+        "projectTitle": "Sistema de redes",
+        "oldQuote": 35000.0,
+        "newQuote": 60000.0,
+        "changeDate": "Dec 30, 2024, 5:28:22 PM"
+      }
+    ],
+    "statusChangeLogs": [],
+    "quoteStatusChangeLogs": [],
+    "supports": []
   }
 ]

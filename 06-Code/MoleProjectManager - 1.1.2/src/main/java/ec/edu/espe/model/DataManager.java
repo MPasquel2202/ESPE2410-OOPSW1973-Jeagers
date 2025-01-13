@@ -618,21 +618,8 @@ public class DataManager {
     }
 
     public Date calculateEndDateOfSupport(Scanner scanner, Date startDate, int durationYears) {
-        int monthsOfSupport = 0;
-        while (monthsOfSupport <= 0) {
-            try {
-                System.out.println("Meses de contrato de soporte: ");
-                monthsOfSupport = scanner.nextInt();
-                scanner.nextLine();
-                if (monthsOfSupport <= 0) {
-                    System.out.println("Ingrese un valor válido para los meses de contrato.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
-                scanner.nextLine();
-            }
-        }
-
+        int monthsOfSupport = durationYears * 12;
+        
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
         calendar.add(Calendar.MONTH, monthsOfSupport);
@@ -750,7 +737,7 @@ public class DataManager {
             System.out.print("Ingrese la duración del soporte en años (1, 2 o 5): ");
             if (scanner.hasNextInt()) {
                 durationYears = scanner.nextInt();
-                if (durationYears == 1 || durationYears == 2 || durationYears == 5) {
+                if (durationYears == 1 || durationYears == 3 || durationYears == 5) {
                     validDuration = true;
                 } else {
                     System.out.println("Duración inválida. Solo se permite 1, 2 o 5 años.");

@@ -123,5 +123,30 @@
     "paid": true,
     "invoiced": true,
     "isPublic": false
+  },
+  {
+    "projectId": "Prj-0006",
+    "projectTitle": "jkh",
+    "projectDescription": "jkl",
+    "customer": {
+      "ruc": "454546",
+      "name": "Puntonet",
+      "phoneNumber": "0990600274",
+      "email": "puntonetec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "76704"
+    },
+    "startDate": "Jan 13, 2025, 2:46:31 AM",
+    "closingDate": "Mar 25, 2025, 12:00:00 AM",
+    "startquote": 56146.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": false
   }
 ]

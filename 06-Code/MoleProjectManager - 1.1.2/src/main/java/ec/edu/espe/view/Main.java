@@ -351,8 +351,7 @@ public class Main {
 
                 case 9:
                     System.out.println("Opción 4: Agrupación de Reportes del Mes Actual");
-                    Report report = new Report();
-                    report.showMonthlyReports();
+                    reportGenerator.showMonthlyReports();
                     break;
                 case 10:
                     break;

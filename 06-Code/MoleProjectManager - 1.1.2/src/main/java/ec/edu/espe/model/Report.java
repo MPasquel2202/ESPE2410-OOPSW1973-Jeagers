@@ -1,15 +1,7 @@
 package ec.edu.espe.model;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -121,46 +113,6 @@ public class Report {
         }
 
         System.out.println("+--------------------------------------------------------------+");
-    }
-
-    public void showMonthlyReports() {
-        List<Project> projects = new ArrayList<>();
-        File file = new File(fileName);
-        int currentMonth = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH) + 1;
-
-        if (file.exists()) {
-            Gson gson = new Gson();
-            try (Reader reader = new FileReader(file)) {
-                Type projectListType = new TypeToken<List<Project>>() {}.getType();
-                projects = gson.fromJson(reader, projectListType);
-                System.out.println("\n---------> Reportes del Mes Actual <---------");
-                boolean foundAny = false;
-                for (Project project : projects) {
-                    if (project.getStartDate() != null) {
-                        int projectMonth = project.getStartDate()
-                                .toInstant()
-                                .atZone(java.time.ZoneId.systemDefault())
-                                .toLocalDate()
-                                .getMonthValue();
-                        if (projectMonth == currentMonth) {
-                            writeReport(project);
-                            foundAny = true;
-                        }
-                    }
-                }
-                if (!foundAny) {
-                    System.out.println("No se encontraron proyectos iniciados en el mes actual.");
-                }
-            } catch (IOException e) {
-                System.out.println("Error al cargar proyectos desde el archivo: " + e.getMessage());
-            }
-        } else {
-            System.out.println("No se encontró el archivo de proyectos en " + fileName);
-        }
-    }
-
-    private void writeReport(Project project) {
-        System.out.println("Reporte generado para el proyecto: " + project.getProjectTitle());
     }
 
     public String getReportId() {

@@ -142,7 +142,7 @@ public class Main {
                             case 2:
                                 System.out.println("Opcion 2: Visualizar Proyectos");
 
-                                System.out.println("\n--- Detalles de los Proyectos ---");
+                                System.out.println("\n---> Detalles de los Proyectos <---");
 
                                 for (Project project : dataManager.getProjects()) {
                                     project.displayProjectData();
@@ -245,7 +245,7 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("Visualizar Soportes");
-                                System.out.println("\n--- Detalles de los Soportes ---");
+                                System.out.println("\n---> Detalles de los Soportes <---");
 
                                 for (Support support : dataManager.getSupports()) {
                                     support.displaySupportData();

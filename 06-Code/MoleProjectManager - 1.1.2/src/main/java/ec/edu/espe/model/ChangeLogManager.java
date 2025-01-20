@@ -78,7 +78,7 @@ import java.util.Map;
                 for (String log : entry.getValue()) {
                     System.out.println("  " + log);
                 }
-                System.out.println("---------------------------------------------------");
+                System.out.println("|---------------------------------------------------|");
             }
         }
         

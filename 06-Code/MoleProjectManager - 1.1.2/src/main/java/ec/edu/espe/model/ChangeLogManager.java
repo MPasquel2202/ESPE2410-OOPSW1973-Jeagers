@@ -16,6 +16,7 @@ import java.util.Map;
         public ChangeLogManager(DataManager dataManager) {
             this.dataManager = dataManager;
         }
+        //TODO remake to use jframe HistoryOfChanges
 
         public Map<String, List<String>> getGroupedChangeLogs() {
             Map<String, List<String>> groupedLogs = new HashMap<>();

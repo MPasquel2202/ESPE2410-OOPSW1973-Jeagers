@@ -21,7 +21,6 @@ import java.util.Map;
         public Map<String, List<String>> getGroupedChangeLogs() {
             Map<String, List<String>> groupedLogs = new HashMap<>();
 
-           
             List<QuoteChangeLog> quoteChangeLogs = dataManager.getQuoteChangeLogs();
             List<QuoteStatusChangeLog> quoteStatusChangeLogs = dataManager.getQuoteStatusChangeLogs();
             List<StatusChangeLog> statusChangeLogs = dataManager.getStatusChangeLogs();
@@ -81,6 +80,5 @@ import java.util.Map;
                 }
                 System.out.println("|---------------------------------------------------|");
             }
-        }
-        
+        }  
  }

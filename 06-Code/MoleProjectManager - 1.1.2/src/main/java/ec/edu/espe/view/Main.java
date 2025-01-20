@@ -18,7 +18,6 @@ import java.util.Scanner;
  * @author Dennis Paucar
  */
 public class Main {
-
     public String fileName = "json/projects.json";
 
     public static void mostrarMenu() {
@@ -157,7 +156,6 @@ public class Main {
                                 backToMenu = true;
                                 break;
                         }
-
                     }
 
                     break;

@@ -8,7 +8,6 @@ import java.util.List;
  * 
  * @author David Pilatasig
  */
-
 public class Report {
 
     private String reportId;
@@ -46,7 +45,6 @@ public class Report {
         System.out.printf("| %-60s |\n", "Reporte ID: " + reportId);
         System.out.printf("| %-60s |\n", "Proyecto ID: " + project.getProjectId());
         System.out.println("+--------------------------------------------------------------+");
-
         System.out.printf("| %-18s | %-45s |\n", "Nombre del Proyecto:", project.getProjectTitle());
         System.out.printf("| %-18s | %-45s |\n", "Descripcion:", project.getProjectDescription());
         System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", dateFormat.format(project.getStartDate()));
@@ -59,10 +57,8 @@ public class Report {
         System.out.printf("| %-18s | %-45s |\n", "Pagado:", project.isPaid() ? "Si" : "No");
         System.out.printf("| %-18s | %-45s |\n", "Es Publico:", project.isIsPublic() ? "Si" : "No");
         System.out.println("+--------------------------------------------------------------+");
-
         System.out.println("Soportes del proyecto:");
         System.out.println("+--------------------------------------------------------------+");
-
         System.out.println("Soportes Asociados:");
         if (!supports.isEmpty()) {
             for (Support support : supports) {
@@ -74,7 +70,6 @@ public class Report {
         } else {
             System.out.println(" - No hay soportes asociados.");
         }
-
         System.out.println("+--------------------------------------------------------------+");
         System.out.println("Historial de Cambios:");
         System.out.println("+--------------------------------------------------------------+");

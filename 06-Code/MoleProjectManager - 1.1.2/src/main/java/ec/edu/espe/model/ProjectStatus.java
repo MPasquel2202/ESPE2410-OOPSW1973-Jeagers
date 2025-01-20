@@ -16,7 +16,7 @@ public class ProjectStatus {
     public static final ProjectStatus QUOTE_ACCEPTED = new ProjectStatus("Quote Accepted");
 
     private final String status;
-
+    //TODO update to run with new datamanager and project
     
     ProjectStatus(String status) {
         this.status = status;

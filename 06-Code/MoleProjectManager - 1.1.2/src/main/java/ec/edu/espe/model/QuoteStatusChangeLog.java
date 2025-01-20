@@ -21,6 +21,7 @@ public class QuoteStatusChangeLog {
         this.newQuoteStatus = newQuoteStatus;
         this.changeDate = changeDate;
     }
+    //TODO update to run with datamanager and proyect changes for jfrm
     
 
     public void displayStatusChangeLog() {

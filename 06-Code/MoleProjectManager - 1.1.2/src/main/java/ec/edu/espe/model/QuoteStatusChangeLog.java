@@ -2,7 +2,6 @@ package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  *
  * @author Dennis Paucar
@@ -21,8 +20,7 @@ public class QuoteStatusChangeLog {
         this.newQuoteStatus = newQuoteStatus;
         this.changeDate = changeDate;
     }
-    
-
+    //TODO update to run with datamanager and proyect changes for jfrm
     public void displayStatusChangeLog() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -41,8 +39,6 @@ public class QuoteStatusChangeLog {
         System.out.printf("| %-18s | %-45s |\n", "Fecha del Cambio:", changeDate != null ? dateFormat.format(changeDate) : "No registrada");
         System.out.println("+--------------------------------------------------------------+");
     }
-
-    
 
     public String getProjectId() {
         return projectId;
@@ -82,7 +78,5 @@ public class QuoteStatusChangeLog {
 
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
-    }
-    
-    
+    } 
 }

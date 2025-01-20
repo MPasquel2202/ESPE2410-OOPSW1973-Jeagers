@@ -6,21 +6,25 @@ import java.util.Date;
  *
  * @author Dennis Paucar
  */
-public class ProjectChangeLog {
+public class StatusChangeLog {
     private String projectId;
     private String projectTitle;
-    private double oldQuote;
-    private double newQuote;
+    private String oldStatus;
+    private String newStatus;
     private Date changeDate;
+    private String description;
 
-    public ProjectChangeLog(String projectId, String projectTitle, double oldQuote, double newQuote, Date changeDate) {
+    public StatusChangeLog(String projectId, String projectTitle, String oldStatus, String newStatus, Date changeDate) {
         this.projectId = projectId;
         this.projectTitle = projectTitle;
-        this.oldQuote = oldQuote;
-        this.newQuote = newQuote;
+        this.oldStatus = oldStatus;
+        this.newStatus = newStatus;
         this.changeDate = changeDate;
+        
     }
-      
+    
+    
+
     public String getProjectId() {
         return projectId;
     }
@@ -37,20 +41,20 @@ public class ProjectChangeLog {
         this.projectTitle = projectTitle;
     }
 
-    public double getOldQuote() {
-        return oldQuote;
+    public String getOldStatus() {
+        return oldStatus;
     }
 
-    public void setOldQuote(double oldQuote) {
-        this.oldQuote = oldQuote;
+    public void setOldStatus(String oldSrarus) {
+        this.oldStatus = oldSrarus;
     }
 
-    public double getNewQuote() {
-        return newQuote;
+    public String getNewStatus() {
+        return newStatus;
     }
 
-    public void setNewQuote(double newQuote) {
-        this.newQuote = newQuote;
+    public void setNewStatus(String newStatus) {
+        this.newStatus = newStatus;
     }
 
     public Date getChangeDate() {
@@ -60,4 +64,18 @@ public class ProjectChangeLog {
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+
+   
+            
+   
 }

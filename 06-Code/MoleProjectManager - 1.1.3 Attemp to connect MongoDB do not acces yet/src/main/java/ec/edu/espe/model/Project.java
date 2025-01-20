@@ -52,7 +52,7 @@ public class Project {
         this.invoiced = false;
         this.isPublic = false;
     }
-    //TODO remake to use in jfrm projects list
+
     public void displayProjectData() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

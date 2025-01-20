@@ -53,7 +53,7 @@ public class ReportGenerator {
     }
 
     private List<Support> loadSupportsForProject(String projectId) {
-        String fileName = "json/supports.json";
+        String fileName = "json/supports.json"; // Ruta al archivo JSON
         File file = new File(fileName);
         List<Support> supports = new ArrayList<>();
 

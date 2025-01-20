@@ -10,11 +10,13 @@ public class ProjectStatus {
     public static final ProjectStatus IN_PROGRESS = new ProjectStatus("In Progress");
     public static final ProjectStatus PAUSED = new ProjectStatus("Paused");
     public static final ProjectStatus CLOSED = new ProjectStatus("Closed");
+
     public static final ProjectStatus QUOTE_SEND = new ProjectStatus("Quote Sended");
     public static final ProjectStatus QUOTE_REJECTED = new ProjectStatus("Quote Rejected");
     public static final ProjectStatus QUOTE_ACCEPTED = new ProjectStatus("Quote Accepted");
+
     private final String status;
-    //TODO update to run with new datamanager and project
+
     
     ProjectStatus(String status) {
         this.status = status;

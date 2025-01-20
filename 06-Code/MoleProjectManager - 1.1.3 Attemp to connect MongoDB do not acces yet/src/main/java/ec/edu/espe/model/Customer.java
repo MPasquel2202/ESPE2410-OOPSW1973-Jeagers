@@ -1,5 +1,7 @@
 package ec.edu.espe.model;
 
+import org.bson.Document;
+
 /**
  * @author David Pilatasig
  */
@@ -10,6 +12,7 @@ public class Customer {
     private String email;          
     private String address; 
     private String customerId;
+
     
     public Customer(String ruc, String name, String phoneNumber, String email, String address, String customerId) {
         this.ruc = ruc;
@@ -19,6 +22,7 @@ public class Customer {
         this.address = address;
         this.customerId = customerId;
     }
+
     public void displayCustomerDetails() {
         System.out.println("+---------------------+---------------------+");
         System.out.printf("| %-20s | %-20s |%n", "Campo", "Valor");
@@ -80,9 +84,15 @@ public class Customer {
         this.customerId = customerId;
     }
     
+
     @Override
     public String toString() {
-        return String.format("Nombre: %s | RUC: %s | Telefono: %s | Email: %s | Direccion: %s",
-                name, ruc, phoneNumber, email, address);
+        return new Document("id", customerId)
+                .append("RUC", ruc)
+                .append("name", name)
+                .append("Phone", phoneNumber)
+                .append("Email", email)
+                .append("Dirección", address)
+                .toJson();
     }
 }

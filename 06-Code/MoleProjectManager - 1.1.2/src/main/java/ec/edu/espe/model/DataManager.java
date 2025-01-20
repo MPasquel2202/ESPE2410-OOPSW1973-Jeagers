@@ -693,11 +693,10 @@ public class DataManager {
         System.out.println("Seleccione el tipo de horario:");
         System.out.println("1. 8x5 (8 horas al día por 5 días a la semana)");
         System.out.println("2. 24x7 (24 horas al día por 7 días a la semana)");
-
+        
         do {
             System.out.print("Ingrese el número de la opción: ");
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
                     scheduleType = "8x5";
@@ -712,7 +711,6 @@ public class DataManager {
                     break;
             }
         } while (!validSchedule);
-
         return scheduleType;
     }
 
@@ -722,7 +720,6 @@ public class DataManager {
         for (Support support : supports) {
             System.out.println("ID: " + support.getSupportId() + ", Estado: " + support.getSupportStatus());
         }
-
         System.out.print("Ingrese el ID del soporte que desea cerrar: ");
         String supportId = scanner.nextLine();
         Support selectedSupport = null;
@@ -732,12 +729,10 @@ public class DataManager {
                 break;
             }
         }
-        
         if (selectedSupport == null) {
             System.out.println("Soporte no encontrado con el ID: " + supportId);
             return;
         }
-
         if (selectedSupport.getSupportStatus().equals("Closed")) {
             System.out.println("El soporte ya esta cerrado.");
             return;

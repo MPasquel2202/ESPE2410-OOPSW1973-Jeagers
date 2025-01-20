@@ -41,10 +41,8 @@ public class DataManager {
 
     private void initializeProjectCounter() {
         int maxId = 0;
-
         for (Project project : projects) {
             String id = project.getProjectId();
-
             try {
                 int numericPart = Integer.parseInt(id.split("-")[1]);
                 if (numericPart > maxId) {
@@ -64,20 +62,17 @@ public class DataManager {
         quoteChangeLogs = new ArrayList<>();
         quoteStatusChangeLogs = new ArrayList<>();
         statusChangeLogs = new ArrayList<>();
-
         loadProjectsFromFile();
         loadCustomersFromFile();
         loadChangeLogsFromFile();
         loadStatusChangeLogsFromFile();
         loadQuoteStatusChangeLogsFromFile();
-
         initializeProjectCounter();
     }
 
     public void addProject(Project project) {
         projects.add(project);
         System.out.println("Proyecto agregado con exito: " + project.getProjectTitle());
-
     }
 
     public List<Project> getProjects() {
@@ -212,7 +207,6 @@ public class DataManager {
     public Customer askForCustomerData() {
         Scanner scanner = new Scanner(System.in);
         String ruc;
-
         System.out.println("----------Ingrese la informacion del cliente----------");
         System.out.print("Ingrese RUC: ");
         while (true) {
@@ -225,32 +219,25 @@ public class DataManager {
                 System.out.println("El RUC no es válido. Debe contener exactamente 13 dígitos. Intente nuevamente.");
             }
         }
-
         System.out.print("Ingrese nombre/empresa del cliente: ");
         String name = scanner.nextLine();
-
         System.out.print("Ingrese numero de contacto: ");
         String phoneNumber = scanner.nextLine();
-
         System.out.print("Ingrese e-mail: ");
         String email = scanner.nextLine();
-
         System.out.print("Ingrese direccion: ");
         String address = scanner.nextLine();
-
         String customerId = String.format("%05d", ThreadLocalRandom.current().nextInt(10000, 99999));
         Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
-
         customers.add(customer);
         saveCustomersToFile();
-
         return customer;
     }
 
     public Project askForProjectData() {
         Scanner scanner = new Scanner(System.in);
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
         String title = askForProjectTitle(scanner);
         String description = askForProjectDescription(scanner);
         Customer customer = askForCustomer(scanner);
@@ -261,9 +248,7 @@ public class DataManager {
         boolean isInvoiced = askIfInvoiced(scanner);
         boolean paid = isInvoiced ? askIfPaid(scanner) : false;
         boolean isPublic = askIfPublic(scanner);
-
         String projectId = "Prj-" + String.format("%04d", projectCounter++);
-
         return new Project(title, projectId, description, customer, startDate, closingDate, quote,
                 ProjectStatus.CREATED, quoteStatus, paid, isInvoiced, isPublic);
     }
@@ -285,7 +270,6 @@ public class DataManager {
         System.out.print("Seleccione una opcion: ");
         int customerOption = scanner.nextInt();
         scanner.nextLine();
-
         if (customerOption == 1) {
             List<Customer> customers = getCustomers();
             if (customers.isEmpty()) {
@@ -308,7 +292,6 @@ public class DataManager {
         System.out.print("Seleccione el numero del cliente: ");
         int customerIndex = scanner.nextInt() - 1;
         scanner.nextLine();
-
         if (customerIndex >= 0 && customerIndex < customers.size()) {
             return customers.get(customerIndex);
         } else {
@@ -323,7 +306,6 @@ public class DataManager {
         do {
             System.out.print("Fecha de cierre (yyyy-MM-dd): ");
             String inputDate = scanner.nextLine();
-
             if (inputDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 try {
                     closingDate = dateFormat.parse(inputDate);
@@ -354,7 +336,6 @@ public class DataManager {
         System.out.println("3. Quote Accepted");
         System.out.print("Seleccione el numero: ");
         int quoteStatusInput = scanner.nextInt();
-
         return switch (quoteStatusInput) {
             case 1 ->
                 ProjectStatus.QUOTE_SEND;
@@ -397,31 +378,24 @@ public class DataManager {
     public void modifyCustomerByCode(String customerId) {
         Scanner scanner = new Scanner(System.in);
         Customer customer = null;
-
         for (Customer c : customers) {
             if (c.getCustomerId().equals(customerId)) {
                 customer = c;
                 break;
             }
         }
-
         if (customer != null) {
             System.out.println("Modificando datos del cliente: " + customer.getName());
             System.out.print("Nuevo nombre/empresa: ");
             customer.setName(scanner.nextLine());
-
             System.out.print("Nuevo RUC: ");
             customer.setRuc(scanner.nextLine());
-
             System.out.print("Nuevo numero de contacto: ");
             customer.setPhoneNumber(scanner.nextLine());
-
             System.out.print("Nuevo e-mail: ");
             customer.setEmail(scanner.nextLine());
-
             System.out.print("Nueva direccion: ");
             customer.setAddress(scanner.nextLine());
-
             saveCustomersToFile();
             System.out.println("Datos del cliente modificados exitosamente.");
         } else {
@@ -448,7 +422,6 @@ public class DataManager {
     }
 
     public void logProjectStatusChange(Project project, ProjectStatus oldStatus, ProjectStatus newStatus) {
-
         StatusChangeLog log = new StatusChangeLog(
                 project.getProjectId(),
                 project.getProjectTitle(),
@@ -456,11 +429,8 @@ public class DataManager {
                 newStatus.toString(),
                 new Date()
         );
-
         statusChangeLogs.add(log);
-
         saveStatusChangeLogsToFile();
-
         System.out.println("Cambio de estado registrado: " + log);
     }
 
@@ -469,19 +439,15 @@ public class DataManager {
 
         for (Project project : projects) {
             if (project.getProjectId().equals(projectId)) {
-
                 System.out.println("Estado actual: " + project.getOperationalStatus());
-
                 System.out.println("Seleccione el nuevo estado:");
                 System.out.println("1. Created");
                 System.out.println("2. In Progress");
                 System.out.println("3. Paused");
                 System.out.println("4. Closed");
-
                 int option;
                 ProjectStatus newStatus = null;
                 String description = "";
-
                 do {
                     System.out.print("Opcion: ");
                     while (!scanner.hasNextInt()) {
@@ -498,7 +464,6 @@ public class DataManager {
                             newStatus = ProjectStatus.IN_PROGRESS;
                         case 3 -> {
                             newStatus = ProjectStatus.PAUSED;
-
                             System.out.print("Ingrese una descripcion para el estado PAUSED: ");
                             description = scanner.nextLine();
                         }
@@ -511,13 +476,9 @@ public class DataManager {
 
                 ProjectStatus oldStatus = project.getOperationalStatus();
                 if (!oldStatus.equals(newStatus)) {
-
                     project.setOperationalStatus(newStatus);
-
                     logProjectStatusChange(project, oldStatus, newStatus);
-
                     saveProjectsToFile();
-
                     System.out.println("Estado actualizado exitosamente.");
                     if (newStatus == ProjectStatus.PAUSED) {
                         System.out.println("Descripcion agregada: " + description);
@@ -535,14 +496,12 @@ public class DataManager {
         System.out.println("Listado de Proyectos:");
         System.out.printf("%-10s %-30s %-20s%n", "Codigo", "Titulo", "Estado");
         System.out.println("-------------------------------------------------------------");
-
         for (Project project : projects) {
             System.out.printf("%-10s %-30s %-20s%n",
                     project.getProjectId(),
                     project.getProjectTitle(),
                     project.getOperationalStatus().toString());
         }
-
         System.out.println("-------------------------------------------------------------");
     }
 
@@ -554,7 +513,6 @@ public class DataManager {
                 newStatus.toString(),
                 new Date()
         );
-
         quoteStatusChangeLogs.add(log);
         saveQuoteStatusChangeLogsToFile();
         System.out.println("Cambio de estado de cotizacion registrado: " + log);
@@ -565,14 +523,11 @@ public class DataManager {
 
         for (Project project : projects) {
             if (project.getProjectId().equals(projectId)) {
-
                 System.out.println("Estado actual de cotizacion: " + project.getQuoteStatus());
-
                 System.out.println("Seleccione el nuevo estado de cotizacion:");
                 System.out.println("1. Quote Sended");
                 System.out.println("2. Quote Rejected");
                 System.out.println("3. Quote Accepted");
-
                 int option;
                 ProjectStatus newQuoteStatus = null;
 
@@ -596,17 +551,11 @@ public class DataManager {
                             System.out.println("Opcion no valida. Intente de nuevo.");
                     }
                 } while (newQuoteStatus == null);
-
                 ProjectStatus oldQuoteStatus = project.getQuoteStatus();
-
                 if (!oldQuoteStatus.equals(newQuoteStatus)) {
-
                     project.setQuoteStatus(newQuoteStatus);
-
                     logQuoteStatusChange(project, oldQuoteStatus, newQuoteStatus);
-
                     saveProjectsToFile();
-
                     System.out.println("Estado de cotizacion actualizado exitosamente.");
                 } else {
                     System.out.println("El estado de cotizacion no ha cambiado.");
@@ -619,7 +568,6 @@ public class DataManager {
 
     public Date calculateEndDateOfSupport(Scanner scanner, Date startDate, int durationYears) {
         int monthsOfSupport = durationYears * 12;
-        
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
         calendar.add(Calendar.MONTH, monthsOfSupport);
@@ -628,27 +576,20 @@ public class DataManager {
 
     public void generateSupport() {
         Scanner scanner = new Scanner(System.in);
-
         Project selectedProject = selectProject(scanner);
         if (selectedProject == null) {
             System.out.println("Proyecto no encontrado o inválido.");
             return;
         }
-
         if (!validateProjectStatus(selectedProject)) {
             return;
         }
-
+        
         String supportDetails = getSupportDetails(scanner);
-
         Date startDate = new Date();
-
         int durationYears = getDurationYears(scanner);
-
         Date endDate = calculateEndDateOfSupport(scanner, startDate, durationYears);
-
         String scheduleType = getScheduleType(scanner);
-
         String supportId = generateSupportId(durationYears, scheduleType);
 
         Support support = new Support(
@@ -665,7 +606,6 @@ public class DataManager {
 
         supports.add(support);
         saveSupportsToFile();
-
         System.out.println("Soporte generado con éxito:");
         support.displaySupportData();
     }
@@ -675,7 +615,6 @@ public class DataManager {
         for (Project project : projects) {
             System.out.println("Proyecto ID: " + project.getProjectId() + " Estado: " + project.getOperationalStatus());
         }
-
         System.out.print("Ingrese el ID del proyecto para generar soporte: ");
         String projectId = scanner.nextLine();
 
@@ -684,7 +623,6 @@ public class DataManager {
                 return project;
             }
         }
-
         return null;
     }
 
@@ -699,14 +637,13 @@ public class DataManager {
             System.out.println("El proyecto no está pagado. Solo los proyectos pagados pueden generar soporte.");
             return false;
         }
-
         return true;
     }
 
     private String generateSupportId(int durationYears, String scheduleType) {
         String durationLabel = durationYears + "A";
         String scheduleLabel = scheduleType.equals("8x5") ? "8*5" : "24*7";
-
+        
         if (durationYears == 1 && scheduleType.equals("8x5")) {
             return "SRV_01 (" + durationLabel + " " + scheduleLabel + ")";
         } else if (durationYears == 1 && scheduleType.equals("24x7")) {
@@ -747,14 +684,12 @@ public class DataManager {
                 scanner.next();
             }
         } while (!validDuration);
-
         return durationYears;
     }
 
     private String getScheduleType(Scanner scanner) {
         String scheduleType = "";
         boolean validSchedule = false;
-
         System.out.println("Seleccione el tipo de horario:");
         System.out.println("1. 8x5 (8 horas al día por 5 días a la semana)");
         System.out.println("2. 24x7 (24 horas al día por 7 días a la semana)");
@@ -783,7 +718,6 @@ public class DataManager {
 
     public void closeSupport() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Lista de soportes:");
         for (Support support : supports) {
             System.out.println("ID: " + support.getSupportId() + ", Estado: " + support.getSupportStatus());
@@ -791,7 +725,6 @@ public class DataManager {
 
         System.out.print("Ingrese el ID del soporte que desea cerrar: ");
         String supportId = scanner.nextLine();
-
         Support selectedSupport = null;
         for (Support support : supports) {
             if (support.getSupportId().equals(supportId)) {
@@ -799,7 +732,7 @@ public class DataManager {
                 break;
             }
         }
-
+        
         if (selectedSupport == null) {
             System.out.println("Soporte no encontrado con el ID: " + supportId);
             return;
@@ -811,9 +744,7 @@ public class DataManager {
         }
 
         selectedSupport.setSupportStatus("Closed");
-
         saveSupportsToFile();
-
         System.out.println("El soporte con ID: " + supportId + " ha sido cerrado correctamente.");
     }
 }

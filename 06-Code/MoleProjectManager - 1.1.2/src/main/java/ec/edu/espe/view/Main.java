@@ -18,7 +18,6 @@ import java.util.Scanner;
  * @author Dennis Paucar
  */
 public class Main {
-
     public String fileName = "json/projects.json";
 
     public static void mostrarMenu() {
@@ -142,7 +141,7 @@ public class Main {
                             case 2:
                                 System.out.println("Opcion 2: Visualizar Proyectos");
 
-                                System.out.println("\n--- Detalles de los Proyectos ---");
+                                System.out.println("\n---> Detalles de los Proyectos <---");
 
                                 for (Project project : dataManager.getProjects()) {
                                     project.displayProjectData();
@@ -157,7 +156,6 @@ public class Main {
                                 backToMenu = true;
                                 break;
                         }
-
                     }
 
                     break;
@@ -245,7 +243,7 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("Visualizar Soportes");
-                                System.out.println("\n--- Detalles de los Soportes ---");
+                                System.out.println("\n---> Detalles de los Soportes <---");
 
                                 for (Support support : dataManager.getSupports()) {
                                     support.displaySupportData();

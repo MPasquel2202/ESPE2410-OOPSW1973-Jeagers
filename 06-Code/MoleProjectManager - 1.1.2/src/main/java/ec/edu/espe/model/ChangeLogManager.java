@@ -16,11 +16,11 @@ import java.util.Map;
         public ChangeLogManager(DataManager dataManager) {
             this.dataManager = dataManager;
         }
+        //TODO remake to use jframe HistoryOfChanges
 
         public Map<String, List<String>> getGroupedChangeLogs() {
             Map<String, List<String>> groupedLogs = new HashMap<>();
 
-           
             List<QuoteChangeLog> quoteChangeLogs = dataManager.getQuoteChangeLogs();
             List<QuoteStatusChangeLog> quoteStatusChangeLogs = dataManager.getQuoteStatusChangeLogs();
             List<StatusChangeLog> statusChangeLogs = dataManager.getStatusChangeLogs();
@@ -78,8 +78,7 @@ import java.util.Map;
                 for (String log : entry.getValue()) {
                     System.out.println("  " + log);
                 }
-                System.out.println("---------------------------------------------------");
+                System.out.println("|---------------------------------------------------|");
             }
-        }
-        
+        }  
  }

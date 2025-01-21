@@ -21,7 +21,6 @@ public class ProjectChangeLog {
         this.changeDate = changeDate;
     }
       
-
     public String getProjectId() {
         return projectId;
     }
@@ -61,7 +60,4 @@ public class ProjectChangeLog {
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
-    
-    
-    
 }

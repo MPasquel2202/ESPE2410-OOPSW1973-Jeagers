@@ -2,7 +2,6 @@ package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  *
  * @author Dennis Paucar
@@ -80,8 +79,5 @@ public class QuoteChangeLog {
 
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
-    }
-    
-    
-    
+    } 
 }

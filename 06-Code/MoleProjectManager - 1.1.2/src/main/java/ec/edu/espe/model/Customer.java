@@ -10,7 +10,6 @@ public class Customer {
     private String email;          
     private String address; 
     private String customerId;
-
     
     public Customer(String ruc, String name, String phoneNumber, String email, String address, String customerId) {
         this.ruc = ruc;
@@ -20,7 +19,6 @@ public class Customer {
         this.address = address;
         this.customerId = customerId;
     }
-
     public void displayCustomerDetails() {
         System.out.println("+---------------------+---------------------+");
         System.out.printf("| %-20s | %-20s |%n", "Campo", "Valor");
@@ -81,9 +79,6 @@ public class Customer {
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
-    
-    
-
     
     @Override
     public String toString() {

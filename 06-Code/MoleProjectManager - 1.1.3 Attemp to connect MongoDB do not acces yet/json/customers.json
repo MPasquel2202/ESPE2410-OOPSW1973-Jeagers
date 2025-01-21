@@ -1,0 +1,34 @@
+[
+  {
+    "ruc": "0349343",
+    "name": "neetlife.EC",
+    "phoneNumber": " netlife@gmail.com",
+    "email": "netlife@gmail.com4",
+    "address": "ecuador-Quito",
+    "customerId": "47584"
+  },
+  {
+    "ruc": "454546",
+    "name": "Puntonet",
+    "phoneNumber": "0990600274",
+    "email": "puntonetec@gmail.com",
+    "address": "Ecuador-Quito",
+    "customerId": "76704"
+  },
+  {
+    "ruc": "45657676",
+    "name": "Telconet",
+    "phoneNumber": "0985473435",
+    "email": "telconectEcuador@gmail.com",
+    "address": "Ecuador-Quito-Av.6 de diciembre",
+    "customerId": "50414"
+  },
+  {
+    "ruc": "1835698027001",
+    "name": "Pablo Noruda",
+    "phoneNumber": "0945213678",
+    "email": "lejemplo1@gmail.com",
+    "address": "Av. Los Ríos Oe-32",
+    "customerId": "77884"
+  }
+]

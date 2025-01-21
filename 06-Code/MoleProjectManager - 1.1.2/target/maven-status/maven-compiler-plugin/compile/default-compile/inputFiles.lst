@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\complements\Menu.java
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\complements\MenuAnimation.java
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\complements\MenuEvent.java
@@ -27,3 +28,36 @@ C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\raven\scroll\win11\ScrollPaneWin11.java
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\raven\swing\shadow\GraphicsUtilities.java
 C:\Users\denni\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\raven\swing\shadow\ShadowRenderer.java
+=======
+<<<<<<< Updated upstream
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ChangeLogManager.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Customer.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\DataManager.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Notification.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Project.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ProjectChangeLog.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ProjectStatus.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\QuoteChangeLog.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\QuoteStatusChangeLog.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Report.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ReportGenerator.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\StatusChangeLog.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Support.java
+C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\view\Main.java
+=======
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ChangeLogManager.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Customer.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\DataManager.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Notification.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Project.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ProjectChangeLog.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ProjectStatus.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\QuoteChangeLog.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\QuoteStatusChangeLog.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Report.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\ReportGenerator.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\StatusChangeLog.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\model\Support.java
+C:\Users\marlo\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.2\src\main\java\ec\edu\espe\view\Main.java
+>>>>>>> Stashed changes
+>>>>>>> 83fed074a856ad9e7942ec67cc04376577b0275d

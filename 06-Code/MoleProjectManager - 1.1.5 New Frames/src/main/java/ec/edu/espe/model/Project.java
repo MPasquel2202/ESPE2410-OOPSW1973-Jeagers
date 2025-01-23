@@ -2,6 +2,7 @@ package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.bson.Document;
 
 /**
  *
@@ -178,4 +179,21 @@ public class Project {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
+    
+    @Override
+public String toString() {
+    return new Document("projectId", projectId)
+            .append("projectTitle", projectTitle)
+            .append("projectDescription", projectDescription)
+            .append("customer", customer != null ? Document.parse(customer.toString()) : null)
+            .append("startDate", startDate != null ? new SimpleDateFormat("yyyy-MM-dd").format(startDate) : null)
+            .append("closingDate", closingDate != null ? new SimpleDateFormat("yyyy-MM-dd").format(closingDate) : null)
+            .append("startquote", startquote)
+            .append("operationalStatus", operationalStatus != null ? operationalStatus.toString() : null)
+            .append("quoteStatus", quoteStatus != null ? quoteStatus.toString() : null)
+            .append("paid", paid)
+            .append("invoiced", invoiced)
+            .append("isPublic", isPublic)
+            .toJson();
+}
 }

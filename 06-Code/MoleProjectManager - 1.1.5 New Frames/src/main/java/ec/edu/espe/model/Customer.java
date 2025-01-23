@@ -14,13 +14,13 @@ public class Customer {
     private String customerId;
 
     
-    public Customer(String ruc, String name, String phoneNumber, String email, String address, String customerId) {
+    public Customer(String customerId, String ruc, String name, String phoneNumber, String email, String address) {
+        this.customerId= customerId;
         this.ruc = ruc;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        this.customerId = customerId;
     }
 
     public void displayCustomerDetails() {
@@ -83,16 +83,15 @@ public class Customer {
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
-    
 
     @Override
     public String toString() {
-        return new Document("id", customerId)
+       return new Document("id", customerId)
                 .append("RUC", ruc)
                 .append("name", name)
                 .append("Phone", phoneNumber)
                 .append("Email", email)
                 .append("Dirección", address)
                 .toJson();
-    }
+    }   
 }

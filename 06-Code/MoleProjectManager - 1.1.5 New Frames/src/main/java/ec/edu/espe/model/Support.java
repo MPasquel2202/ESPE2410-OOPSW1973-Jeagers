@@ -2,6 +2,7 @@ package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.bson.Document;
 
 /**
  *
@@ -140,5 +141,22 @@ public class Support {
     public void setScheduleType(String scheduleType) {
         this.scheduleType = scheduleType;
     }
+    
+    @Override
+public String toString() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    return new Document("supportId", supportId)
+            .append("projectId", projectId)
+            .append("projectDescription", projectDescription)
+            .append("supportDetails", supportDetails)
+            .append("startDate", startDate != null ? dateFormat.format(startDate) : null)
+            .append("endDate", endDate != null ? dateFormat.format(endDate) : null)
+            .append("supportStatus", supportStatus != null ? supportStatus : "Sin definir")
+            .append("durationYears", durationYears)
+            .append("scheduleType", scheduleType)
+            .toJson();
+}
+
 
 }

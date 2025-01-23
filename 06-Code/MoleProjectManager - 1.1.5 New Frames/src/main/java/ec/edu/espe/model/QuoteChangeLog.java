@@ -2,47 +2,46 @@ package ec.edu.espe.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.bson.Document;
 
 /**
  *
  * @author Dennis Paucar
  */
-public class QuoteStatusChangeLog {
+public class QuoteChangeLog {
     private String projectId;
     private String projectTitle;
-    private String oldQuoteStatus;
-    private String newQuoteStatus;
+    private double oldQuote;
+    private double newQuote;
     private Date changeDate;
 
-    public QuoteStatusChangeLog(String projectId, String projectTitle, String oldQuoteStatus, String newQuoteStatus, Date changeDate) {
+    public QuoteChangeLog(String projectId, String projectTitle, double oldQuote, double newQuote, Date changeDate) {
         this.projectId = projectId;
         this.projectTitle = projectTitle;
-        this.oldQuoteStatus = oldQuoteStatus;
-        this.newQuoteStatus = newQuoteStatus;
+        this.oldQuote = oldQuote;
+        this.newQuote = newQuote;
         this.changeDate = changeDate;
     }
     
-
-    public void displayStatusChangeLog() {
+    public void displayChangeLog() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         System.out.println("+--------------------------------------------------------------+");
-        System.out.printf("| %-60s |\n", "Registro de Cambios en Estado de Cotizacion");
+        System.out.printf("| %-60s |\n", "Registro de Cambios en Cotizacion");
         System.out.println("+--------------------------------------------------------------+");
 
         System.out.printf("| %-18s | %-45s |\n", "ID Proyecto:", projectId);
         System.out.printf("| %-18s | %-45s |\n", "Titulo Proyecto:", projectTitle);
         System.out.println("+--------------------------------------------------------------+");
 
-        System.out.printf("| %-18s | %-45s |\n", "Estado Anterior:", oldQuoteStatus);
-        System.out.printf("| %-18s | %-45s |\n", "Nuevo Estado:", newQuoteStatus);
+        System.out.printf("| %-18s | %-45.2f |\n", "Cotizacion Anterior:", oldQuote);
+        System.out.printf("| %-18s | %-45.2f |\n", "Nueva Cotizacion:", newQuote);
         System.out.println("+--------------------------------------------------------------+");
 
         System.out.printf("| %-18s | %-45s |\n", "Fecha del Cambio:", changeDate != null ? dateFormat.format(changeDate) : "No registrada");
         System.out.println("+--------------------------------------------------------------+");
     }
-
-    
+      
 
     public String getProjectId() {
         return projectId;
@@ -60,20 +59,20 @@ public class QuoteStatusChangeLog {
         this.projectTitle = projectTitle;
     }
 
-    public String getOldQuoteStatus() {
-        return oldQuoteStatus;
+    public double getOldQuote() {
+        return oldQuote;
     }
 
-    public void setOldQuoteStatus(String oldQuoteStatus) {
-        this.oldQuoteStatus = oldQuoteStatus;
+    public void setOldQuote(double oldQuote) {
+        this.oldQuote = oldQuote;
     }
 
-    public String getNewQuoteStatus() {
-        return newQuoteStatus;
+    public double getNewQuote() {
+        return newQuote;
     }
 
-    public void setNewQuoteStatus(String newQuoteStatus) {
-        this.newQuoteStatus = newQuoteStatus;
+    public void setNewQuote(double newQuote) {
+        this.newQuote = newQuote;
     }
 
     public Date getChangeDate() {
@@ -83,6 +82,17 @@ public class QuoteStatusChangeLog {
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
+    
+    @Override
+public String toString() {
+    return new Document("projectId", projectId)
+            .append("projectTitle", projectTitle)
+            .append("oldQuote", oldQuote)
+            .append("newQuote", newQuote)
+            .append("changeDate", changeDate != null ? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(changeDate) : null)
+            .toJson();
+}
+
     
     
 }

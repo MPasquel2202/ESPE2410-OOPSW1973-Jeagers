@@ -1,6 +1,8 @@
 package ec.edu.espe.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.bson.Document;
 
 /**
  *
@@ -73,7 +75,16 @@ public class StatusChangeLog {
         this.description = description;
     }
     
-    
+   @Override
+public String toString() {
+    return new Document("projectId", projectId)
+            .append("projectTitle", projectTitle)
+            .append("oldStatus", oldStatus)
+            .append("newStatus", newStatus)
+            .append("changeDate", changeDate != null ? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(changeDate) : null)
+            .append("description", description)
+            .toJson();
+} 
 
    
             

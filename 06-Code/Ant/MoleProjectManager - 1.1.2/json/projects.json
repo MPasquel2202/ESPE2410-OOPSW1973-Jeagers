@@ -1,0 +1,152 @@
+[
+  {
+    "projectId": "Prj-0001",
+    "projectTitle": "Netlife",
+    "projectDescription": "netlife 5g wifi",
+    "customer": {
+      "ruc": "0034934",
+      "name": "netlife",
+      "phoneNumber": "09903434",
+      "email": "netlifeec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "30330"
+    },
+    "startDate": "Dec 26, 2024, 2:15:22 AM",
+    "closingDate": "Dec 30, 2024, 12:00:00 AM",
+    "startquote": 50000.0,
+    "operationalStatus": {
+      "status": "Closed"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": true
+  },
+  {
+    "projectId": "Prj-0002",
+    "projectTitle": "Puntonet ",
+    "projectDescription": "rebuild a antena ",
+    "customer": {
+      "ruc": "0092323",
+      "name": "Celerity",
+      "phoneNumber": "09902324",
+      "email": "celerity@gmail.com",
+      "address": "Guayaquil-Ecuador",
+      "customerId": "93697"
+    },
+    "startDate": "Dec 26, 2024, 2:17:23 AM",
+    "closingDate": "Dec 28, 2024, 12:00:00 AM",
+    "startquote": 6000.0,
+    "operationalStatus": {
+      "status": "Closed"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": true,
+    "invoiced": true,
+    "isPublic": false
+  },
+  {
+    "projectId": "Prj-0003",
+    "projectTitle": "Netlife",
+    "projectDescription": "install routers",
+    "customer": {
+      "ruc": "0349343",
+      "name": "neetlife.EC",
+      "phoneNumber": " netlife@gmail.com",
+      "email": "netlife@gmail.com4",
+      "address": "ecuador-Quito",
+      "customerId": "47584"
+    },
+    "startDate": "Dec 27, 2024, 11:23:48 PM",
+    "closingDate": "Dec 29, 2024, 12:00:00 AM",
+    "startquote": 59000.0,
+    "operationalStatus": {
+      "status": "Paused"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": true
+  },
+  {
+    "projectId": "Prj-0004",
+    "projectTitle": "Build 5g Antenas",
+    "projectDescription": "Build a rele and control system for internet in Quito-Sur",
+    "customer": {
+      "ruc": "0349343",
+      "name": "neetlife.EC",
+      "phoneNumber": " netlife@gmail.com",
+      "email": "netlife@gmail.com4",
+      "address": "ecuador-Quito",
+      "customerId": "47584"
+    },
+    "startDate": "Dec 28, 2024, 2:10:36 AM",
+    "closingDate": "Dec 31, 2024, 12:00:00 AM",
+    "startquote": 56000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Rejected"
+    },
+    "paid": false,
+    "invoiced": true,
+    "isPublic": true
+  },
+  {
+    "projectId": "Prj-0005",
+    "projectTitle": "Sistema de redes",
+    "projectDescription": "construccion de un sistema de red 5G en Quito-Sur",
+    "customer": {
+      "ruc": "454546",
+      "name": "Puntonet",
+      "phoneNumber": "0990600274",
+      "email": "puntonetec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "76704"
+    },
+    "startDate": "Dec 30, 2024, 5:27:35 PM",
+    "closingDate": "Dec 31, 2024, 12:00:00 AM",
+    "startquote": 60000.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Accepted"
+    },
+    "paid": true,
+    "invoiced": true,
+    "isPublic": false
+  },
+  {
+    "projectId": "Prj-0006",
+    "projectTitle": "jkh",
+    "projectDescription": "jkl",
+    "customer": {
+      "ruc": "454546",
+      "name": "Puntonet",
+      "phoneNumber": "0990600274",
+      "email": "puntonetec@gmail.com",
+      "address": "Ecuador-Quito",
+      "customerId": "76704"
+    },
+    "startDate": "Jan 13, 2025, 2:46:31 AM",
+    "closingDate": "Mar 25, 2025, 12:00:00 AM",
+    "startquote": 56146.0,
+    "operationalStatus": {
+      "status": "Created"
+    },
+    "quoteStatus": {
+      "status": "Quote Sended"
+    },
+    "paid": false,
+    "invoiced": false,
+    "isPublic": false
+  }
+]

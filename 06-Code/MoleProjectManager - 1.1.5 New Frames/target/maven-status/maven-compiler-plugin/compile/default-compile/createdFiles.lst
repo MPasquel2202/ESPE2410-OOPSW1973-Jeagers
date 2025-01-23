@@ -1,9 +1,11 @@
 ec\edu\espe\model\StatusChangeLog.class
+ec\edu\espe\view\ListProjectsFrm$3.class
 ec\edu\espe\model\DataManager$2.class
 ec\edu\espe\model\ReportGenerator.class
 ec\edu\espe\model\Report.class
 ec\edu\espe\view\CreateSupportFrm.class
 ec\edu\espe\model\Project.class
+ec\edu\espe\view\ListProjectsFrm$1.class
 ec\edu\espe\Controller\SupportController.class
 ec\edu\espe\model\QuoteStatusChangeLog.class
 ec\edu\espe\model\ReportGenerator$1.class
@@ -19,10 +21,12 @@ ec\edu\espe\Controller\QuoteChangeLogController.class
 ec\edu\espe\model\DataManager$5.class
 ec\edu\espe\model\DataManager$1.class
 ec\edu\espe\model\ProjectStatus.class
+ec\edu\espe\view\ListProjectsFrm$2.class
 ec\edu\espe\view\ListCustomersFrm.class
 ec\edu\espe\Controller\StatusChangeLogController.class
 ec\edu\espe\model\DataManager$3.class
 ec\edu\espe\view\ListCustomersFrm$1.class
+ec\edu\espe\view\ListProjectsFrm.class
 ec\edu\espe\Controller\QuoteStatusChangeLogController.class
 ec\edu\espe\view\AddProject$1.class
 ec\edu\espe\Controller\BaseController.class

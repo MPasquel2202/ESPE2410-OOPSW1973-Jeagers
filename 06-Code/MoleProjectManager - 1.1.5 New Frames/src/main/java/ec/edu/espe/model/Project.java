@@ -39,21 +39,6 @@ public class Project {
         this.isPublic = isPublic;
     }
 
-    public Project() {
-        this.projectTitle = "";
-        this.projectId = "";
-        this.projectDescription = "";
-        this.customer = null;
-        this.startDate = null;
-        this.closingDate = null;
-        this.startquote = 0.0;
-        this.operationalStatus = null;
-        this.quoteStatus = null;
-        this.paid = false;
-        this.invoiced = false;
-        this.isPublic = false;
-    }
-
     public void displayProjectData() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

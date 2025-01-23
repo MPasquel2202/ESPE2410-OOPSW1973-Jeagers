@@ -33,7 +33,7 @@ public class Report {
 
     public Report() {
         this.reportId = "";
-        this.project = new Project();
+        this.project = new Project("", "", "",null,null, null, 0.0,ProjectStatus.CREATED, ProjectStatus.QUOTE_SEND, false, false, false);
         this.quoteChangeLogs = new ArrayList<>();
         this.statusChangeLogs = new ArrayList<>();
         this.quoteStatusChangeLogs = new ArrayList<>();

@@ -44,6 +44,18 @@ public class AddProjectFrm extends javax.swing.JFrame {
        
     }
     
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        if (customer != null) {
+            lblCustomerName.setText(customer.getName());
+            lblCustomerId.setText(customer.getCustomerId());
+            lblEmail.setText(customer.getEmail());
+            lblPhoneNumber.setText(customer.getPhoneNumber());
+            lblRuc.setText(customer.getRuc());
+            lblCustomerAdress.setText(customer.getAddress());
+        }
+    }
+    
     public void changelblName(Customer customer){
             if (customer != null) {
             lblCustomerName.setText(customer.getName());
@@ -276,11 +288,11 @@ public class AddProjectFrm extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Código del comprador: ");
 
-        lblRuc.setText("jLabel8");
+        lblRuc.setText(".");
 
-        lblCustomerName.setText("jLabel8");
+        lblCustomerName.setText(".");
 
-        lblCustomerAdress.setText("jLabel8");
+        lblCustomerAdress.setText(".");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Teléfono:");
@@ -288,9 +300,9 @@ public class AddProjectFrm extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("E-mail");
 
-        lblEmail.setText("jLabel8");
+        lblEmail.setText(".");
 
-        lblPhoneNumber.setText("jLabel8");
+        lblPhoneNumber.setText(".");
 
         btnCustomerChoose.setText("Volver a Escoger");
         btnCustomerChoose.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +311,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
             }
         });
 
-        lblCustomerId.setText("jLabel18");
+        lblCustomerId.setText(".");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -332,7 +344,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCustomerChoose)
-                .addGap(15, 15, 15))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,6 +414,11 @@ public class AddProjectFrm extends javax.swing.JFrame {
         });
 
         rbtnNotInvoiced.setText("No");
+        rbtnNotInvoiced.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnNotInvoicedActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Pagado:");
 
@@ -413,6 +430,11 @@ public class AddProjectFrm extends javax.swing.JFrame {
         });
 
         rbtnNotPaid.setText("No");
+        rbtnNotPaid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnNotPaidActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpIsPaidedLayout = new javax.swing.GroupLayout(jpIsPaided);
         jpIsPaided.setLayout(jpIsPaidedLayout);
@@ -576,6 +598,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProjectTitleActionPerformed
 
     private void rbtnCustomerOptionYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCustomerOptionYesActionPerformed
+       
         if (rbtnCustomerOptionYes.isSelected()) {
             LoadCustomerFrm customerFrame = new LoadCustomerFrm(this);
             customerFrame.setVisible(true);
@@ -600,14 +623,14 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private void rbtnInvoicedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnInvoicedActionPerformed
         if (rbtnInvoiced.isSelected()) {
             rbtnInvoiced.setSelected(true);
-            rbtnPaid.setSelected(false); 
+            rbtnNotInvoiced.setSelected(false); 
         }
     }//GEN-LAST:event_rbtnInvoicedActionPerformed
 
     private void rbtnPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnPaidActionPerformed
         if (rbtnPaid.isSelected()) {
             rbtnPaid.setSelected(true);
-            rbtnInvoiced.setSelected(false); 
+            rbtnNotPaid.setSelected(false); 
         }
     }//GEN-LAST:event_rbtnPaidActionPerformed
 
@@ -706,15 +729,51 @@ public class AddProjectFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSectorActionPerformed
 
     private void btnCustomerChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerChooseActionPerformed
-        LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
-        loadCustomerFrm.setVisible(true);
+        if (rbtnCustomerOptionYes.isSelected()) {
+            LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
+            loadCustomerFrm.setVisible(true);
+        } else if (rbnCreateNewCustomer.isSelected()) {
+
+            AddClientforProjectFrm addClientforProjectFrm = new AddClientforProjectFrm(this);
+            addClientforProjectFrm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una opción antes de continuar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+       
     }//GEN-LAST:event_btnCustomerChooseActionPerformed
 
     private void rbnCreateNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnCreateNewCustomerActionPerformed
+        if (rbnCreateNewCustomer.isSelected()) {
+            AddClientforProjectFrm addClientforProjectFrm =  new AddClientforProjectFrm(this) ;
+            addClientforProjectFrm.setVisible(true);
+            jPanel3.setVisible(true);
+        } else {
+            jPanel3.setVisible(false);
+
+            lblCustomerName.setText("");
+            lblCustomerId.setText("");
+            lblEmail.setText("");
+            lblPhoneNumber.setText("");
+            lblRuc.setText("");
+            lblCustomerAdress.setText("");
+            customer = null;
+        }
         
-        AddClientFrm addClientFrm = new AddClientFrm();
-        addClientFrm.setVisible(true);
     }//GEN-LAST:event_rbnCreateNewCustomerActionPerformed
+
+    private void rbtnNotInvoicedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNotInvoicedActionPerformed
+        if (rbtnNotInvoiced.isSelected()) {
+            rbtnNotInvoiced.setSelected(true);
+            rbtnInvoiced.setSelected(false); 
+        }
+    }//GEN-LAST:event_rbtnNotInvoicedActionPerformed
+
+    private void rbtnNotPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNotPaidActionPerformed
+        if (rbtnNotPaid.isSelected()) {
+            rbtnNotPaid.setSelected(true);
+            rbtnPaid.setSelected(false); 
+        }
+    }//GEN-LAST:event_rbtnNotPaidActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,12 +1,9 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.Complements.MenuEvent;
 import ec.edu.espe.submenu.DefaultForm;
 import java.awt.Component;
-import ec.edu.espe.view.AddProjectFrm;
-
-
+import ec.edu.espe.view.*;
 
 /**
  *
@@ -19,54 +16,71 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
-         menu1.setEvent(new MenuEvent() {
-        @Override
-        public void selected(int index, int subIndex) {
-            if(index == 1) { 
-                if(subIndex == 1) { 
-                    AddProjectFrm addProjectFrm = new AddProjectFrm();
-                    addProjectFrm.setVisible(true);
-                    addProjectFrm.setLocationRelativeTo(null);  
-                } else if(subIndex == 2) {  
-                    ListProjects listProjects = new ListProjects();
-                    listProjects.setVisible(true);  
-                
-                    
-                }
-            }else if(index == 3){
-                if(subIndex == 1){
-                    UpdateStatus updateStatus = new UpdateStatus();
-                    updateStatus.setVisible(true);
-                    
-                }
-            }else if(index == 4){
-                if(subIndex == 1){
-                    ProjectForSupportFrm projectForSupportFrm = new ProjectForSupportFrm();
-                    projectForSupportFrm.setVisible(true);
-                }else if(subIndex == 2){
-                    ListSupportsFrm listSupportsFrm = new ListSupportsFrm();
-                    listSupportsFrm.setVisible(true);
-                }
-                
-            }else if(index == 8){
-                if(subIndex == 1){
-                    AddClientFrm addClientFrm = new AddClientFrm();
-                    addClientFrm.setVisible(true);
-                } else if(subIndex == 2){
-                    ListCustomersFrm listCustomersFrm = new ListCustomersFrm();
-                    listCustomersFrm.setVisible(true);
+        menu1.setEvent(new MenuEvent() {
+            @Override
+            public void selected(int index, int subIndex) {
+                if (index == 1) {
+                    if (subIndex == 1) {
+                        AddProjectFrm addProjectFrm = new AddProjectFrm();
+                        addProjectFrm.setVisible(true);
+                        addProjectFrm.setLocationRelativeTo(null);
+                    } else if (subIndex == 2) {
+                        ListProjects listProjects = new ListProjects();
+                        listProjects.setVisible(true);
+
+                    }
+                } else if (index == 2) {
+                    if (subIndex == 1) {
+                        QuoteUpdaterFrm quoteUpdaterFrm = new QuoteUpdaterFrm();
+                        quoteUpdaterFrm.setVisible(true);
+                    } else if (subIndex == 2) {
+                        QuoteStateUpdaterFrm quoteStateUpdaterFrm = new QuoteStateUpdaterFrm();
+                        quoteStateUpdaterFrm.setVisible(true);
+                    } else if (subIndex == 3) {
+                        QuoteHistoryFrm quoteHistoryFrm = new QuoteHistoryFrm();
+                        quoteHistoryFrm.setVisible(true);
+                    }
+
+                } else if (index == 3) {
+                    if (subIndex == 1) {
+                        ProjectForSupportFrm projectForSupportFrm = new ProjectForSupportFrm();
+                        projectForSupportFrm.setVisible(true);
+                    } else if (subIndex == 2) {
+                        UpdateStatusFrm updateStatusFrm = new UpdateStatusFrm();
+                        updateStatusFrm.setVisible(true);
+                    } else if (subIndex == 3) {
+                        ListSupportsFrm listSupportsFrm = new ListSupportsFrm();
+                        listSupportsFrm.setVisible(true);
+
+                    }
+                } else if (index == 4) {
+                    if (subIndex == 1) {
+                        ProjectForSupportFrm projectForSupportFrm = new ProjectForSupportFrm();
+                        projectForSupportFrm.setVisible(true);
+                    } else if (subIndex == 2) {
+                        ListSupportsFrm listSupportsFrm = new ListSupportsFrm();
+                        listSupportsFrm.setVisible(true);
+                    }
+
+                } else if (index == 8) {
+                    if (subIndex == 1) {
+                        AddClientFrm addClientFrm = new AddClientFrm();
+                        addClientFrm.setVisible(true);
+                    } else if (subIndex == 2) {
+                        ListCustomersFrm listCustomersFrm = new ListCustomersFrm();
+                        listCustomersFrm.setVisible(true);
+                    }
                 }
             }
-        }
-    });
+        });
     }
-    
-    private void showForm(Component com){
+
+    private void showForm(Component com) {
         body.removeAll();
         body.add(com);
         body.repaint();
         body.revalidate();
-        
+
     }
 
     /**

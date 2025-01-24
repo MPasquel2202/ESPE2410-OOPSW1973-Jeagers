@@ -13,15 +13,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Brandon Pazmino
  */
-public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
+public class QuoteHistoryFrm extends javax.swing.JFrame {
 
     private QuoteChangeLogController quoteChangeLogController = new QuoteChangeLogController();
     private QuoteStatusChangeLogController quoteStatusChangeLogController = new QuoteStatusChangeLogController();
-
+    private MainMenu mainMenu;
     /**
      * Creates new form BudgetChangeHistory
      */
-    public QuoteChangeHistoryFrm() {
+    public QuoteHistoryFrm() {
         initComponents();
     }
 
@@ -157,28 +157,28 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
 
     private void btnLoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataActionPerformed
         try {
-           
+
             List<QuoteChangeLog> changeLogs = quoteChangeLogController.findAllQuoteChangeLogs();
             List<QuoteStatusChangeLog> statusChangeLogs = quoteStatusChangeLogController.findAllQuoteStatusChangeLogs();
-            
+
             DefaultTableModel model = (DefaultTableModel) tblQuoteChangeLog.getModel();
-            model.setRowCount(0); 
-            
+            model.setRowCount(0);
+
             for (QuoteChangeLog changeLog : changeLogs) {
                 model.addRow(new Object[]{
-                    changeLog.getProjectId(), 
+                    changeLog.getProjectId(),
                     "Presupuesto",
-                    changeLog.getNewQuote(), 
-                    changeLog.getChangeDate() != null ? changeLog.getChangeDate().toString() : "Sin fecha" 
+                    changeLog.getNewQuote(),
+                    changeLog.getChangeDate() != null ? changeLog.getChangeDate().toString() : "Sin fecha"
                 });
             }
-           
+
             for (QuoteStatusChangeLog statusChangeLog : statusChangeLogs) {
                 model.addRow(new Object[]{
-                    statusChangeLog.getProjectId(), 
+                    statusChangeLog.getProjectId(),
                     "Estatus",
-                    statusChangeLog.getNewQuoteStatus(), 
-                    statusChangeLog.getChangeDate() != null ? statusChangeLog.getChangeDate().toString() : "Sin fecha" 
+                    statusChangeLog.getNewQuoteStatus(),
+                    statusChangeLog.getChangeDate() != null ? statusChangeLog.getChangeDate().toString() : "Sin fecha"
                 });
             }
 
@@ -191,7 +191,10 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadDataActionPerformed
 
     private void btnReturnToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnToMenuActionPerformed
-
+        this.dispose();
+        if (mainMenu != null) {
+            mainMenu.setVisible(true);
+        }
     }//GEN-LAST:event_btnReturnToMenuActionPerformed
 
     /**
@@ -211,14 +214,22 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuoteChangeHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuoteChangeHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuoteChangeHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuoteChangeHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteHistoryFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -231,7 +242,7 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuoteChangeHistoryFrm().setVisible(true);
+                new QuoteHistoryFrm().setVisible(true);
             }
         });
     }

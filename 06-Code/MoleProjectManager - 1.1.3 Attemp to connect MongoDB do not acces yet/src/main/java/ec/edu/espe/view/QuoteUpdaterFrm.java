@@ -5,7 +5,7 @@ import ec.edu.espe.Controller.ProjectController;
 import ec.edu.espe.Controller.QuoteStatusChangeLogController;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.model.Project;
-import ec.edu.espe.model.QuoteStatusChangeLog;
+import ec.edu.espe.model.QuoteChangeLog;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Brandon Pazmino
  */
-public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
+public class QuoteUpdaterFrm extends javax.swing.JFrame {
 
     private QuoteChangeLogController quoteChangeLogController = new QuoteChangeLogController();
     private QuoteStatusChangeLogController quoteStatusChangeLogController = new QuoteStatusChangeLogController();
@@ -25,7 +25,7 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
     /**
      * Creates new form QuoteStateUpdater
      */
-    public QuoteStateUpdaterFrm() {
+    public QuoteUpdaterFrm() {
         initComponents();
         loadProjectIDs();
     }
@@ -39,6 +39,7 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -47,22 +48,24 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         cmbProjectIDs = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        cmbQuoteStates = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtNewQuote = new javax.swing.JTextField();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 3, 24)); // NOI18N
-        jLabel1.setText("Cambios de Estado del Presupuesto");
+        jLabel1.setText("Cambios de Presupuesto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(204, 204, 204)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,12 +118,11 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Seleccione el Nuevo Estado del Projecto:");
+        jLabel4.setText("Ingrese el Nuevo Presupuesto:");
 
-        cmbQuoteStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Creado", "En Progreso", "Pausado ", "Cerrado", " " }));
-        cmbQuoteStates.addActionListener(new java.awt.event.ActionListener() {
+        txtNewQuote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbQuoteStatesActionPerformed(evt);
+                txtNewQuoteActionPerformed(evt);
             }
         });
 
@@ -131,11 +133,11 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(cmbQuoteStates, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbProjectIDs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(447, Short.MAX_VALUE))
+                    .addComponent(txtNewQuote)
+                    .addComponent(cmbProjectIDs, 0, 213, Short.MAX_VALUE))
+                .addContainerGap(532, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,11 +146,11 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbProjectIDs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jLabel5)
+                .addGap(71, 71, 71)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbQuoteStates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addComponent(txtNewQuote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,57 +190,56 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
         try {
             String projectTitle = "Título del Proyecto";
             Date changeDate = new Date();
-            String newStatus = (String) cmbQuoteStates.getSelectedItem();
-            if (newStatus == null || newStatus.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, selecciona un nuevo estatus.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            String oldQuoteStatus = "Estado Anterior";
-            QuoteStatusChangeLog statusChangeLog = new QuoteStatusChangeLog(projectId, projectTitle, oldQuoteStatus, newStatus, changeDate);
-            quoteStatusChangeLogController.saveQuoteStatusChangeLog(statusChangeLog);
+                String newBudgetStr = txtNewQuote.getText().trim();
+                if (newBudgetStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Por favor, ingresa un nuevo presupuesto.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                double oldQuote = 0.0;
+                double newQuote = Double.parseDouble(newBudgetStr);
+                QuoteChangeLog changeLog = new QuoteChangeLog(projectId, projectTitle, oldQuote, newQuote, changeDate);
+                quoteChangeLogController.saveQuoteChangeLog(changeLog);
 
-            JOptionPane.showMessageDialog(this, "Estatus actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
+                JOptionPane.showMessageDialog(this, "Presupuesto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            
             clearFields();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el cambio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveQuoteChangeActionPerformed
 
+    private void cmbProjectIDsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProjectIDsActionPerformed
+        
+    }//GEN-LAST:event_cmbProjectIDsActionPerformed
+
+    private void txtNewQuoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewQuoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewQuoteActionPerformed
+
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
-        this.dispose();
+                this.dispose();
         if (mainMenu != null) {
             mainMenu.setVisible(true);
         }
     }//GEN-LAST:event_btnGoBackActionPerformed
 
-    private void cmbProjectIDsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProjectIDsActionPerformed
-
-    }//GEN-LAST:event_cmbProjectIDsActionPerformed
-
-    private void cmbQuoteStatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuoteStatesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbQuoteStatesActionPerformed
-
-    private void loadProjectIDs() {
-        List<String> projectIds = projectController.findAllProjectIds();
-
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-
-        for (String id : projectIds) {
-            comboBoxModel.addElement(id);
-        }
-
-        cmbProjectIDs.setModel(comboBoxModel);
+private void loadProjectIDs() {
+    List<String> projectIds = projectController.findAllProjectIds();
+    
+    DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+    
+    for (String id : projectIds) {
+        comboBoxModel.addElement(id);
     }
+    
+    cmbProjectIDs.setModel(comboBoxModel);
+}
 
     private void clearFields() {
         cmbProjectIDs.setSelectedIndex(0);
-        cmbQuoteStates.setSelectedIndex(-1);
-        cmbQuoteStates.setEnabled(false);
-
+        txtNewQuote.setText("");
+        txtNewQuote.setEnabled(false);
     }
-
     /**
      * @param args the command line arguments
      */
@@ -256,21 +257,27 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuoteStateUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuoteStateUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuoteStateUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuoteStateUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuoteUpdaterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuoteStateUpdaterFrm().setVisible(true);
+                new QuoteUpdaterFrm().setVisible(true);
             }
         });
     }
@@ -279,12 +286,13 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnSaveQuoteChange;
     private javax.swing.JComboBox<String> cmbProjectIDs;
-    private javax.swing.JComboBox<String> cmbQuoteStates;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField txtNewQuote;
     // End of variables declaration//GEN-END:variables
 }

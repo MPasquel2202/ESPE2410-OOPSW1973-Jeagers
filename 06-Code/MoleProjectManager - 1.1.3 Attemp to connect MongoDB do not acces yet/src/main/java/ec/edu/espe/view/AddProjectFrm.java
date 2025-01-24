@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,14 +24,17 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
     private CustomerController customerController= new CustomerController();
     private ProjectController projectController = new ProjectController();
+    
+    
+    
     private Customer customer;
     private MainMenu mainMenu;
     
     public AddProjectFrm() {
         initComponents();
-       
-        loadCustomersIntoTable();
-        
+        buttonGroup1 = new ButtonGroup();
+        buttonGroup1.add(rbtnCustomerOptionYes);  
+        buttonGroup1.add(rbnCreateNewCustomer); 
         jPanel3.setVisible(false);
         Calendar calendar = Calendar.getInstance(); 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
@@ -40,29 +44,28 @@ public class AddProjectFrm extends javax.swing.JFrame {
        
     }
     
+    public void changelblName(Customer customer){
+            if (customer != null) {
+            lblCustomerName.setText(customer.getName());
+            lblCustomerId.setText(customer.getCustomerId());
+            lblEmail.setText(customer.getEmail());
+            lblPhoneNumber.setText(customer.getPhoneNumber());
+            lblRuc.setText(customer.getRuc());
+            lblCustomerAdress.setText(customer.getAddress());
+        } else {
+            lblCustomerName.setText("No customer selected");
+            lblCustomerId.setText("");
+            lblEmail.setText("");
+            lblPhoneNumber.setText("");
+            lblRuc.setText("");
+            lblCustomerAdress.setText("");
+        }
+    }
+    
     
        
     
-    private void loadCustomersIntoTable() {
-        try {
-            List<Customer> customers = customerController.findAllCustomers();
-             DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
-            model.setRowCount(0);
-            for (Customer customer : customers) {
-                model.addRow(new Object[]{
-                    customer.getCustomerId(),
-                    customer.getRuc(),
-                    customer.getName(),
-                    customer.getPhoneNumber(),
-                    customer.getEmail(),
-                    customer.getAddress()
-                });
-            }
-            
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los datos de los clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +91,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
         bgCustomerOption = new javax.swing.ButtonGroup();
         bgInvoiced = new javax.swing.ButtonGroup();
         bgPaided = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -98,6 +102,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
         txtpDescription = new javax.swing.JTextPane();
         jLabel10 = new javax.swing.JLabel();
         rbtnCustomerOptionYes = new javax.swing.JRadioButton();
+        rbnCreateNewCustomer = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -111,10 +116,8 @@ public class AddProjectFrm extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblPhoneNumber = new javax.swing.JLabel();
-        lblCustomerId = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblCustomers = new javax.swing.JTable();
         btnCustomerChoose = new javax.swing.JButton();
+        lblCustomerId = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         lblStartDate = new javax.swing.JLabel();
@@ -167,23 +170,24 @@ public class AddProjectFrm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Insertar Proyecto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(423, 423, 423)
                 .addComponent(jLabel8)
-                .addGap(207, 207, 207))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         jLabel1.setText("Ingrese el título del proyecto:");
@@ -198,11 +202,19 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtpDescription);
 
-        jLabel10.setText("Seleccionar Cliente");
+        jLabel10.setText("Datos del Cliente");
 
+        rbtnCustomerOptionYes.setText("Selecionar Cliente");
         rbtnCustomerOptionYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnCustomerOptionYesActionPerformed(evt);
+            }
+        });
+
+        rbnCreateNewCustomer.setText("Crear Nuevo Cliente");
+        rbnCreateNewCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnCreateNewCustomerActionPerformed(evt);
             }
         });
 
@@ -220,7 +232,9 @@ public class AddProjectFrm extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(33, 33, 33)
-                        .addComponent(rbtnCustomerOptionYes, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rbtnCustomerOptionYes, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbnCreateNewCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(42, 42, 42)
@@ -241,13 +255,14 @@ public class AddProjectFrm extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbtnCustomerOptionYes))
+                    .addComponent(rbtnCustomerOptionYes)
+                    .addComponent(rbnCreateNewCustomer))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel11.setText("Datos del cliente");
+        jLabel11.setText("Datos ");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Dirección:");
@@ -277,40 +292,14 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
         lblPhoneNumber.setText("jLabel8");
 
-        lblCustomerId.setText("jLabel18");
-
-        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Código", "RUC", "Nombre ", "Teléfono", "E-mail", "Dirección"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblCustomersMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblCustomers);
-
-        btnCustomerChoose.setText("Seleccionar");
+        btnCustomerChoose.setText("Volver a Escoger");
         btnCustomerChoose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerChooseActionPerformed(evt);
             }
         });
+
+        lblCustomerId.setText("jLabel18");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -330,15 +319,16 @@ public class AddProjectFrm extends javax.swing.JFrame {
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCustomerAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
-                .addContainerGap())
+                            .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCustomerAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(575, 575, 575))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCustomerChoose)
@@ -348,34 +338,31 @@ public class AddProjectFrm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(lblRuc))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(lblCustomerName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(lblCustomerAdress))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(lblEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(lblPhoneNumber)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(lblCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(lblRuc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(lblCustomerName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(lblCustomerAdress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(lblEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(lblPhoneNumber))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCustomerChoose)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -550,24 +537,19 @@ public class AddProjectFrm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(134, 134, 134))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnProyectSave)
                 .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,7 +565,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProyectSave)
                     .addComponent(jButton1))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -595,55 +577,21 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
     private void rbtnCustomerOptionYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCustomerOptionYesActionPerformed
         if (rbtnCustomerOptionYes.isSelected()) {
-            jPanel3.setVisible(true); 
+            LoadCustomerFrm customerFrame = new LoadCustomerFrm(this);
+            customerFrame.setVisible(true);
+            jPanel3.setVisible(true);  
         } else {
-            jPanel3.setVisible(false); 
+            jPanel3.setVisible(false);  
+
+            lblCustomerName.setText("");
+            lblCustomerId.setText("");
+            lblEmail.setText("");
+            lblPhoneNumber.setText("");
+            lblRuc.setText("");
+            lblCustomerAdress.setText("");
+            customer = null;
         }
     }//GEN-LAST:event_rbtnCustomerOptionYesActionPerformed
-
-    private void tblCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomersMouseClicked
-
-        int selectedRow = tblCustomers.getSelectedRow();
-
-        if (selectedRow != -1) {
-
-            String customerId = tblCustomers.getValueAt(selectedRow, 0).toString();
-            String ruc = tblCustomers.getValueAt(selectedRow, 1).toString();
-            String name = tblCustomers.getValueAt(selectedRow, 2).toString();
-            String phoneNumber = tblCustomers.getValueAt(selectedRow, 3).toString();
-            String email = tblCustomers.getValueAt(selectedRow, 4).toString();
-            String address = tblCustomers.getValueAt(selectedRow, 5).toString();
-
-        }
-    }//GEN-LAST:event_tblCustomersMouseClicked
-
-    private void btnCustomerChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerChooseActionPerformed
-        int selectedRow = tblCustomers.getSelectedRow();
-
-        if (selectedRow != -1) {
-            String customerId = tblCustomers.getValueAt(selectedRow, 0).toString();
-            String ruc = tblCustomers.getValueAt(selectedRow, 1).toString();
-            String name = tblCustomers.getValueAt(selectedRow, 2).toString();
-            String phoneNumber = tblCustomers.getValueAt(selectedRow, 3).toString();
-            String email = tblCustomers.getValueAt(selectedRow, 4).toString();
-            String address = tblCustomers.getValueAt(selectedRow, 5).toString();
-
-           
-            customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
-
-            lblCustomerId.setText(customerId); 
-            lblRuc.setText(ruc);
-            lblCustomerName.setText(name);
-            lblPhoneNumber.setText(phoneNumber);
-            lblEmail.setText(email);
-            lblCustomerAdress.setText(address);
-                
-            
-        } else {
-            
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un cliente de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_btnCustomerChooseActionPerformed
 
     private void txtQuoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuoteActionPerformed
         // TODO add your handling code here:
@@ -757,6 +705,17 @@ public class AddProjectFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbSectorActionPerformed
 
+    private void btnCustomerChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerChooseActionPerformed
+        LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
+        loadCustomerFrm.setVisible(true);
+    }//GEN-LAST:event_btnCustomerChooseActionPerformed
+
+    private void rbnCreateNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnCreateNewCustomerActionPerformed
+        
+        AddClientFrm addClientFrm = new AddClientFrm();
+        addClientFrm.setVisible(true);
+    }//GEN-LAST:event_rbnCreateNewCustomerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -799,6 +758,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgPaided;
     private javax.swing.JButton btnCustomerChoose;
     private javax.swing.JButton btnProyectSave;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbQuoteStatus;
     private javax.swing.JComboBox<String> cmbSector;
     private com.toedter.calendar.JDateChooser dcrCloseDate;
@@ -832,7 +792,6 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpIsPaided;
     private javax.swing.JLabel lblCustomerAdress;
     private javax.swing.JLabel lblCustomerId;
@@ -841,12 +800,12 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblRuc;
     private javax.swing.JLabel lblStartDate;
+    private javax.swing.JRadioButton rbnCreateNewCustomer;
     private javax.swing.JRadioButton rbtnCustomerOptionYes;
     private javax.swing.JRadioButton rbtnInvoiced;
     private javax.swing.JRadioButton rbtnNotInvoiced;
     private javax.swing.JRadioButton rbtnNotPaid;
     private javax.swing.JRadioButton rbtnPaid;
-    private javax.swing.JTable tblCustomers;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtId;

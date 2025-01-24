@@ -102,14 +102,14 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
 
         tblQuoteChangeLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID del Proyecto", "Campo", "Anterior", "Nuevo", "Fecha"
+                "ID del Proyecto", "Campo", "Nuevo", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(tblQuoteChangeLog);
@@ -168,7 +168,6 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     changeLog.getProjectId(), 
                     "Presupuesto",
-                    changeLog.getOldQuote(), 
                     changeLog.getNewQuote(), 
                     changeLog.getChangeDate() != null ? changeLog.getChangeDate().toString() : "Sin fecha" 
                 });
@@ -178,7 +177,6 @@ public class QuoteChangeHistoryFrm extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     statusChangeLog.getProjectId(), 
                     "Estatus",
-                    statusChangeLog.getOldQuoteStatus(), 
                     statusChangeLog.getNewQuoteStatus(), 
                     statusChangeLog.getChangeDate() != null ? statusChangeLog.getChangeDate().toString() : "Sin fecha" 
                 });

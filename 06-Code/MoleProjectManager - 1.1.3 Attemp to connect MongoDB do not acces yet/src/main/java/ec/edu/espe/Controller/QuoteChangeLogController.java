@@ -64,4 +64,5 @@ public class QuoteChangeLogController extends BaseController<QuoteChangeLog>{
             return null;
         }
     }
+    
 }

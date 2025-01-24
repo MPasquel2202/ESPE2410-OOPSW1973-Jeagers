@@ -332,7 +332,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnCustomerChoose" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -418,17 +418,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblRuc">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCustomerName">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCustomerAdress">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
@@ -449,12 +449,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblEmail">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPhoneNumber">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCustomerChoose">
@@ -467,7 +467,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCustomerId">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel18"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
       </SubComponents>
@@ -636,6 +636,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="No"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnNotInvoicedActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jpIsPaided">
 
@@ -685,6 +688,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="No"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnNotPaidActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

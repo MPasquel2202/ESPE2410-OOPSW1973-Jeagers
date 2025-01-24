@@ -234,7 +234,7 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int selectedRow = tblCustomers.getSelectedRow();
-    
+
         if (selectedRow != -1) {
             String customerId = tblCustomers.getValueAt(selectedRow, 0).toString();
             String ruc = tblCustomers.getValueAt(selectedRow, 1).toString();
@@ -243,17 +243,15 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
             String email = tblCustomers.getValueAt(selectedRow, 4).toString();
             String address = tblCustomers.getValueAt(selectedRow, 5).toString();
 
-            customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
+            Customer customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
 
             if (addCustomer != null) {
-                System.out.println("Actualizando etiquetas con: " + customer.getName());
-                addCustomer.changelblName(customer); // Actualiza el frame principal
+                addCustomer.setCustomer(customer);  
             } else {
-                System.out.println("parentFrame es null");
+                System.out.println("addCustomer es null");
             }
 
-            this.dispose();
-
+            this.dispose();  
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un cliente de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }

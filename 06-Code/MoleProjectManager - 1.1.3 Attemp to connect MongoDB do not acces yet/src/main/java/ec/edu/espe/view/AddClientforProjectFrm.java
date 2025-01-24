@@ -11,13 +11,14 @@ import utils.MongoDBConnection;
  */
 public class AddClientforProjectFrm extends javax.swing.JFrame {
     private CustomerController customerController = new CustomerController();
-    
+    private AddProjectFrm addCustomer;
     
     /**
      * Creates new form AddClientFrm
      */
-    public AddClientforProjectFrm() {
+    public AddClientforProjectFrm(AddProjectFrm addCustomer) {
         initComponents();
+        this.addCustomer = addCustomer;
     }
 
     /**
@@ -51,22 +52,23 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 3, 24)); // NOI18N
-        jLabel1.setText("Añadir un nuevo cliente");
+        jLabel1.setText("Añadir un nuevo cliente al Proyecto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 27, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
@@ -236,19 +238,26 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
             return;
         }
 
-        Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
+        Customer customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
 
         try {
-            customerController.saveCustomer(customer);
+            customerController.saveCustomer(customer); 
             JOptionPane.showMessageDialog(this, "Cliente añadido correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            clearFields();
 
-            AddProjectFrm parentFrame = (AddProjectFrm) this.getParent(); 
-            parentFrame.changelblName(customer); 
-            
+            if (addCustomer != null) {
+                System.out.println("Actualizando etiquetas con: " + customer.getName());
+                addCustomer.setCustomer(customer);
+            } else {
+                System.out.println("parentFrame es null");
+            }
+
+            clearFields();
+            this.dispose();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void txtRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucActionPerformed
@@ -302,7 +311,9 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddClientforProjectFrm().setVisible(true);
+                AddProjectFrm mainFrame = new AddProjectFrm();
+                AddClientforProjectFrm addClientforProjectFrm = new AddClientforProjectFrm(mainFrame);
+                addClientforProjectFrm.setVisible(true);
             }
         });
     }

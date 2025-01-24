@@ -454,6 +454,11 @@ public class AddProjectFrm extends javax.swing.JFrame {
         jLabel25.setText("Sector:");
 
         cmbSector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Público", "Privado", " " }));
+        cmbSector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSectorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -490,8 +495,8 @@ public class AddProjectFrm extends javax.swing.JFrame {
                             .addComponent(jLabel22))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbSector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbQuoteStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cmbQuoteStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbSector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(209, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -747,6 +752,10 @@ public class AddProjectFrm extends javax.swing.JFrame {
             mainMenu.setVisible(true);  
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmbSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSectorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -571,8 +571,8 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cmbSector" max="32767" attributes="0"/>
                               <Component id="cmbQuoteStatus" max="32767" attributes="0"/>
+                              <Component id="cmbSector" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -759,6 +759,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbSectorActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

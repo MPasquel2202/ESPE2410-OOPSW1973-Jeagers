@@ -27,14 +27,11 @@ public class ProjectForSupportFrm extends javax.swing.JFrame {
         configureButtonActions();
     }
     private void loadProjectData() {
-        // Inicializar modelo de la tabla
         tableModel = (DefaultTableModel) tblClosedProjects.getModel();
-        tableModel.setRowCount(0); // Limpiar datos previos
+        tableModel.setRowCount(0); 
 
-        // Obtener proyectos desde el controlador
         List<Project> projects = projectController.getClosedProjects();
 
-        // Agregar proyectos a la tabla
         for (Project project : projects) {
             tableModel.addRow(new Object[]{
                 project.getProjectId(),
@@ -44,7 +41,6 @@ public class ProjectForSupportFrm extends javax.swing.JFrame {
         }
     }
     private void configureButtonActions() {
-        // Configurar acción para el botón "Crear Soporte"
         btnOpenCreateSupport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,13 +48,10 @@ public class ProjectForSupportFrm extends javax.swing.JFrame {
             }
         });
 
-        // Configurar acción para el botón "Volver al menú principal"
         jButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Cierra el formulario actual
-                // Aquí puedes abrir el menú principal si tienes otro formulario
-                // Ejemplo: new MainMenuFrm().setVisible(true);
+                dispose(); 
             }
         });
     }

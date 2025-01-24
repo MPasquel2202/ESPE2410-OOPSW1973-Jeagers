@@ -1,5 +1,6 @@
 package ec.edu.espe.view;
 
+import ec.edu.espe.model.ListCustomersFrm;
 import ec.edu.espe.Complements.MenuEvent;
 import ec.edu.espe.submenu.DefaultForm;
 import java.awt.Component;

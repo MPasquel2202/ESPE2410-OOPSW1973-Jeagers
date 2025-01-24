@@ -1,4 +1,4 @@
-package ec.edu.espe.view;
+package ec.edu.espe.model;
 
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.Controller.CustomerController;

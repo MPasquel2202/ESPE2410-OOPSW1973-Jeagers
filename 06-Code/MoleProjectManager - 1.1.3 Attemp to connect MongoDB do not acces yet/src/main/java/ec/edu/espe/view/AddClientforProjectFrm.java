@@ -19,6 +19,7 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
     public AddClientforProjectFrm(AddProjectFrm addCustomer) {
         initComponents();
         this.addCustomer = addCustomer;
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

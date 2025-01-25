@@ -27,7 +27,7 @@ public class Menu extends JComponent{
         {"Proyectos", "Crear nuevo Proyectos", "Ver Proyectos"},
         {"Presupuestos", "Cambiar Presupuesto" , "Cambiar Estatus", "Historial de cambios"},
         {"Estatus de Proyecto", "Ver Estatus", "Cambiar Estatus", "Historial de cambios"},
-        {"Soportes", "Nuevo Soporte", "Estado de Soporte", "Ver Soportes"},
+        {"Soportes", "Nuevo Soporte", "Ver Soportes"},
         {"Historial de cambios"},
         {"Reporte Individual"},
         {"Reporte Mensual"},

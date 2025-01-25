@@ -253,7 +253,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblProjectId">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel3"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -263,7 +263,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblProjectName">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel5"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -273,7 +273,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblStartDate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
@@ -298,7 +298,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblProjectStatus">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel9"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
@@ -313,7 +313,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblModificationDate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnChangeStatus">

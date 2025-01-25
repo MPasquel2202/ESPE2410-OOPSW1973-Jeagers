@@ -29,6 +29,7 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
         initComponents();
         this.addCustomer = addCustomer;
         loadCustomersIntoTable();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     

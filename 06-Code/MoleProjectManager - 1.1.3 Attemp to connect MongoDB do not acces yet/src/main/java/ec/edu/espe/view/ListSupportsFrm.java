@@ -19,6 +19,7 @@ public class ListSupportsFrm extends javax.swing.JFrame {
      */
     public ListSupportsFrm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

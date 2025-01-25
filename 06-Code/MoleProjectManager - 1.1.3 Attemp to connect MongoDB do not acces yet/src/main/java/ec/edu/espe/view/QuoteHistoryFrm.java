@@ -23,6 +23,7 @@ public class QuoteHistoryFrm extends javax.swing.JFrame {
      */
     public QuoteHistoryFrm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

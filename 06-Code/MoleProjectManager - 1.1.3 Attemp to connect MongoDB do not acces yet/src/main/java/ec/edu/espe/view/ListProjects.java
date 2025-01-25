@@ -20,6 +20,7 @@ public class ListProjects extends javax.swing.JFrame {
      */
     public ListProjects() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

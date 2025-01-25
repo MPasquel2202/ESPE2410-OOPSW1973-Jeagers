@@ -106,6 +106,33 @@ public class ProjectController extends BaseController<Project> {
 
         return projects;
     }
+    public void updateProject(Project project) {
+        MongoCollection<Document> collection = getCollection();
+
+        Document query = new Document("projectId", project.getProjectId());
+
+        Document updatedData = new Document()
+                .append("projectId", project.getProjectId())
+                .append("projectTitle", project.getProjectTitle())
+                .append("projectDescription", project.getProjectDescription())
+                .append("customer", new Document()
+                        .append("id", project.getCustomer().getCustomerId())
+                        .append("RUC", project.getCustomer().getRuc())
+                        .append("name", project.getCustomer().getName())
+                        .append("Phone", project.getCustomer().getPhoneNumber())
+                        .append("Email", project.getCustomer().getEmail())
+                        .append("Dirección", project.getCustomer().getAddress()))
+                .append("startDate", project.getStartDate() != null ? new SimpleDateFormat("yyyy-MM-dd").format(project.getStartDate()) : null)
+                .append("closingDate", project.getClosingDate() != null ? new SimpleDateFormat("yyyy-MM-dd").format(project.getClosingDate()) : null)
+                .append("startquote", project.getStartquote())
+                .append("operationalStatus", project.getOperationalStatus().toString())
+                .append("quoteStatus", project.getQuoteStatus().toString())
+                .append("paid", project.isPaid())
+                .append("invoiced", project.isInvoiced())
+                .append("isPublic", project.isIsPublic());
+
+        collection.replaceOne(query, updatedData);
+    }
     
     
     public List<Project> getClosedProjects() {

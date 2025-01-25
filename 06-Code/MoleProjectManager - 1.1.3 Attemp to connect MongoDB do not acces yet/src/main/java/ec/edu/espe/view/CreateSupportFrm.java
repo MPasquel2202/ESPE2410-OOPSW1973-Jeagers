@@ -22,6 +22,7 @@ public class CreateSupportFrm extends javax.swing.JFrame {
         
         lblProjectId.setText("ID del Proyecto: " + project.getProjectId());
         lblProjectTitle.setText("Título del Proyecto: " + project.getProjectTitle());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

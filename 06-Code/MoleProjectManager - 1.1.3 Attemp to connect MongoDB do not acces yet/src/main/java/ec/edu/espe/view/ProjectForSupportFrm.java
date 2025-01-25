@@ -25,6 +25,7 @@ public class ProjectForSupportFrm extends javax.swing.JFrame {
         initComponents();
         loadProjectData();
         configureButtonActions();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     private void loadProjectData() {
         tableModel = (DefaultTableModel) tblClosedProjects.getModel();

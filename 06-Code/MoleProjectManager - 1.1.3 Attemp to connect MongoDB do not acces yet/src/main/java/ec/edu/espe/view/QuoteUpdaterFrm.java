@@ -28,6 +28,7 @@ public class QuoteUpdaterFrm extends javax.swing.JFrame {
     public QuoteUpdaterFrm() {
         initComponents();
         loadProjectIDs();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

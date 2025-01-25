@@ -24,7 +24,7 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
     public UpdateStatusFrm() {
         initComponents();
         loadProjectsIntoTable();
-        
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
      private void loadProjectsIntoTable() {
@@ -152,27 +152,27 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
 
         jLabel2.setText("Código de Proyecto:");
 
-        lblProjectId.setText("jLabel3");
+        lblProjectId.setText(".");
 
         jLabel4.setText("Nombre del Proyecto:");
 
-        lblProjectName.setText("jLabel5");
+        lblProjectName.setText(".");
 
         jLabel6.setText("Fecha de creación:");
 
-        lblStartDate.setText("jLabel7");
+        lblStartDate.setText(".");
 
         jLabel8.setText("Estatus actual:");
 
         cmbStatusOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En progreso", "Pausado", "Cerrado", " " }));
 
-        lblProjectStatus.setText("jLabel9");
+        lblProjectStatus.setText(".");
 
         jLabel10.setText("Cambiar Estatus:");
 
         jLabel11.setText("Fecha de modificación:");
 
-        lblModificationDate.setText("jLabel7");
+        lblModificationDate.setText(".");
 
         btnChangeStatus.setText("Cambiar");
         btnChangeStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -309,8 +309,9 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
                         ProjectStatus oldStatus = selectedProject.getOperationalStatus();
 
                         if (!oldStatus.equals(newStatus)) {
-                            selectedProject.setOperationalStatus(newStatus); 
-                            projectController.saveProject(selectedProject); 
+                            selectedProject.setOperationalStatus(newStatus);
+
+                            projectController.updateProject(selectedProject);  
 
                             JOptionPane.showMessageDialog(this, "Estado del proyecto actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 

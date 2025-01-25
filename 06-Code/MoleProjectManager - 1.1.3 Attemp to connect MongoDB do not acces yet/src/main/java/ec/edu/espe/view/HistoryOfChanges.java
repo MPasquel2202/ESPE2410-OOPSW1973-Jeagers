@@ -11,6 +11,7 @@ public class HistoryOfChanges extends javax.swing.JPanel {
      */
     public HistoryOfChanges() {
         initComponents();
+        
     }
 
     /**

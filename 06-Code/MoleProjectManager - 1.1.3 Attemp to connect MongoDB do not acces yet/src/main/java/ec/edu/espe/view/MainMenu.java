@@ -17,6 +17,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        setResizable(false);
         menu1.setEvent(new MenuEvent() {
             @Override
             public void selected(int index, int subIndex) {
@@ -44,8 +45,8 @@ public class MainMenu extends javax.swing.JFrame {
 
                 } else if (index == 3) {
                     if (subIndex == 1) {
-                        ProjectForSupportFrm projectForSupportFrm = new ProjectForSupportFrm();
-                        projectForSupportFrm.setVisible(true);
+                        StatusTableFrm statusTableFrm = new StatusTableFrm();
+                        statusTableFrm.setVisible(true);
                     } else if (subIndex == 2) {
                         UpdateStatusFrm updateStatusFrm = new UpdateStatusFrm();
                         updateStatusFrm.setVisible(true);

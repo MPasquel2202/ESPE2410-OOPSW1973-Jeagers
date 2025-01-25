@@ -18,6 +18,7 @@ public class AddClientFrm extends javax.swing.JFrame {
      */
     public AddClientFrm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

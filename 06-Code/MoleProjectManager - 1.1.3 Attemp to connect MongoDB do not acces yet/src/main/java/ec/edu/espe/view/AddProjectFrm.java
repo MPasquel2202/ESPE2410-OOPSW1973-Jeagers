@@ -41,7 +41,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
         String formattedDate = sdf.format(calendar.getTime()); 
         
         lblStartDate.setText(formattedDate);
-       
+       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     public void setCustomer(Customer customer) {

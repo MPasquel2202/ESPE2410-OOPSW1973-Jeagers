@@ -1,18 +1,20 @@
 package ec.edu.espe.view;
+
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.Controller.CustomerController;
 import ec.edu.espe.model.Customer;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import utils.MongoDBConnection;
+
 /**
  *
  * @author David Pilatasig
  */
 public class AddClientFrm extends javax.swing.JFrame {
+
     private CustomerController customerController = new CustomerController();
-    
-    
+
     /**
      * Creates new form AddClientFrm
      */
@@ -220,31 +222,47 @@ public class AddClientFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        String ruc= txtRuc.getText().trim();
-        String name= txtName.getText().trim();
-        String phoneNumber= txtPhoneNumber.getText().trim();
-        String email= txtEmail.getText().trim();
-        String address= txtAddress.getText().trim();
-        String customerId= txtId.getText().trim();
-        
+        String ruc = txtRuc.getText().trim();
+        String name = txtName.getText().trim();
+        String phoneNumber = txtPhoneNumber.getText().trim();
+        String email = txtEmail.getText().trim();
+        String address = txtAddress.getText().trim();
+        String customerId = txtId.getText().trim();
+
         if (ruc.isEmpty() || name.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty() || customerId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
-        JOptionPane.showMessageDialog(this, "El email ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
+        if (validateRUC(ruc)) {
+            JOptionPane.showMessageDialog(this, "RUC inválido. Debe ingresar 13 dígitos numéricos.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        Customer customer= new Customer(ruc, name, phoneNumber, email, address, customerId);
-        
+
+        if (validateId(customerId)) {
+            JOptionPane.showMessageDialog(this, "Id inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (validatePhoneNumber(phoneNumber)) {
+            JOptionPane.showMessageDialog(this, "Número Telefónico Inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            JOptionPane.showMessageDialog(this, "El email ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
+
         try {
             customerController.saveCustomer(customer);
             JOptionPane.showMessageDialog(this, "Cliente añadido correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        }
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void txtRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucActionPerformed
@@ -254,8 +272,20 @@ public class AddClientFrm extends javax.swing.JFrame {
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnGoBackActionPerformed
- 
-    private void clearFields(){
+
+    private boolean validateRUC(String ruc) {
+        return ruc == null || !ruc.matches("\\d{13}");
+    }
+
+    private boolean validateId(String customerId) {
+        return customerId == null || !customerId.matches("\\d{10}");
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        return phoneNumber == null || !phoneNumber.matches("\\d{10}");
+    }
+
+    private void clearFields() {
         txtRuc.setText("");
         txtName.setText("");
         txtPhoneNumber.setText("");
@@ -263,14 +293,14 @@ public class AddClientFrm extends javax.swing.JFrame {
         txtAddress.setText("");
         txtId.setText("");
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         MongoDatabase database = MongoDBConnection.getDatabase();
-            System.out.println("Conexión establecida con la base de datos: " + database.getName());
-            
-        
+        System.out.println("Conexión establecida con la base de datos: " + database.getName());
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

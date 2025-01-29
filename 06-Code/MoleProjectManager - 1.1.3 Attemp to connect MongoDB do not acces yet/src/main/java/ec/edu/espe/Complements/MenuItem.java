@@ -103,13 +103,9 @@ public class MenuItem extends JButton{
 
     @Override
     public void setBounds(int x, int y, int width, int height) {
-        super.setBounds(x, y, width, height); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        super.setBounds(x, y, width, height); 
         createShadowImage();
     }
-    
-    
-    
-    
 
     public int getIndex() {
         return index;

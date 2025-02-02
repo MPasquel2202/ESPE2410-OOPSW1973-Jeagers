@@ -1,5 +1,6 @@
 ec\edu\espe\model\StatusChangeLog.class
 ec\edu\espe\view\ModifyCustomerFrm$2.class
+ec\edu\espe\view\ModifyDataCustomerFrm$4.class
 ec\edu\espe\view\AddProjectFrm$7.class
 ec\edu\espe\view\UpdateStatusFrm$5.class
 ec\edu\espe\model\QuoteStatusChangeLog.class
@@ -16,6 +17,7 @@ ec\edu\espe\view\ProjectForSupportFrm$5.class
 raven\scroll\win11\ScrollBarWin11UI$1.class
 ec\edu\espe\view\QuoteStateUpdaterFrm.class
 ec\edu\espe\view\ListProjects$2.class
+ec\edu\espe\view\ModifyDataCustomerFrm$7.class
 ec\edu\espe\view\AddClientforProjectFrm$1.class
 ec\edu\espe\Controller\LoginController.class
 ec\edu\espe\Controller\StatusChangeLogController.class
@@ -36,6 +38,7 @@ ec\edu\espe\view\AddProjectFrm$2.class
 ec\edu\espe\view\StatusTableFrm$5.class
 ec\edu\espe\view\AddClientFrm$3.class
 raven\scroll\win11\ScrollPaneWin11$ScrollLayout.class
+ec\edu\espe\view\ModifyDataCustomerFrm$6.class
 raven\scroll\win11\ScrollBarWin11UI$2.class
 ec\edu\espe\view\AddProjectFrm$9.class
 ec\edu\espe\view\CreateSupportFrm.class
@@ -59,6 +62,7 @@ ec\edu\espe\view\LoadCustomerFrm.class
 ec\edu\espe\view\ModifyCustomerFrm.class
 ec\edu\espe\view\AddClientforProjectFrm.class
 ec\edu\espe\view\HistoryOfChanges.class
+ec\edu\espe\view\ModifyDataCustomerFrm$5.class
 ec\edu\espe\model\ProjectStatus.class
 ec\edu\espe\view\AddClientFrm$2.class
 ec\edu\espe\view\ListProjects$3.class
@@ -117,6 +121,7 @@ ec\edu\espe\view\ProjectForSupportFrm.class
 ec\edu\espe\view\StatusTableFrm$2.class
 ec\edu\espe\view\AddProjectFrm$5.class
 ec\edu\espe\view\ListProjects$1.class
+ec\edu\espe\view\ModifyDataCustomerFrm$3.class
 ec\edu\espe\view\QuoteUpdaterFrm$2.class
 utils\MongoDBConnection.class
 ec\edu\espe\view\LoginMole$4.class
@@ -153,6 +158,7 @@ ec\edu\espe\model\Customer.class
 ec\edu\espe\view\ModifyDataCustomerFrm$1.class
 ec\edu\espe\view\QuoteHistoryFrm$2.class
 raven\effect\RippleEffect$Effect.class
+ec\edu\espe\view\ModifyDataCustomerFrm$8.class
 ec\edu\espe\model\Support.class
 ec\edu\espe\view\Main.class
 ec\edu\espe\view\UpdateStatusFrm$2.class

@@ -19,9 +19,10 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
     public ModifyCustomerFrm() {
         initComponents();
         loadCustomersIntoTable();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
-    private void loadCustomersIntoTable() {
+    public void loadCustomersIntoTable() {
         try {
             List<Customer> customers = customerController.findAllCustomers();
              DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
@@ -59,7 +60,6 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnModifyCustomerData = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         btnClearCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,6 +129,11 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
         );
 
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnModifyCustomerData.setText("Modficar");
         btnModifyCustomerData.addActionListener(new java.awt.event.ActionListener() {
@@ -136,8 +141,6 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
                 btnModifyCustomerDataActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Buscar");
 
         btnClearCustomer.setText("Borrar");
         btnClearCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +156,6 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClearCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(btnModifyCustomerData)
                 .addGap(18, 18, 18)
@@ -168,7 +169,6 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnModifyCustomerData)
-                    .addComponent(jButton3)
                     .addComponent(btnClearCustomer))
                 .addGap(37, 37, 37))
         );
@@ -217,7 +217,7 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
 
     private void btnClearCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCustomerActionPerformed
          int selectedRow = tblCustomers.getSelectedRow();
-
+         
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
@@ -253,10 +253,14 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
         String email = tblCustomers.getValueAt(selectedRow, 4).toString();
         String address = tblCustomers.getValueAt(selectedRow, 5).toString();
 
-        ModifyDataCustomerFrm modifyDataCustomerFrm = new ModifyDataCustomerFrm(customerId, ruc, name, phoneNumber, email, address);
+        ModifyDataCustomerFrm modifyDataCustomerFrm = new ModifyDataCustomerFrm(this ,customerId, ruc, name, phoneNumber, email, address);
         modifyDataCustomerFrm.setVisible(true);
         
     }//GEN-LAST:event_btnModifyCustomerDataActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,7 +301,6 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnClearCustomer;
     private javax.swing.JButton btnModifyCustomerData;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

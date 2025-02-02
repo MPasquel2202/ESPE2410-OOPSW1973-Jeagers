@@ -71,6 +71,9 @@ public class MainMenu extends javax.swing.JFrame {
                     } else if (subIndex == 2) {
                         ListCustomersFrm listCustomersFrm = new ListCustomersFrm();
                         listCustomersFrm.setVisible(true);
+                    } else if (subIndex == 3) {
+                        ModifyCustomerFrm modifyCustomerFrm = new ModifyCustomerFrm();
+                        modifyCustomerFrm.setVisible(true);
                     }
                 }
             }

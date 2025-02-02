@@ -31,7 +31,7 @@ public class Menu extends JComponent{
         {"Historial de cambios"},
         {"Reporte Individual"},
         {"Reporte Mensual"},
-        {"Clientes", "Añadir Cliente", "Listar Cliente"},
+        {"Clientes", "Añadir Cliente", "Listar Cliente","Datos del Cliente"},
         {"Opcion 12", "Feather Icons", "Flag Icons", "Mdi Icons"},
         {"Opcion 13", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"}
         

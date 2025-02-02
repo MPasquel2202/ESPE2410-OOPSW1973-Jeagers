@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.Controller.CustomerController;
@@ -24,9 +23,6 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
     private CustomerController customerController= new CustomerController();
     private ProjectController projectController = new ProjectController();
-    
-    
-    
     private Customer customer;
     private MainMenu mainMenu;
     
@@ -73,11 +69,6 @@ public class AddProjectFrm extends javax.swing.JFrame {
             lblCustomerAdress.setText("");
         }
     }
-    
-    
-       
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -251,7 +242,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(42, 42, 42)
                         .addComponent(jScrollPane1)))
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(403, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,8 +699,6 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
        
         cmbSector.setSelectedIndex(0);  
-
-       
         dcrCloseDate.setDate(null); 
     }
     private void cmbQuoteStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuoteStatusActionPerformed
@@ -732,7 +721,6 @@ public class AddProjectFrm extends javax.swing.JFrame {
             LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
             loadCustomerFrm.setVisible(true);
         } else if (rbnCreateNewCustomer.isSelected()) {
-
             AddClientforProjectFrm addClientforProjectFrm = new AddClientforProjectFrm(this);
             addClientforProjectFrm.setVisible(true);
         } else {
@@ -809,6 +797,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgCustomerOption;

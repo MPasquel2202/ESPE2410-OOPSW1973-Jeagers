@@ -1,5 +1,6 @@
 package ec.edu.espe.view;
 
+import ec.edu.espe.Controller.SplashScreen;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -11,13 +12,13 @@ import javax.swing.Timer;
  *
  * @author Brandon Pazmino
  */
-public class SplashScreen extends javax.swing.JFrame {
+public class SplashScreenFrm extends javax.swing.JFrame {
        private MainMenu mainMenu;
 
     /**
      * Creates new form FirstFrame
      */
-    public SplashScreen() {
+    public SplashScreenFrm() {
         setUndecorated(true); 
         initComponents();
         setLocationRelativeTo(null);
@@ -124,7 +125,7 @@ public class SplashScreen extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new SplashScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new SplashScreenFrm().setVisible(true));
     }
 
 

@@ -24,7 +24,7 @@ public class ProjectController extends BaseController<Project> {
     public void saveProject(Project project) {
         MongoCollection<Document> collection = getCollection();
 
-        Document query = new Document("projectId", project.getProjectId()); 
+        Document query = new Document("projectId", project.getProjectId());
         Document updatedData = new Document()
                 .append("projectId", project.getProjectId())
                 .append("projectTitle", project.getProjectTitle())
@@ -59,53 +59,54 @@ public class ProjectController extends BaseController<Project> {
                 ProjectStatus operationalStatus = ProjectStatus.fromString(doc.getString("operationalStatus"));
                 ProjectStatus quoteStatus = ProjectStatus.fromString(doc.getString("quoteStatus"));
 
-                Document customerDoc = (Document) doc.get("customer");  
+                Document customerDoc = (Document) doc.get("customer");
                 Customer customer = new Customer(
-                    customerDoc.getString("id"),
-                    customerDoc.getString("RUC"),
-                    customerDoc.getString("name"),
-                    customerDoc.getString("Phone"),
-                    customerDoc.getString("Email"),
-                    customerDoc.getString("Dirección")
+                        customerDoc.getString("id"),
+                        customerDoc.getString("RUC"),
+                        customerDoc.getString("name"),
+                        customerDoc.getString("Phone"),
+                        customerDoc.getString("Email"),
+                        customerDoc.getString("Dirección")
                 );
 
                 String startDateStr = doc.getString("startDate");
                 Date startDate = null;
                 if (startDateStr != null) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-                    startDate = sdf.parse(startDateStr);  
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    startDate = sdf.parse(startDateStr);
                 }
 
                 String closingDateStr = doc.getString("closingDate");
                 Date closingDate = null;
                 if (closingDateStr != null) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    closingDate = sdf.parse(closingDateStr);  
+                    closingDate = sdf.parse(closingDateStr);
                 }
 
                 Project project = new Project(
-                    doc.getString("projectId"),
-                    doc.getString("projectTitle"),
-                    doc.getString("projectDescription"),
-                    customer,  
-                    startDate,  
-                    closingDate,  
-                    doc.getDouble("startquote"),
-                    operationalStatus,
-                    quoteStatus,
-                    doc.getBoolean("paid"),
-                    doc.getBoolean("invoiced"),
-                    doc.getBoolean("isPublic")
+                        doc.getString("projectId"),
+                        doc.getString("projectTitle"),
+                        doc.getString("projectDescription"),
+                        customer,
+                        startDate,
+                        closingDate,
+                        doc.getDouble("startquote"),
+                        operationalStatus,
+                        quoteStatus,
+                        doc.getBoolean("paid"),
+                        doc.getBoolean("invoiced"),
+                        doc.getBoolean("isPublic")
                 );
 
                 projects.add(project);
             }
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
 
         return projects;
     }
+
     public void updateProject(Project project) {
         MongoCollection<Document> collection = getCollection();
 
@@ -133,24 +134,24 @@ public class ProjectController extends BaseController<Project> {
 
         collection.replaceOne(query, updatedData);
     }
-    
-    
+
     public List<Project> getClosedProjects() {
-    List<Project> closedProjects = new ArrayList<>();
-    for (Document doc : getCollection().find(Filters.eq("operationalStatus", ProjectStatus.CLOSED.getStatus()))) {
-        String id = doc.getString("projectId");
-        String description = doc.getString("projectDescription"); 
-        String status = doc.getString("operationalStatus");
+        List<Project> closedProjects = new ArrayList<>();
+        for (Document doc : getCollection().find(Filters.eq("operationalStatus", ProjectStatus.CLOSED.getStatus()))) {
+            String id = doc.getString("projectId");
+            String description = doc.getString("projectDescription");
+            String status = doc.getString("operationalStatus");
 
-        ProjectStatus projectStatus = ProjectStatus.fromString(status);
+            ProjectStatus projectStatus = ProjectStatus.fromString(status);
 
-        Project project = new Project(id, description, projectStatus);
-        
-        closedProjects.add(project);
+            Project project = new Project(id, description, projectStatus);
+
+            closedProjects.add(project);
+        }
+        return closedProjects;
     }
-    return closedProjects;
-    }
-     public List<String> findAllProjectIds() {
+
+    public List<String> findAllProjectIds() {
         List<String> projectIds = new ArrayList<>();
         MongoCollection<Document> collection = getCollection();
         try (MongoCursor<Document> cursor = collection.find().iterator()) {
@@ -165,51 +166,51 @@ public class ProjectController extends BaseController<Project> {
             System.err.println("Error al obtener los IDs de los proyectos: " + e.getMessage());
         }
         return projectIds;
-        
+
     }
-    
+
     public Project findProjectById(String projectId) {
-    MongoCollection<Document> collection = getCollection();
-    Document doc = collection.find(new Document("projectId", projectId)).first();
+        MongoCollection<Document> collection = getCollection();
+        Document doc = collection.find(new Document("projectId", projectId)).first();
 
-    if (doc != null) {
-        Document customerDoc = (Document) doc.get("customer");
-        Customer customer = null;
+        if (doc != null) {
+            Document customerDoc = (Document) doc.get("customer");
+            Customer customer = null;
 
-        if (customerDoc != null) {
-            customer = new Customer(
-                    customerDoc.getString("id"),
-                    customerDoc.getString("RUC"),
-                    customerDoc.getString("name"),
-                    customerDoc.getString("Phone"),
-                    customerDoc.getString("email"),
-                    customerDoc.getString("Dirección")
+            if (customerDoc != null) {
+                customer = new Customer(
+                        customerDoc.getString("id"),
+                        customerDoc.getString("RUC"),
+                        customerDoc.getString("name"),
+                        customerDoc.getString("Phone"),
+                        customerDoc.getString("email"),
+                        customerDoc.getString("Dirección")
+                );
+            }
+
+            ProjectStatus operationalStatus = getProjectStatus(doc.getString("operationalStatus"), ProjectStatus.CREATED);
+            ProjectStatus quoteStatus = getProjectStatus(doc.getString("quoteStatus"), ProjectStatus.QUOTE_SEND);
+
+            Date startDate = parseDate(doc.getString("startDate"));
+            Date closingDate = parseDate(doc.getString("closingDate"));
+
+            return new Project(
+                    doc.getString("projectId"),
+                    doc.getString("projectTitle"),
+                    doc.getString("projectDescription"),
+                    customer,
+                    startDate,
+                    closingDate,
+                    doc.getDouble("startquote"),
+                    operationalStatus,
+                    quoteStatus,
+                    doc.getBoolean("paid"),
+                    doc.getBoolean("invoiced"),
+                    doc.getBoolean("isPublic")
             );
         }
-
-        ProjectStatus operationalStatus = getProjectStatus(doc.getString("operationalStatus"), ProjectStatus.CREATED);
-        ProjectStatus quoteStatus = getProjectStatus(doc.getString("quoteStatus"), ProjectStatus.QUOTE_SEND);
-
-        Date startDate = parseDate(doc.getString("startDate"));
-        Date closingDate = parseDate(doc.getString("closingDate"));
-
-        return new Project(
-                doc.getString("projectId"),
-                doc.getString("projectTitle"),
-                doc.getString("projectDescription"),
-                customer,
-                startDate,
-                closingDate,
-                doc.getDouble("startquote"),
-                operationalStatus,
-                quoteStatus,
-                doc.getBoolean("paid"),
-                doc.getBoolean("invoiced"),
-                doc.getBoolean("isPublic")
-        );
+        return null;
     }
-    return null;
-}
 
     private ProjectStatus getProjectStatus(String statusString, ProjectStatus defaultStatus) {
         try {
@@ -227,6 +228,12 @@ public class ProjectController extends BaseController<Project> {
             System.out.println("Error al convertir fecha: " + e.getMessage());
             return null;
         }
+    }
+
+    public void deleteProject(String projectId) {
+        MongoCollection<Document> collection = getCollection();
+        Document query = new Document("projectId", projectId);
+        collection.deleteOne(query);
     }
 
 }

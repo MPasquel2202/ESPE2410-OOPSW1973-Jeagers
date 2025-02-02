@@ -1,4 +1,5 @@
 ec\edu\espe\model\StatusChangeLog.class
+ec\edu\espe\view\ProjectModification$8.class
 ec\edu\espe\view\ModifyCustomerFrm$2.class
 ec\edu\espe\view\AddProjectFrm$7.class
 ec\edu\espe\view\UpdateStatusFrm$5.class
@@ -9,6 +10,7 @@ ec\edu\espe\view\LoadCustomerFrm$5.class
 ec\edu\espe\view\ListSupportsFrm$2.class
 ec\edu\espe\view\AddProjectFrm$4.class
 ec\edu\espe\view\ProjectForSupportFrm$2.class
+ec\edu\espe\view\ProjectModification$5.class
 ec\edu\espe\model\Notification.class
 ec\edu\espe\view\CreateSupportFrm$1.class
 ec\edu\espe\view\QuoteUpdaterFrm$3.class
@@ -16,6 +18,7 @@ ec\edu\espe\view\ProjectForSupportFrm$5.class
 raven\scroll\win11\ScrollBarWin11UI$1.class
 ec\edu\espe\view\QuoteStateUpdaterFrm.class
 ec\edu\espe\view\ListProjects$2.class
+ec\edu\espe\view\ProjectModification$2.class
 ec\edu\espe\view\AddClientforProjectFrm$1.class
 ec\edu\espe\Controller\LoginController.class
 ec\edu\espe\Controller\StatusChangeLogController.class
@@ -32,6 +35,7 @@ ec\edu\espe\model\DataManager$6.class
 ec\edu\espe\view\MainMenu$1.class
 ec\edu\espe\model\ListCustomersFrm$3.class
 ec\edu\espe\submenu\Dashboard.class
+ec\edu\espe\view\ProjectModification$10.class
 ec\edu\espe\view\AddProjectFrm$2.class
 ec\edu\espe\view\StatusTableFrm$5.class
 ec\edu\espe\view\AddClientFrm$3.class
@@ -40,7 +44,9 @@ raven\scroll\win11\ScrollBarWin11UI$2.class
 ec\edu\espe\view\AddProjectFrm$9.class
 ec\edu\espe\view\CreateSupportFrm.class
 ec\edu\espe\model\Project.class
+ec\edu\espe\view\ProjectModification$13.class
 ec\edu\espe\Complements\Menu.class
+ec\edu\espe\view\ProjectModification$6.class
 ec\edu\espe\view\UpdateStatusFrm.class
 ec\edu\espe\Controller\CustomerController.class
 ec\edu\espe\view\ListProjects$4.class
@@ -70,14 +76,17 @@ ec\edu\espe\view\MainMenu.class
 ec\edu\espe\view\QuoteHistoryFrm.class
 ec\edu\espe\view\StatusTableFrm$3.class
 ec\edu\espe\view\CreateSupportFrm$2.class
+ec\edu\espe\view\ProjectModification$12.class
 ec\edu\espe\model\ProjectChangeLog.class
 ec\edu\espe\model\DataManager$4.class
 ec\edu\espe\view\ProjectForSupportFrm$1.class
 raven\swing\shadow\ShadowRenderer.class
 ec\edu\espe\view\ListProjects.class
+ec\edu\espe\view\ProjectModification$7.class
 ec\edu\espe\view\QuoteUpdaterFrm.class
 ec\edu\espe\view\QuoteStateUpdaterFrm$3.class
 ec\edu\espe\model\ListCustomersFrm$2.class
+ec\edu\espe\view\ProjectModification.class
 ec\edu\espe\view\ListSupportsFrm.class
 ec\edu\espe\model\DataManager$2.class
 ec\edu\espe\model\ReportGenerator.class
@@ -86,7 +95,7 @@ ec\edu\espe\view\AddProjectFrm$13.class
 ec\edu\espe\view\QuoteStateUpdaterFrm$5.class
 raven\scroll\win11\PolygonCorner.class
 ec\edu\espe\view\AddClientFrm$1.class
-ec\edu\espe\view\SplashScreen.class
+ec\edu\espe\view\ProjectModification$1.class
 ec\edu\espe\view\LoadCustomerFrm$1.class
 ec\edu\espe\Controller\ReportController.class
 ec\edu\espe\view\QuoteStateUpdaterFrm$2.class
@@ -94,13 +103,16 @@ ec\edu\espe\view\StatusTableFrm$4.class
 ec\edu\espe\view\QuoteHistoryFrm$1.class
 ec\edu\espe\view\UpdateStatusFrm$1.class
 ec\edu\espe\view\AddProjectFrm.class
+ec\edu\espe\view\ProjectModification$11.class
 ec\edu\espe\view\MainMenu$2.class
 ec\edu\espe\Complements\MenuAnimation$1.class
 ec\edu\espe\model\DataManager$5.class
 ec\edu\espe\view\ModifyCustomerFrm$3.class
 ec\edu\espe\view\AddProjectFrm$8.class
 ec\edu\espe\view\ProjectForSupportFrm$3.class
+ec\edu\espe\view\ProjectModification$14.class
 ec\edu\espe\view\QuoteUpdaterFrm$5.class
+ec\edu\espe\view\ProjectModification$9.class
 ec\edu\espe\view\ListSupportsFrm$1.class
 ec\edu\espe\view\AddClientforProjectFrm$3.class
 ec\edu\espe\view\AddClientFrm$4.class
@@ -117,11 +129,11 @@ ec\edu\espe\view\ProjectForSupportFrm.class
 ec\edu\espe\view\StatusTableFrm$2.class
 ec\edu\espe\view\AddProjectFrm$5.class
 ec\edu\espe\view\ListProjects$1.class
+ec\edu\espe\view\ModifyDataCustomerFrm$3.class
 ec\edu\espe\view\QuoteUpdaterFrm$2.class
 utils\MongoDBConnection.class
 ec\edu\espe\view\LoginMole$4.class
 ec\edu\espe\view\ProjectForSupportFrm$4.class
-ec\edu\espe\model\SplashScreen.class
 ec\edu\espe\view\ModifyCustomerFrm$4.class
 ec\edu\espe\model\Report.class
 ec\edu\espe\Controller\SupportController.class
@@ -137,6 +149,7 @@ ec\edu\espe\submenu\DefaultForm.class
 ec\edu\espe\view\AddProjectFrm$6.class
 ec\edu\espe\Controller\QuoteChangeLogController.class
 ec\edu\espe\Complements\MenuItem.class
+ec\edu\espe\view\ProjectModification$3.class
 ec\edu\espe\view\StatusTableFrm$1.class
 ec\edu\espe\view\LoginMole.class
 ec\edu\espe\model\DataManager$1.class
@@ -148,6 +161,7 @@ ec\edu\espe\Controller\QuoteStatusChangeLogController.class
 ec\edu\espe\view\ModifyCustomerFrm$5.class
 ec\edu\espe\Complements\MenuAnimation.class
 ec\edu\espe\model\ListCustomersFrm$1.class
+ec\edu\espe\view\SplashScreenFrm.class
 ec\edu\espe\model\ChangeLogManager.class
 ec\edu\espe\model\Customer.class
 ec\edu\espe\view\ModifyDataCustomerFrm$1.class
@@ -155,6 +169,9 @@ ec\edu\espe\view\QuoteHistoryFrm$2.class
 raven\effect\RippleEffect$Effect.class
 ec\edu\espe\model\Support.class
 ec\edu\espe\view\Main.class
+ec\edu\espe\view\ProjectModification$4.class
 ec\edu\espe\view\UpdateStatusFrm$2.class
+ec\edu\espe\Controller\SplashScreen.class
 ec\edu\espe\view\AddClientforProjectFrm$2.class
+ec\edu\espe\view\ProjectModification$15.class
 raven\scroll\win11\ScrollPaneWin11.class

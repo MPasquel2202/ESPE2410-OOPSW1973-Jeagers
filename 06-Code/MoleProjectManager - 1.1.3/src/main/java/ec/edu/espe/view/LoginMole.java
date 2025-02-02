@@ -41,7 +41,7 @@ public class LoginMole extends javax.swing.JFrame {
         )) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso", "Login", JOptionPane.INFORMATION_MESSAGE);
             dispose();
-            SplashScreen splashScreen = new SplashScreen();
+            SplashScreenFrm splashScreen = new SplashScreenFrm();
             splashScreen.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);

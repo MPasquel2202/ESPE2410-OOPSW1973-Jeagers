@@ -118,7 +118,7 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
 
         jLabel5.setText("Seleccione el Nuevo Estado del Projecto:");
 
-        cmbQuoteStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Creado", "En Progreso", "Pausado ", "Cerrado", " " }));
+        cmbQuoteStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviada", "Rechazada", "Aceptada" }));
         cmbQuoteStates.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbQuoteStatesActionPerformed(evt);

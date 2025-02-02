@@ -29,7 +29,9 @@ public class MainMenu extends javax.swing.JFrame {
                     } else if (subIndex == 2) {
                         ListProjects listProjects = new ListProjects();
                         listProjects.setVisible(true);
-
+                    } else if (subIndex == 3) {
+                        ProjectModification projectModification = new ProjectModification();
+                        projectModification.setVisible(true);
                     }
                 } else if (index == 2) {
                     if (subIndex == 1) {

@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.model.Customer;
@@ -17,11 +16,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Dennis Paucar
  */
 public class LoadCustomerFrm extends javax.swing.JFrame {
-    private CustomerController customerController= new CustomerController();
+
+    private CustomerController customerController = new CustomerController();
     private ProjectController projectController = new ProjectController();
     private AddProjectFrm addProjectFrm = new AddProjectFrm();
     private Customer customer;
     private AddProjectFrm addCustomer;
+    private ProjectModification projectModification;
+
     /**
      * Creates new form LoadCustomerFrm
      */
@@ -31,12 +33,18 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
         loadCustomersIntoTable();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
-    
+
+    public LoadCustomerFrm(ProjectModification projectModification) {
+        initComponents();
+        this.projectModification = projectModification;
+        loadCustomersIntoTable();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
     private void loadCustomersIntoTable() {
         try {
             List<Customer> customers = customerController.findAllCustomers();
-             DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
             model.setRowCount(0);
             for (Customer customer : customers) {
                 model.addRow(new Object[]{
@@ -48,12 +56,11 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
                     customer.getAddress()
                 });
             }
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al cargar los datos de los clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -234,7 +241,7 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCustomersMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int selectedRow = tblCustomers.getSelectedRow();
+                int selectedRow = tblCustomers.getSelectedRow();
 
         if (selectedRow != -1) {
             String customerId = tblCustomers.getValueAt(selectedRow, 0).toString();
@@ -246,26 +253,28 @@ public class LoadCustomerFrm extends javax.swing.JFrame {
 
             Customer customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
 
+            // Pasa el cliente a AddProjectFrm si está presente
             if (addCustomer != null) {
-                addCustomer.setCustomer(customer);  
-            } else {
-                System.out.println("addCustomer es null");
+                addCustomer.setCustomer(customer);
             }
 
-            this.dispose();  
+            // Pasa el cliente a ProjectModification si está presente
+            if (projectModification != null) {
+                projectModification.setCustomer(customer);
+            }
+
+            this.dispose(); // Cierra el formulario de carga de clientes
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un cliente de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-
-
-            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void lblBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblBackActionPerformed
         this.dispose();
-        
+
     }//GEN-LAST:event_lblBackActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

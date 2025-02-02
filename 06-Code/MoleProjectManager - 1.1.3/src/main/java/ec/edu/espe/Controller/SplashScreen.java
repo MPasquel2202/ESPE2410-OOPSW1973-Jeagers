@@ -1,16 +1,14 @@
-package ec.edu.espe.model;
+package ec.edu.espe.Controller;
 
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
  *
  * @author Brandon Pazmino
- * 
  */
 public class SplashScreen extends JWindow{
-    
+        
         public SplashScreen() {
 
         setSize(400, 300);
@@ -33,5 +31,6 @@ public class SplashScreen extends JWindow{
         setVisible(false);
         dispose(); 
     }
+    
     
 }

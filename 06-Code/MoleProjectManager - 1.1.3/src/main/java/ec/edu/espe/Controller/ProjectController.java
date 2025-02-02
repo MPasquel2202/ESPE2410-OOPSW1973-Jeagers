@@ -112,27 +112,44 @@ public class ProjectController extends BaseController<Project> {
 
         Document query = new Document("projectId", project.getProjectId());
 
-        Document updatedData = new Document()
-                .append("projectId", project.getProjectId())
-                .append("projectTitle", project.getProjectTitle())
-                .append("projectDescription", project.getProjectDescription())
-                .append("customer", new Document()
-                        .append("id", project.getCustomer().getCustomerId())
-                        .append("RUC", project.getCustomer().getRuc())
-                        .append("name", project.getCustomer().getName())
-                        .append("Phone", project.getCustomer().getPhoneNumber())
-                        .append("Email", project.getCustomer().getEmail())
-                        .append("Dirección", project.getCustomer().getAddress()))
-                .append("startDate", project.getStartDate() != null ? new SimpleDateFormat("yyyy-MM-dd").format(project.getStartDate()) : null)
-                .append("closingDate", project.getClosingDate() != null ? new SimpleDateFormat("yyyy-MM-dd").format(project.getClosingDate()) : null)
-                .append("startquote", project.getStartquote())
-                .append("operationalStatus", project.getOperationalStatus().toString())
-                .append("quoteStatus", project.getQuoteStatus().toString())
-                .append("paid", project.isPaid())
-                .append("invoiced", project.isInvoiced())
-                .append("isPublic", project.isIsPublic());
+        Document updatedData = new Document();
+        if (project.getProjectTitle() != null && !project.getProjectTitle().isEmpty()) {
+            updatedData.append("projectTitle", project.getProjectTitle());
+        }
+        if (project.getProjectDescription() != null && !project.getProjectDescription().isEmpty()) {
+            updatedData.append("projectDescription", project.getProjectDescription());
+        }
+        if (project.getCustomer() != null) {
+            updatedData.append("customer", new Document()
+                    .append("id", project.getCustomer().getCustomerId())
+                    .append("RUC", project.getCustomer().getRuc())
+                    .append("name", project.getCustomer().getName())
+                    .append("Phone", project.getCustomer().getPhoneNumber())
+                    .append("Email", project.getCustomer().getEmail())
+                    .append("Dirección", project.getCustomer().getAddress()));
+        }
+        if (project.getStartDate() != null) {
+            updatedData.append("startDate", new SimpleDateFormat("yyyy-MM-dd").format(project.getStartDate()));
+        }
+        if (project.getClosingDate() != null) {
+            updatedData.append("closingDate", new SimpleDateFormat("yyyy-MM-dd").format(project.getClosingDate()));
+        }
+        if (project.getStartquote() != 0) {
+            updatedData.append("startquote", project.getStartquote());
+        }
+        if (project.getOperationalStatus() != null) {
+            updatedData.append("operationalStatus", project.getOperationalStatus().toString());
+        }
+        if (project.getQuoteStatus() != null) {
+            updatedData.append("quoteStatus", project.getQuoteStatus().toString());
+        }
+        updatedData.append("paid", project.isPaid());
+        updatedData.append("invoiced", project.isInvoiced());
+        updatedData.append("isPublic", project.isIsPublic());
 
-        collection.replaceOne(query, updatedData);
+        if (!updatedData.isEmpty()) {
+            collection.updateOne(query, new Document("$set", updatedData));
+        }
     }
 
     public List<Project> getClosedProjects() {

@@ -1,4 +1,5 @@
 package ec.edu.espe.view;
+
 import ec.edu.espe.Controller.CustomerController;
 import ec.edu.espe.Controller.ProjectController;
 import ec.edu.espe.model.Customer;
@@ -30,7 +31,7 @@ public class ProjectModification extends javax.swing.JFrame {
      */
     public ProjectModification() {
         initComponents();
-        loadProjectIDs();  
+        loadProjectIDs();
         jCustomerPanel.setVisible(false);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -511,17 +512,11 @@ public class ProjectModification extends javax.swing.JFrame {
         String projectTitle = txtProjectTitle.getText().trim();
         String projectDescription = txtpDescription.getText().trim();
         Date closingDate = dcrCloseDate.getDate();
-
-        if (projectTitle.isEmpty() || projectDescription.isEmpty() || closingDate == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos requeridos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
         double startquote = 0;
-        try {
-            startquote = Double.parseDouble(txtQuote.getText().trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un presupuesto válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        String quoteText = txtQuote.getText().trim();
+
+        if (!quoteText.isEmpty()) {
+            startquote = Double.parseDouble(quoteText);
         }
 
         ProjectStatus quoteStatus = ProjectStatus.fromString(cmbQuoteStatus.getSelectedItem().toString().trim());
@@ -612,21 +607,21 @@ public class ProjectModification extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnNotPaidActionPerformed
 
     private void rbtnSelectCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSelectCustomerActionPerformed
-    if (rbtnSelectCustomer.isSelected()) {
-        LoadCustomerFrm customerFrame = new LoadCustomerFrm(this);
-        customerFrame.setVisible(true);
-    } else {
-        jCustomerPanel.setVisible(false);
-    }
+        if (rbtnSelectCustomer.isSelected()) {
+            LoadCustomerFrm customerFrame = new LoadCustomerFrm(this);
+            customerFrame.setVisible(true);
+        } else {
+            jCustomerPanel.setVisible(false);
+        }
     }//GEN-LAST:event_rbtnSelectCustomerActionPerformed
 
     private void btnCustomerChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerChooseActionPerformed
-    if (rbtnSelectCustomer.isSelected()) {
-        LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
-        loadCustomerFrm.setVisible(true);
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, seleccione una opción antes de continuar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }
+        if (rbtnSelectCustomer.isSelected()) {
+            LoadCustomerFrm loadCustomerFrm = new LoadCustomerFrm(this);
+            loadCustomerFrm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una opción antes de continuar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnCustomerChooseActionPerformed
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
@@ -636,35 +631,36 @@ public class ProjectModification extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGoBackActionPerformed
 
-   public void changelblName(Customer customer) {
-    if (customer != null) {
-        lblCustomerName.setText(customer.getName());
-        lblCustomerId.setText(customer.getCustomerId());
-        lblEmail.setText(customer.getEmail());
-        lblPhoneNumber.setText(customer.getPhoneNumber());
-        lblRuc.setText(customer.getRuc());
-        lblCustomerAdress.setText(customer.getAddress());
-    } else {
-        lblCustomerName.setText("No customer selected");
-        lblCustomerId.setText("");
-        lblEmail.setText("");
-        lblPhoneNumber.setText("");
-        lblRuc.setText("");
-        lblCustomerAdress.setText("");
+    public void changelblName(Customer customer) {
+        if (customer != null) {
+            lblCustomerName.setText(customer.getName());
+            lblCustomerId.setText(customer.getCustomerId());
+            lblEmail.setText(customer.getEmail());
+            lblPhoneNumber.setText(customer.getPhoneNumber());
+            lblRuc.setText(customer.getRuc());
+            lblCustomerAdress.setText(customer.getAddress());
+        } else {
+            lblCustomerName.setText("No customer selected");
+            lblCustomerId.setText("");
+            lblEmail.setText("");
+            lblPhoneNumber.setText("");
+            lblRuc.setText("");
+            lblCustomerAdress.setText("");
+        }
     }
-}
-public void setCustomer(Customer customer) {
-    this.customer = customer;
-    if (customer != null) {
-        lblCustomerName.setText(customer.getName());
-        lblCustomerId.setText(customer.getCustomerId());
-        lblEmail.setText(customer.getEmail());
-        lblPhoneNumber.setText(customer.getPhoneNumber());
-        lblRuc.setText(customer.getRuc());
-        lblCustomerAdress.setText(customer.getAddress());
-        jCustomerPanel.setVisible(true); // Muestra el panel si hay un cliente
-}
-}
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        if (customer != null) {
+            lblCustomerName.setText(customer.getName());
+            lblCustomerId.setText(customer.getCustomerId());
+            lblEmail.setText(customer.getEmail());
+            lblPhoneNumber.setText(customer.getPhoneNumber());
+            lblRuc.setText(customer.getRuc());
+            lblCustomerAdress.setText(customer.getAddress());
+            jCustomerPanel.setVisible(true); // Muestra el panel si hay un cliente
+        }
+    }
 
     private void loadProjectIDs() {
         List<String> projectIds = projectController.findAllProjectIds();
@@ -689,8 +685,6 @@ public void setCustomer(Customer customer) {
         dcrCloseDate.setDate(null);
 
     }
-
-
 
     /**
      * @param args the command line arguments

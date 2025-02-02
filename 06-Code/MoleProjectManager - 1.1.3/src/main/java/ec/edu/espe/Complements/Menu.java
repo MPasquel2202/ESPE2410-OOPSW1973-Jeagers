@@ -24,16 +24,14 @@ public class Menu extends JComponent{
     private MigLayout layout;
     private String [][]menuItems = new String[][]{
         {"Dashboard"},
-        {"Proyectos", "Crear nuevo Proyectos", "Ver Proyectos"},
+        {"Proyectos", "Crear nuevo Proyectos", "Ver Proyectos", "Modificar/Eliminar Proyectos"},
         {"Presupuestos", "Cambiar Presupuesto" , "Cambiar Estatus", "Historial de cambios"},
         {"Estatus de Proyecto", "Ver Estatus", "Cambiar Estatus", "Historial de cambios"},
         {"Soportes", "Nuevo Soporte", "Ver Soportes"},
         {"Historial de cambios"},
         {"Reporte Individual"},
         {"Reporte Mensual"},
-        {"Clientes", "Añadir Cliente", "Listar Cliente","Datos del Cliente"},
-        {"Opcion 12", "Feather Icons", "Flag Icons", "Mdi Icons"},
-        {"Opcion 13", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"}
+        {"Clientes", "Añadir Cliente", "Listar Cliente","Datos del Cliente"}
         
     };
     

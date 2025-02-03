@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ec.edu.espe</groupId>
+    <artifactId>MoleProjectManager</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>23</maven.compiler.release>
+        <exec.mainClass>ec.edu.espe.view.LoginMole</exec.mainClass>
+    </properties>
+    
+    <dependencies>
+         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+         <dependency>
+             <groupId>com.google.code.gson</groupId>
+             <artifactId>gson</artifactId>
+             <version>2.11.0</version>
+         </dependency>
+         <dependency>
+            <groupId>net.java.timingframework</groupId>
+            <artifactId>timingframework-swing</artifactId>
+            <version>7.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.timingframework</groupId>
+            <artifactId>timingframework-core</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-jdesktop-animation-timing</artifactId>
+            <version>1.0-201002281504</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+    </dependencies>
+    
+</project>

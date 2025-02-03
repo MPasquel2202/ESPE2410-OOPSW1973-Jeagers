@@ -222,7 +222,7 @@ public class AddClientFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        String ruc = txtRuc.getText().trim();
+          String ruc = txtRuc.getText().trim();
         String name = txtName.getText().trim();
         String phoneNumber = txtPhoneNumber.getText().trim();
         String email = txtEmail.getText().trim();
@@ -254,7 +254,7 @@ public class AddClientFrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El email ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Customer customer = new Customer(ruc, name, phoneNumber, email, address, customerId);
+        Customer customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
 
         try {
             customerController.saveCustomer(customer);

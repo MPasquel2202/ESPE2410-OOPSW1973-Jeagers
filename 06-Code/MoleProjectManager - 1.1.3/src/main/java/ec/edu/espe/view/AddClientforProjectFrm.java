@@ -222,7 +222,7 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        String ruc = txtRuc.getText().trim();
+         String ruc = txtRuc.getText().trim();
         String name = txtName.getText().trim();
         String phoneNumber = txtPhoneNumber.getText().trim();
         String email = txtEmail.getText().trim();
@@ -233,28 +233,33 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (validateRUC(ruc)) {
+            JOptionPane.showMessageDialog(this, "RUC inválido. Debe ingresar 13 dígitos numéricos.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (validateId(customerId)) {
+            JOptionPane.showMessageDialog(this, "Id inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (validatePhoneNumber(phoneNumber)) {
+            JOptionPane.showMessageDialog(this, "Número Telefónico Inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
             JOptionPane.showMessageDialog(this, "El email ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         Customer customer = new Customer(customerId, ruc, name, phoneNumber, email, address);
 
         try {
-            customerController.saveCustomer(customer); 
+            customerController.saveCustomer(customer);
             JOptionPane.showMessageDialog(this, "Cliente añadido correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-            if (addCustomer != null) {
-                System.out.println("Actualizando etiquetas con: " + customer.getName());
-                addCustomer.setCustomer(customer);
-            } else {
-                System.out.println("parentFrame es null");
-            }
-
             clearFields();
-            this.dispose();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -269,7 +274,19 @@ public class AddClientforProjectFrm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGoBackActionPerformed
  
-    private void clearFields(){
+    private boolean validateRUC(String ruc) {
+        return ruc == null || !ruc.matches("\\d{13}");
+    }
+
+    private boolean validateId(String customerId) {
+        return customerId == null || !customerId.matches("\\d{10}");
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        return phoneNumber == null || !phoneNumber.matches("\\d{10}");
+    }
+
+    private void clearFields() {
         txtRuc.setText("");
         txtName.setText("");
         txtPhoneNumber.setText("");

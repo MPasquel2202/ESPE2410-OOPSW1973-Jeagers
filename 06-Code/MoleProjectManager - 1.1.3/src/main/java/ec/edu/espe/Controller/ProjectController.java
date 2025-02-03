@@ -84,8 +84,8 @@ public class ProjectController extends BaseController<Project> {
                 }
 
                 Project project = new Project(
-                        doc.getString("projectId"),
                         doc.getString("projectTitle"),
+                        doc.getString("projectId"),
                         doc.getString("projectDescription"),
                         customer,
                         startDate,

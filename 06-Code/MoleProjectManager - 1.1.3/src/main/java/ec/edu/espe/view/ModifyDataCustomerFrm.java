@@ -13,6 +13,7 @@ import javax.swing.event.DocumentListener;
  */
 public class ModifyDataCustomerFrm extends javax.swing.JFrame {
     private ModifyCustomerFrm parentFrame;
+    private CustomerController customerController= new CustomerController();
     /**
      * Creates new form ModifyDataCustomerFrm
      */
@@ -73,6 +74,19 @@ public class ModifyDataCustomerFrm extends javax.swing.JFrame {
             public void changedUpdate(DocumentEvent e) { lblNewAdress.setText(txtCustomerAdress.getText()); }
         });
     }
+    
+    private boolean validateRUC(String ruc) {
+        return ruc == null || !ruc.matches("\\d{13}");
+    }
+
+    private boolean validateId(String customerId) {
+        return customerId == null || !customerId.matches("\\d{10}");
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        return phoneNumber == null || !phoneNumber.matches("\\d{10}");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -434,17 +448,12 @@ public class ModifyDataCustomerFrm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
    
     private void txtCustomerRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerRUCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCustomerRUCActionPerformed
 
     private void btnSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveChangesActionPerformed
-         CustomerController customerController = new CustomerController();
-
         String customerId = lblOldId.getText().trim(); 
         String ruc = txtCustomerRUC.getText().trim();
         String name = txtCustomerName.getText().trim();
@@ -454,6 +463,28 @@ public class ModifyDataCustomerFrm extends javax.swing.JFrame {
 
         if (customerId.isEmpty() || ruc.isEmpty() || name.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || address.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (validateRUC(ruc)) {
+            JOptionPane.showMessageDialog(this, "RUC inválido. Debe ingresar 13 dígitos numéricos.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (validateId(customerId)) {
+            JOptionPane.showMessageDialog(this, "Id inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (validatePhoneNumber(phoneNumber)) {
+            JOptionPane.showMessageDialog(this, "Número Telefónico Inválido. Debe ingresar 10 dígitos numéricos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            JOptionPane.showMessageDialog(this, "El email ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

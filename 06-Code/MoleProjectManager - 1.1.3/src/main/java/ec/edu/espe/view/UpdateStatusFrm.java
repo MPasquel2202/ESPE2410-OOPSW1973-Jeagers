@@ -164,7 +164,7 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
 
         jLabel8.setText("Estatus actual:");
 
-        cmbStatusOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En progreso", "Pausado", "Cerrado", " " }));
+        cmbStatusOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Progreso", "Pausado", "Cerrado", " " }));
 
         lblProjectStatus.setText(".");
 

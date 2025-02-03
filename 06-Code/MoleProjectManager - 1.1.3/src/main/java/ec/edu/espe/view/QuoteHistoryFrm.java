@@ -17,7 +17,7 @@ public class QuoteHistoryFrm extends javax.swing.JFrame {
 
     private QuoteChangeLogController quoteChangeLogController = new QuoteChangeLogController();
     private QuoteStatusChangeLogController quoteStatusChangeLogController = new QuoteStatusChangeLogController();
-    private MainMenu mainMenu;
+    private MainMenuFrm mainMenu;
     /**
      * Creates new form BudgetChangeHistory
      */

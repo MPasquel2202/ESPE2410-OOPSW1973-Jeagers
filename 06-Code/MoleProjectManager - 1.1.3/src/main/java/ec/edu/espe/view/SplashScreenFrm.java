@@ -13,7 +13,7 @@ import javax.swing.Timer;
  * @author Brandon Pazmino
  */
 public class SplashScreenFrm extends javax.swing.JFrame {
-       private MainMenu mainMenu;
+       private MainMenuFrm mainMenu;
 
     /**
      * Creates new form FirstFrame
@@ -118,7 +118,7 @@ public class SplashScreenFrm extends javax.swing.JFrame {
             } else {
                 ((Timer) e.getSource()).stop();
                 this.dispose();
-                new MainMenu().setVisible(true); 
+                new MainMenuFrm().setVisible(true); 
             }
         });
         mTimer.start(); 

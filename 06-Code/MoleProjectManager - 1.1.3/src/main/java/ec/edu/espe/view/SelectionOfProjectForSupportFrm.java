@@ -15,13 +15,13 @@ import utils.MongoDBConnection;
  *
  * @author Usuario
  */
-public class ProjectForSupportFrm extends javax.swing.JFrame {
+public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     private ProjectController projectController= new ProjectController();
     /**
      * Creates new form ProjectForSupportFrm
      */
-    public ProjectForSupportFrm() {
+    public SelectionOfProjectForSupportFrm() {
         initComponents();
         loadProjectData();
         configureButtonActions();
@@ -245,21 +245,23 @@ public class ProjectForSupportFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectionOfProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectionOfProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectionOfProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectionOfProjectForSupportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProjectForSupportFrm().setVisible(true);
+                new SelectionOfProjectForSupportFrm().setVisible(true);
             }
         });
     }

@@ -24,7 +24,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private CustomerController customerController= new CustomerController();
     private ProjectController projectController = new ProjectController();
     private Customer customer;
-    private MainMenu mainMenu;
+    private MainMenuFrm mainMenu;
     
     public AddProjectFrm() {
         initComponents();

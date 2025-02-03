@@ -257,14 +257,14 @@ public class CreateSupportFrm extends javax.swing.JFrame {
         supportController.saveSupport(support);
         JOptionPane.showMessageDialog(null, "Soporte creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         
-        ProjectForSupportFrm projectForSupportFrm= new ProjectForSupportFrm();
+        SelectionOfProjectForSupportFrm projectForSupportFrm= new SelectionOfProjectForSupportFrm();
         projectForSupportFrm.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_btnCreateSupportActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ProjectForSupportFrm projectForSupportFrm= new ProjectForSupportFrm();
+        SelectionOfProjectForSupportFrm projectForSupportFrm= new SelectionOfProjectForSupportFrm();
         projectForSupportFrm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

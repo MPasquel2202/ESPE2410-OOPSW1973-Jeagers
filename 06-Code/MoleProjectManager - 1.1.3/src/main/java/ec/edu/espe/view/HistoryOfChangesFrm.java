@@ -4,12 +4,12 @@ package ec.edu.espe.view;
  *
  * @author Brandon Pazmino
  */
-public class HistoryOfChanges extends javax.swing.JPanel {
+public class HistoryOfChangesFrm extends javax.swing.JPanel {
 
     /**
      * Creates new form HistoryOfChanges
      */
-    public HistoryOfChanges() {
+    public HistoryOfChangesFrm() {
         initComponents();
         
     }

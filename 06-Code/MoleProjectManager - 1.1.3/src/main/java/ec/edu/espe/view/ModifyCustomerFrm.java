@@ -253,7 +253,7 @@ public class ModifyCustomerFrm extends javax.swing.JFrame {
         String email = tblCustomers.getValueAt(selectedRow, 4).toString();
         String address = tblCustomers.getValueAt(selectedRow, 5).toString();
 
-        ModifyDataCustomerFrm modifyDataCustomerFrm = new ModifyDataCustomerFrm(this ,customerId, ruc, name, phoneNumber, email, address);
+        ModifyCustomerDataFrm modifyDataCustomerFrm = new ModifyCustomerDataFrm(this ,customerId, ruc, name, phoneNumber, email, address);
         modifyDataCustomerFrm.setVisible(true);
         
     }//GEN-LAST:event_btnModifyCustomerDataActionPerformed

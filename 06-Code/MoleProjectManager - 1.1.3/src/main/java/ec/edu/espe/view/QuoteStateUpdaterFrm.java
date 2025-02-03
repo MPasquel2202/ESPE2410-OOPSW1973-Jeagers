@@ -20,7 +20,7 @@ public class QuoteStateUpdaterFrm extends javax.swing.JFrame {
     private QuoteChangeLogController quoteChangeLogController = new QuoteChangeLogController();
     private QuoteStatusChangeLogController quoteStatusChangeLogController = new QuoteStatusChangeLogController();
     private ProjectController projectController = new ProjectController();
-    private MainMenu mainMenu;
+    private MainMenuFrm mainMenu;
 
     /**
      * Creates new form QuoteStateUpdater

@@ -11,13 +11,13 @@ import javax.swing.event.DocumentListener;
  *
  * @author Dennis Paucar
  */
-public class ModifyDataCustomerFrm extends javax.swing.JFrame {
+public class ModifyCustomerDataFrm extends javax.swing.JFrame {
     private ModifyCustomerFrm parentFrame;
     private CustomerController customerController= new CustomerController();
     /**
      * Creates new form ModifyDataCustomerFrm
      */
-    public ModifyDataCustomerFrm(ModifyCustomerFrm parentFrame,String customerId, String ruc, String name, String phoneNumber, String email, String address) {
+    public ModifyCustomerDataFrm(ModifyCustomerFrm parentFrame,String customerId, String ruc, String name, String phoneNumber, String email, String address) {
         initComponents();
         this.parentFrame = parentFrame;
         lblOldId.setText(customerId);
@@ -38,7 +38,7 @@ public class ModifyDataCustomerFrm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    public ModifyDataCustomerFrm() {
+    public ModifyCustomerDataFrm() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -525,20 +525,21 @@ public class ModifyDataCustomerFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyDataCustomerFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCustomerDataFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyDataCustomerFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCustomerDataFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyDataCustomerFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCustomerDataFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifyDataCustomerFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyCustomerDataFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyDataCustomerFrm().setVisible(true);
+                new ModifyCustomerDataFrm().setVisible(true);
             }
         });
     }

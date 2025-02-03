@@ -15,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StatusTableFrm extends javax.swing.JFrame {
     private ProjectController projectController = new ProjectController();
-    private Project project;
     /**
      * Creates new form StatusTableFrm
      */
@@ -40,7 +39,7 @@ public class StatusTableFrm extends javax.swing.JFrame {
           for (Project project : projects) {
               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
               String startDateFormatted = (project.getStartDate() != null) ? sdf.format(project.getStartDate()) : "";
-
+project=null;
               model.addRow(new Object[]{
                   project.getProjectId(),
                   project.getProjectTitle(),
@@ -48,6 +47,8 @@ public class StatusTableFrm extends javax.swing.JFrame {
                   project.getOperationalStatus().toString()   
               });
           }
+          
+          JOptionPane.showMessageDialog(this, "Datos cargados correctamente: " + JOptionPane.MESSAGE_PROPERTY);
 
       } catch (Exception e) {
           JOptionPane.showMessageDialog(this, "Error al cargar los datos de los proyectos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -114,9 +115,16 @@ public class StatusTableFrm extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblStatus.addMouseListener(new java.awt.event.MouseAdapter() {

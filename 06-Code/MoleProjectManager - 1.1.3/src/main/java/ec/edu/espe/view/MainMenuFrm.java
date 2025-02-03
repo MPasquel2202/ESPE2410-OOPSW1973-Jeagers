@@ -10,12 +10,12 @@ import ec.edu.espe.view.*;
  *
  * @author Dennis Paucar
  */
-public class MainMenu extends javax.swing.JFrame {
+public class MainMenuFrm extends javax.swing.JFrame {
 
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public MainMenuFrm() {
         initComponents();
         setResizable(false);
         menu1.setEvent(new MenuEvent() {
@@ -27,7 +27,7 @@ public class MainMenu extends javax.swing.JFrame {
                         addProjectFrm.setVisible(true);
                         addProjectFrm.setLocationRelativeTo(null);
                     } else if (subIndex == 2) {
-                        ListProjects listProjects = new ListProjects();
+                        ListProjectsFrm listProjects = new ListProjectsFrm();
                         listProjects.setVisible(true);
                     } else if (subIndex == 3) {
                         ProjectModification projectModification = new ProjectModification();
@@ -59,7 +59,7 @@ public class MainMenu extends javax.swing.JFrame {
                     }
                 } else if (index == 4) {
                     if (subIndex == 1) {
-                        ProjectForSupportFrm projectForSupportFrm = new ProjectForSupportFrm();
+                        SelectionOfProjectForSupportFrm projectForSupportFrm = new SelectionOfProjectForSupportFrm();
                         projectForSupportFrm.setVisible(true);
                     } else if (subIndex == 2) {
                         ListSupportsFrm listSupportsFrm = new ListSupportsFrm();
@@ -174,20 +174,21 @@ public class MainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                new MainMenuFrm().setVisible(true);
             }
         });
     }

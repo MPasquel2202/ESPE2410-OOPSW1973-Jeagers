@@ -39,7 +39,7 @@ public class StatusTableFrm extends javax.swing.JFrame {
           for (Project project : projects) {
               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
               String startDateFormatted = (project.getStartDate() != null) ? sdf.format(project.getStartDate()) : "";
-project=null;
+              
               model.addRow(new Object[]{
                   project.getProjectId(),
                   project.getProjectTitle(),

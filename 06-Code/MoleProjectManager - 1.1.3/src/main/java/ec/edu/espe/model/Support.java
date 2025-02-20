@@ -33,41 +33,6 @@ public class Support {
     this.durationYears = durationYears;
     this.scheduleType = scheduleType;
 }
-
-
-    
-    
-    public void displaySupportData() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        
-        System.out.println("+--------------------------------------------------------------+");
-        System.out.printf("| %-60s |\n", "Detalles del Soporte");
-        System.out.println("+--------------------------------------------------------------+");
-
-        
-        System.out.printf("| %-18s | %-45s |\n", "ID Soporte:", supportId);
-        System.out.printf("| %-18s | %-45s |\n", "Proyecto:", projectId);
-        System.out.printf("| %-18s | %-45s |\n", "Detalles:", supportDetails);
-        System.out.println("+--------------------------------------------------------------+");
-
-        
-        System.out.printf("| %-18s | %-45s |\n", "Fecha de Inicio:", startDate != null ? dateFormat.format(startDate) : "No definida");
-        System.out.printf("| %-18s | %-45s |\n", "Fecha de Fin:", endDate != null ? dateFormat.format(endDate) : "No definida");
-        System.out.println("+--------------------------------------------------------------+");
-
-        
-        System.out.printf("| %-18s | %-45s |\n", "Estado del Soporte:", supportStatus != null ? supportStatus : "Sin definir");
-        System.out.println("+--------------------------------------------------------------+");
-        
-        System.out.printf("| %-18s | %-45s |\n", "Duracion (anios):", durationYears);
-        System.out.printf("| %-18s | %-45s |\n", "Horario:", scheduleType);
-        System.out.println("+--------------------------------------------------------------+");
-
-
-     
-    }
-    
     
 
     public String getSupportId() {

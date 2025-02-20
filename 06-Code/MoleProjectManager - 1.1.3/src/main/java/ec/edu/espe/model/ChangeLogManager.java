@@ -70,16 +70,5 @@ import java.util.Map;
                     log.getChangeDate().toString());
         }
 
-        public void displayGroupedLogs() {
-            Map<String, List<String>> groupedLogs = getGroupedChangeLogs();
-
-            for (Map.Entry<String, List<String>> entry : groupedLogs.entrySet()) {
-                System.out.println("Proyecto ID: " + entry.getKey());
-                for (String log : entry.getValue()) {
-                    System.out.println("  " + log);
-                }
-                System.out.println("---------------------------------------------------");
-            }
-        }
         
  }

@@ -88,14 +88,6 @@ public class ReportGenerator {
         return filteredLogs;
     }
 
-    public void displayReport(Project project) {
-        if (project == null) {
-            throw new IllegalArgumentException("El proyecto no puede ser nulo");
-        }
-        Report report = generateReport(project);
-        report.displayReport();
-        saveReportToFile(report);
-    }
 
     private void saveReportToFile(Report report) {
         String fileName = "json/reports.json";
@@ -133,27 +125,6 @@ public class ReportGenerator {
         }
 
         return reports;
-    }
-
-     public void showMonthlyReports() {
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-        List<Project> allProjects = dataManager.getProjects();
-        List<Support> allSupports = dataManager.getSupports();
-        List<QuoteChangeLog> allQuoteChangeLogs = dataManager.getQuoteChangeLogs();
-        List<StatusChangeLog> allStatusChangeLogs = dataManager.getStatusChangeLogs();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        System.out.println("\n---------> Reporte Mensual <---------\n");
-
-        displayCreatedProjects(allProjects, currentMonth, currentYear);
-        displayClosedProjects(allProjects, currentMonth, currentYear);
-        displayCreatedSupports(allSupports, currentMonth, currentYear);
-        displayClosedSupports(allSupports, currentMonth, currentYear);
-        displayStatusChanges(allStatusChangeLogs, currentMonth, currentYear, dateFormat);
-        displayQuoteChanges(allQuoteChangeLogs, currentMonth, currentYear, dateFormat);
     }
 
     private void displayCreatedProjects(List<Project> projects, int month, int year) {

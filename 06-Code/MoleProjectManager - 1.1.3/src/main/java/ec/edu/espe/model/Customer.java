@@ -23,19 +23,6 @@ public class Customer {
         this.address = address;
     }
 
-    public void displayCustomerDetails() {
-        System.out.println("+---------------------+---------------------+");
-        System.out.printf("| %-20s | %-20s |%n", "Campo", "Valor");
-        System.out.println("+---------------------+---------------------+");
-        System.out.printf("| %-20s | %-20s |%n", "ID del Cliente", customerId);
-        System.out.printf("| %-20s | %-20s |%n", "Nombre/Empresa", name);
-        System.out.printf("| %-20s | %-20s |%n", "RUC", ruc);
-        System.out.printf("| %-20s | %-20s |%n", "Telefono", phoneNumber);
-        System.out.printf("| %-20s | %-20s |%n", "Correo Electronico", email);
-        System.out.printf("| %-20s | %-20s |%n", "Direccion", address);
-        System.out.println("+---------------------+---------------------+");
-    }
-
     public String getRuc() {
         return ruc;
     }

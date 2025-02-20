@@ -23,24 +23,7 @@ public class QuoteChangeLog {
         this.changeDate = changeDate;
     }
     
-    public void displayChangeLog() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        System.out.println("+--------------------------------------------------------------+");
-        System.out.printf("| %-60s |\n", "Registro de Cambios en Cotizacion");
-        System.out.println("+--------------------------------------------------------------+");
-
-        System.out.printf("| %-18s | %-45s |\n", "ID Proyecto:", projectId);
-        System.out.printf("| %-18s | %-45s |\n", "Titulo Proyecto:", projectTitle);
-        System.out.println("+--------------------------------------------------------------+");
-
-        System.out.printf("| %-18s | %-45.2f |\n", "Cotizacion Anterior:", oldQuote);
-        System.out.printf("| %-18s | %-45.2f |\n", "Nueva Cotizacion:", newQuote);
-        System.out.println("+--------------------------------------------------------------+");
-
-        System.out.printf("| %-18s | %-45s |\n", "Fecha del Cambio:", changeDate != null ? dateFormat.format(changeDate) : "No registrada");
-        System.out.println("+--------------------------------------------------------------+");
-    }
+    
       
 
     public String getProjectId() {

@@ -197,7 +197,7 @@ public class ListProjectsFrm extends javax.swing.JFrame {
                     project.getQuoteStatus(),
                     project.isPaid(),
                     project.isInvoiced(),
-                    project.isIsPublic() ? "Público" : "Privado"
+                    project.isPublic() ? "Público" : "Privado"
                 });
             }
 

@@ -21,25 +21,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AddProjectFrm extends javax.swing.JFrame {
 
-    private CustomerController customerController= new CustomerController();
+    private CustomerController customerController = new CustomerController();
     private ProjectController projectController = new ProjectController();
     private Customer customer;
     private MainMenuFrm mainMenu;
-    
+
     public AddProjectFrm() {
         initComponents();
         buttonGroup1 = new ButtonGroup();
-        buttonGroup1.add(rbtnCustomerOptionYes);  
-        buttonGroup1.add(rbnCreateNewCustomer); 
+        buttonGroup1.add(rbtnCustomerOptionYes);
+        buttonGroup1.add(rbnCreateNewCustomer);
         jPanel3.setVisible(false);
-        Calendar calendar = Calendar.getInstance(); 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-        String formattedDate = sdf.format(calendar.getTime()); 
-        
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(calendar.getTime());
+
         lblStartDate.setText(formattedDate);
-       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
         if (customer != null) {
@@ -51,9 +51,9 @@ public class AddProjectFrm extends javax.swing.JFrame {
             lblCustomerAdress.setText(customer.getAddress());
         }
     }
-    
-    public void changelblName(Customer customer){
-            if (customer != null) {
+
+    public void changelblName(Customer customer) {
+        if (customer != null) {
             lblCustomerName.setText(customer.getName());
             lblCustomerId.setText(customer.getCustomerId());
             lblEmail.setText(customer.getEmail());
@@ -69,7 +69,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
             lblCustomerAdress.setText("");
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -588,13 +588,13 @@ public class AddProjectFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProjectTitleActionPerformed
 
     private void rbtnCustomerOptionYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCustomerOptionYesActionPerformed
-       
+
         if (rbtnCustomerOptionYes.isSelected()) {
             LoadCustomerFrm customerFrame = new LoadCustomerFrm(this);
             customerFrame.setVisible(true);
-            jPanel3.setVisible(true);  
+            jPanel3.setVisible(true);
         } else {
-            jPanel3.setVisible(false);  
+            jPanel3.setVisible(false);
 
             lblCustomerName.setText("");
             lblCustomerId.setText("");
@@ -613,102 +613,99 @@ public class AddProjectFrm extends javax.swing.JFrame {
     private void rbtnInvoicedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnInvoicedActionPerformed
         if (rbtnInvoiced.isSelected()) {
             rbtnInvoiced.setSelected(true);
-            rbtnNotInvoiced.setSelected(false); 
+            rbtnNotInvoiced.setSelected(false);
         }
     }//GEN-LAST:event_rbtnInvoicedActionPerformed
 
     private void rbtnPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnPaidActionPerformed
         if (rbtnPaid.isSelected()) {
             rbtnPaid.setSelected(true);
-            rbtnNotPaid.setSelected(false); 
+            rbtnNotPaid.setSelected(false);
         }
     }//GEN-LAST:event_rbtnPaidActionPerformed
 
     private void btnProyectSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProyectSaveActionPerformed
-        
-        
         if (customer == null) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un cliente antes de guardar el proyecto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-       
         Random random = new Random();
-        String projectId = String.format("%05d", random.nextInt(100000)); 
+        String projectId = String.format("%05d", random.nextInt(100000));
 
-        
         String projectTitle = txtProjectTitle.getText().trim();
-        String projectDescription = txtpDescription.getText().trim(); 
-        Customer customerInfo = customer; 
-        Date startDate = new Date();  
-        Date closingDate = (dcrCloseDate.getDate() != null) ? dcrCloseDate.getDate() : null;  
+        String projectDescription = txtpDescription.getText().trim();
+        Customer customerInfo = customer;
+        Date startDate = new Date();
+        Date closingDate = (dcrCloseDate.getDate() != null) ? dcrCloseDate.getDate() : null;
 
-        
         double startquote = 0;
         try {
             startquote = Double.parseDouble(txtQuote.getText().trim());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un presupuesto válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;  
+            return;
         }
 
-        
-        ProjectStatus operationalStatus = ProjectStatus.CREATED; 
+        ProjectStatus operationalStatus = ProjectStatus.CREATED;
 
-        
         String selectedStatus = cmbQuoteStatus.getSelectedItem().toString().trim();
         if (selectedStatus.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un estado de cotización.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         ProjectStatus quoteStatus = ProjectStatus.fromString(selectedStatus);
 
-       
         boolean invoiced = rbtnInvoiced.isSelected();
         boolean paid = rbtnPaid.isSelected();
 
-        
         boolean isPublic = cmbSector.getSelectedItem().toString().equals("Público");
 
-       
-        Project project = new Project(projectTitle, projectId, projectDescription, customerInfo, startDate, closingDate, 
-                                      startquote, operationalStatus, quoteStatus, paid, invoiced, isPublic);
+        Project project = new Project.Builder(projectId, projectTitle)
+                .setProjectDescription(projectDescription)
+                .setCustomer(customerInfo)
+                .setStartDate(startDate)
+                .setClosingDate(closingDate)
+                .setStartquote(startquote)
+                .setOperationalStatus(operationalStatus)
+                .setQuoteStatus(quoteStatus)
+                .setPaid(paid)
+                .setInvoiced(invoiced)
+                .setPublic(isPublic)
+                .build();
 
         try {
-                projectController.save(project);
-                JOptionPane.showMessageDialog(this, "Proyecto crado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                clearFields();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            projectController.save(project);
+            JOptionPane.showMessageDialog(this, "Proyecto crado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnProyectSaveActionPerformed
     private void clearFields() {
-        
+
         txtProjectTitle.setText("");
         txtpDescription.setText("");
         txtQuote.setText("");
 
-        
-        cmbQuoteStatus.setSelectedIndex(0);  
+        cmbQuoteStatus.setSelectedIndex(0);
 
-       
         rbtnInvoiced.setSelected(false);
         rbtnPaid.setSelected(false);
 
-       
-        cmbSector.setSelectedIndex(0);  
-        dcrCloseDate.setDate(null); 
+        cmbSector.setSelectedIndex(0);
+        dcrCloseDate.setDate(null);
     }
     private void cmbQuoteStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbQuoteStatusActionPerformed
-     
+
     }//GEN-LAST:event_cmbQuoteStatusActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose(); 
-        if(mainMenu != null) {
-            mainMenu.setVisible(true);  
+        this.dispose();
+        if (mainMenu != null) {
+            mainMenu.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -726,12 +723,12 @@ public class AddProjectFrm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una opción antes de continuar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-       
+
     }//GEN-LAST:event_btnCustomerChooseActionPerformed
 
     private void rbnCreateNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnCreateNewCustomerActionPerformed
         if (rbnCreateNewCustomer.isSelected()) {
-            AddClientforProjectFrm addClientforProjectFrm =  new AddClientforProjectFrm(this) ;
+            AddClientforProjectFrm addClientforProjectFrm = new AddClientforProjectFrm(this);
             addClientforProjectFrm.setVisible(true);
             jPanel3.setVisible(true);
         } else {
@@ -745,20 +742,20 @@ public class AddProjectFrm extends javax.swing.JFrame {
             lblCustomerAdress.setText("");
             customer = null;
         }
-        
+
     }//GEN-LAST:event_rbnCreateNewCustomerActionPerformed
 
     private void rbtnNotInvoicedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNotInvoicedActionPerformed
         if (rbtnNotInvoiced.isSelected()) {
             rbtnNotInvoiced.setSelected(true);
-            rbtnInvoiced.setSelected(false); 
+            rbtnInvoiced.setSelected(false);
         }
     }//GEN-LAST:event_rbtnNotInvoicedActionPerformed
 
     private void rbtnNotPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNotPaidActionPerformed
         if (rbtnNotPaid.isSelected()) {
             rbtnNotPaid.setSelected(true);
-            rbtnPaid.setSelected(false); 
+            rbtnPaid.setSelected(false);
         }
     }//GEN-LAST:event_rbtnNotPaidActionPerformed
 
@@ -797,7 +794,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgCustomerOption;

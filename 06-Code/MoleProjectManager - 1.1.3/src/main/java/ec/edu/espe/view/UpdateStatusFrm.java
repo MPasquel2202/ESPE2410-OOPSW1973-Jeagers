@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.Controller.ProjectController;
@@ -15,9 +14,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Dennis Paucar
  */
 public class UpdateStatusFrm extends javax.swing.JFrame {
+
     private ProjectController projectController = new ProjectController();
     private Project project;
-            
+
     /**
      * Creates new form UpdateStatus
      */
@@ -26,36 +26,35 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
         loadProjectsIntoTable();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
-     private void loadProjectsIntoTable() {
+
+    private void loadProjectsIntoTable() {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dateFormat.format(currentDate);
         lblModificationDate.setText(formattedDate);
-            
+
         try {
-          
-          List<Project> projects = projectController.findAllProjects();
 
-         
-          DefaultTableModel model = (DefaultTableModel) tblStatus.getModel();
-          model.setRowCount(0); 
+            List<Project> projects = projectController.findAllProjects();
 
-          for (Project project : projects) {
-              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-              String startDateFormatted = (project.getStartDate() != null) ? sdf.format(project.getStartDate()) : "";
+            DefaultTableModel model = (DefaultTableModel) tblStatus.getModel();
+            model.setRowCount(0);
 
-              model.addRow(new Object[]{
-                  project.getProjectId(),
-                  project.getProjectTitle(),
-                  startDateFormatted,   
-                  project.getOperationalStatus().toString()   
-              });
-          }
+            for (Project project : projects) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String startDateFormatted = (project.getStartDate() != null) ? sdf.format(project.getStartDate()) : "";
 
-      } catch (Exception e) {
-          JOptionPane.showMessageDialog(this, "Error al cargar los datos de los proyectos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-      }
+                model.addRow(new Object[]{
+                    project.getProjectId(),
+                    project.getProjectTitle(),
+                    startDateFormatted,
+                    project.getOperationalStatus().toString()
+                });
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de los proyectos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -309,13 +308,24 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
                         ProjectStatus oldStatus = selectedProject.getOperationalStatus();
 
                         if (!oldStatus.equals(newStatus)) {
-                            selectedProject.setOperationalStatus(newStatus);
+                            Project updatedProject = new Project.Builder(selectedProject.getProjectId(), selectedProject.getProjectTitle())
+                                    .setProjectDescription(selectedProject.getProjectDescription())
+                                    .setCustomer(selectedProject.getCustomer())
+                                    .setStartDate(selectedProject.getStartDate())
+                                    .setClosingDate(selectedProject.getClosingDate())
+                                    .setStartquote(selectedProject.getStartquote())
+                                    .setOperationalStatus(newStatus)
+                                    .setQuoteStatus(selectedProject.getQuoteStatus())
+                                    .setPaid(selectedProject.isPaid())
+                                    .setInvoiced(selectedProject.isInvoiced())
+                                    .setPublic(selectedProject.isPublic())
+                                    .build();
 
-                            projectController.updateProject(selectedProject);  
+                            projectController.updateProject(selectedProject);
 
                             JOptionPane.showMessageDialog(this, "Estado del proyecto actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-                            loadProjectsIntoTable(); 
+                            loadProjectsIntoTable();
                         } else {
                             JOptionPane.showMessageDialog(this, "El estado seleccionado es igual al actual. No se realizaron cambios.", "Sin cambios", JOptionPane.WARNING_MESSAGE);
                         }
@@ -334,27 +344,26 @@ public class UpdateStatusFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangeStatusActionPerformed
 
     private void tblStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStatusMouseClicked
-         int selectedRow = tblStatus.getSelectedRow();
-         
+        int selectedRow = tblStatus.getSelectedRow();
+
         if (selectedRow != -1) {
 
-            String projectId = (String) tblStatus.getValueAt(selectedRow, 0); 
+            String projectId = (String) tblStatus.getValueAt(selectedRow, 0);
             String projectTitle = (String) tblStatus.getValueAt(selectedRow, 1);
             String startDate = (String) tblStatus.getValueAt(selectedRow, 2);
             String projectStatus = (String) tblStatus.getValueAt(selectedRow, 3);
 
-            lblProjectId.setText(projectId);  
-            lblProjectName.setText(projectTitle); 
+            lblProjectId.setText(projectId);
+            lblProjectName.setText(projectTitle);
             lblStartDate.setText(startDate);
             lblProjectStatus.setText(projectStatus);
-            
-            
+
         }
     }//GEN-LAST:event_tblStatusMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -16,8 +16,10 @@ import utils.MongoDBConnection;
  * @author Usuario
  */
 public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
+
     private DefaultTableModel tableModel;
-    private ProjectController projectController= new ProjectController();
+    private ProjectController projectController = new ProjectController();
+
     /**
      * Creates new form ProjectForSupportFrm
      */
@@ -27,9 +29,10 @@ public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
         configureButtonActions();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
+
     private void loadProjectData() {
         tableModel = (DefaultTableModel) tblClosedProjects.getModel();
-        tableModel.setRowCount(0); 
+        tableModel.setRowCount(0);
 
         List<Project> projects = projectController.getClosedProjects();
 
@@ -41,6 +44,7 @@ public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
             });
         }
     }
+
     private void configureButtonActions() {
         btnOpenCreateSupport.addActionListener(new ActionListener() {
             @Override
@@ -52,10 +56,11 @@ public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
         jButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); 
+                dispose();
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,23 +208,29 @@ public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
     private void openCreateSupportFrm() {
         int selectedRow = tblClosedProjects.getSelectedRow();
         if (selectedRow != -1) {
             String projectId = tblClosedProjects.getValueAt(selectedRow, 0).toString();
             String projectTitle = tblClosedProjects.getValueAt(selectedRow, 1).toString();
             String projectStatus = tblClosedProjects.getValueAt(selectedRow, 2).toString();
-            
-            ProjectStatus projectStatus1=ProjectStatus.fromString(projectStatus);
-            
-            Project project = new Project(projectId, projectTitle, projectStatus1);
+
+            ProjectStatus projectStatus1 = ProjectStatus.fromString(projectStatus);
+
+            Project project = new Project.Builder(projectId, projectTitle)
+                    .setProjectDescription("") 
+                    .setOperationalStatus(projectStatus1)
+                    .setQuoteStatus(ProjectStatus.QUOTE_SEND) 
+                    .setPaid(false) 
+                    .setInvoiced(false) 
+                    .setPublic(false) 
+                    .build();
             CreateSupportFrm createSupportFrm = new CreateSupportFrm(project);
             createSupportFrm.setVisible(true);
             this.setVisible(false);
@@ -228,7 +239,7 @@ public class SelectionOfProjectForSupportFrm extends javax.swing.JFrame {
                     "Selección requerida", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     public static void main(String args[]) {
         MongoDatabase database = MongoDBConnection.getDatabase();
         System.out.println("Conexión establecida con la base de datos: " + database.getName());

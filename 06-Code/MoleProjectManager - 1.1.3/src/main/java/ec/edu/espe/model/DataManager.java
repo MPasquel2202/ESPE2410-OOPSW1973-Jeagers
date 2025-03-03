@@ -209,26 +209,6 @@ public class DataManager {
         System.out.println("Cambio registrado: " + log);
     }
 
-
-    
-
-    private String askForProjectTitle(Scanner scanner) {
-        System.out.print("Ingrese el titulo del proyecto: ");
-        return scanner.nextLine();
-    }
-
-    private String askForProjectDescription(Scanner scanner) {
-        System.out.print("Ingrese la descripcion: ");
-        return scanner.nextLine();
-    }
-
-
-
-
-
-
-
-
     public Date calculateEndDateOfSupport(Scanner scanner, Date startDate, int durationYears) {
         int monthsOfSupport = durationYears * 12;
         
@@ -237,26 +217,4 @@ public class DataManager {
         calendar.add(Calendar.MONTH, monthsOfSupport);
         return calendar.getTime();
     }
-
-    private String generateSupportId(int durationYears, String scheduleType) {
-        String durationLabel = durationYears + "A";
-        String scheduleLabel = scheduleType.equals("8x5") ? "8*5" : "24*7";
-
-        if (durationYears == 1 && scheduleType.equals("8x5")) {
-            return "SRV_01 (" + durationLabel + " " + scheduleLabel + ")";
-        } else if (durationYears == 1 && scheduleType.equals("24x7")) {
-            return "SRV_02 (" + durationLabel + " " + scheduleLabel + ")";
-        } else if (durationYears == 3 && scheduleType.equals("8x5")) {
-            return "SRV_03 (" + durationLabel + " " + scheduleLabel + ")";
-        } else if (durationYears == 3 && scheduleType.equals("24x7")) {
-            return "SRV_04 (" + durationLabel + " " + scheduleLabel + ")";
-        } else if (durationYears == 5 && scheduleType.equals("8x5")) {
-            return "SRV_05 (" + durationLabel + " " + scheduleLabel + ")";
-        } else if (durationYears == 5 && scheduleType.equals("24x7")) {
-            return "SRV_06 (" + durationLabel + " " + scheduleLabel + ")";
-        } else {
-            return "SRV_UNKNOWN (" + durationLabel + " " + scheduleLabel + ")";
-        }
-    }
-
 }

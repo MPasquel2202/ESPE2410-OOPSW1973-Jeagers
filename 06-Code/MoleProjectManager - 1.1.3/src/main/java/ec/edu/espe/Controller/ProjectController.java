@@ -43,7 +43,7 @@ public class ProjectController extends BaseController<Project> {
                 .append("quoteStatus", project.getQuoteStatus().toString())
                 .append("paid", project.isPaid())
                 .append("invoiced", project.isInvoiced())
-                .append("isPublic", project.isIsPublic());
+                .append("isPublic", project.isPublic());
 
         collection.replaceOne(query, updatedData, new ReplaceOptions().upsert(true));
     }
@@ -83,20 +83,18 @@ public class ProjectController extends BaseController<Project> {
                     closingDate = sdf.parse(closingDateStr);
                 }
 
-                Project project = new Project(
-                        doc.getString("projectTitle"),
-                        doc.getString("projectId"),
-                        doc.getString("projectDescription"),
-                        customer,
-                        startDate,
-                        closingDate,
-                        doc.getDouble("startquote"),
-                        operationalStatus,
-                        quoteStatus,
-                        doc.getBoolean("paid"),
-                        doc.getBoolean("invoiced"),
-                        doc.getBoolean("isPublic")
-                );
+                Project project = new Project.Builder(doc.getString("projectId"), doc.getString("projectTitle"))
+                        .setProjectDescription(doc.getString("projectDescription"))
+                        .setCustomer(customer)
+                        .setStartDate(startDate)
+                        .setClosingDate(closingDate)
+                        .setStartquote(doc.getDouble("startquote"))
+                        .setOperationalStatus(operationalStatus)
+                        .setQuoteStatus(quoteStatus)
+                        .setPaid(doc.getBoolean("paid"))
+                        .setInvoiced(doc.getBoolean("invoiced"))
+                        .setPublic(doc.getBoolean("isPublic"))
+                        .build(); // Construir el objeto Project
 
                 projects.add(project);
             }
@@ -145,7 +143,7 @@ public class ProjectController extends BaseController<Project> {
         }
         updatedData.append("paid", project.isPaid());
         updatedData.append("invoiced", project.isInvoiced());
-        updatedData.append("isPublic", project.isIsPublic());
+        updatedData.append("isPublic", project.isPublic());
 
         if (!updatedData.isEmpty()) {
             collection.updateOne(query, new Document("$set", updatedData));
@@ -154,17 +152,29 @@ public class ProjectController extends BaseController<Project> {
 
     public List<Project> getClosedProjects() {
         List<Project> closedProjects = new ArrayList<>();
+
+        // Suponiendo que getCollection() devuelve la colección de MongoDB
         for (Document doc : getCollection().find(Filters.eq("operationalStatus", ProjectStatus.CLOSED.getStatus()))) {
             String id = doc.getString("projectId");
+            String title = doc.getString("projectTitle"); // Asegúrate de obtener el título del proyecto
             String description = doc.getString("projectDescription");
             String status = doc.getString("operationalStatus");
 
+            // Convertir el estado a ProjectStatus
             ProjectStatus projectStatus = ProjectStatus.fromString(status);
 
-            Project project = new Project(id, description, projectStatus);
+            // Crear el objeto Project usando el Builder
+            Project project = new Project.Builder(id, title) // Aquí se necesita el título
+                    .setProjectDescription(description)
+                    .setOperationalStatus(projectStatus)
+                    .setPaid(doc.getBoolean("paid", false)) // Asumiendo que tienes un campo "paid"
+                    .setInvoiced(doc.getBoolean("invoiced", false)) // Asumiendo que tienes un campo "invoiced"
+                    .setPublic(doc.getBoolean("isPublic", false)) // Asumiendo que tienes un campo "isPublic"
+                    .build();
 
             closedProjects.add(project);
         }
+
         return closedProjects;
     }
 
@@ -211,20 +221,19 @@ public class ProjectController extends BaseController<Project> {
             Date startDate = parseDate(doc.getString("startDate"));
             Date closingDate = parseDate(doc.getString("closingDate"));
 
-            return new Project(
-                    doc.getString("projectId"),
-                    doc.getString("projectTitle"),
-                    doc.getString("projectDescription"),
-                    customer,
-                    startDate,
-                    closingDate,
-                    doc.getDouble("startquote"),
-                    operationalStatus,
-                    quoteStatus,
-                    doc.getBoolean("paid"),
-                    doc.getBoolean("invoiced"),
-                    doc.getBoolean("isPublic")
-            );
+            Project project = new Project.Builder(doc.getString("projectId"), doc.getString("projectTitle"))
+                    .setProjectDescription(doc.getString("projectDescription"))
+                    .setCustomer(customer)
+                    .setStartDate(startDate)
+                    .setClosingDate(closingDate)
+                    .setStartquote(doc.getDouble("startquote"))
+                    .setOperationalStatus(operationalStatus)
+                    .setQuoteStatus(quoteStatus)
+                    .setPaid(doc.getBoolean("paid", false)) // Valor por defecto si no existe
+                    .setInvoiced(doc.getBoolean("invoiced", false)) // Valor por defecto si no existe
+                    .setPublic(doc.getBoolean("isPublic", false)) // Valor por defecto si no existe
+                    .build();
+            return project;
         }
         return null;
     }

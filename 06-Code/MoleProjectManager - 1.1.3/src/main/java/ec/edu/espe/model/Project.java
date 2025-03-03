@@ -8,9 +8,10 @@ import org.bson.Document;
  *
  * @author Dennis Paucar
  */
-public class Project {
+public class Project implements ProjectData {
+
     private String projectId;
-    private String projectTitle;
+    private String projectTitle; 
     private String projectDescription;
     private Customer customer;
     private Date startDate;
@@ -22,156 +23,155 @@ public class Project {
     private boolean invoiced;
     private boolean isPublic;
 
-    public Project(String projectTitle, String projectId, String projectDescription, Customer customer, Date startDate, Date closingDate, 
-                   double startquote, ProjectStatus operationalStatus, ProjectStatus quoteStatus, boolean paid, 
-                   boolean invoiced, boolean isPublic) {
-        this.projectTitle = projectTitle;
-        this.projectId = projectId;
-        this.projectDescription = projectDescription;
-        this.customer = customer;
-        this.startDate = startDate;
-        this.closingDate = closingDate;
-        this.startquote = startquote;
-        this.operationalStatus = operationalStatus;
-        this.quoteStatus = quoteStatus;
-        this.paid = paid;
-        this.invoiced = invoiced;
-        this.isPublic = isPublic;
+    private Project(Builder builder) {
+        this.projectId = builder.projectId;
+        this.projectTitle = builder.projectTitle;
+        this.projectDescription = builder.projectDescription;
+        this.customer = builder.customer;
+        this.startDate = builder.startDate;
+        this.closingDate = builder.closingDate;
+        this.startquote = builder.startquote;
+        this.operationalStatus = builder.operationalStatus;
+        this.quoteStatus = builder.quoteStatus;
+        this.paid = builder.paid;
+        this.invoiced = builder.invoiced;
+        this.isPublic = builder.isPublic;
     }
 
-    public Project() {
-        this.projectTitle = "";
-        this.projectId = "";
-        this.projectDescription = "";
-        this.customer = null;
-        this.startDate = null;
-        this.closingDate = null;
-        this.startquote = 0.0;
-        this.operationalStatus = null;
-        this.quoteStatus = null;
-        this.paid = false;
-        this.invoiced = false;
-        this.isPublic = false;
-    }
-    
-    public Project(String projectId, String projectTitle, ProjectStatus operationalStatus) {
-        this.projectId = projectId;
-        this.projectTitle = projectTitle;
-        this.operationalStatus = operationalStatus;
-    }
-
-
+    // Getters
+    @Override
     public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
+    @Override
     public String getProjectTitle() {
         return projectTitle;
     }
 
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
-    }
-
+    @Override
     public String getProjectDescription() {
         return projectDescription;
     }
 
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription;
-    }
-
+    @Override
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
+    @Override
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
+    @Override
     public Date getClosingDate() {
         return closingDate;
     }
 
-    public void setClosingDate(Date closingDate) {
-        this.closingDate = closingDate;
-    }
-
+    @Override
     public double getStartquote() {
         return startquote;
     }
 
-    public void setStartquote(double startquote) {
-        this.startquote = startquote;
-    }
-
+    @Override
     public ProjectStatus getOperationalStatus() {
         return operationalStatus;
     }
 
-    public void setOperationalStatus(ProjectStatus operationalStatus) {
-        this.operationalStatus = operationalStatus;
-    }
-
+    @Override
     public ProjectStatus getQuoteStatus() {
         return quoteStatus;
     }
 
-    public void setQuoteStatus(ProjectStatus quoteStatus) {
-        this.quoteStatus = quoteStatus;
-    }
-
+    @Override
     public boolean isPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
+    @Override
     public boolean isInvoiced() {
         return invoiced;
     }
 
-    public void setInvoiced(boolean invoiced) {
-        this.invoiced = invoiced;
-    }
-
-    public boolean isIsPublic() {
+    @Override
+    public boolean isPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(boolean isPublic) {
-        this.isPublic = isPublic;
+    // Builder para facilitar la creación de instancias
+    public static class Builder {
+
+        private String projectId;
+        private String projectTitle;
+        private String projectDescription;
+        private Customer customer;
+        private Date startDate;
+        private Date closingDate;
+        private double startquote;
+        private ProjectStatus operationalStatus;
+        private ProjectStatus quoteStatus;
+        private boolean paid;
+        private boolean invoiced;
+        private boolean isPublic;
+
+        public Builder(String projectId, String projectTitle) {
+            this.projectId = projectId;
+            this.projectTitle = projectTitle;
+        }
+
+        public Builder setProjectDescription(String projectDescription) {
+            this.projectDescription = projectDescription;
+            return this;
+        }
+
+        public Builder setCustomer(Customer customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        public Builder setStartDate(Date startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder setClosingDate(Date closingDate) {
+            this.closingDate = closingDate;
+            return this;
+        }
+
+        public Builder setStartquote(double startquote) {
+            this.startquote = startquote;
+            return this;
+        }
+
+        public Builder setOperationalStatus(ProjectStatus operationalStatus) {
+            this.operationalStatus = operationalStatus;
+            return this;
+        }
+
+        public Builder setQuoteStatus(ProjectStatus quoteStatus) {
+            this.quoteStatus = quoteStatus;
+            return this;
+        }
+
+        public Builder setPaid(boolean paid) {
+            this.paid = paid;
+            return this;
+        }
+
+        public Builder setInvoiced(boolean invoiced) {
+            this.invoiced = invoiced;
+            return this;
+        }
+
+        public Builder setPublic(boolean isPublic) {
+            this.isPublic = isPublic;
+            return this;
+        }
+
+        public Project build() {
+            return new Project(this);
+        }
     }
-    
-    @Override
-    public String toString() {
-        return new Document("projectId", projectId)
-                .append("projectTitle", projectTitle)
-                .append("projectDescription", projectDescription)
-                .append("customer", customer != null ? Document.parse(customer.toString()) : null)
-                .append("startDate", startDate != null ? new SimpleDateFormat("yyyy-MM-dd").format(startDate) : null)
-                .append("closingDate", closingDate != null ? new SimpleDateFormat("yyyy-MM-dd").format(closingDate) : null)
-                .append("startquote", startquote)
-                .append("operationalStatus", operationalStatus != null ? operationalStatus.toString() : null)
-                .append("quoteStatus", quoteStatus != null ? quoteStatus.toString() : null)
-                .append("paid", paid)
-                .append("invoiced", invoiced)
-                .append("isPublic", isPublic)
-                .toJson();
-    }
-    
 }

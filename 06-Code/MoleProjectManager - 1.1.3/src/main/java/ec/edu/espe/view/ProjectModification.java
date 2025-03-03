@@ -524,9 +524,18 @@ public class ProjectModification extends javax.swing.JFrame {
         boolean paid = rbtnPaid.isSelected();
         boolean isPublic = cmbSector.getSelectedItem().toString().equals("Público");
 
-        Project project = new Project(projectTitle, projectId, projectDescription, customer, new Date(), closingDate,
-                startquote, ProjectStatus.CREATED, quoteStatus, paid, invoiced, isPublic);
-
+        Project project = new Project.Builder(projectId, projectTitle)
+                .setProjectDescription(projectDescription)
+                .setCustomer(customer)
+                .setStartDate(new Date()) 
+                .setClosingDate(closingDate)
+                .setStartquote(startquote)
+                .setOperationalStatus(ProjectStatus.CREATED) 
+                .setQuoteStatus(quoteStatus)
+                .setPaid(paid)
+                .setInvoiced(invoiced)
+                .setPublic(isPublic)
+                .build();
         try {
             projectController.updateProject(project);
             JOptionPane.showMessageDialog(this, "Proyecto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

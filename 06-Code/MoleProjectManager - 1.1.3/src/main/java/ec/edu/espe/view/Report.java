@@ -4,6 +4,11 @@ package ec.edu.espe.view;
 import ec.edu.espe.Controller.ProjectController;
 import ec.edu.espe.Controller.ReportController;
 import ec.edu.espe.model.ProjectReport;
+import ec.edu.espe.model.QuoteChangeLog;
+import ec.edu.espe.model.StatusChangeLog;
+import ec.edu.espe.model.Support;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -33,6 +38,66 @@ public class Report extends javax.swing.JFrame {
 
         cmbProjectId.setModel(comboBoxModel);
     }
+    
+
+private String formatReport(ProjectReport report) {
+    StringBuilder sb = new StringBuilder();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy"); 
+    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+
+    sb.append("📌 REPORTE DEL PROYECTO\n");
+    sb.append("──────────────────────────────\n");
+    sb.append("🆔 ID Proyecto: ").append(report.getProject().getProjectId()).append("\n");
+    sb.append("📌 Título: ").append(report.getProject().getProjectTitle()).append("\n");
+    sb.append("📄 Descripción: ").append(report.getProject().getProjectDescription()).append("\n");
+    sb.append("📅 Inicio: ").append(formatDate(report.getProject().getStartDate(), dateFormat)).append("\n");
+    sb.append("📅 Cierre: ").append(formatDate(report.getProject().getClosingDate(), dateFormat)).append("\n");
+    sb.append("💰 Cotización Inicial: $").append(report.getProject().getStartquote()).append("\n");
+    sb.append("⚡ Estado Operacional: ").append(report.getProject().getOperationalStatus()).append("\n");
+    sb.append("📜 Estado de Cotización: ").append(report.getProject().getQuoteStatus()).append("\n");
+    sb.append("🧾 Facturado: ").append(report.getProject().isInvoiced() ? "Sí" : "No").append("\n");
+    sb.append("💵 Pagado: ").append(report.getProject().isPaid() ? "Sí" : "No").append("\n");
+    sb.append("🌍 Público: ").append(report.getProject().isPublic() ? "Sí" : "No").append("\n");
+
+    sb.append("\n📜 HISTORIAL DE COTIZACIONES\n");
+    sb.append("──────────────────────────────\n");
+    for (QuoteChangeLog log : report.getQuoteChangeLogs()) {
+        sb.append("💰 Antes: $").append(log.getOldQuote()).append("\n");
+        sb.append("💰 Ahora: $").append(log.getNewQuote()).append("\n");
+        sb.append("📅 Fecha: ").append(formatDate(log.getChangeDate(), dateFormat)).append("\n");
+        sb.append("⏰ Hora: ").append(formatDate(log.getChangeDate(), timeFormat)).append("\n");
+        sb.append("──────────────────────────────\n");
+    }
+
+    sb.append("\n📜 HISTORIAL DE ESTADOS\n");
+    sb.append("──────────────────────────────\n");
+    for (StatusChangeLog log : report.getStatusChangeLogs()) {
+        sb.append("🔄 Estado Anterior: ").append(log.getOldStatus()).append("\n");
+        sb.append("✅ Estado Nuevo: ").append(log.getNewStatus()).append("\n");
+        sb.append("📅 Fecha: ").append(formatDate(log.getChangeDate(), dateFormat)).append("\n");
+        sb.append("⏰ Hora: ").append(formatDate(log.getChangeDate(), timeFormat)).append("\n");
+        sb.append("──────────────────────────────\n");
+    }
+
+    sb.append("\n🔧 SOPORTES ASOCIADOS\n");
+    sb.append("──────────────────────────────\n");
+    for (Support support : report.getSupports()) {
+        sb.append("🆔 ID Soporte: ").append(support.getSupportId()).append("\n");
+        sb.append("🛠️ Detalles: ").append(support.getSupportDetails()).append("\n");
+        sb.append("📅 Inicio: ").append(formatDate(support.getStartDate(), dateFormat)).append("\n");
+        sb.append("📅 Fin: ").append(formatDate(support.getEndDate(), dateFormat)).append("\n");
+        sb.append("🔄 Estado: ").append(support.getSupportStatus()).append("\n");
+        sb.append("──────────────────────────────\n");
+    }
+
+    return sb.toString();
+}
+
+private String formatDate(Date date, SimpleDateFormat format) {
+    return (date != null) ? format.format(date) : "N/A";
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,6 +116,8 @@ public class Report extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtReportArea = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,12 +193,34 @@ public class Report extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton2.setText("Regresar");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(49, 49, 49))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jButton2)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +228,8 @@ public class Report extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -152,7 +242,7 @@ public class Report extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String selectedProjectId = (String) cmbProjectId.getSelectedItem();
-        System.out.println("Proyecto seleccionado: " + selectedProjectId); // Depuración
+        System.out.println("Proyecto seleccionado: " + selectedProjectId); 
 
         if (selectedProjectId == null || selectedProjectId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione un ID de proyecto válido.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -163,11 +253,12 @@ public class Report extends javax.swing.JFrame {
         ProjectReport report = reportController.generateReport(selectedProjectId);
 
         if (report != null) {
-            System.out.println("Reporte generado: " + report); // Depuración
+            System.out.println("Reporte generado: " + report); 
             JOptionPane.showMessageDialog(this, "Reporte generado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
             if (txtReportArea != null) {
-                txtReportArea.setText(report.toString());
+                txtReportArea.setText(formatReport(report));
+
             } else {
                 System.out.println(report.toString()); 
             }
@@ -217,10 +308,12 @@ public class Report extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbProjectId;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtReportArea;
     // End of variables declaration//GEN-END:variables

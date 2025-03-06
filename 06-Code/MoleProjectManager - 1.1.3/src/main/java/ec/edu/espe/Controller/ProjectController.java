@@ -153,23 +153,21 @@ public class ProjectController extends BaseController<Project> {
     public List<Project> getClosedProjects() {
         List<Project> closedProjects = new ArrayList<>();
 
-        // Suponiendo que getCollection() devuelve la colección de MongoDB
         for (Document doc : getCollection().find(Filters.eq("operationalStatus", ProjectStatus.CLOSED.getStatus()))) {
             String id = doc.getString("projectId");
-            String title = doc.getString("projectTitle"); // Asegúrate de obtener el título del proyecto
+            String title = doc.getString("projectTitle"); 
             String description = doc.getString("projectDescription");
             String status = doc.getString("operationalStatus");
 
-            // Convertir el estado a ProjectStatus
+           
             ProjectStatus projectStatus = ProjectStatus.fromString(status);
 
-            // Crear el objeto Project usando el Builder
-            Project project = new Project.Builder(id, title) // Aquí se necesita el título
+            Project project = new Project.Builder(id, title) 
                     .setProjectDescription(description)
                     .setOperationalStatus(projectStatus)
-                    .setPaid(doc.getBoolean("paid", false)) // Asumiendo que tienes un campo "paid"
-                    .setInvoiced(doc.getBoolean("invoiced", false)) // Asumiendo que tienes un campo "invoiced"
-                    .setPublic(doc.getBoolean("isPublic", false)) // Asumiendo que tienes un campo "isPublic"
+                    .setPaid(doc.getBoolean("paid", false)) 
+                    .setInvoiced(doc.getBoolean("invoiced", false)) 
+                    .setPublic(doc.getBoolean("isPublic", false)) 
                     .build();
 
             closedProjects.add(project);
@@ -229,9 +227,9 @@ public class ProjectController extends BaseController<Project> {
                     .setStartquote(doc.getDouble("startquote"))
                     .setOperationalStatus(operationalStatus)
                     .setQuoteStatus(quoteStatus)
-                    .setPaid(doc.getBoolean("paid", false)) // Valor por defecto si no existe
-                    .setInvoiced(doc.getBoolean("invoiced", false)) // Valor por defecto si no existe
-                    .setPublic(doc.getBoolean("isPublic", false)) // Valor por defecto si no existe
+                    .setPaid(doc.getBoolean("paid", false)) 
+                    .setInvoiced(doc.getBoolean("invoiced", false)) 
+                    .setPublic(doc.getBoolean("isPublic", false)) 
                     .build();
             return project;
         }

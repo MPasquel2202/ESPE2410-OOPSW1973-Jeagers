@@ -631,7 +631,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
         }
 
         Random random = new Random();
-        String projectId = String.format("%05d", random.nextInt(100000));
+        String projectId = "Prj-" + String.format("%05d", random.nextInt(100000));
 
         String projectTitle = txtProjectTitle.getText().trim();
         String projectDescription = txtpDescription.getText().trim();

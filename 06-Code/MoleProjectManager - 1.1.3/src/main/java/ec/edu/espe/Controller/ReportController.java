@@ -56,29 +56,31 @@ public ProjectReport generateReport(String projectId) {
     ProjectStatus quoteStatus = ProjectStatus.fromString(projectDoc.getString("quoteStatus"));
 
     Project project = new Project.Builder(projectDoc.getString("projectId"), projectDoc.getString("projectTitle"))
-            .setProjectDescription(projectDoc.getString("projectDescription"))
-            .setCustomer(customer)
-            .setStartDate(parseDate(projectDoc.getString("startDate")))
-            .setClosingDate(parseDate(projectDoc.getString("closingDate")))
-            .setStartquote(projectDoc.getDouble("startquote"))
-            .setOperationalStatus(operationalStatus)  
-            .setQuoteStatus(quoteStatus)  
-            .setPaid(projectDoc.getBoolean("paid"))
-            .setInvoiced(projectDoc.getBoolean("invoiced"))
-            .setPublic(projectDoc.getBoolean("isPublic"))
-            .build();
+        .setProjectDescription(projectDoc.getString("projectDescription"))
+        .setCustomer(customer)
+        .setStartDate(parseDate(projectDoc.getString("startDate")))  
+        .setClosingDate(parseDate(projectDoc.getString("closingDate")))  
+        .setStartquote(projectDoc.getDouble("startquote"))
+        .setOperationalStatus(operationalStatus)
+        .setQuoteStatus(quoteStatus)
+        .setPaid(projectDoc.getBoolean("paid"))
+        .setInvoiced(projectDoc.getBoolean("invoiced"))
+        .setPublic(projectDoc.getBoolean("isPublic"))
+        .build();
+
 
     List<QuoteChangeLog> quoteLogs = new ArrayList<>();
     try (MongoCursor<Document> quoteCursor = quoteLogsCollection.find(Filters.eq("projectId", projectId)).iterator()) {
         while (quoteCursor.hasNext()) {
             Document doc = quoteCursor.next();
             quoteLogs.add(new QuoteChangeLog(
-                    doc.getString("projectId"),
-                    doc.getString("projectTitle"),
-                    doc.getDouble("oldQuote"),
-                    doc.getDouble("newQuote"),
-                    doc.getDate("changeDate")
+                doc.getString("projectId"),
+                doc.getString("projectTitle"),
+                doc.getDouble("oldQuote"),
+                doc.getDouble("newQuote"),
+                parseDate(doc.getString("changeDate"))  
             ));
+
         }
     }
 
@@ -87,12 +89,13 @@ public ProjectReport generateReport(String projectId) {
         while (statusCursor.hasNext()) {
             Document doc = statusCursor.next();
             statusLogs.add(new StatusChangeLog(
-                    doc.getString("projectId"),
-                    doc.getString("projectTitle"),
-                    doc.getString("oldStatus"),
-                    doc.getString("newStatus"),
-                    doc.getDate("changeDate")
+                doc.getString("projectId"),
+                doc.getString("projectTitle"),
+                doc.getString("oldStatus"),
+                doc.getString("newStatus"),
+                parseDate(doc.getString("changeDate"))  
             ));
+
         }
     }
 
@@ -101,16 +104,17 @@ public ProjectReport generateReport(String projectId) {
         while (supportCursor.hasNext()) {
             Document doc = supportCursor.next();
             supports.add(new Support(
-                    doc.getString("supportId"),
-                    doc.getString("projectId"),
-                    doc.getString("projectTitle"),
-                    doc.getString("supportDetails"),
-                    doc.getDate("startDate"),
-                    doc.getDate("endDate"),
-                    doc.getString("supportStatus"),
-                    doc.getInteger("durationYears"),
-                    doc.getString("scheduleType")
+                doc.getString("supportId"),
+                doc.getString("projectId"),
+                doc.getString("projectTitle"),
+                doc.getString("supportDetails"),
+                parseDate(doc.getString("startDate")),  
+                parseDate(doc.getString("endDate")),  
+                doc.getString("supportStatus"),
+                doc.getInteger("durationYears"),
+                doc.getString("scheduleType")
             ));
+
         }
     }
 
@@ -121,15 +125,22 @@ public ProjectReport generateReport(String projectId) {
     return report;
 }
 
-// Método para parsear fecha de manera segura utilizando SimpleDateFormat
 private Date parseDate(String dateString) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    try {
-        return dateString != null ? dateFormat.parse(dateString) : null;
-    } catch (Exception e) {
-        System.out.println("Error al convertir fecha: " + e.getMessage());
-        return null;  // Si hay un error, se retorna null
+        if (dateString == null || dateString.isEmpty()) return null;
+
+        String[] formats = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd"};
+
+        for (String format : formats) {
+            try {
+                return new SimpleDateFormat(format).parse(dateString);
+            } catch (Exception e) { 
+                System.out.println("Intento fallido con formato: " + format);
+            }
+        }
+
+        System.out.println("Error: No se pudo parsear la fecha: " + dateString);
+        return null;
     }
-}
+
 
 }

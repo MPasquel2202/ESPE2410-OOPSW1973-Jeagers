@@ -1,4 +1,10 @@
+ec\edu\espe\model\ProjectTestStartquote.class
 ec\edu\espe\model\ProjectTestWithACustomer.class
 ec\edu\espe\model\ProjectTestInactiveCustomer.class
+ec\edu\espe\model\ProjectTestDateManage.class
+ec\edu\espe\model\ProjectTestAsPaid.class
+ec\edu\espe\model\ProjectTestQuoteStatus.class
+ec\edu\espe\model\ProjectTestClosingDate.class
+ec\edu\espe\model\ProjectTestCustomerNull.class
 ec\edu\espe\model\ProjectTestWithoutCustomer.class
 ec\edu\espe\model\ProjectTest.class

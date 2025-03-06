@@ -1,6 +1,5 @@
 package ec.edu.espe.model;
 
-import com.mongodb.internal.inject.EmptyProvider;
 import ec.edu.espe.model.Customer;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
@@ -16,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Brandon Pazmino
  */
-public class ProjectTest {
+public class ProjectTestDateManage {
 
     private Project instance;
 
-    public ProjectTest() {
+    public ProjectTestDateManage() {
     }
 
     @BeforeAll
@@ -33,11 +32,11 @@ public class ProjectTest {
 
     @BeforeEach
     public void setUp() {
-        instance = new Project.Builder("Prj-001", "Hola Mundo")
+        instance = new Project.Builder("Prj-0050", "HermanosJO")
                 .setProjectDescription("Proyecto de prueba")
                 .setCustomer(null)
                 .setStartDate(new Date())
-                .setClosingDate(new Date(System.currentTimeMillis() + 86400000))
+                .setClosingDate(new Date(System.currentTimeMillis() + 86400000)) // 1 día después
                 .setStartquote(1500.0)
                 .setOperationalStatus(ProjectStatus.PAUSED)
                 .setQuoteStatus(ProjectStatus.CLOSED)
@@ -45,14 +44,22 @@ public class ProjectTest {
                 .setInvoiced(true)
                 .setPublic(true)
                 .build();
-
     }
 
     @AfterEach
     public void tearDown() {
-        Project instance = null;
+        instance = null;
     }
 
+    @Test
+    public void testProjectStartDateBeforeClosingDate() {
+        System.out.println("testProjectStartDateBeforeClosingDate...");
+        // Verifica que la fecha de inicio del proyecto sea anterior a la fecha de cierre
+        assertTrue(instance.getStartDate().before(instance.getClosingDate()), 
+               "La fecha de inicio no puede ser posterior a la fecha de cierre.");
+    }
+
+    // Otros métodos de prueba que ya mencionamos anteriormente
     @Test
     public void testGetProjectId() {
         System.out.println("getProjectID...");
@@ -97,19 +104,19 @@ public class ProjectTest {
     @Test
     public void testGetStartquote() {
         System.out.println("getStartquote...");
-        assertEquals(103.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
+        assertEquals(1500.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
     }
 
     @Test
     public void testGetOperationalStatus() {
         System.out.println("getOperationalStatus...");
-        assertEquals(ProjectStatus.CLOSED, instance.getOperationalStatus(), "El estado operativo no coincide.");
+        assertEquals(ProjectStatus.PAUSED, instance.getOperationalStatus(), "El estado operativo no coincide.");
     }
 
     @Test
     public void testGetQuoteStatus() {
         System.out.println("getQuoteStatus...");
-        assertEquals(ProjectStatus.QUOTE_REJECTED, instance.getQuoteStatus(), "El estado de cotización no coincide.");
+        assertEquals(ProjectStatus.CLOSED, instance.getQuoteStatus(), "El estado de cotización no coincide.");
     }
 
     @Test

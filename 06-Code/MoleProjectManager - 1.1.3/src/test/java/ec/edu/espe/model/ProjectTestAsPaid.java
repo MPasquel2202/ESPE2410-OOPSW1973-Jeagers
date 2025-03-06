@@ -1,6 +1,5 @@
 package ec.edu.espe.model;
 
-import com.mongodb.internal.inject.EmptyProvider;
 import ec.edu.espe.model.Customer;
 import ec.edu.espe.model.Project;
 import ec.edu.espe.model.ProjectStatus;
@@ -16,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Brandon Pazmino
  */
-public class ProjectTest {
+public class ProjectTestAsPaid {
 
     private Project instance;
 
-    public ProjectTest() {
+    public ProjectTestAsPaid() {
     }
 
     @BeforeAll
@@ -45,12 +44,11 @@ public class ProjectTest {
                 .setInvoiced(true)
                 .setPublic(true)
                 .build();
-
     }
 
     @AfterEach
     public void tearDown() {
-        Project instance = null;
+        instance = null;
     }
 
     @Test
@@ -75,11 +73,9 @@ public class ProjectTest {
     @Test
     public void testGetCustomer() {
         System.out.println("getCustomer");
-        Project instance = null;
         Customer expResult = null;
         Customer result = instance.getCustomer();
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     @Test
@@ -97,19 +93,19 @@ public class ProjectTest {
     @Test
     public void testGetStartquote() {
         System.out.println("getStartquote...");
-        assertEquals(103.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
+        assertEquals(1500.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
     }
 
     @Test
     public void testGetOperationalStatus() {
         System.out.println("getOperationalStatus...");
-        assertEquals(ProjectStatus.CLOSED, instance.getOperationalStatus(), "El estado operativo no coincide.");
+        assertEquals(ProjectStatus.PAUSED, instance.getOperationalStatus(), "El estado operativo no coincide.");
     }
 
     @Test
     public void testGetQuoteStatus() {
         System.out.println("getQuoteStatus...");
-        assertEquals(ProjectStatus.QUOTE_REJECTED, instance.getQuoteStatus(), "El estado de cotización no coincide.");
+        assertEquals(ProjectStatus.CLOSED, instance.getQuoteStatus(), "El estado de cotización no coincide.");
     }
 
     @Test
@@ -128,5 +124,27 @@ public class ProjectTest {
     public void testIsPublic() {
         System.out.println("getisPublic...");
         assertTrue(instance.isPublic(), "El proyecto debería ser público.");
+    }
+
+    @Test
+    public void testInvalidDates() {
+        System.out.println("testInvalidDates...");
+        Date startDate = new Date();
+        Date closingDate = new Date(System.currentTimeMillis() - 86400000);
+        instance = new Project.Builder("Prj-002", "Proyecto con fechas inválidas")
+                .setProjectDescription("Proyecto para probar fechas inválidas")
+                .setCustomer(null)
+                .setStartDate(startDate)
+                .setClosingDate(closingDate)
+                .setStartquote(2000.0)
+                .setOperationalStatus(ProjectStatus.PAUSED)
+                .setQuoteStatus(ProjectStatus.QUOTE_REJECTED)
+                .setPaid(false)
+                .setInvoiced(true)
+                .setPublic(true)
+                .build();
+
+        assertTrue(instance.getStartDate().before(instance.getClosingDate()),
+                "La fecha de inicio debe ser antes de la fecha de cierre.");
     }
 }

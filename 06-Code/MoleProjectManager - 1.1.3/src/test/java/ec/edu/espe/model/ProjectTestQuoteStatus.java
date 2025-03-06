@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Brandon Pazmino
  */
-public class ProjectTest {
+public class ProjectTestQuoteStatus {
 
     private Project instance;
 
-    public ProjectTest() {
+    public ProjectTestQuoteStatus() {
     }
 
     @BeforeAll
@@ -33,8 +33,8 @@ public class ProjectTest {
 
     @BeforeEach
     public void setUp() {
-        instance = new Project.Builder("Prj-001", "Hola Mundo")
-                .setProjectDescription("Proyecto de prueba")
+        instance = new Project.Builder("Prj-058", "Horizontes Infranqueables")
+                .setProjectDescription("Proyecto de Escaneres de Obstaculos")
                 .setCustomer(null)
                 .setStartDate(new Date())
                 .setClosingDate(new Date(System.currentTimeMillis() + 86400000))
@@ -45,7 +45,6 @@ public class ProjectTest {
                 .setInvoiced(true)
                 .setPublic(true)
                 .build();
-
     }
 
     @AfterEach
@@ -97,7 +96,7 @@ public class ProjectTest {
     @Test
     public void testGetStartquote() {
         System.out.println("getStartquote...");
-        assertEquals(103.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
+        assertEquals(1500.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
     }
 
     @Test
@@ -128,5 +127,11 @@ public class ProjectTest {
     public void testIsPublic() {
         System.out.println("getisPublic...");
         assertTrue(instance.isPublic(), "El proyecto debería ser público.");
+    }
+
+    @Test
+    public void testQuoteStatusNotNull() {
+        System.out.println("testQuoteStatusNotNull...");
+        assertNotNull(instance.getQuoteStatus(), "El estado de cotización no debería ser nulo.");
     }
 }

@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Brandon Pazmino
  */
-public class ProjectTest {
+public class ProjectTestStartquote {
 
     private Project instance;
 
-    public ProjectTest() {
+    public ProjectTestStartquote() {
     }
 
     @BeforeAll
@@ -45,7 +45,6 @@ public class ProjectTest {
                 .setInvoiced(true)
                 .setPublic(true)
                 .build();
-
     }
 
     @AfterEach
@@ -97,7 +96,7 @@ public class ProjectTest {
     @Test
     public void testGetStartquote() {
         System.out.println("getStartquote...");
-        assertEquals(103.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
+        assertEquals(1500.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
     }
 
     @Test
@@ -128,5 +127,12 @@ public class ProjectTest {
     public void testIsPublic() {
         System.out.println("getisPublic...");
         assertTrue(instance.isPublic(), "El proyecto debería ser público.");
+    }
+
+    @Test
+    public void testStartquoteGreaterThanZero() {
+        System.out.println("testStartquoteGreaterThanZero...");
+        double startquote = instance.getStartquote();
+        assertTrue(startquote > 0, "La cotización inicial debería ser mayor que cero.");
     }
 }

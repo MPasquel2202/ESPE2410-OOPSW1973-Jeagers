@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Brandon Pazmino
  */
-public class ProjectTest {
+public class ProjectTestCustomerNull {
 
     private Project instance;
 
-    public ProjectTest() {
+    public ProjectTestCustomerNull() {
     }
 
     @BeforeAll
@@ -33,7 +33,7 @@ public class ProjectTest {
 
     @BeforeEach
     public void setUp() {
-        instance = new Project.Builder("Prj-001", "Hola Mundo")
+        instance = new Project.Builder("Prj-9851", "CantarDeCantares")
                 .setProjectDescription("Proyecto de prueba")
                 .setCustomer(null)
                 .setStartDate(new Date())
@@ -45,7 +45,6 @@ public class ProjectTest {
                 .setInvoiced(true)
                 .setPublic(true)
                 .build();
-
     }
 
     @AfterEach
@@ -75,11 +74,9 @@ public class ProjectTest {
     @Test
     public void testGetCustomer() {
         System.out.println("getCustomer");
-        Project instance = null;
-        Customer expResult = null;
+        Customer expResult = null;  // Se espera que el cliente sea nulo
         Customer result = instance.getCustomer();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        assertEquals(expResult, result, "El cliente no debería ser nulo.");
     }
 
     @Test
@@ -97,7 +94,7 @@ public class ProjectTest {
     @Test
     public void testGetStartquote() {
         System.out.println("getStartquote...");
-        assertEquals(103.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
+        assertEquals(1500.0, instance.getStartquote(), 0.01, "El valor de la cotización inicial no coincide.");
     }
 
     @Test
@@ -128,5 +125,11 @@ public class ProjectTest {
     public void testIsPublic() {
         System.out.println("getisPublic...");
         assertTrue(instance.isPublic(), "El proyecto debería ser público.");
+    }
+
+    @Test
+    public void testCustomerNull() {
+        System.out.println("testCustomerNull...");
+        assertNull(instance.getCustomer(), "El cliente no debería estar presente.");
     }
 }

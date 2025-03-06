@@ -7,6 +7,11 @@ import ec.edu.espe.model.ProjectReport;
 import ec.edu.espe.model.QuoteChangeLog;
 import ec.edu.espe.model.StatusChangeLog;
 import ec.edu.espe.model.Support;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,12 +22,12 @@ import javax.swing.JOptionPane;
  *
  * @author Dennis Paucar
  */
-public class Report extends javax.swing.JFrame {
+public class ReportFrm extends javax.swing.JFrame {
     private ProjectController projectController = new ProjectController();
     /**
      * Creates new form StatusChangeLogs
      */
-    public Report() {
+    public ReportFrm() {
         initComponents();
         loadProjectIDs();
     }
@@ -118,6 +123,7 @@ private String formatDate(Date date, SimpleDateFormat format) {
         txtReportArea = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,6 +200,18 @@ private String formatDate(Date date, SimpleDateFormat format) {
         );
 
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Imprimir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -201,6 +219,8 @@ private String formatDate(Date date, SimpleDateFormat format) {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(49, 49, 49))
         );
@@ -208,7 +228,9 @@ private String formatDate(Date date, SimpleDateFormat format) {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -267,6 +289,50 @@ private String formatDate(Date date, SimpleDateFormat format) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Obtener el texto del reporte
+    String reportText = txtReportArea.getText();
+
+    if (reportText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No hay un reporte para imprimir. Genera un reporte primero.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setJobName("Reporte de Proyecto");
+
+        printerJob.setPrintable((graphics, pageFormat, pageIndex) -> {
+            if (pageIndex > 0) {
+                return Printable.NO_SUCH_PAGE;
+            }
+
+            Graphics2D g2d = (Graphics2D) graphics;
+            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+            g2d.setFont(new Font("Serif", Font.PLAIN, 12));
+
+            g2d.drawString(reportText, 100, 100); 
+            return Printable.PAGE_EXISTS;
+        });
+
+        
+        if (printerJob.printDialog()) {
+            printerJob.print();
+            JOptionPane.showMessageDialog(this, "Reporte impreso exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Impresión cancelada.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    } catch (PrinterException e) {
+        JOptionPane.showMessageDialog(this, "Error al intentar imprimir el reporte: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -284,14 +350,18 @@ private String formatDate(Date date, SimpleDateFormat format) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -300,7 +370,7 @@ private String formatDate(Date date, SimpleDateFormat format) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Report().setVisible(true);
+                new ReportFrm().setVisible(true);
             }
         });
     }
@@ -309,6 +379,7 @@ private String formatDate(Date date, SimpleDateFormat format) {
     private javax.swing.JComboBox<String> cmbProjectId;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

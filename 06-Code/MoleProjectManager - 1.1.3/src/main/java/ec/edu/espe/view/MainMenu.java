@@ -65,7 +65,12 @@ public class MainMenu extends javax.swing.JFrame {
                         ListSupportsFrm listSupportsFrm = new ListSupportsFrm();
                         listSupportsFrm.setVisible(true);
                     }
-
+                } else if (index == 6) {
+                    if (subIndex == 1) {
+                        ReportFrm reportFrm = new ReportFrm();
+                        reportFrm.setVisible(true);
+                    } 
+                
                 } else if (index == 8) {
                     if (subIndex == 1) {
                         AddClientFrm addClientFrm = new AddClientFrm();

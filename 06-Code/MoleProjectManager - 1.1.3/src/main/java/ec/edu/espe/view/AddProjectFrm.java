@@ -631,7 +631,7 @@ public class AddProjectFrm extends javax.swing.JFrame {
         }
 
         Random random = new Random();
-        String projectId = "Prj-" + String.format("%05d", random.nextInt(100000));
+        String projectId = String.format("%05d", random.nextInt(100000));
 
         String projectTitle = txtProjectTitle.getText().trim();
         String projectDescription = txtpDescription.getText().trim();
@@ -662,26 +662,28 @@ public class AddProjectFrm extends javax.swing.JFrame {
 
         boolean isPublic = cmbSector.getSelectedItem().toString().equals("Público");
 
+        // Usando el Builder para crear el proyecto
         Project project = new Project.Builder(projectId, projectTitle)
-                .setProjectDescription(projectDescription)
-                .setCustomer(customerInfo)
-                .setStartDate(startDate)
-                .setClosingDate(closingDate)
-                .setStartquote(startquote)
-                .setOperationalStatus(operationalStatus)
-                .setQuoteStatus(quoteStatus)
-                .setPaid(paid)
-                .setInvoiced(invoiced)
-                .setPublic(isPublic)
-                .build();
+            .setProjectDescription(projectDescription)
+            .setCustomer(customerInfo)
+            .setStartDate(startDate)
+            .setClosingDate(closingDate)
+            .setStartquote(startquote)
+            .setOperationalStatus(operationalStatus)
+            .setQuoteStatus(quoteStatus)
+            .setPaid(paid)
+            .setInvoiced(invoiced)
+            .setPublic(isPublic)
+            .build();
 
         try {
             projectController.save(project);
-            JOptionPane.showMessageDialog(this, "Proyecto crado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Proyecto creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar el proyecto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_btnProyectSaveActionPerformed
     private void clearFields() {

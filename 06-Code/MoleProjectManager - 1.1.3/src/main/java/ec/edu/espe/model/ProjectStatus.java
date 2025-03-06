@@ -4,20 +4,17 @@ package ec.edu.espe.model;
  *
  * @author Dennis Paucar
  */
-public class ProjectStatus {
-    
-    public static final ProjectStatus CREATED = new ProjectStatus("Creado");
-    public static final ProjectStatus IN_PROGRESS = new ProjectStatus("En Progreso");
-    public static final ProjectStatus PAUSED = new ProjectStatus("Pausado");
-    public static final ProjectStatus CLOSED = new ProjectStatus("Cerrado");
-
-    public static final ProjectStatus QUOTE_SEND = new ProjectStatus("Enviado");
-    public static final ProjectStatus QUOTE_REJECTED = new ProjectStatus("Rechazado");
-    public static final ProjectStatus QUOTE_ACCEPTED = new ProjectStatus("Aceptado");
+public enum ProjectStatus {
+    CREATED("Creado"),
+    IN_PROGRESS("En Progreso"),
+    PAUSED("Pausado"),
+    CLOSED("Cerrado"),
+    QUOTE_SEND("Enviado"),
+    QUOTE_REJECTED("Rechazado"),
+    QUOTE_ACCEPTED("Aceptado");
 
     private final String status;
 
-    
     ProjectStatus(String status) {
         this.status = status;
     }
@@ -30,7 +27,6 @@ public class ProjectStatus {
     public String toString() {
         return status;
     }
-    
     public static ProjectStatus fromString(String status) {
     switch (status) {
         case "Creado": return CREATED;

@@ -36,6 +36,7 @@ ec\edu\espe\view\AddProjectFrm$12.class
 ec\edu\espe\view\StatusTableFrm.class
 ec\edu\espe\view\LoadCustomerFrm$3.class
 ec\edu\espe\view\LoadCustomerFrm.class
+ec\edu\espe\model\ProjectReport.class
 ec\edu\espe\view\ModifyDataCustomerFrm$5.class
 ec\edu\espe\view\AddClientFrm$2.class
 ec\edu\espe\view\SelectionOfProjectForSupportFrm$2.class
@@ -58,6 +59,7 @@ ec\edu\espe\view\AddProjectFrm$10.class
 ec\edu\espe\view\QuoteStateUpdaterFrm$5.class
 ec\edu\espe\view\StatusTableFrm$4.class
 ec\edu\espe\view\QuoteHistoryFrm$1.class
+ec\edu\espe\view\Report$1.class
 ec\edu\espe\view\AddProjectFrm$8.class
 ec\edu\espe\view\ListProjectsFrm$2.class
 ec\edu\espe\view\ProjectModification$14.class
@@ -108,6 +110,7 @@ ec\edu\espe\view\ModifyCustomerDataFrm$3.class
 ec\edu\espe\model\Notification.class
 ec\edu\espe\view\HistoryOfChangesFrm.class
 ec\edu\espe\view\SelectionOfProjectForSupportFrm$4.class
+ec\edu\espe\view\Report$2.class
 ec\edu\espe\view\QuoteStateUpdaterFrm.class
 ec\edu\espe\view\ListProjects$2.class
 ec\edu\espe\view\ModifyDataCustomerFrm$7.class
@@ -151,6 +154,7 @@ ec\edu\espe\view\QuoteHistoryFrm.class
 ec\edu\espe\view\StatusTableFrm$3.class
 ec\edu\espe\view\LoginMoleFrm$4.class
 ec\edu\espe\model\ProjectChangeLog.class
+ec\edu\espe\view\Report$3.class
 ec\edu\espe\model\DataManager$4.class
 ec\edu\espe\view\ProjectForSupportFrm$1.class
 ec\edu\espe\model\ProjectToDocument.class
@@ -183,6 +187,7 @@ ec\edu\espe\view\ListSupportsFrm$4.class
 ec\edu\espe\view\ProjectForSupportFrm.class
 ec\edu\espe\view\StatusTableFrm$2.class
 ec\edu\espe\view\ListProjects$1.class
+ec\edu\espe\view\Report.class
 ec\edu\espe\view\QuoteUpdaterFrm$2.class
 ec\edu\espe\view\LoginMole$4.class
 ec\edu\espe\view\ProjectForSupportFrm$4.class

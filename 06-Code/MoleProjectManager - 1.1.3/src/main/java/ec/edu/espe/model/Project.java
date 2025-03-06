@@ -38,7 +38,6 @@ public class Project implements ProjectData {
         this.isPublic = builder.isPublic;
     }
 
-    // Getters
     @Override
     public String getProjectId() {
         return projectId;
@@ -99,7 +98,12 @@ public class Project implements ProjectData {
         return isPublic;
     }
 
-    // Builder para facilitar la creación de instancias
+    public void setStartquote(double startquote) {
+        this.startquote = startquote;
+    }
+    
+    
+
     public static class Builder {
 
         private String projectId;

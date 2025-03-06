@@ -188,25 +188,46 @@ public class QuoteUpdaterFrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, selecciona un proyecto.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try {
-            String projectTitle = "Título del Proyecto";
-            Date changeDate = new Date();
-                String newBudgetStr = txtNewQuote.getText().trim();
-                if (newBudgetStr.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Por favor, ingresa un nuevo presupuesto.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                double oldQuote = 0.0;
-                double newQuote = Double.parseDouble(newBudgetStr);
-                QuoteChangeLog changeLog = new QuoteChangeLog(projectId, projectTitle, oldQuote, newQuote, changeDate);
-                quoteChangeLogController.saveQuoteChangeLog(changeLog);
 
-                JOptionPane.showMessageDialog(this, "Presupuesto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            
+        try {
+            Project project = projectController.findProjectById(projectId);
+            if (project == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró el proyecto seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String projectTitle = project.getProjectTitle();
+            double oldQuote = project.getStartquote(); 
+
+            String newBudgetStr = txtNewQuote.getText().trim();
+            if (newBudgetStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingresa un nuevo presupuesto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double newQuote = Double.parseDouble(newBudgetStr);
+            if (newQuote <= 0) {
+                JOptionPane.showMessageDialog(this, "El nuevo presupuesto debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Date changeDate = new Date();
+            QuoteChangeLog changeLog = new QuoteChangeLog(projectId, projectTitle, oldQuote, newQuote, changeDate);
+            quoteChangeLogController.saveQuoteChangeLog(changeLog);
+
+            project.setStartquote(newQuote);
+            projectController.updateProject(project);
+
+            JOptionPane.showMessageDialog(this, "Presupuesto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un valor numérico válido para el presupuesto.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el cambio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_btnSaveQuoteChangeActionPerformed
 
     private void cmbProjectIDsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProjectIDsActionPerformed

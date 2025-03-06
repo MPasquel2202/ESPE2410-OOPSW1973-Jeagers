@@ -24,7 +24,7 @@ public class QuoteChangeLogController extends BaseController<QuoteChangeLog>{
     public void saveQuoteChangeLog(QuoteChangeLog quoteChangeLog){
         save(quoteChangeLog);
     }
-        public List<QuoteChangeLog> findAllQuoteChangeLogs() {
+    public List<QuoteChangeLog> findAllQuoteChangeLogs() {
         List<QuoteChangeLog> changeLogs = new ArrayList<>();
         MongoCollection<Document> collection = getCollection();
 

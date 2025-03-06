@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ec.edu.espe.model.ProjectTestWithACustomer" time="0.151" tests="8" errors="0" skipped="0" failures="3">
+  <properties>
+    <property name="java.specification.version" value="23"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3\target\test-classes;C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3\target\classes;C:\Users\User\.m2\repository\org\mongodb\mongodb-driver-sync\5.3.0\mongodb-driver-sync-5.3.0.jar;C:\Users\User\.m2\repository\org\mongodb\mongodb-driver-core\5.3.0\mongodb-driver-core-5.3.0.jar;C:\Users\User\.m2\repository\org\mongodb\bson-record-codec\5.3.0\bson-record-codec-5.3.0.jar;C:\Users\User\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\User\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\User\.m2\repository\net\java\timingframework\timingframework-swing\7.3.1\timingframework-swing-7.3.1.jar;C:\Users\User\.m2\repository\net\java\timingframework\timingframework-core\5.0.0\timingframework-core-5.0.0.jar;C:\Users\User\.m2\repository\com\surelogic\promises\4.0.3\promises-4.0.3.jar;C:\Users\User\.m2\repository\com\kenai\nbpwr\org-jdesktop-animation-timing\1.0-201002281504\org-jdesktop-animation-timing-1.0-201002281504.jar;C:\Users\User\.m2\repository\net\java\dev\timingframework\timingframework\1.0\timingframework-1.0.jar;C:\Users\User\.m2\repository\com\miglayout\miglayout-swing\5.0\miglayout-swing-5.0.jar;C:\Users\User\.m2\repository\com\miglayout\miglayout-core\5.0\miglayout-core-5.0.jar;C:\Users\User\.m2\repository\com\toedter\jcalendar\1.4\jcalendar-1.4.jar;C:\Users\User\.m2\repository\org\mongodb\bson\5.3.0-beta0\bson-5.3.0-beta0.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="America/Guayaquil"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="23"/>
+    <property name="user.country" value="EC"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
+    <property name="sun.java.command" value="C:\Users\User\AppData\Local\Temp\surefire10656179002083766224\surefirebooter-20250305190955716_3.jar C:\Users\User\AppData\Local\Temp\surefire10656179002083766224 2025-03-05T19-09-55_512-jvmRun1 surefire-20250305190955716_1tmp surefire_0-20250305190955716_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="test" value="ec.edu.espe.model.ProjectTestWithACustomer"/>
+    <property name="surefire.test.class.path" value="C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3\target\test-classes;C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3\target\classes;C:\Users\User\.m2\repository\org\mongodb\mongodb-driver-sync\5.3.0\mongodb-driver-sync-5.3.0.jar;C:\Users\User\.m2\repository\org\mongodb\mongodb-driver-core\5.3.0\mongodb-driver-core-5.3.0.jar;C:\Users\User\.m2\repository\org\mongodb\bson-record-codec\5.3.0\bson-record-codec-5.3.0.jar;C:\Users\User\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\User\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\User\.m2\repository\net\java\timingframework\timingframework-swing\7.3.1\timingframework-swing-7.3.1.jar;C:\Users\User\.m2\repository\net\java\timingframework\timingframework-core\5.0.0\timingframework-core-5.0.0.jar;C:\Users\User\.m2\repository\com\surelogic\promises\4.0.3\promises-4.0.3.jar;C:\Users\User\.m2\repository\com\kenai\nbpwr\org-jdesktop-animation-timing\1.0-201002281504\org-jdesktop-animation-timing-1.0-201002281504.jar;C:\Users\User\.m2\repository\net\java\dev\timingframework\timingframework\1.0\timingframework-1.0.jar;C:\Users\User\.m2\repository\com\miglayout\miglayout-swing\5.0\miglayout-swing-5.0.jar;C:\Users\User\.m2\repository\com\miglayout\miglayout-core\5.0\miglayout-core-5.0.jar;C:\Users\User\.m2\repository\com\toedter\jcalendar\1.4\jcalendar-1.4.jar;C:\Users\User\.m2\repository\org\mongodb\bson\5.3.0-beta0\bson-5.3.0-beta0.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\User\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\User\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\User\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\User\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\User"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-10-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-23"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\User\AppData\Local\Temp\surefire10656179002083766224\surefirebooter-20250305190955716_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="23.0.1+11-39"/>
+    <property name="user.name" value="User"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-23\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\User\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\User\AppData\Local\Temp\"/>
+    <property name="java.version" value="23.0.1"/>
+    <property name="user.dir" value="C:\Users\User\OneDrive\Documentos\ESPE2410-OOPSW1973-Jeagers\06-Code\MoleProjectManager - 1.1.3"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\User\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\User\AppData\Local\Programs\Python\Launcher\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\User\AppData\Local\Microsoft\WinGet\Packages\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe;C:\Program Files\MongoDB\Server\8.0\bin;C:\Users\User\AppData\Local\Programs\mongosh\;C:\Users\User\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\python.exe;C:\Users\User\AppData\Local\nvm;C:\nvm4w\nodejs;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="23.0.1+11-39"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="67.0"/>
+    <property name="argLine" value="--enable-preview"/>
+  </properties>
+  <testcase name="testCustomerIsNotNull" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.051"/>
+  <testcase name="testIsInvoiced" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.017">
+    <failure message="El proyecto debería estar facturado. ==&gt; expected: &lt;false&gt; but was: &lt;true&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El proyecto debería estar facturado. ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:239)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testIsInvoiced(ProjectTestWithACustomer.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></failure>
+  </testcase>
+  <testcase name="testProjectId" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.005"/>
+  <testcase name="testQuoteStatus" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.002"/>
+  <testcase name="testIsPublic" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.003"/>
+  <testcase name="testProjectStatus" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.003">
+    <failure message="El estado del proyecto debería ser ACTIVO. ==&gt; expected: &lt;Pausado&gt; but was: &lt;Creado&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El estado del proyecto debería ser ACTIVO. ==> expected: <Pausado> but was: <Creado>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testProjectStatus(ProjectTestWithACustomer.java:51)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></failure>
+  </testcase>
+  <testcase name="testIsPaid" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.003"/>
+  <testcase name="testCustomerData" classname="ec.edu.espe.model.ProjectTestWithACustomer" time="0.004">
+    <failure message="El ID del cliente no coincide. ==&gt; expected: &lt;CUST-002&gt; but was: &lt;1545757556&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El ID del cliente no coincide. ==> expected: <CUST-002> but was: <1545757556>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testCustomerData(ProjectTestWithACustomer.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+]]></failure>
+  </testcase>
+</testsuite>

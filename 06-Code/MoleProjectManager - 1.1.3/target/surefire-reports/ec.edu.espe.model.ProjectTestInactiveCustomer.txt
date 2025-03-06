@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.model.ProjectTestInactiveCustomer
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.184 s <<< FAILURE! -- in ec.edu.espe.model.ProjectTestInactiveCustomer
+ec.edu.espe.model.ProjectTestInactiveCustomer.testIsNotPaid -- Time elapsed: 0.018 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El proyecto no debería estar pagado. ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at ec.edu.espe.model.ProjectTestInactiveCustomer.testIsNotPaid(ProjectTestInactiveCustomer.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+ec.edu.espe.model.ProjectTestInactiveCustomer.testCustomerInactiveStatus -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: La dirección del cliente no coincide. ==> expected: <4> but was: <Calle Falsa 123>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestInactiveCustomer.testCustomerInactiveStatus(ProjectTestInactiveCustomer.java:47)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+ec.edu.espe.model.ProjectTestInactiveCustomer.testProjectId -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El ID del proyecto no coincide. ==> expected: <Prj-010> but was: <Prj-004>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestInactiveCustomer.testProjectId(ProjectTestInactiveCustomer.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+ec.edu.espe.model.ProjectTestInactiveCustomer.testQuoteStatus -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El estado de cotización debería ser PENDIENTE. ==> expected: <Rechazado> but was: <Aceptado>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestInactiveCustomer.testQuoteStatus(ProjectTestInactiveCustomer.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

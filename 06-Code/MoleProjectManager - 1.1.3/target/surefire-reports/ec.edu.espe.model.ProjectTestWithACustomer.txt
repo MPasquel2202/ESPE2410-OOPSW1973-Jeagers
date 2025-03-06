@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.model.ProjectTestWithACustomer
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.151 s <<< FAILURE! -- in ec.edu.espe.model.ProjectTestWithACustomer
+ec.edu.espe.model.ProjectTestWithACustomer.testIsInvoiced -- Time elapsed: 0.017 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El proyecto debería estar facturado. ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:239)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testIsInvoiced(ProjectTestWithACustomer.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+ec.edu.espe.model.ProjectTestWithACustomer.testProjectStatus -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El estado del proyecto debería ser ACTIVO. ==> expected: <Pausado> but was: <Creado>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testProjectStatus(ProjectTestWithACustomer.java:51)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+ec.edu.espe.model.ProjectTestWithACustomer.testCustomerData -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El ID del cliente no coincide. ==> expected: <CUST-002> but was: <1545757556>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at ec.edu.espe.model.ProjectTestWithACustomer.testCustomerData(ProjectTestWithACustomer.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

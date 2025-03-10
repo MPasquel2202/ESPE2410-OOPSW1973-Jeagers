@@ -14,7 +14,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ec.edu.espe.view.LoginMoleFrm</mainClass>
+                            <mainClass>ec.edu.espe.view.MainMenu</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -47,7 +47,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>23</maven.compiler.release>
-        <exec.mainClass>ec.edu.espe.view.LoginMoleFrm</exec.mainClass>
+        <exec.mainClass>ec.edu.espe.view.MainMenu</exec.mainClass>
     </properties>
     
     <dependencies>
